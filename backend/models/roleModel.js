@@ -8,13 +8,13 @@ const roleSchema = mongoose.Schema({
             unique: true,
         },
 
-        permissions: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                required: true,
-                ref: 'Permission',
-            },
-        ],
+        // permissions: [
+        //     {
+        //         type: mongoose.Schema.Types.ObjectId,
+        //         required: true,
+        //         ref: 'Permission',
+        //     },
+        // ],
     }
 )
 
