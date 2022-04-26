@@ -13,7 +13,14 @@ const userSchema = mongoose.Schema({
         password: {
             type: String,
             required: [true, 'Please add a password']
-        }
+        },
+        // Assigning roles to user
+        roles: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Role'
+            }
+        ]
     },
     {
         timestamps: true
