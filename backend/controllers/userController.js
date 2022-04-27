@@ -97,28 +97,9 @@ const generateToken = (id) => {
     })
 }
 
-// @desc    Allocate role
-// @route   PUT /api/users/role
-// @access  Private
-const allocateRole = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.body.id)
-
-    // check for user
-    if(!user) {
-        res.status(401)
-        throw new Error('User not found')
-    }
-
-    const allocatedUser = await User.findByIdAndUpdate(user.id,{
-        roles: req.body.roles,
-    })
-
-    res.status(200).json(allocatedUser)
-})
 
 module.exports = {
     registerUser,
     loginUser,
     getMe,
-    allocateRole,
 }
