@@ -5,7 +5,7 @@ const {protect} = require('../middleware/authMiddleware')
 // actual route is /api/roles/
 
 router.post('/addRole', protect, addRole)
-router.post('/allocateRole', protect, allocateRole)
+router.put('/allocateRole', protect, allocateRole)
 
 
 module.exports = router

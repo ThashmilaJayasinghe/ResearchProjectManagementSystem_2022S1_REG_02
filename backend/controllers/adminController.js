@@ -2,7 +2,7 @@
 const asyncHandler = require('express-async-handler')
 
 const Role = require('../models/roleModel')
-const User = require("../models/userModel");
+const User = require('../models/userModel')
 
 
 // @desc    Add role
