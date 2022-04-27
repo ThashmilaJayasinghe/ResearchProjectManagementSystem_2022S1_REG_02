@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler')
 
 const Role = require('../models/roleModel')
 const User = require('../models/userModel')
+const Goal = require("../models/goalModel");
 
 
 // @desc    Add role
@@ -23,10 +24,10 @@ const addRole = asyncHandler(async (req, res) => {
 
 
 // @desc    Allocate role
-// @route   PUT /api/users/role
+// @route   PUT /api/admin/allocateRole/:staffid
 // @access  Private
 const allocateRole = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.body.id)
+    const user = await User.findById(req.params.staffid)
 
     // check for user
     if(!user) {
@@ -34,9 +35,10 @@ const allocateRole = asyncHandler(async (req, res) => {
         throw new Error('User not found')
     }
 
-    const allocatedUser = await User.findByIdAndUpdate(user.id,{
-        roles: req.body.roles,
-    })
+    user.roles.push(req.body.roles);
+    user.save();
+
+    const allocatedUser = await User.findByIdAndUpdate(req.params.staffid, user)
 
     res.status(200).json(allocatedUser)
 })

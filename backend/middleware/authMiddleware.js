@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
+const Role = require('../models/roleModel')
 
 const protect = asyncHandler(async (req, res, next) => {
     let token
@@ -36,4 +37,43 @@ const protect = asyncHandler(async (req, res, next) => {
     }
 })
 
-module.exports = {protect}
+const authRole = (role) => {
+    return async (req, res, next) => {
+        // let auth = 0
+        // if (req.user.roles.some(e => e === role)) {
+        //     auth = 1
+        //     next()
+        // }
+        //
+        // if(!auth) {
+        //     res.status(401)
+        //     throw new Error('Not authorizeddd')
+        //}
+
+        const userRoles = await Role.findById(req.user.roles)
+        // res.send(userRoles)
+        if (userRoles.name !== role) {
+            res.status(401)
+            return res.send('Not authorized')
+        }
+
+        next()
+    }
+}
+
+// const aRole = (role) => {
+//     return (req, res, next) => {
+//         if(req.user.role !== role) {
+//             res.status(401)
+//             return res.send('Not authorized')
+//         }
+//
+//         next()
+//     }
+// }
+
+
+module.exports = {
+    protect,
+    authRole,
+}
