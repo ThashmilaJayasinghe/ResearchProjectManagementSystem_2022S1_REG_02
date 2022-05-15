@@ -11,8 +11,11 @@ import {
 } from '@mui/material';
 import DrawerC from './DrawerC';
 
-function Header() {
+function Header(props) {
+
 	const [value, setValue] = useState(0);
+	const [pages, setPages] = useState(props.pages);
+
 	const theme = useTheme();
 	console.log(theme);
 	const isMatch = useMediaQuery(theme.breakpoints.down('md'));
@@ -26,7 +29,7 @@ function Header() {
 							<Typography style={{ paddingLeft: '10%' }}>
 								Student Management
 							</Typography>
-							<DrawerC />
+							<DrawerC pages = {pages}/>
 						</>
 					) : (
 						<>
@@ -37,11 +40,12 @@ function Header() {
 								indicatorColor="secondary"
 							>
 
-								<Tab label="Students" />
-								<Tab label="Submissions" />
-								<Tab label="Marks" />
-								<Tab label="Supervisor" />
-								<Tab label="contact us" />
+								{
+									pages.map((page, index) => {
+										return <Tab key={index} label= {page} />
+									})
+								}
+
 							</Tabs>
 							<Button style={{ marginLeft: 'auto' }} variant="contained">
 								Login
