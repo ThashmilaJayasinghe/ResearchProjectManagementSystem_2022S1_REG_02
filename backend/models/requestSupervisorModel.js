@@ -1,10 +1,7 @@
 const mongoose = require('mongoose')
 
-const researchTopic = mongoose.Schema({
-        topic: {
-            type: String,
-            required: true
-        },
+const requestSupervisorModel = mongoose.Schema({
+
         requestedGroup: {
             type: String,
             required: true
@@ -21,20 +18,21 @@ const researchTopic = mongoose.Schema({
             type: String,
             required: true
         },
-        coSupervisorName: {
-            type: String,
-            required: true
+        topic: {
+            type:String
         },
-        coSupervisorEmail: {
-            type: String,
-            required: true
+        details: {
+            type: String
         },
-        topicStates: {
+        requestStates: {
             type: String,
+        },
+        requestEvaluatedDate:{
+            type:Date,
         }
     },
     {
         timestamps: true
     })
 
-module.exports = mongoose.model('ResearchTopic', researchTopic)
+module.exports = mongoose.model('RequestSupervisor', requestSupervisorModel)
