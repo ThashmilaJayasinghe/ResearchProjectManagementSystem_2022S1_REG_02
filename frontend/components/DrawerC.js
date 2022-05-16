@@ -11,18 +11,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 // import PeopleIcon from '@mui/icons-material/People';
 // import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 // import MarkChatReadIcon from '@mui/icons-material/MarkChatRead';
-const pages = [
-	'Students',
-	'Submissions',
-	'Marks',
-	'Supervisor',
-	'Contact Us',
-	'Login',
-	'Logout',
-];
 
-const DrawerC = () => {
+const DrawerC = (props) => {
+
 	const [openDrawer, setOpenDrawer] = useState(false);
+	const [pages, setPages] = useState(props.pages);
+
 	return (
 		<React.Fragment>
 			<Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
