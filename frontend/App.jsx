@@ -14,9 +14,11 @@ export default class App extends React.Component {
         return (
             <Router>
                 <Header/>
+                <div style={{paddingTop: 40 }}>
                 <Routes>
                     <Route exact path='/' element={<Home/>} />
                 </Routes>
+                </div>
             </Router>
         )
     }
