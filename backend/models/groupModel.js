@@ -11,9 +11,11 @@ const groupSchema = new Schema({
         }
     }],
     supervisor:{
-        id:{type:String,required:true},
-        name:{type:String},
-        email:{type:String}
+        // id:{type:String,required:true},
+        // name:{type:String},
+        // email:{type:String}
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Supervisor'
     },
     // supervisorName:{
     //     type:String
@@ -22,9 +24,11 @@ const groupSchema = new Schema({
     //     type:String
     // },
     coSupervisor:{
-        id:{type:String,required:true},
-        name:{type:String},
-        email:{type:String}
+        // id:{type:String,required:true},
+        // name:{type:String},
+        // email:{type:String}
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Supervisor'
     },
     documents:[{
         documentID:{
