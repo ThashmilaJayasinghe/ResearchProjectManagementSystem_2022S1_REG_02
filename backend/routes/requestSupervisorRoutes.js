@@ -2,12 +2,16 @@ const express = require('express');
 const {protect} = require("../middleware/authMiddleware");
 const router = express.Router()
 const makeSupervisorRequest = require('../controllers/studentController')
-const researchGroupEval = require('../controllers/supervisorController')
+const getAllRequestedSupervisors = require('../controllers/supervisorController').getAllRequestedSupervisors
+const getSupervisorRequest = require('../controllers/supervisorController').getSupervisorRequest
 
 //add a request
-router.route('/addRequest').post(makeSupervisorRequest)
+router.post('/addRequest', makeSupervisorRequest)
 
 //get all the requests
-router.route('/requests').get(researchGroupEval)
+router.get('/requests',getAllRequestedSupervisors)
+
+//get requests according to the supervisor
+router.get('/requestedSupervisor', getSupervisorRequest)
 
 module.exports = router;
