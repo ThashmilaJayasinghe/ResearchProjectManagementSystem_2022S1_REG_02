@@ -4,29 +4,24 @@ const jwt = require('jsonwebtoken')
 // Used to hash password
 const bcrypt = require('bcryptjs')
 
-// Used to handle express async errors
-const asyncHandler = require('express-async-handler')
-
 const User = require('../models/userModel')
 const Goal = require("../models/goalModel");
 
 // @desc    Register new user
 // @route   POST /api/users
 // @access  Public
-const registerUser = asyncHandler(async (req, res) => {
+const registerUser = async (req, res) => {
     const{name, email, password} = req.body
 
     if(!name || !email || !password) {
-         res.status(400)
-         throw new Error('Please add all fields')
+        return res.status(400).json({ msg: 'Please add all fields'})
     }
 
     // Check if user exists
     const userExists = await User.findOne({email})
 
     if(userExists) {
-        res.status(400)
-        throw new Error('User already exists')
+        return res.status(400).json({ msg: 'User already exists'})
     }
 
     // Hash password
@@ -48,16 +43,15 @@ const registerUser = asyncHandler(async (req, res) => {
             token: generateToken(user._id)
         })
     } else {
-        res.status(400)
-        throw new Error('Invalid user data')
+        return res.status(400).json({ msg: 'Invalid user data'})
     }
 
-})
+}
 
 // @desc    Authenticate a user
 // @route   POST /api/users/login
 // @access  Public
-const loginUser = asyncHandler(async (req, res) => {
+const loginUser = async (req, res) => {
     const{email, password} = req.body
 
     // Check for user email
@@ -72,15 +66,14 @@ const loginUser = asyncHandler(async (req, res) => {
             token: generateToken(user._id)
         })
     } else {
-        res.status(400)
-        throw new Error('Invalid credentials')
+        return res.status(400).json({ msg: 'Invalid credentials'})
     }
-})
+}
 
 // @desc    Get user data
 // @route   GET /api/users/me
 // @access  Private
-const getMe = asyncHandler(async (req, res) => {
+const getMe = async (req, res) => {
     const {_id, name, email} = await User.findById(req.user.id)
 
     res.status(200).json({
@@ -88,7 +81,7 @@ const getMe = asyncHandler(async (req, res) => {
         name,
         email
     })
-})
+}
 
 // Generate JWT with id as token payload
 const generateToken = (id) => {
