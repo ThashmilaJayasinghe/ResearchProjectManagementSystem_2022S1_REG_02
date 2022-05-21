@@ -24,12 +24,11 @@ function Register() {
     useEffect(() => {
 
         if(isError) {
-            // toast.error(message)
             alert(message)
         }
 
+        //*********************************************
         if(isSuccess || user){
-            console.log('success')
             user.role === 'buyer' ? navigate('/dash') : navigate('/FarmerHome')
         }
 
