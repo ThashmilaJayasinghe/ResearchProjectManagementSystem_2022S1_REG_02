@@ -16,9 +16,13 @@ const userSchema = mongoose.Schema({
         },
         // Assigning roles to user
         roles: [
+            // {
+            //     type: mongoose.Schema.Types.ObjectId,
+            //     ref: 'Role'
+            // }
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Role'
+                type: String,
+                required: [true, 'Please add a role']
             }
         ]
     },
