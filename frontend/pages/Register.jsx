@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-import {register, reset} from '../features/auth/authSlice'
+import {register, reset} from '../features/authSlice'
 import Spinner from '../components/Spinner'
 
 function Register() {
@@ -28,8 +28,11 @@ function Register() {
         }
 
         //*********************************************
+        // if(isSuccess || user){
+        //     user.role === 'supervisor' ? navigate('/dash') : navigate('/FarmerHome')
+        // }
         if(isSuccess || user){
-            user.role === 'buyer' ? navigate('/dash') : navigate('/FarmerHome')
+            navigate('/')
         }
 
         dispatch(reset())
@@ -47,8 +50,6 @@ function Register() {
         e.preventDefault()
 
         if(password !== password2) {
-            // toast.error('Passwords do not match')
-            console.log('success')
             alert('Passwords do not match')
         } else {
             const userData = {
@@ -70,7 +71,6 @@ function Register() {
         <div className='container'>
             <div>
                 <h1>
-                    {/*<FaUser />Register*/}
                     Register
                 </h1>
                 <p>Please create an account</p>
@@ -106,8 +106,8 @@ function Register() {
                             onChange={onChange}
                         >
                             <option disabled selected value>Do you wish to register as a buyer or farmer?</option>
-                            <option value="buyer">buyer</option>
-                            <option value="farmer">farmer</option>
+                            <option value="admin">buyer</option>
+                            <option value="staff">farmer</option>
                         </select>
                     </div>
                     <div className="mb-3">

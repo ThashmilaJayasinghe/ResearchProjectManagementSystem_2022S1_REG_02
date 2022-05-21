@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-import {login, reset} from '../features/auth/authSlice'
+import {login, reset} from '../features/authSlice'
 import Spinner from '../components/Spinner'
 
 
@@ -13,7 +13,7 @@ function Login() {
         password: '',
     })
 
-    const {email, password, role} = formData
+    const {email, password} = formData
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -26,9 +26,14 @@ function Login() {
             alert('Incorrect Credentials')
         }
 
+        //*********************************************
+        // if(isSuccess || user){
+        //     console.log('roles', user.roles)
+        //     user.role === 'buyer' ? navigate('/dash') : navigate('/FarmerHome')
+        // }
         if(isSuccess || user){
-            console.log('role', user.role)
-            user.role === 'buyer' ? navigate('/dash') : navigate('/FarmerHome')
+            console.log('roles', user.roles)
+            navigate('/')
         }
 
         dispatch(reset())
