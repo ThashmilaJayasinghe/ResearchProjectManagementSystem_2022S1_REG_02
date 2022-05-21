@@ -13,7 +13,7 @@ module.exports.get_topic_Status = (req,res) => {
 
 module.exports.post_topic_Status = (req,res) => {
     const status = req.body.status;
-    const message = req.body.message;
+    const feedback = req.body.feedback;
     const grp_ID = req.body.grp_ID;
     const supervisorName = req.body.supervisorName;
     const title = req.body.title;
@@ -24,7 +24,7 @@ module.exports.post_topic_Status = (req,res) => {
         supervisorName,
         title,
         status,
-        message,
+        feedback,
         evaluated_Date
     })
 

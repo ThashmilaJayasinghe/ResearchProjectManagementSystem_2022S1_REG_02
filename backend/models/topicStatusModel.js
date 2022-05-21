@@ -18,7 +18,7 @@ const topicStatusSchema = new Schema({
         type : String,
         required : true
     },
-    message : {
+    feedback : {
         type : String
     },
     evaluated_Date : {
@@ -27,5 +27,5 @@ const topicStatusSchema = new Schema({
     },
 })
 
-const topicStatusModel = mongoose.model("topicStatusModel", topicStatusSchema);
-module.exports = topicStatusModel;
+const topicStatus = mongoose.model("topicStatus", topicStatusSchema);
+module.exports = topicStatus;
