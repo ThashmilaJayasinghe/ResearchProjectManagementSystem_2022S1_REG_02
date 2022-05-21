@@ -99,12 +99,21 @@ const getAll = async (req, res) => {
     } else {
         return res.status(404).json({ msg: 'No users to display'})
     }
+}
 
-    // User.find().then((users) => {
-    //     res.json(users)
-    // }).catch((err) => {
-    //     console.log(err)
-    // })
+
+// @desc    Get all staff data
+// @route   GET /api/users/staff
+// @access  Private
+const getStaff = async (req, res) => {
+
+    const staff = await User.find({roles:'staff'})
+
+    if(staff) {
+        res.status(200).json(staff)
+    } else {
+        return res.status(404).json({ msg: 'No staff to display'})
+    }
 }
 
 
@@ -121,4 +130,5 @@ module.exports = {
     loginUser,
     getMe,
     getAll,
+    getStaff,
 }
