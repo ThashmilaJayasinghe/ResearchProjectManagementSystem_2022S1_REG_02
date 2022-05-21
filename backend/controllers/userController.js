@@ -5,15 +5,14 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
 const User = require('../models/userModel')
-const Goal = require("../models/goalModel");
 
 // @desc    Register new user
 // @route   POST /api/users
 // @access  Public
 const registerUser = async (req, res) => {
-    const{name, email, password} = req.body
+    const{name, email, password, role} = req.body
 
-    if(!name || !email || !password) {
+    if(!name || !email || !password || !role) {
         return res.status(400).json({ msg: 'Please add all fields'})
     }
 
@@ -32,14 +31,17 @@ const registerUser = async (req, res) => {
     const user = await User.create({
         name,
         email,
-        password: hashedPassword
+        password: hashedPassword,
+        roles: [role]
     })
+
 
     if(user) {
         res.status(201).json({
             _id: user.id,
             name: user.name,
             email: user.email,
+            roles: user.roles,
             token: generateToken(user._id)
         })
     } else {
