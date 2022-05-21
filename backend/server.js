@@ -20,6 +20,7 @@ app.use('/api/goals', require('./routes/goalRoutes'))
 app.use('/api/users', require('./routes/userRoutes'))
 app.use('/api/admin', require('./routes/adminRoutes'))
 app.use('/api/reqSupervisor', require('./routes/requestSupervisorRoutes'))
+app.use('/topic', require('./routes/topicStatuesRoutes'))
 
 app.use(errorHandler)
 
