@@ -3,11 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import Header from "./components/Header";
 import Home from "./pages/Home"
-<<<<<<< HEAD
 import Register from "./pages/Register"
-=======
 import HomePage from "./pages/supervisor/HomePage";
->>>>>>> master
+
 
 const studentpages = [
     'Students',
