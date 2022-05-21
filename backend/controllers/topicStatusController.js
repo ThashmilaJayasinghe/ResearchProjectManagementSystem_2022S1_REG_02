@@ -14,15 +14,23 @@ module.exports.get_topic_Status = (req,res) => {
 module.exports.post_topic_Status = (req,res) => {
     const status = req.body.status;
     const message = req.body.message;
+    const grp_ID = req.body.grp_ID;
+    const supervisorName = req.body.supervisorName;
+    const title = req.body.title;
+    const evaluated_Date = req.body.evaluated_Date;
 
     const newTopicS = new topic( {
+        grp_ID,
+        supervisorName,
+        title,
         status,
-        message
+        message,
+        evaluated_Date
     })
 
     newTopicS.save()
         .then(()=>{
-            res.json('Topic Status Added')
+            res.json('Topic Evaluated')
         })
         .catch((err)=>{
             console.log(err)
