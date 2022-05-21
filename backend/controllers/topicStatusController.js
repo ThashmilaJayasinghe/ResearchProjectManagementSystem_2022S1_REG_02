@@ -1,5 +1,5 @@
 const express = require('express')
-const topic = require('../models/topicStatus')
+const topic = require('../models/topicStatusModel')
 
 module.exports.get_topic_Status = (req,res) => {
     topic.find()

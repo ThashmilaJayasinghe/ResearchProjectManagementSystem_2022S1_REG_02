@@ -27,5 +27,5 @@ const topicStatusSchema = new Schema({
     },
 })
 
-const topicStatus = mongoose.model("topicStatus", topicStatusSchema);
-module.exports = topicStatus;
+const topicStatusModel = mongoose.model("topicStatusModel", topicStatusSchema);
+module.exports = topicStatusModel;
