@@ -87,6 +87,27 @@ const getMe = async (req, res) => {
     })
 }
 
+// @desc    Get all user data
+// @route   GET /api/users/all
+// @access  Private
+const getAll = async (req, res) => {
+
+    const users = await User.find()
+
+    if(users) {
+        res.status(200).json(users)
+    } else {
+        return res.status(404).json({ msg: 'No users to display'})
+    }
+
+    // User.find().then((users) => {
+    //     res.json(users)
+    // }).catch((err) => {
+    //     console.log(err)
+    // })
+}
+
+
 // Generate JWT with id as token payload
 const generateToken = (id) => {
     return jwt.sign({id}, process.env.JWT_SECRET, {
@@ -99,4 +120,5 @@ module.exports = {
     registerUser,
     loginUser,
     getMe,
+    getAll,
 }

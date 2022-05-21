@@ -58,3 +58,52 @@ function Header(props) {
 	);
 }
 export default Header;
+
+// import React from "react";
+// import {useDispatch, useSelector} from "react-redux";
+// import {useNavigate} from "react-router-dom";
+// import {logout, reset} from "../features/auth/authSlice";
+//
+// export default function NavBar(){
+//
+// 	const navigate = useNavigate()
+// 	const dispatch = useDispatch()
+//
+// 	const {user} = useSelector((state) => state.auth)
+//
+// 	const onLogout = () => {
+// 		dispatch(logout())
+// 		dispatch(reset())
+// 		navigate('/')
+// 	}
+//
+// 	return(
+// 		<div>
+// 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
+// 				<a className="navbar-brand" href="#">Agri Products</a>
+// 				<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+// 						aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+// 					<span className="navbar-toggler-icon"></span>
+// 				</button>
+// 				<div className="collapse navbar-collapse" id="navbarNav">
+// 					<ul className="navbar-nav">
+// 						{user && user.role === 'admin' ? (<>
+//
+// 						</>) : user && user.role === 'staff' ? (<>
+//
+// 						</>) : user && user.role === 'supervisor' ? (<>
+//
+// 						</>) : user && user.role === 'panel' ? (<>
+//
+// 						</>) : user && user.role === 'student' ? (<>
+//
+// 						</>) : (<>
+//
+// 						</>)}
+// 					</ul>
+// 				</div>
+// 			</nav>
+// 		</div>
+// 	)
+//
+// }
