@@ -33,7 +33,7 @@ function Login() {
         // }
         if(isSuccess || user){
             console.log('roles', user.roles)
-            navigate('/')
+            navigate('/admin')
         }
 
         dispatch(reset())

@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home"
 import Register from "./pages/Register"
 import HomePage from "./pages/supervisor/HomePage";
+import Admin from "./pages/admin/AdminDash";
 
 
 const studentpages = [
@@ -35,6 +36,7 @@ export default class App extends React.Component {
                 <Routes>
                     <Route exact path='/' element={<Home/>} />
                     <Route exact path='/register' element={<Register/>} />
+                    <Route exact path='/admin' element={<Admin/>} />
                 </Routes>
 =======
                 {

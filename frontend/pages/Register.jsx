@@ -32,7 +32,7 @@ function Register() {
         //     user.role === 'supervisor' ? navigate('/dash') : navigate('/FarmerHome')
         // }
         if(isSuccess || user){
-            navigate('/')
+            navigate('/admin')
         }
 
         dispatch(reset())
