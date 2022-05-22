@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Header from "./components/Header";
 import Home from "./pages/Home"
 import HomePage from "./pages/supervisor/HomePage";
+import Request_ResearchField from "./pages/supervisor/Request_ResearchField";
 
 const studentpages = [
     'Students',
@@ -16,6 +17,7 @@ const studentpages = [
 
 const supervisorPages = [
     'Students',
+    'Research field requests',
     'Topic evaluation',
     'Document evaluation',
     'Chat',
@@ -42,6 +44,7 @@ export default class App extends React.Component {
                     <Routes>
                         <Route exact path='/' element={<Home/>} />
                         <Route exact path = '/supervisor' element = {<HomePage/>} />
+                        <Route exact path = '/requestedresearchField' element = {<Request_ResearchField/>} />
                     </Routes>
                 </div>
 

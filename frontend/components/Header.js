@@ -9,17 +9,22 @@ import {
 	useMediaQuery,
 	useTheme,
 } from '@mui/material';
+import {TabPanel} from '@mui/lab';
 import DrawerC from './DrawerC';
+import {Link} from "react-router-dom";
 
 function Header(props) {
 
 	const [value, setValue] = useState(0);
 	const [pages, setPages] = useState(props.pages);
+	const [clickItem, setClickItem] = useState("");
+
+	console.log(clickItem)
 
 	const theme = useTheme();
-	console.log(theme);
+	// console.log(theme);
 	const isMatch = useMediaQuery(theme.breakpoints.down('md'));
-	console.log(isMatch);
+	// console.log(isMatch);
 	return (
 		<React.Fragment>
 			<AppBar style={{ background: '#063970' }}>
@@ -42,7 +47,12 @@ function Header(props) {
 
 								{
 									pages.map((page, index) => {
-										return <Tab key={index} label= {page} />
+
+										let tempPath = page.replace(/ /g, '')
+
+										return (
+												<Tab key={index} label= {page} onClick={() => setClickItem(page) }/>
+											)
 									})
 								}
 
