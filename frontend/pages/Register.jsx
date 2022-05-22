@@ -29,9 +29,9 @@ function Register() {
 
         //*********************************************
         if(isSuccess || user){
-            user.role === 'admin' ? navigate('/admin')
-                : user.role === 'staff' ? navigate('/supervisor')
-                    : navigate('/admin')
+            user.roles.includes('admin') ? navigate('/admin')
+                : user.roles.includes('staff') ? navigate('/supervisor')
+                    : navigate('/')
         }
 
         dispatch(reset())
@@ -104,9 +104,10 @@ function Register() {
                             required="required"
                             onChange={onChange}
                         >
-                            <option disabled selected value>Do you wish to register as a buyer or farmer?</option>
-                            <option value="admin">buyer</option>
-                            <option value="staff">farmer</option>
+                            <option disabled selected value>Please select user role</option>
+                            <option value="admin">Admin</option>
+                            <option value="staff">Staff</option>
+                            <option value="student">Student</option>
                         </select>
                     </div>
                     <div className="mb-3">

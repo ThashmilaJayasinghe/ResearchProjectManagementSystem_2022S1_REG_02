@@ -28,9 +28,9 @@ function Login() {
 
         //*********************************************
         if(isSuccess || user){
-            user.roles === 'admin' ? navigate('/admin')
-                : user.roles === 'staff' ? navigate('/supervisor')
-                    : navigate('/admin')
+            user.roles.includes('admin') ? navigate('/admin')
+                : user.roles.includes('staff') ? navigate('/supervisor')
+                    : navigate('/')
         }
 
         dispatch(reset())
