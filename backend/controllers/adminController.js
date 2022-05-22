@@ -3,7 +3,7 @@ const User = require('../models/userModel')
 
 
 // @desc    Add role
-// @route   POST /api/roles
+// @route   POST /api/admin/addRole
 // @access  Private
 const addRole = async (req, res) => {
     if(!req.body.name) {
@@ -38,7 +38,25 @@ const allocateRole = async (req, res) => {
 }
 
 
+// @desc    Get all staff data
+// @route   GET /api/admin/staff
+// @access  Private
+const getStaff = async (req, res) => {
+
+    const staff = await User.find({roles:'staff'})
+
+    if(staff) {
+        res.status(200).json(staff)
+    } else {
+        return res.status(404).json({ msg: 'No staff to display'})
+    }
+}
+
+
+
+
 module.exports = {
     addRole,
     allocateRole,
+    getStaff,
 }

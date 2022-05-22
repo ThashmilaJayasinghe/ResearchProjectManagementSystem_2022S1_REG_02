@@ -104,21 +104,6 @@ const getAll = async (req, res) => {
 }
 
 
-// @desc    Get all staff data
-// @route   GET /api/users/staff
-// @access  Private
-const getStaff = async (req, res) => {
-
-    const staff = await User.find({roles:'staff'})
-
-    if(staff) {
-        res.status(200).json(staff)
-    } else {
-        return res.status(404).json({ msg: 'No staff to display'})
-    }
-}
-
-
 // @desc    Delete user
 // @route   DELETE /api/users/:id
 // @access  Private
@@ -131,6 +116,88 @@ const deleteUser = async (req, res) => {
     })
 
 }
+
+
+// @desc    Update user
+// @route   PUT /api/users/:id
+// @access  Private
+const updateUser = async (req, res) => {
+
+    const {name, email} = req.body;
+
+    const updatedUser = {name, email}
+
+    await User.findByIdAndUpdate(req.params.id, updatedUser).then(() => {
+        res.status(200).json("User updated");
+    }).catch((err) => {
+        console.log(err);
+    })
+
+}
+
+// //updating
+// router.route("/update/:currentid").put(upload.single("image"), async (req, res) => {
+//
+//
+//     //The object sent from frontend is assigned to these three variables
+//     let adId = req.params.currentid;
+//     const {title, placement, startdate, enddate, description, oldimage} = req.body;
+//
+//
+//
+//     let updateCurrent = {};
+//
+//     if(uCondition){
+//
+//         //delete ad image using node js file handling
+//         const fs = require('fs')
+//         let path = ""
+//
+//
+//         if(placement == "Horizontal Banner") {
+//             path = ("../frontend/public/Horizontal_Banner/" + oldimage);
+//             console.log(path);
+//         } else {
+//             path = ("../frontend/public/Medium_Banner/" + oldimage);
+//             console.log(path);
+//         }
+//
+//         try {
+//             fs.unlinkSync(path)
+//             //file removed
+//         }catch(err) {
+//             console.error(err)
+//         }
+//
+//
+//         image = req.file.filename;
+//         updateCurrent = {
+//             title,
+//             placement,
+//             startdate,
+//             enddate,
+//             description,
+//             image
+//         }
+//     }else{
+//         updateCurrent = {
+//             title,
+//             placement,
+//             startdate,
+//             enddate,
+//             description
+//         }
+//     }
+//
+//     console.log(updateCurrent);
+//
+//     const update = await Current.findByIdAndUpdate(adId, updateCurrent).then(() => {
+//         res.json("Current Ad Updated");
+//     }).catch((err) => {
+//         console.log(err);
+//     })
+// })
+//
 
 
 
@@ -147,6 +214,6 @@ module.exports = {
     loginUser,
     getMe,
     getAll,
-    getStaff,
     deleteUser,
+    updateUser,
 }
