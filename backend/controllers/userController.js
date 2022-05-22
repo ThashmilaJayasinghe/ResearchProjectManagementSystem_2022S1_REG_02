@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
 const User = require('../models/userModel')
+const asyncHandler = require("express-async-handler");
+const Goal = require("../models/goalModel");
 
 // @desc    Register new user
 // @route   POST /api/users
@@ -117,6 +119,21 @@ const getStaff = async (req, res) => {
 }
 
 
+// @desc    Delete user
+// @route   DELETE /api/users/:id
+// @access  Private
+const deleteUser = async (req, res) => {
+
+    await User.findByIdAndDelete(req.params.id).then(() => {
+        res.status(200).json("User deleted");
+    }).catch((err) => {
+        console.log(err);
+    })
+
+}
+
+
+
 // Generate JWT with id as token payload
 const generateToken = (id) => {
     return jwt.sign({id}, process.env.JWT_SECRET, {
@@ -131,4 +148,5 @@ module.exports = {
     getMe,
     getAll,
     getStaff,
+    deleteUser,
 }

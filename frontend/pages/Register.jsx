@@ -28,11 +28,10 @@ function Register() {
         }
 
         //*********************************************
-        // if(isSuccess || user){
-        //     user.role === 'supervisor' ? navigate('/dash') : navigate('/FarmerHome')
-        // }
         if(isSuccess || user){
-            navigate('/admin')
+            user.role === 'admin' ? navigate('/admin')
+                : user.role === 'staff' ? navigate('/supervisor')
+                    : navigate('/admin')
         }
 
         dispatch(reset())

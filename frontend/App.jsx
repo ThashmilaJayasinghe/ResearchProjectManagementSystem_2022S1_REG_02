@@ -1,11 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 import Header from "./components/Header";
 import Home from "./pages/Home"
 import Register from "./pages/Register"
 import HomePage from "./pages/supervisor/HomePage";
 import Admin from "./pages/admin/AdminDash";
+import Login from "./pages/Login";
 
 
 const studentpages = [
@@ -24,39 +25,21 @@ const supervisorPages = [
     'Chat',
 ]
 
-export default class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {userRole: "supervisor"};
-    }
-    render() {
-        return (
+function App(){
+    return(
+        <div>
             <Router>
-<<<<<<< HEAD
+                <Header/>
                 <Routes>
-                    <Route exact path='/' element={<Home/>} />
-                    <Route exact path='/register' element={<Register/>} />
-                    <Route exact path='/admin' element={<Admin/>} />
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/register" element ={<Register/>}/>
+                    <Route path="/login" element ={<Login/>}/>
+                    <Route path="/supervisor" element={<HomePage/>}/>
+                    <Route path="/admin" element={<Admin/>}/>
                 </Routes>
-=======
-                {
-                    this.state.userRole == "student" ? (
-                        <Header pages = {studentpages}/>
-                    ):
-                        (
-                            <Header pages = {supervisorPages}/>
-                        )
-                }
-
-                <div style={{paddingTop:"40px"}}>
-                    <Routes>
-                        <Route exact path='/' element={<Home/>} />
-                        <Route exact path = '/supervisor' element = {<HomePage/>} />
-                    </Routes>
-                </div>
-
->>>>>>> master
             </Router>
-        )
-    }
+        </div>
+    )
 }
+
+export default App;

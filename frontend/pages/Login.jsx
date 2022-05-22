@@ -27,13 +27,10 @@ function Login() {
         }
 
         //*********************************************
-        // if(isSuccess || user){
-        //     console.log('roles', user.roles)
-        //     user.role === 'buyer' ? navigate('/dash') : navigate('/FarmerHome')
-        // }
         if(isSuccess || user){
-            console.log('roles', user.roles)
-            navigate('/admin')
+            user.roles === 'admin' ? navigate('/admin')
+                : user.roles === 'staff' ? navigate('/supervisor')
+                    : navigate('/admin')
         }
 
         dispatch(reset())

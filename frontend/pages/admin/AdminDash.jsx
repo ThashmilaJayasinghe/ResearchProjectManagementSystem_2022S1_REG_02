@@ -12,7 +12,7 @@ function AdminDashboard() {
     const {user} = useSelector((state) => state.auth) //used to get the user
 
 
-    const [staff, setStaff] = useState([]);
+    const [currents, setCurrents] = useState([]);
     const [search, setSearch] = useState("");
 
 
@@ -22,7 +22,7 @@ function AdminDashboard() {
             navigate('/')
         }
 
-        Axios.get("http://localhost:8070/current/view")
+        Axios.get("http://localhost:5000/api/users/staff")
             .then((res) => {
                 setCurrents(res.data)
                 console.log(res.data);
@@ -102,7 +102,7 @@ function AdminDashboard() {
                                         }
 
                                         const getCurrent = () => {
-                                            Axios.get("http://localhost:8070/current/view")
+                                            Axios.get("http://localhost:5000/api/users/staff")
                                                 .then((getCurrent) => {
                                                     setCurrents(getCurrent.data);
                                                 })
@@ -110,8 +110,8 @@ function AdminDashboard() {
 
                                         const onDelete = (id) => {
 
-                                            if (window.confirm('Do you wish to delete this advertisement?')) {
-                                                Axios.get("http://localhost:8070/current/delete/" + id)
+                                            if (window.confirm('Do you wish to delete this staff member?')) {
+                                                Axios.get("http://localhost:5000/api/users/" + id)
                                                     .then(() => {
                                                         getCurrent();
                                                         // alert("Ad Deleted");
@@ -119,22 +119,6 @@ function AdminDashboard() {
                                             }
                                         }
 
-                                        const onOpenModal = (image) => {
-                                            setModalState({
-                                                ...modalState, mState: {
-                                                    open: true,
-                                                    modalImage: image
-                                                }
-                                            });
-                                        };
-
-                                        const onCloseModal = () => {
-                                            setModalState({
-                                                ...modalState, mState: {
-                                                    open: false
-                                                }
-                                            });
-                                        };
 
                                         const location = () => {
                                             if (current.placement == 'Horizontal Banner')

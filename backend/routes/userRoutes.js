@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { registerUser, loginUser, getMe, getAll, getStaff } = require('../controllers/userController')
+const { registerUser, loginUser, getMe, getAll, getStaff, deleteUser } = require('../controllers/userController')
 const { protect } = require('../middleware/authMiddleware')
 // actual route is /api/users/
 
@@ -10,5 +10,6 @@ router.post('/login', loginUser)
 router.get('/me', protect, getMe)
 router.get('/all', getAll)
 router.get('/staff', getStaff)
+router.delete('/:id', deleteUser)
 
 module.exports = router
