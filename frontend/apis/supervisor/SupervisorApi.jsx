@@ -29,9 +29,12 @@ export const getSupRequests = async (supEmail,setSupRequests) => {
 
 //change the states of the request
 export const changeRequestStates = async (id, state) => {
+
+    //########### after add to add a state to a topic it should remove from the requests and add it to another colloection in a DB
+
     try{
         const response = await axios.put(`http://localhost:5000/api/reqSupervisor/updateRequest/${id}`, {requestStates: state})
-            .then((res) => setSupRequests([res.data]))
+            .then((res) => console.log(res.data))
     }catch (err) {
         console.log(err)
     }

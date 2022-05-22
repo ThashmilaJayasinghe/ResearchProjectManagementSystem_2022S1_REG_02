@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import {changeRequestStates, getAllRequests, getSupRequests} from "../../apis/supervisor/SupervisorApi";
+import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -38,11 +39,27 @@ const data = [
     {groupName: "groupName5", groupId: "g005", topic: "Cloud computing5", supervisor: "nuwan5"}
 ]
 
+const formatter = new Intl.DateTimeFormat("en-GB", {
+    year: "numeric",
+    month: "long",
+    day: "2-digit"
+});
+
 const Request_ResearchField = () => {
 
     const [requestDetails, setRequestDetails] = useState([]);
     const [supEmail, setSupEmail] = useState("Kushnaya@gmail.com");
     const [supRequests, setSupRequests] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [onViewClick, setOnViewClick] = useState({});
+
+    const handleClickModalOpen = () => {
+        setOpen(true);
+    };
+
+    const handleModalClose = () => {
+        setOpen(false);
+    };
 
     const onAcceptClick = (groupId) => {
         const accept  = "accepted"
@@ -72,44 +89,79 @@ const Request_ResearchField = () => {
                             <StyledTableCell align="center">Group Name</StyledTableCell>
                             <StyledTableCell align="center">Topic&nbsp;</StyledTableCell>
                             <StyledTableCell align="center">Added date&nbsp;</StyledTableCell>
-                            <StyledTableCell align="center">Decision&nbsp;</StyledTableCell>
+                            <StyledTableCell align="center">&nbsp;</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {supRequests.map((data) => (
+                        <>
                             <StyledTableRow key={data.requestedGroupID}>
                                 <StyledTableCell component="th" scope="row" align="center">
                                     {data.requestedGroupID}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">{data.requestedGroup}</StyledTableCell>
                                 <StyledTableCell align="center">{data.topic}</StyledTableCell>
-                                <StyledTableCell align="center">{data.createdAt}</StyledTableCell>
+                                <StyledTableCell align="center">{formatter.format(Date.parse(data.createdAt))}</StyledTableCell>
                                 <StyledTableCell align="center">
-                                    {/*<botton style = {{border: "1px solid black", padding: "5px", marginRight:"5px"}}>Accept</botton>*/}
-
-                                    <button style={{padding:"10px", marginRight: "5px"}}>View</button>
-                                    <Button
-                                        variant="contained"
-                                        color="success"
-                                        style={{marginRight: "5px"}}
-                                        onClick = {() => onAcceptClick(data._id)}
-                                    >
-                                        Accept
-                                    </Button>
-                                    <Button
-                                        variant="outlined"
-                                        color="error"
-                                        onClick = {() => onRejectClick(data._id)}
-                                    >
-                                        Reject
-                                    </Button>
-                                    {/*<botton style = {{border: "1px solid black", padding: "5px", marginRight:"5px"}}>Reject</botton>*/}
-                                </StyledTableCell>
+                                    <Button variant="contained"
+                                            onClick={() => (setOnViewClick(data), handleClickModalOpen())}
+                                    >View</Button>
+                                 </StyledTableCell>
                             </StyledTableRow>
+                        </>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
+
+
+
+
+
+            <div>
+                {/*<Button variant="outlined" onClick={handleClickModalOpen}>*/}
+                {/*    Open alert dialog*/}
+                {/*</Button>*/}
+                <Dialog
+                    open={open}
+                    onClose={handleModalClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        {onViewClick.topic}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            <div style={{}}><h4>Group Name : {onViewClick.requestedGroup}</h4> </div>
+                            <h3>Group ID : {onViewClick.requestedGroupID}</h3>
+                            <h4>Added date : {onViewClick.createdAt}</h4>
+                            <h4>Details :</h4>
+                            <p>{onViewClick.details}</p>
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button
+                            variant="contained"
+                            color="success"
+                            style={{marginRight: "5px"}}
+                            onClick = {() => (onAcceptClick(onViewClick._id), handleModalClose())}
+                        >
+                            Accept
+                        </Button>
+                        <Button
+                            variant="outlined"
+                            color="error"
+                            onClick = {() => (onRejectClick(onViewClick._id), handleModalClose())}
+                        >
+                            Reject
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
+
+
+
 
 
 
