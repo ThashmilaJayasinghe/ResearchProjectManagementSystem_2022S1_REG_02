@@ -4,29 +4,25 @@ const jwt = require('jsonwebtoken')
 // Used to hash password
 const bcrypt = require('bcryptjs')
 
-// Used to handle express async errors
-const asyncHandler = require('express-async-handler')
-
 const User = require('../models/userModel')
+const asyncHandler = require("express-async-handler");
 const Goal = require("../models/goalModel");
 
 // @desc    Register new user
 // @route   POST /api/users
 // @access  Public
-const registerUser = asyncHandler(async (req, res) => {
-    const{name, email, password} = req.body
+const registerUser = async (req, res) => {
+    const{name, email, password, role} = req.body
 
-    if(!name || !email || !password) {
-         res.status(400)
-         throw new Error('Please add all fields')
+    if(!name || !email || !password || !role) {
+        return res.status(400).json({ msg: 'Please add all fields'})
     }
 
     // Check if user exists
     const userExists = await User.findOne({email})
 
     if(userExists) {
-        res.status(400)
-        throw new Error('User already exists')
+        return res.status(400).json({ msg: 'User already exists'})
     }
 
     // Hash password
@@ -37,27 +33,29 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         name,
         email,
-        password: hashedPassword
+        password: hashedPassword,
+        roles: [role]
     })
+
 
     if(user) {
         res.status(201).json({
             _id: user.id,
             name: user.name,
             email: user.email,
+            roles: user.roles,
             token: generateToken(user._id)
         })
     } else {
-        res.status(400)
-        throw new Error('Invalid user data')
+        return res.status(400).json({ msg: 'Invalid user data'})
     }
 
-})
+}
 
 // @desc    Authenticate a user
 // @route   POST /api/users/login
 // @access  Public
-const loginUser = asyncHandler(async (req, res) => {
+const loginUser = async (req, res) => {
     const{email, password} = req.body
 
     // Check for user email
@@ -69,26 +67,72 @@ const loginUser = asyncHandler(async (req, res) => {
             _id: user.id,
             name: user.name,
             email: user.email,
+            roles: user.roles,
             token: generateToken(user._id)
         })
     } else {
-        res.status(400)
-        throw new Error('Invalid credentials')
+        return res.status(400).json({ msg: 'Invalid credentials'})
     }
-})
+}
 
 // @desc    Get user data
 // @route   GET /api/users/me
 // @access  Private
-const getMe = asyncHandler(async (req, res) => {
+const getMe = async (req, res) => {
     const {_id, name, email} = await User.findById(req.user.id)
 
     res.status(200).json({
         id:_id,
         name,
-        email
+        email,
+        roles
     })
-})
+}
+
+// @desc    Get all user data
+// @route   GET /api/users/all
+// @access  Private
+const getAll = async (req, res) => {
+
+    const users = await User.find()
+
+    if(users) {
+        res.status(200).json(users)
+    } else {
+        return res.status(404).json({ msg: 'No users to display'})
+    }
+}
+
+
+// @desc    Get all staff data
+// @route   GET /api/users/staff
+// @access  Private
+const getStaff = async (req, res) => {
+
+    const staff = await User.find({roles:'staff'})
+
+    if(staff) {
+        res.status(200).json(staff)
+    } else {
+        return res.status(404).json({ msg: 'No staff to display'})
+    }
+}
+
+
+// @desc    Delete user
+// @route   DELETE /api/users/:id
+// @access  Private
+const deleteUser = async (req, res) => {
+
+    await User.findByIdAndDelete(req.params.id).then(() => {
+        res.status(200).json("User deleted");
+    }).catch((err) => {
+        console.log(err);
+    })
+
+}
+
+
 
 // Generate JWT with id as token payload
 const generateToken = (id) => {
@@ -102,4 +146,7 @@ module.exports = {
     registerUser,
     loginUser,
     getMe,
+    getAll,
+    getStaff,
+    deleteUser,
 }
