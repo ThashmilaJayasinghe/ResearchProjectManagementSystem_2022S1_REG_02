@@ -7,23 +7,8 @@ import Register from "./pages/Register"
 import HomePage from "./pages/supervisor/HomePage";
 import Admin from "./pages/admin/AdminDash";
 import Login from "./pages/Login";
+import Request_ResearchField from "./pages/supervisor/Request_ResearchField";
 
-
-const studentpages = [
-    'Students',
-    'Submissions',
-    'Marks',
-    'Supervisor',
-    'Contact Us',
-
-];
-
-const supervisorPages = [
-    'Students',
-    'Topic evaluation',
-    'Document evaluation',
-    'Chat',
-]
 
 function App(){
     return(
@@ -36,6 +21,7 @@ function App(){
                     <Route path="/login" element ={<Login/>}/>
                     <Route path="/supervisor" element={<HomePage/>}/>
                     <Route path="/admin" element={<Admin/>}/>
+                    <Route exact path = '/requestedresearchField' element = {<Request_ResearchField/>} />
                 </Routes>
             </Router>
         </div>
