@@ -78,9 +78,12 @@ const Request_ResearchField = () => {
 
     }, [])
 
+    console.log(supRequests)
 
     return (
-        <div style={{paddingTop:"20px", margin: "40px"}}>
+        // <div style={{paddingTop:"20px", margin: "40px"}}>
+        <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
+            <center><h1>Requests</h1></center>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
                     <TableHead>
@@ -89,6 +92,7 @@ const Request_ResearchField = () => {
                             <StyledTableCell align="center">Group Name</StyledTableCell>
                             <StyledTableCell align="center">Topic&nbsp;</StyledTableCell>
                             <StyledTableCell align="center">Added date&nbsp;</StyledTableCell>
+                            <StyledTableCell align="center">Checked&nbsp;</StyledTableCell>
                             <StyledTableCell align="center">&nbsp;</StyledTableCell>
                         </TableRow>
                     </TableHead>
@@ -103,6 +107,41 @@ const Request_ResearchField = () => {
                                 <StyledTableCell align="center">{data.topic}</StyledTableCell>
                                 <StyledTableCell align="center">{formatter.format(Date.parse(data.createdAt))}</StyledTableCell>
                                 <StyledTableCell align="center">
+
+                                    {
+                                        data.requestStates ? (
+                                            <>
+                                            {
+                                                data.requestStates == "rejected" ?
+                                                    <>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-1 w-1" fill="none"
+                                                             viewBox="-14 0 60 24" stroke="#d4503b" stroke-width="1">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                  d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
+                                                        </svg>
+                                                    </>
+                                                    : (
+                                                        <>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none"
+                                                                 viewBox="-14 0 60 24" stroke="#49de73" stroke-width="1">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                      d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                                                            </svg>
+                                                        </>
+                                                    )
+                                            }
+                                            </>
+                                        ) : (
+                                            <>
+                                                <div style={{color: "yellow"}}>Not marked</div>
+                                            </>
+                                            )
+                                    }
+
+
+                                </StyledTableCell>
+
+                                <StyledTableCell align="center">
                                     <Button variant="contained"
                                             onClick={() => (setOnViewClick(data), handleClickModalOpen())}
                                     >View</Button>
@@ -114,14 +153,7 @@ const Request_ResearchField = () => {
                 </Table>
             </TableContainer>
 
-
-
-
-
             <div>
-                {/*<Button variant="outlined" onClick={handleClickModalOpen}>*/}
-                {/*    Open alert dialog*/}
-                {/*</Button>*/}
                 <Dialog
                     open={open}
                     onClose={handleModalClose}

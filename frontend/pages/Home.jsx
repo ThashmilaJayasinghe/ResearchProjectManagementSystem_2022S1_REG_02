@@ -10,7 +10,7 @@ const Home = () => {
                 <h1>WELCOME TO RESEARCH PROJECT MANAGEMEN </h1>
             </div>
 
-            <Link to = "/requestedresearchField">
+            <Link to = "/supervisor/requestedresearchField">
                 click to navigate
             </Link>
 
