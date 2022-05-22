@@ -17,15 +17,18 @@ const DrawerC = (props) => {
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [pages, setPages] = useState(props.pages);
 
+	const [clickedItem, setClickedItem] = useState("");
+	console.log(clickedItem)
+
 	return (
 		<React.Fragment>
 			<Drawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
 				<List>
 					{pages.map((page, index) => (
 						<ListItemButton onClick={() => setOpenDrawer(false)} key={index}>
-							<ListItemIcon>
+							<ListItemIcon >
 								{/* {index % 2 === 0 ? <PeopleIcon /> : <LibraryBooksIcon />} */}
-								<ListItemText>{page}</ListItemText>
+								<ListItemText onClick={() =>  setClickedItem(page)}>{page}</ListItemText>
 							</ListItemIcon>
 						</ListItemButton>
 					))}
