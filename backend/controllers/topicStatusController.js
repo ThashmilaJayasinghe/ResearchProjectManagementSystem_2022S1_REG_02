@@ -1,4 +1,3 @@
-const express = require('express')
 const topic = require('../models/topicStatusModel')
 
 module.exports.get_topic_Status = (req,res) => {
