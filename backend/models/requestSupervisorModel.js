@@ -2,10 +2,10 @@ const mongoose = require('mongoose')
 
 const requestSupervisorModel = mongoose.Schema({
 
-        requestedGroup: {
-            type: String,
-            required: true
-        },
+        // requestedGroup: {
+        //     type: String,
+        //     required: true
+        // },
         requestedGroupID: {
             type: String,
             required: true
@@ -21,7 +21,7 @@ const requestSupervisorModel = mongoose.Schema({
         topic: {
             type:String
         },
-        details: {
+        message: {
             type: String
         },
         requestStates: {
