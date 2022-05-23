@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import Header from "./components/Header";
 import Home from "./pages/Home"
-import HomePage from "./pages/supervisor/HomePage";
+
+// import HomePage from "./pages/supervisor/HomePage";
 
 const studentpages = [
     'Students',
@@ -24,7 +25,7 @@ const supervisorPages = [
 export default class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {userRole: "supervisor"};
+        this.state = {userRole: "student"};
     }
     render() {
         return (
@@ -41,7 +42,8 @@ export default class App extends React.Component {
                 <div style={{paddingTop:"40px"}}>
                     <Routes>
                         <Route exact path='/' element={<Home/>} />
-                        <Route exact path = '/supervisor' element = {<HomePage/>} />
+
+                        {/*<Route exact path = '/supervisor' element = {<HomePage/>} />*/}
                     </Routes>
                 </div>
 
