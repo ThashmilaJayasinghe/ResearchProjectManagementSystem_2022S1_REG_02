@@ -1,6 +1,7 @@
 const topic = require('../models/topicStatusModel')
 const Group = require('../models/groupModel')
 const Student = require('../models/studentModel')
+const {json} = require("express");
 
 module.exports.get_topic_Status = (req,res) => {
     topic.find()
@@ -12,16 +13,17 @@ module.exports.get_topic_Status = (req,res) => {
         })
 }
 
-module.exports.post_topic_Status = (req,res) => {
-    // let user = req.params.id;
-    // console.log(user)
-    // let student = Student.findOne({user})
-    // console.log(student);
-    //const {_id} = Group.findOne({"members":{regNumber:regNumber}});
+module.exports.post_topic_Status = async (req,res) => {
+    let id = req.params.id;
+    console.log(id)
+    let student = await Student.findOne({user:id})
+    const regNum = student.regNumber
+    console.log(regNum)
+    const group = await Group.findOne({"members.regNumber" : regNum});
+    const gid = group._id.toString()
+    console.log(gid)
 
-
-    // const grp_ID = _id;
-    const grp_ID = req.params.id;
+    const grp_ID = gid;
     const title = req.body.title;
     const message = req.body.message;
     const supervisorID = req.body.supervisorID;
