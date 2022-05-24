@@ -1,14 +1,18 @@
 const express = require('express');
 const {protect} = require("../middleware/authMiddleware");
 const router = express.Router()
-const makeSupervisorRequest = require('../controllers/studentController')
+const makeSupervisorRequest = require('../controllers/requestSupervisorController').post_request
+const Requests = require('../controllers/requestSupervisorController').get_requests
+const updateRequest = require('../controllers/requestSupervisorController').update_request
 const getAllRequestedSupervisors = require('../controllers/supervisorController').getAllRequestedSupervisors
 const getSupervisorRequest = require('../controllers/supervisorController').getSupervisorRequest
 const requestCheck = require('../controllers/supervisorController').requestCheck
 
 
 //add a request
-router.post('/addRequest', makeSupervisorRequest)
+router.post('/', makeSupervisorRequest)
+router.get('/',Requests);
+router.put('/update',updateRequest)
 
 //get all the requests
 router.get('/requests',getAllRequestedSupervisors)

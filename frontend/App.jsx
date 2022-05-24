@@ -10,7 +10,6 @@ import Login from "./pages/Login";
 import Request_ResearchField from "./pages/supervisor/Request_ResearchField";
 import UpdateUser from "./pages/admin/UpdateUser";
 
-
 function App(){
     return(
         <div>
