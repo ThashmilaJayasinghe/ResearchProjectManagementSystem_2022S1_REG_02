@@ -13,7 +13,6 @@ export default function UpdateUser(){
     const {user} = useSelector((state) => state.auth) //used to get the user
 
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     useEffect(() => {
 

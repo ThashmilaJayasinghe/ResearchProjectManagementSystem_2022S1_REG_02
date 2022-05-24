@@ -9,7 +9,6 @@ import EditIcon from '@mui/icons-material/Edit';
 function AdminDashboard() {
 
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     const {user} = useSelector((state) => state.auth) //used to get the user
 

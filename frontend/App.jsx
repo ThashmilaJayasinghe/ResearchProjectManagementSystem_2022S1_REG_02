@@ -9,6 +9,7 @@ import Admin from "./pages/admin/AdminDash";
 import Login from "./pages/Login";
 import Request_ResearchField from "./pages/supervisor/Request_ResearchField";
 import UpdateUser from "./pages/admin/UpdateUser";
+import ManageSubmissions from "./pages/admin/ManageSubmissions";
 
 
 function App(){
@@ -23,7 +24,8 @@ function App(){
                     <Route path="/supervisor" element={<HomePage/>}/>
                     <Route path="/admin" element={<Admin/>}/>
                     <Route exact path = '/requestedresearchField' element = {<Request_ResearchField/>} />
-                    <Route exact path = '/updateuser' element = {<UpdateUser/>} />
+                    <Route path = '/updateuser' element = {<UpdateUser/>} />
+                    <Route path = '/managesubmissions' element = {<ManageSubmissions/>} />
                 </Routes>
             </Router>
         </div>

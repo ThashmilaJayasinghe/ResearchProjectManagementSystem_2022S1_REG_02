@@ -34,6 +34,10 @@ const Header = () => {
 			onClick: () => navigate('/admin')
 		},
 		{
+			text: 'Submissions',
+			onClick: () => navigate('/managesubmissions')
+		},
+		{
 			text: 'Logout',
 			onClick: () => onLogout()
 		},
