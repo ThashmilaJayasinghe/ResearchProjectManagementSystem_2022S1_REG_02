@@ -12,44 +12,77 @@ import AdbIcon from '@mui/icons-material/Adb';
 import {Link, useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from "react-redux";
 import {logout, reset} from "../features/authSlice";
+import Button from "@mui/material/Button";
 
 
 const Header = () => {
-	const [anchorElNav, setAnchorElNav] = React.useState(null);
-	const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-	const [anchor, setAnchor] = React.useState(null); //for onClick
-
-	const handleOpenNavMenu = (event) => {
-		setAnchorElNav(event.currentTarget);
-	};
-	const handleOpenUserMenu = (event) => {
-		setAnchorElUser(event.currentTarget);
-	};
-
-	const handleCloseNavMenu = () => {
-		setAnchorElNav(null);
-	};
-
-	const handleCloseUserMenu = () => {
-		setAnchorElUser(null);
-	};
-
-	const handleMenu = (event) => {
-		setAnchor(event.currentTarget);
-	};   // for onClick
 
 	const navigate = useNavigate()
- 	const dispatch = useDispatch()
+	const dispatch = useDispatch()
 
 	const {user} = useSelector((state) => state.auth)
-
 
 	const onLogout = () => {
 		dispatch(logout())
 		dispatch(reset())
 		navigate('/')
 	}
+
+	const adminItems = [
+		{
+			text: 'AdminDash',
+			onClick: () => navigate('/supervisor')
+		},
+		{
+			text: 'Logout',
+			onClick: () => onLogout()
+		},
+	]
+
+	const staffItems = [
+		{
+			text: 'StaffDash',
+			onClick: () => navigate('/supervisor')
+		},
+		{
+			text: 'Logout',
+			onClick: () => onLogout()
+		},
+	]
+
+	const studentItems = [
+		{
+			text: 'StudentDash',
+			onClick: () => ('/admin')
+		},
+		{
+			text: 'Logout',
+			onClick: () => onLogout()
+		},
+	]
+
+	const Items = [
+		{
+			text: 'Login',
+			onClick: () => navigate('/login')
+		},
+		{
+			text: 'Register',
+			onClick: () => navigate('/register')
+		}
+	]
+
+
+	const [anchorElNav, setAnchorElNav] = React.useState(null);
+
+	const handleOpenNavMenu = (event) => {
+		setAnchorElNav(event.currentTarget);
+	};
+
+	const handleCloseNavMenu = () => {
+		setAnchorElNav(null);
+	};
+
 
 	return (
 		<AppBar position="static" style={{ background: '#063970' }}>
@@ -103,61 +136,50 @@ const Header = () => {
 								display: { xs: 'block', md: 'none' },
 							}}
 						>
-							{user && user.roles.includes('admin') ? (<>
-								<MenuItem
-									onClick={() => setAnchor(null)}
-									component={Link}
-									to="/admin"
-								>
-									<Typography textAlign="center" variant="h6"> AdminHome </Typography>
-								</MenuItem>
-								<MenuItem
-									onClick={onLogout}
-								>
-									<Typography textAlign="center" variant="h6"> Logout </Typography>
-								</MenuItem>
-							</>) : user && user.roles.includes('staff') ? (<>
-								<MenuItem
-									onClick={() => setAnchor(null)}
-									component={Link}
-									to="/supervisor"
-								>
-									<Typography textAlign="center" variant="h6"> StaffHome </Typography>
-								</MenuItem>
-								<MenuItem
-									onClick={onLogout}
-								>
-									<Typography textAlign="center" variant="h6"> Logout </Typography>
-								</MenuItem>
-							</>) : user && user.roles.includes('student') ? (<>
-								<MenuItem
-									onClick={() => setAnchor(null)}
-									component={Link}
-									to="/"
-								>
-									<Typography textAlign="center" variant="h6"> StudentHome </Typography>
-								</MenuItem>
-								<MenuItem
-									onClick={onLogout}
-								>
-									<Typography textAlign="center" variant="h6"> Logout </Typography>
-								</MenuItem>
-							</>) : (<>
-								<MenuItem
-									onClick={() => setAnchor(null)}
-									component={Link}
-									to="/login"
-								>
-									<Typography textAlign="center" variant="h6"> Login </Typography>
-								</MenuItem>
-								<MenuItem
-									onClick={() => setAnchor(null)}
-									component={Link}
-									to="/register"
-								>
-									<Typography textAlign="center" variant="h6"> Register </Typography>
-								</MenuItem>
-							</>)}
+							{user && user.roles.includes('admin') ? (
+
+								adminItems.map((adminItem) => {
+									const {text, onClick} = adminItem;
+									return (
+										<MenuItem key={text} onClick={onClick}>
+											<Typography textAlign="center">{text}</Typography>
+										</MenuItem>
+									)
+								})
+
+							) : user && user.roles.includes('staff') ? (
+
+								staffItems.map((staffItem) => {
+									const {text, onClick} = staffItem;
+									return (
+										<MenuItem key={text} onClick={onClick}>
+											<Typography textAlign="center">{text}</Typography>
+										</MenuItem>
+									)
+								})
+
+							) : user && user.roles.includes('student') ? (
+
+								studentItems.map((studentItem) => {
+									const {text, onClick} = studentItem;
+									return (
+										<MenuItem key={text} onClick={onClick}>
+											<Typography textAlign="center">{text}</Typography>
+										</MenuItem>
+									)
+								})
+							) : (
+
+								Items.map((Item) => {
+									const {text, onClick} = Item;
+									return (
+										<MenuItem key={text} onClick={onClick}>
+											<Typography textAlign="center">{text}</Typography>
+										</MenuItem>
+									)
+								})
+
+							)}
 						</Menu>
 					</Box>
 					<AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -180,61 +202,66 @@ const Header = () => {
 						LOGO
 					</Typography>
 					<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-						{user && user.roles.includes('admin') ? (<>
-							<MenuItem
-								onClick={() => setAnchor(null)}
-								component={Link}
-								to="/admin"
-							>
-								<Typography textAlign="center" variant="h6"> AdminHome </Typography>
-							</MenuItem>
-							<MenuItem
-								onClick={onLogout}
-							>
-								<Typography textAlign="center" variant="h6"> Logout </Typography>
-							</MenuItem>
-						</>) : user && user.roles.includes('staff') ? (<>
-							<MenuItem
-								onClick={() => setAnchor(null)}
-								component={Link}
-								to="/supervisor"
-							>
-								<Typography textAlign="center" variant="h6"> StaffHome </Typography>
-							</MenuItem>
-							<MenuItem
-								onClick={onLogout}
-							>
-								<Typography textAlign="center" variant="h6"> Logout </Typography>
-							</MenuItem>
-						</>) : user && user.roles.includes('student') ? (<>
-							<MenuItem
-								onClick={() => setAnchor(null)}
-								component={Link}
-								to="/"
-							>
-								<Typography textAlign="center" variant="h6"> StudentHome </Typography>
-							</MenuItem>
-							<MenuItem
-								onClick={onLogout}
-							>
-								<Typography textAlign="center" variant="h6"> Logout </Typography>
-							</MenuItem>
-						</>) : (<>
-							<MenuItem
-								onClick={() => setAnchor(null)}
-								component={Link}
-								to="/login"
-							>
-								<Typography textAlign="center" variant="h6"> Login </Typography>
-							</MenuItem>
-							<MenuItem
-								onClick={() => setAnchor(null)}
-								component={Link}
-								to="/register"
-							>
-								<Typography textAlign="center" variant="h6"> Register </Typography>
-							</MenuItem>
-						</>)}
+						{user && user.roles.includes('admin') ? (
+
+							adminItems.map((adminItem) => {
+								const {text, onClick} = adminItem;
+								return (
+									<Button
+										key={text}
+										onClick={onClick}
+										sx={{ my: 2, color: 'white', display: 'block' }}
+									>
+										{text}
+									</Button>
+								)
+							})
+
+						) : user && user.roles.includes('staff') ? (
+
+							staffItems.map((staffItem) => {
+								const {text, onClick} = staffItem;
+								return (
+									<Button
+										key={text}
+										onClick={onClick}
+										sx={{ my: 2, color: 'white', display: 'block' }}
+									>
+										{text}
+									</Button>
+								)
+							})
+
+						) : user && user.roles.includes('student') ? (
+
+							studentItems.map((studentItem) => {
+								const {text, onClick} = studentItem;
+								return (
+									<Button
+										key={text}
+										onClick={onClick}
+										sx={{ my: 2, color: 'white', display: 'block' }}
+									>
+										{text}
+									</Button>
+								)
+							})
+						) : (
+
+							Items.map((Item) => {
+								const {text, onClick} = Item;
+								return (
+									<Button
+										key={text}
+										onClick={onClick}
+										sx={{ my: 2, color: 'white', display: 'block' }}
+									>
+										{text}
+									</Button>
+								)
+							})
+
+						)}
 					</Box>
 				</Toolbar>
 			</Container>

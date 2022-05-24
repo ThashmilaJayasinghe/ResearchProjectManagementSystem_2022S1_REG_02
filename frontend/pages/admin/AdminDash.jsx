@@ -42,18 +42,18 @@ function AdminDashboard() {
                 <h2>Staff Details</h2>
                 <br/>
             </div>
-            <div className="topnav__search">
+            <div>
                 <input type="text" placeholder='Search By Name...' onChange={(e) => {
                     setSearch(e.target.value);
                 }}/>
                 <i className='bx bx-search'></i>
             </div>
-            <div className="row">
-                <div className="col-12">
-                    <div className="card">
-                        <div className="card__body">
-                            <table className="table">
-                                <thead className="thead-dark">
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <table>
+                                <thead>
                                 <tr>
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
@@ -88,6 +88,9 @@ function AdminDashboard() {
                                             Axios.get("http://localhost:5000/api/admin/staff/")
                                                 .then((getStaff) => {
                                                     setStaffs(getStaff.data);
+                                                })
+                                                .catch((err) => {
+                                                    alert(err)
                                                 })
                                         }
 
