@@ -2,7 +2,6 @@ const express = require('express')
 const colors = require('colors')
 const cors = require('cors')
 const dotenv = require('dotenv').config()
-const {errorHandler} = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
 const port = process.env.PORT || 5000
 
@@ -27,7 +26,5 @@ app.use('/api/reqSupervisor', require('./routes/requestSupervisorRoutes'))
 app.use('/topic', require('./routes/topicStatuesRoutes'))
 app.use('/marks', require('./routes/marksRoutes'))
 app.use('/group', require('./routes/groupRoutes'))
-
-app.use(errorHandler)
 
 app.listen(port, () => console.log(`Server started on port ${port}`))

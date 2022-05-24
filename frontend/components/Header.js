@@ -31,7 +31,11 @@ const Header = () => {
 	const adminItems = [
 		{
 			text: 'AdminDash',
-			onClick: () => navigate('/supervisor')
+			onClick: () => navigate('/admin')
+		},
+		{
+			text: 'Submissions',
+			onClick: () => navigate('/managesubmissions')
 		},
 		{
 			text: 'Logout',
