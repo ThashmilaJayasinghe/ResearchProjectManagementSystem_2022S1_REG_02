@@ -1,6 +1,45 @@
 const Role = require('../models/roleModel')
 const User = require('../models/userModel')
 const SubmissionType = require('../models/submissionTypeModel')
+const Multer = require("multer");
+const Goal = require("../models/goalModel");
+
+
+//define storage for the images using Multer
+const storage = Multer.diskStorage({
+
+    destination: (req, file, callback) => {
+
+        callback(null, "../frontend/public/Requested_Ads/");
+
+    },
+
+    //add back extension
+    filename: (req, file, callback) => {
+        callback(null, Date.now() + file.originalname);
+    }
+
+});
+
+
+//upload parameters for Multer
+const upload = Multer({
+
+    storage: storage,
+
+    fileFilter: (req, file, callback) => {
+        var path = require('path');
+        var ext = path.extname(file.originalname);
+        if(ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
+            return callback(new Error('Only images are allowed'))
+        }
+        callback(null, true)
+    },
+
+    limits: {
+        fieldSize: 1024 * 1024 * 3,
+    }
+});
 
 
 // @desc    Add role
@@ -59,17 +98,28 @@ const getStaff = async (req, res) => {
 // @access  Private
 const addAssignment = async (req, res) => {
 
-    const{title, type, instructions, } = req.body
+    const{title, type, instructions, dueDate, markingScheme, template} = req.body
+    // const image =  req.file.filename;
 
-    if(!name || !email || !password || !role) {
+    if(!title || !type || !instructions || !dueDate || !markingScheme || !template) {
         return res.status(400).json({ msg: 'Please add all fields'})
     }
 
-    const role = await Role.create({
-        name: req.body.name,
+    const subType = await SubmissionType.create({
+        title,
+        type,
+        instructions,
+        dueDate,
+        markingScheme,
+        template
+
     })
 
-    res.status(200).json(role)
+    if(subType) {
+        res.status(200).json(subType)
+    } else {
+        return res.status(404).json({ msg: 'No submission type created'})
+    }
 }
 
 

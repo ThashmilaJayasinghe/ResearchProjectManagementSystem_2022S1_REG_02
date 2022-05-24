@@ -17,7 +17,7 @@ const submissionTypeSchema = mongoose.Schema({
         type: Date,
         required: true
     },
-    markingSchema:{
+    markingScheme:{
         type: String,
         required: true
     },
