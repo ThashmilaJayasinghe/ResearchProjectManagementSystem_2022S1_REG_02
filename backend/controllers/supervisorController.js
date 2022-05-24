@@ -75,7 +75,21 @@ const addQualifications = asyncHandler(async(req, res) => {
     const email = req.body.email;
 
     try{
-        const updateResult = await Supervisor.findOneAndUpdate(email,{ $push : {qualifications: newQualification}})
+        const updateResult = await Supervisor.findOneAndUpdate({email:email},{ $push : {qualifications: newQualification}})
+        res.status(200).json(updateResult)
+    }catch(err){
+        console.log(err)
+    }
+}) 
+
+//update the research field of supervisor 
+const addResearchField = asyncHandler(async(req, res) => {
+
+    const newResearchFeild = req.body.researchInterests;
+    const email = req.body.email;
+
+    try{
+        const updateResult = await Supervisor.findOneAndUpdate({email:email},{ $push : {researchInterests: newResearchFeild}})
         res.status(200).json(updateResult)
     }catch(err){
         console.log(err)
@@ -95,6 +109,7 @@ module.exports.requestCheck = requestCheck
 
 module.exports.addSupervisor = addSupervisor
 module.exports.addQualifications = addQualifications
+module.exports.addResearchField = addResearchField
 
 
 

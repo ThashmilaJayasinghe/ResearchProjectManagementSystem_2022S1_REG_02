@@ -11,6 +11,7 @@ const requestCheck = require('../controllers/staffController').requestCheck
 
 const addSupervisor = require('../controllers/supervisorController').addSupervisor
 const addQualifications = require('../controllers/supervisorController').addQualifications 
+const addResearchField = require('../controllers/supervisorController').addResearchField
 
 //add a request
 router.post('/addRequest', makeSupervisorRequest)
@@ -31,5 +32,8 @@ router.post('/addSupervisor',addSupervisor )
 
 // update qualifications
 router.put('/updateQual',addQualifications )
+
+// update research interest
+router.put('/updateResearch', addResearchField)
 
 module.exports = router;

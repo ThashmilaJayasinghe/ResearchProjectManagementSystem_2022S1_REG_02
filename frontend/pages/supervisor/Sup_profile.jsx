@@ -1,5 +1,6 @@
 import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react'
+import {addQualification, addResearchField} from '../../apis/supervisor/SupervisorApi'
 
 const qualificationsArr = [
   "Bsc IT", "MSC Cloud computing", "Bsc in BA"
@@ -12,7 +13,7 @@ const researchInterestsArr = [
 const Sup_profile = () => {
 
   const [name, setName] = useState("supervisor one");
-  const [email, setEmail] = useState("supervisorOne@gmail.com");
+  const [email, setEmail] = useState("kamala@gmail.com");
   const [qualifications, setQualifications] = useState(qualificationsArr);
   const [researchInterests, setResearchInterests] = useState(researchInterestsArr);
   const [registeredDate, setRegisteredDate] = useState('2020/10/20')
@@ -24,10 +25,14 @@ const Sup_profile = () => {
 
   const onAddQualification = () => {
     console.log(newQualification)
+
+    addQualification(email, newQualification).then(() => console.log("new qualification added"))
   }
 
   const onAddResearchField = () => {
     console.log(newResearchField)
+
+    addResearchField(email, newResearchField).then(() => console.log("new research field added"))
   }
 
   return (

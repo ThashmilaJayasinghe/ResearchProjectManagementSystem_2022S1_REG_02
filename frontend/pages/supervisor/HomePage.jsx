@@ -9,12 +9,7 @@ const HomePage = () => {
     return (
         <div style={{paddingTop: "20px"}}>
 
-            <TextField
-                id="outlined-password-input"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-            />
+           
 
         </div>
     )
