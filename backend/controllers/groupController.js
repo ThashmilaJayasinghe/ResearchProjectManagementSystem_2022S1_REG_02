@@ -13,8 +13,6 @@ const create_group = (req,res) =>{
         .catch((err) => {
             console.log(err);
         })
-
-
 }
 
 const set_group = async (req,res)=> {
@@ -25,11 +23,19 @@ const set_group = async (req,res)=> {
 
     let group = await Group.findOne({groupID})
 
+    let i = group.members.length;
+    console.log(i);
     try {
         if (group) {
-            group.members.push({regNumber, leader, email});
-            group = await group.save();
-            return res.status(201).send(group);
+            if(i<7) {
+                group.members.push({regNumber, leader, email});
+                group = await group.save();
+                return res.status(201).send(group);
+            }
+            else {
+                console.log("Limitted"+i);
+                res.status(500).send("Limit exceded")
+            }
         }
         else {
             const newGroup = new Group({

@@ -28,6 +28,7 @@ app.use('/topic', require('./routes/topicStatuesRoutes'))
 app.use('/marks', require('./routes/marksRoutes'))
 app.use('/group', require('./routes/groupRoutes'))
 app.use('/request', require('./routes/requestSupervisorRoutes'))
+app.use('/student', require('./routes/studentRoutes'))
 
 app.use(errorHandler)
 
