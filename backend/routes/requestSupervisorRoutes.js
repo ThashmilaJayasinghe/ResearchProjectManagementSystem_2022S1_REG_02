@@ -4,9 +4,9 @@ const router = express.Router()
 const makeSupervisorRequest = require('../controllers/requestSupervisorController').post_request
 const Requests = require('../controllers/requestSupervisorController').get_requests
 const updateRequest = require('../controllers/requestSupervisorController').update_request
-const getAllRequestedSupervisors = require('../controllers/supervisorController').getAllRequestedSupervisors
-const getSupervisorRequest = require('../controllers/supervisorController').getSupervisorRequest
-const requestCheck = require('../controllers/supervisorController').requestCheck
+// const getAllRequestedSupervisors = require('../controllers/supervisorController').getAllRequestedSupervisors
+// const getSupervisorRequest = require('../controllers/supervisorController').getSupervisorRequest
+// const requestCheck = require('../controllers/supervisorController').requestCheck
 
 
 //add a request
@@ -15,12 +15,12 @@ router.get('/',Requests);
 router.put('/update',updateRequest)
 
 //get all the requests
-router.get('/requests',getAllRequestedSupervisors)
-
-//get requests according to the supervisor
-router.get('/requestedSupervisor', getSupervisorRequest)
-
-//update request states
-router.put('/updateRequest/:id', requestCheck)
+// router.get('/requests',getAllRequestedSupervisors)
+//
+// //get requests according to the supervisor
+// router.get('/requestedSupervisor', getSupervisorRequest)
+//
+// //update request states
+// router.put('/updateRequest/:id', requestCheck)
 
 module.exports = router;
