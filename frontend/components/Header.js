@@ -1,60 +1,271 @@
-import React, { useState } from 'react';
-import {
-	AppBar,
-	Button,
-	Tab,
-	Tabs,
-	Toolbar,
-	Typography,
-	useMediaQuery,
-	useTheme,
-} from '@mui/material';
-import DrawerC from './DrawerC';
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+import {Link, useNavigate} from 'react-router-dom'
+import {useDispatch, useSelector} from "react-redux";
+import {logout, reset} from "../features/authSlice";
+import Button from "@mui/material/Button";
 
-function Header(props) {
 
-	const [value, setValue] = useState(0);
-	const [pages, setPages] = useState(props.pages);
+const Header = () => {
 
-	const theme = useTheme();
-	console.log(theme);
-	const isMatch = useMediaQuery(theme.breakpoints.down('md'));
-	console.log(isMatch);
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
+
+	const {user} = useSelector((state) => state.auth)
+
+	const onLogout = () => {
+		dispatch(logout())
+		dispatch(reset())
+		navigate('/')
+	}
+
+	const adminItems = [
+		{
+			text: 'AdminDash',
+			onClick: () => navigate('/supervisor')
+		},
+		{
+			text: 'Logout',
+			onClick: () => onLogout()
+		},
+	]
+
+	const staffItems = [
+		{
+			text: 'StaffDash',
+			onClick: () => navigate('/supervisor')
+		},
+		{
+			text: 'Logout',
+			onClick: () => onLogout()
+		},
+	]
+
+	const studentItems = [
+		{
+			text: 'StudentDash',
+			onClick: () => ('/admin')
+		},
+		{
+			text: 'Logout',
+			onClick: () => onLogout()
+		},
+	]
+
+	const Items = [
+		{
+			text: 'Login',
+			onClick: () => navigate('/login')
+		},
+		{
+			text: 'Register',
+			onClick: () => navigate('/register')
+		}
+	]
+
+
+	const [anchorElNav, setAnchorElNav] = React.useState(null);
+
+	const handleOpenNavMenu = (event) => {
+		setAnchorElNav(event.currentTarget);
+	};
+
+	const handleCloseNavMenu = () => {
+		setAnchorElNav(null);
+	};
+
+
 	return (
-		<React.Fragment>
-			<AppBar style={{ background: '#063970' }}>
-				<Toolbar>
-					{isMatch ? (
-						<>
-							<Typography style={{ paddingLeft: '10%' }}>
-								Student Management
-							</Typography>
-							<DrawerC pages = {pages}/>
-						</>
-					) : (
-						<>
-							<Tabs
-								textColor="inherit"
-								value={value}
-								onChange={(e, value) => setValue(value)}
-								indicatorColor="secondary"
-							>
+		<AppBar position="static" style={{ background: '#063970' }}>
+			<Container maxWidth="xl">
+				<Toolbar disableGutters>
+					<AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+					<Typography
+						variant="h6"
+						noWrap
+						component="a"
+						href="/"
+						sx={{
+							mr: 2,
+							display: { xs: 'none', md: 'flex' },
+							fontFamily: 'monospace',
+							fontWeight: 700,
+							letterSpacing: '.3rem',
+							color: 'inherit',
+							textDecoration: 'none',
+						}}
+					>
+						LOGO
+					</Typography>
 
-								{
-									pages.map((page, index) => {
-										return <Tab key={index} label= {page} />
-									})
-								}
+					<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+						<IconButton
+							size="large"
+							aria-label="account of current user"
+							aria-controls="menu-appbar"
+							aria-haspopup="true"
+							onClick={handleOpenNavMenu}
+							color="inherit"
+						>
+							<MenuIcon />
+						</IconButton>
+						<Menu
+							id="menu-appbar"
+							anchorEl={anchorElNav}
+							anchorOrigin={{
+								vertical: 'bottom',
+								horizontal: 'left',
+							}}
+							keepMounted
+							transformOrigin={{
+								vertical: 'top',
+								horizontal: 'left',
+							}}
+							open={Boolean(anchorElNav)}
+							onClose={handleCloseNavMenu}
+							sx={{
+								display: { xs: 'block', md: 'none' },
+							}}
+						>
+							{user && user.roles.includes('admin') ? (
 
-							</Tabs>
-							<Button style={{ marginLeft: 'auto' }} variant="contained">
-								Login
-							</Button>
-						</>
-					)}
+								adminItems.map((adminItem) => {
+									const {text, onClick} = adminItem;
+									return (
+										<MenuItem key={text} onClick={onClick}>
+											<Typography textAlign="center">{text}</Typography>
+										</MenuItem>
+									)
+								})
+
+							) : user && user.roles.includes('staff') ? (
+
+								staffItems.map((staffItem) => {
+									const {text, onClick} = staffItem;
+									return (
+										<MenuItem key={text} onClick={onClick}>
+											<Typography textAlign="center">{text}</Typography>
+										</MenuItem>
+									)
+								})
+
+							) : user && user.roles.includes('student') ? (
+
+								studentItems.map((studentItem) => {
+									const {text, onClick} = studentItem;
+									return (
+										<MenuItem key={text} onClick={onClick}>
+											<Typography textAlign="center">{text}</Typography>
+										</MenuItem>
+									)
+								})
+							) : (
+
+								Items.map((Item) => {
+									const {text, onClick} = Item;
+									return (
+										<MenuItem key={text} onClick={onClick}>
+											<Typography textAlign="center">{text}</Typography>
+										</MenuItem>
+									)
+								})
+
+							)}
+						</Menu>
+					</Box>
+					<AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+					<Typography
+						variant="h5"
+						noWrap
+						component="a"
+						href=""
+						sx={{
+							mr: 2,
+							display: { xs: 'flex', md: 'none' },
+							flexGrow: 1,
+							fontFamily: 'monospace',
+							fontWeight: 700,
+							letterSpacing: '.3rem',
+							color: 'inherit',
+							textDecoration: 'none',
+						}}
+					>
+						LOGO
+					</Typography>
+					<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+						{user && user.roles.includes('admin') ? (
+
+							adminItems.map((adminItem) => {
+								const {text, onClick} = adminItem;
+								return (
+									<Button
+										key={text}
+										onClick={onClick}
+										sx={{ my: 2, color: 'white', display: 'block' }}
+									>
+										{text}
+									</Button>
+								)
+							})
+
+						) : user && user.roles.includes('staff') ? (
+
+							staffItems.map((staffItem) => {
+								const {text, onClick} = staffItem;
+								return (
+									<Button
+										key={text}
+										onClick={onClick}
+										sx={{ my: 2, color: 'white', display: 'block' }}
+									>
+										{text}
+									</Button>
+								)
+							})
+
+						) : user && user.roles.includes('student') ? (
+
+							studentItems.map((studentItem) => {
+								const {text, onClick} = studentItem;
+								return (
+									<Button
+										key={text}
+										onClick={onClick}
+										sx={{ my: 2, color: 'white', display: 'block' }}
+									>
+										{text}
+									</Button>
+								)
+							})
+						) : (
+
+							Items.map((Item) => {
+								const {text, onClick} = Item;
+								return (
+									<Button
+										key={text}
+										onClick={onClick}
+										sx={{ my: 2, color: 'white', display: 'block' }}
+									>
+										{text}
+									</Button>
+								)
+							})
+
+						)}
+					</Box>
 				</Toolbar>
-			</AppBar>
-		</React.Fragment>
+			</Container>
+		</AppBar>
 	);
-}
+};
 export default Header;
