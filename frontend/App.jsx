@@ -7,6 +7,7 @@ import HomePage from "./pages/supervisor/HomePage";
 import Request_ResearchField from "./pages/supervisor/Request_ResearchField";
 import RequestRF from "./pages/student/RequestRF";
 import ViewRequests from "./pages/student/ViewRequests";
+import Sup_profile from './pages/supervisor/Sup_profile';
 
 const studentpages = [
     'Students',
@@ -48,6 +49,7 @@ export default class App extends React.Component {
                         <Route exact path = '/supervisor/requestedresearchField' element = {<Request_ResearchField/>} />
                         <Route exact path = '/student/addRequest' element = {<RequestRF/>} />
                         <Route exact path= '/student/requests' element = {<ViewRequests/>} />
+                        <Route exact path='/supervisor/profile' element = {<Sup_profile/>} />
 
                     </Routes>
                 </div>

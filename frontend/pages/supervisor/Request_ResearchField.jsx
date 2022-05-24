@@ -52,6 +52,7 @@ const Request_ResearchField = () => {
     const [supRequests, setSupRequests] = useState([]);
     const [open, setOpen] = useState(false);
     const [onViewClick, setOnViewClick] = useState({});
+    const [reqState, setReqState] = useState("");
 
     const handleClickModalOpen = () => {
         setOpen(true);
@@ -63,20 +64,23 @@ const Request_ResearchField = () => {
 
     const onAcceptClick = (groupId) => {
         const accept  = "accepted"
+        setReqState(accept);
         changeRequestStates(groupId, accept).then(res => console.log("successfully changed!"))
     }
 
     const onRejectClick = (groupId) => {
         const reject  = "rejected"
+        setReqState(reject);
         changeRequestStates(groupId, reject).then(res => console.log("successfully changed!"))
     }
 
     useEffect(() => {
+        console.log("useEffect called")
         getSupRequests(supEmail, setSupRequests)
             .then(res => console.log("success"))
             .catch(err => console.log(err))
 
-    }, [])
+    }, [reqState])
 
     console.log(supRequests)
 
@@ -159,17 +163,36 @@ const Request_ResearchField = () => {
                     onClose={handleModalClose}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
+                    fullWidth={true}
+
                 >
                     <DialogTitle id="alert-dialog-title">
-                        {onViewClick.topic}
+                        <b> {onViewClick.topic}</b>
                     </DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            <div style={{}}><h4>Group Name : {onViewClick.requestedGroup}</h4> </div>
-                            <h3>Group ID : {onViewClick.requestedGroupID}</h3>
-                            <h4>Added date : {onViewClick.createdAt}</h4>
-                            <h4>Details :</h4>
-                            <p>{onViewClick.details}</p>
+                            <table width="100%">
+                                <tr style={{height: "40px"}}>
+                                    <td>Group ID</td>
+                                    <td>: {onViewClick.requestedGroupID}</td>
+                                </tr>
+                                <tr style={{height: "40px"}}>
+                                    <td>Added date</td>
+                                    <td>: {onViewClick.createdAt}</td>
+                                </tr>
+                                <tr style={{height: "40px"}} >
+                                    <td >Details</td>
+                                    <td>: {onViewClick.details}</td>
+                                </tr>
+                                <tr style={{height: "40px"}}>
+                                    <td>Current status</td>
+                                    <td>: {onViewClick.requestStates}</td>
+                                </tr>
+                            </table>
+                            {/*<h2>Group ID : {onViewClick.requestedGroupID}</h2>*/}
+                            {/*<h4>Added date : {onViewClick.createdAt}</h4>*/}
+                            {/*<h4>Details :</h4>*/}
+                            {/*<p>{onViewClick.details}</p>*/}
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>

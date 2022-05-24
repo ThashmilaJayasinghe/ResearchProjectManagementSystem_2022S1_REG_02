@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler')
-// const Supervisor = require('../models/supervisorModel')
+const Supervisor = require('../models/supervisorModel')
 const requestSupervisor = require('../models/requestSupervisorModel');
 
 
@@ -50,6 +50,40 @@ const requestCheck = asyncHandler(async (req, res) => {
 
 })
 
+// ############################################  for testing
+// add supervisor to the database
+const addSupervisor = asyncHandler(async(req, res) => {
+
+    const data = req.body;
+    console.log(data)
+
+    try{
+        const result = await Supervisor.create({name, email, password, qualifications, researchInterests} = data)
+        res.status(200).json(result)
+    }
+    catch(err){
+        console.log(err)
+    }
+})
+// ########################## testing over
+
+
+//update the qualifications of supervisor 
+const addQualifications = asyncHandler(async(req, res) => {
+
+    const newQualification = req.body.qualifications;
+    const email = req.body.email;
+
+    try{
+        const updateResult = await Supervisor.findOneAndUpdate(email,{ $push : {qualifications: newQualification}})
+        res.status(200).json(updateResult)
+    }catch(err){
+        console.log(err)
+    }
+}) 
+
+
+
 // module.exports = {
 //     getAllRequestedSupervisors,
 //     getSupervisorRequest
@@ -58,6 +92,9 @@ const requestCheck = asyncHandler(async (req, res) => {
 module.exports.getAllRequestedSupervisors = getAllRequestedSupervisors
 module.exports.getSupervisorRequest = getSupervisorRequest
 module.exports.requestCheck = requestCheck
+
+module.exports.addSupervisor = addSupervisor
+module.exports.addQualifications = addQualifications
 
 
 
