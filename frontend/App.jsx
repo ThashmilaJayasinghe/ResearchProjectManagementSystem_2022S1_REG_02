@@ -21,8 +21,8 @@ function App(){
                     <Route path="/login" element ={<Login/>}/>
                     <Route path="/supervisor" element={<HomePage/>}/>
                     <Route path="/admin" element={<Admin/>}/>
-                    <Route exact path = '/requestedresearchField' element = {<Request_ResearchField/>} />
-                    <Route exact path = '/updateuser' element = {<UpdateUser/>} />
+                    {/*<Route exact path = '/requestedresearchField' element = {<Request_ResearchField/>} />*/}
+                    {/*<Route exact path = '/updateuser' element = {<UpdateUser/>} />*/}
                 </Routes>
             </Router>
         </div>
