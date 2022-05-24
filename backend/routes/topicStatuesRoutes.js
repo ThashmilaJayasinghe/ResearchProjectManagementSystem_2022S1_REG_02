@@ -6,7 +6,7 @@ const update_topic_status = require('../controllers/topicStatusController').upda
 
 const router = express.Router();
 
-router.post('/',post_topicStatus);
+router.post('/:id',post_topicStatus);
 router.get('/',get_topicStatus);
 router.put('/updateTopic',update_topic_status);
 

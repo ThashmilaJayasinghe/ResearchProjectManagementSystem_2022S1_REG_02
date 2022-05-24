@@ -13,13 +13,15 @@ module.exports.get_topic_Status = (req,res) => {
 }
 
 module.exports.post_topic_Status = (req,res) => {
-    // let id = req.params.id;
-    // let {regNumber} = Student.findOne({_id:id})
-    // const {_id} = Group.findOne({"members":{regNumber:regNumber}});
+    // let user = req.params.id;
+    // console.log(user)
+    // let student = Student.findOne({user})
+    // console.log(student);
+    //const {_id} = Group.findOne({"members":{regNumber:regNumber}});
 
 
     // const grp_ID = _id;
-    const grp_ID = req.body._id;
+    const grp_ID = req.params.id;
     const title = req.body.title;
     const message = req.body.message;
     const supervisorID = req.body.supervisorID;
