@@ -6,6 +6,7 @@ import Home from "./pages/Home"
 import HomePage from "./pages/supervisor/HomePage";
 import AddMarks from "./pages/supervisor/AddMarks";
 import AddTopicStatus from "./pages/pannel/AddTopicStatus";
+import ViewTopics from "./pages/pannel/ViewTopics";
 
 const studentpages = [
     'Students',
@@ -44,9 +45,9 @@ export default class App extends React.Component {
                     <Routes>
                         <Route exact path='/' element={<Home/>} />
                         <Route exact path = '/supervisor' element = {<HomePage/>} />
-                        <Route exact path = '/supervisor' element = {<HomePage/>} />
                         <Route exact path= '/addMArk' element={<AddMarks/>}/>
-                        <Route exact path= '/addTopicStatu' element={<AddTopicStatus/>}/>
+                        <Route exact path= '/addTopicStatus/:id' element={<AddTopicStatus/>}/>
+                        <Route exact path= '/view' element ={<ViewTopics/>}/>
                     </Routes>
                 </div>
 
