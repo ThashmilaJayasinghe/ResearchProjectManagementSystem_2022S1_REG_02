@@ -2,7 +2,8 @@ import {useState, useEffect} from 'react'
 import Axios from 'axios';
 import {useNavigate, Link} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
-import {DeleteForeverIcon, EditIcon} from '@mui/icons-material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 function AdminDashboard() {
@@ -112,10 +113,10 @@ function AdminDashboard() {
                                                 <td>
                                                     <Link to='/updateuser'>
                                                         <button className='btnIcon' onClick={() => setStaff(staff)}>
-                                                            Update</button>
+                                                            <EditIcon/></button>
                                                     </Link>
                                                     <button className='btnIcon btnsecond'
-                                                            onClick={() => onDelete(staff._id)}>Delete
+                                                            onClick={() => onDelete(staff._id)}><DeleteIcon/>
                                                     </button>
                                                 </td>
                                             </tr>

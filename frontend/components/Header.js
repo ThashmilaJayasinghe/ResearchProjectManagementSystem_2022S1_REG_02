@@ -31,7 +31,7 @@ const Header = () => {
 	const adminItems = [
 		{
 			text: 'AdminDash',
-			onClick: () => navigate('/supervisor')
+			onClick: () => navigate('/admin')
 		},
 		{
 			text: 'Logout',
