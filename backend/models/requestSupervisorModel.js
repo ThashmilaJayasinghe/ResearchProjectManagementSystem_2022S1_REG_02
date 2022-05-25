@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema;
 
-const requestSupervisorModel = mongoose.Schema({
+const requestSupervisorModel = new Schema({
 
         // requestedGroup: {
         //     type: String,

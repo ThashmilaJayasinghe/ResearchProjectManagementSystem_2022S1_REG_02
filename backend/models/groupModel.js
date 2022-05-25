@@ -5,10 +5,13 @@ const groupSchema = new Schema({
     // title:{
     //     type:String
     // },
+    subMemberRegNumber:{
+        type:String,
+    },
+
     members:[{
         regNumber:{
             type:String,
-            required:true
         },
         leader:{
             type:Boolean,
@@ -16,11 +19,10 @@ const groupSchema = new Schema({
         },
         email:{
             type: String,
-            required: [true,'Please enter an email'],
+            // required: [true,'Please enter an email'],
             unique: true,
             lowercase: true,
-        },
-        // validate:[arrayLimit,"You are exceeding your member limits"]
+        }
     }],
     reg_Date:{
         type:Date,
@@ -43,8 +45,8 @@ const groupSchema = new Schema({
 
 })
 
-function arrayLimit(val){
-    return val.length <=4;
-}
+// function arrayLimit(val){
+//     return val.length <=4;
+// }
 const Group = mongoose.model('Group',groupSchema);
 module.exports = Group;

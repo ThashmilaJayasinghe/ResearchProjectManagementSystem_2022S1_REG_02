@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const topicStatusSchema = new Schema({
     grp_ID : {
         type : String,
-        required : true
+        // required : true
     },
     title : {
         type : String,
@@ -23,7 +23,7 @@ const topicStatusSchema = new Schema({
     },
     status : {
         type : String,
-        required : true
+        // required : true
     },
     feedback : {
         type : String
