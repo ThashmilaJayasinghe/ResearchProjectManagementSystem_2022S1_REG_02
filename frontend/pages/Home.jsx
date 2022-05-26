@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <div>
             <div>
-                <h1>WELCOME TO RESEARCH PROJECT MANAGEMENT </h1>
+                <h1>WELCOME TO RESEARCH PROJECT MANAGEMENTS </h1>
             </div>
 
             <Link to = "/supervisor/requestedresearchField">
