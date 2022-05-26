@@ -17,12 +17,12 @@ const groupSchema = new Schema({
             type:Boolean,
             default:false
         },
-        email:{
-            type: String,
-            // required: [true,'Please enter an email'],
-            unique: true,
-            lowercase: true,
-        }
+        // email:{
+        //     type: String,
+        //     // required: [true,'Please enter an email'],
+        //     unique: true,
+        //     lowercase: true,
+        // }
     }],
     reg_Date:{
         type:Date,

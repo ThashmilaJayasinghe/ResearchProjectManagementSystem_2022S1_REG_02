@@ -19,16 +19,16 @@ const set_group = async (req,res)=> {
     const groupID = req.params.id;
     const regNumber = req.body.regNumber;
     const leader = req.body.leader;
-    const email = req.body.email;
+    // const email = req.body.email;
 
-    let group = await Group.findOne({groupID})
+    let group = await Group.findOne({_id:groupID})
 
     let i = group.members.length;
     console.log(i);
     try {
         if (group) {
             if(i<7) {
-                group.members.push({regNumber, leader, email});
+                group.members.push({regNumber, leader});
                 group = await group.save();
                 return res.status(201).send(group);
             }
@@ -42,8 +42,7 @@ const set_group = async (req,res)=> {
                 groupID,
                 members: [{
                     regNumber,
-                    leader,
-                    email
+                    leader
                 }]
 
             })
