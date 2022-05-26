@@ -1,19 +1,36 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
+
 const groupSchema = new Schema({
-    title:{
-        type:String
+    // title:{
+    //     type:String
+    // },
+    subMemberRegNumber:{
+        type:String,
     },
+
     members:[{
-        studentID:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Student'
+        regNumber:{
+            type:String,
+        },
+        leader:{
+            type:Boolean,
+            default:false
+        },
+        email:{
+            type: String,
+            // required: [true,'Please enter an email'],
+            unique: true,
+            lowercase: true,
         }
     }],
+    reg_Date:{
+        type:Date,
+        default:Date.now()
+    },
     supervisor:{
-        id:{type:String,required:true},
-        name:{type:String},
-        email:{type:String}
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Supervisor'
     },
     // supervisorName:{
     //     type:String
@@ -22,20 +39,14 @@ const groupSchema = new Schema({
     //     type:String
     // },
     coSupervisor:{
-        id:{type:String,required:true},
-        name:{type:String},
-        email:{type:String}
-    },
-    documents:[{
-        documentID:{
-            type:String
-        },
-        document:{
-            //pdf ekak hari word doc ekak hari
-            type:String
-        },
-
-    }]
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Supervisor'
+    }
 
 })
+
+// function arrayLimit(val){
+//     return val.length <=4;
+// }
 const Group = mongoose.model('Group',groupSchema);
+module.exports = Group;

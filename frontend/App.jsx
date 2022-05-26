@@ -1,57 +1,34 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 import Header from "./components/Header";
 import Home from "./pages/Home"
+import Register from "./pages/Register"
 import HomePage from "./pages/supervisor/HomePage";
-import AddMarks from "./pages/supervisor/AddMarks";
-import AddTopicStatus from "./pages/pannel/AddTopicStatus";
-import ViewTopics from "./pages/pannel/ViewTopics";
+import Admin from "./pages/admin/AdminDash";
+import Login from "./pages/Login";
+import Request_ResearchField from "./pages/supervisor/Request_ResearchField";
+import UpdateUser from "./pages/admin/UpdateUser";
+import ManageSubmissions from "./pages/admin/ManageSubmissions";
 
-const studentpages = [
-    'Students',
-    'Submissions',
-    'Marks',
-    'Supervisor',
-    'Contact Us',
-
-];
-
-const supervisorPages = [
-    'Students',
-    'Topic evaluation',
-    'Document evaluation',
-    'Chat',
-]
-
-export default class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {userRole: "supervisor"};
-    }
-    render() {
-        return (
+function App(){
+    return(
+        <div>
             <Router>
-                {
-                    this.state.userRole == "student" ? (
-                        <Header pages = {studentpages}/>
-                    ):
-                        (
-                            <Header pages = {supervisorPages}/>
-                        )
-                }
-
-                <div style={{paddingTop:"40px"}}>
-                    <Routes>
-                        <Route exact path='/' element={<Home/>} />
-                        <Route exact path = '/supervisor' element = {<HomePage/>} />
-                        <Route exact path= '/addMArk' element={<AddMarks/>}/>
-                        <Route exact path= '/addTopicStatus/:id' element={<AddTopicStatus/>}/>
-                        <Route exact path= '/view' element ={<ViewTopics/>}/>
-                    </Routes>
-                </div>
-
+                <Header/>
+                <Routes>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/register" element ={<Register/>}/>
+                    <Route path="/login" element ={<Login/>}/>
+                    <Route path="/supervisor" element={<HomePage/>}/>
+                    <Route path="/admin" element={<Admin/>}/>
+                    <Route exact path = '/requestedresearchField' element = {<Request_ResearchField/>} />
+                    <Route path = '/updateuser' element = {<UpdateUser/>} />
+                    <Route path = '/managesubmissions' element = {<ManageSubmissions/>} />
+                </Routes>
             </Router>
-        )
-    }
+        </div>
+    )
 }
+
+export default App;
