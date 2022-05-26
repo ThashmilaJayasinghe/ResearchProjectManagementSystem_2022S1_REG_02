@@ -10,6 +10,10 @@ import Login from "./pages/Login";
 import Request_ResearchField from "./pages/supervisor/Request_ResearchField";
 import UpdateUser from "./pages/admin/UpdateUser";
 import ManageSubmissions from "./pages/admin/ManageSubmissions";
+import Group from "./pages/student/Group"
+import ResearchFields from "./pages/student/ResearchFields"
+import Submission from "./pages/student/Submissions"
+import Student from "./pages/student/StudentHome"
 
 function App(){
     return(
@@ -25,6 +29,10 @@ function App(){
                     <Route exact path = '/requestedresearchField' element = {<Request_ResearchField/>} />
                     <Route path = '/updateuser' element = {<UpdateUser/>} />
                     <Route path = '/managesubmissions' element = {<ManageSubmissions/>} />
+                    <Route path="/group" element = {<Group/>}/>
+                    <Route path="/submissions" element = {<Submission/>}/>
+                    <Route path="/student" element = {<Student/>}/>
+                    <Route path="/researchFields" element = {<ResearchFields/>}/>
                 </Routes>
             </Router>
         </div>

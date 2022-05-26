@@ -56,8 +56,20 @@ const Header = () => {
 
 	const studentItems = [
 		{
-			text: 'StudentDash',
-			onClick: () => ('/admin')
+			text: 'Student',
+			onClick: () =>  navigate('/student')
+		},
+		{
+			text: 'Submissions',
+			onClick: () =>  navigate('/submissions')
+		},
+		{
+			text: 'Group',
+			onClick: () =>  navigate('/group')
+		},
+		{
+			text: 'Research Fields',
+			onClick: () =>  navigate('/researchFields')
 		},
 		{
 			text: 'Logout',
