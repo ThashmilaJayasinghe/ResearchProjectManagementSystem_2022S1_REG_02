@@ -116,7 +116,7 @@ const Sup_chat = () => {
 
     if (loading) {
       return (
-        <div style={{paddingTop: "40px"}}>
+        <div style={{paddingTop: "2.5rem"}}>
           <MDSpinner />
         </div>
       );

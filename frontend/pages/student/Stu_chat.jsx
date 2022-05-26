@@ -106,7 +106,7 @@ const Stu_chat = () => {
   }, []);
   if (load) {
     return (
-      <div className="container">
+      <div className="container" style={{paddingTop: "2.5rem"}}>
         <MDSpinner />
       </div>
     );
