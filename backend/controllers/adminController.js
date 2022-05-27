@@ -150,10 +150,8 @@ const addPanel = async (req, res) => {
 
     const newPanel = await Panel.create({
         name,
-        staff1,
-        staff2,
-        staff3,
-        group
+        staff: [staff1, staff2, staff3],
+        groups: [group]
     })
 
     if(newPanel) {
