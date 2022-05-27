@@ -40,12 +40,12 @@ const upload = Multer({
 
         if (file.fieldname === 'markingScheme') {
             if (ext !== '.doc' && ext !== '.docx' && ext !== '.pdf') {
-                return callback(new Error('Please upload a document'))
+                return callback(new Error('Please upload a .doc, .docx or .pdf file'))
             }
             callback(null, true);
         } else {
-            if (ext !== '.ppt' && ext !== '.pptx' && ext !== '.pdf') {
-                return callback(new Error('Please upload a document'))
+            if (ext !== '.ppt' && ext !== '.pptx' && ext !== '.doc' && ext !== '.docx') {
+                return callback(new Error('Please upload a .ppt, .pptx, .doc or .docx file'))
             }
             callback(null, true);
         }
