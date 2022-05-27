@@ -14,7 +14,6 @@ import Request_ResearchField from "./pages/supervisor/Request_ResearchField";
 import UpdateUser from "./pages/admin/UpdateUser";
 import ManageSubmissions from "./pages/admin/ManageSubmissions";
 
-
 function App(){
     return(
         <div>
