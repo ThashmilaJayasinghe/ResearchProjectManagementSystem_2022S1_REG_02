@@ -14,6 +14,8 @@ import Group from "./pages/student/Group"
 import ResearchFields from "./pages/student/ResearchFields"
 import Submission from "./pages/student/Submissions"
 import Student from "./pages/student/StudentHome"
+import RequestForm from "./pages/student/RequestForm"
+import RequestCoSupForm from './pages/student/RequestCoSupForm';
 
 function App(){
     return(
@@ -33,6 +35,9 @@ function App(){
                     <Route path="/submissions" element = {<Submission/>}/>
                     <Route path="/student" element = {<Student/>}/>
                     <Route path="/researchFields" element = {<ResearchFields/>}/>
+                    <Route path="/request" element = {<RequestForm/>}/>
+                    <Route path="/request/co" element = {<RequestCoSupForm/>}/>
+
                 </Routes>
             </Router>
         </div>
