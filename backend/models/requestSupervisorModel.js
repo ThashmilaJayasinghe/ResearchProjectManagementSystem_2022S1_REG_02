@@ -2,10 +2,6 @@ const mongoose = require('mongoose')
 
 const requestSupervisorModel = mongoose.Schema({
 
-        requestedGroup: {
-            type: String,
-            required: true
-        },
         requestedGroupID: {
             type: String,
             required: true
@@ -27,9 +23,7 @@ const requestSupervisorModel = mongoose.Schema({
         requestStates: {
             type: String,
         },
-        requestEvaluatedDate:{
-            type:Date,
-        }
+       
     },
     {
         timestamps: true

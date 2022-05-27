@@ -5,19 +5,23 @@ const makeSupervisorRequest = require('../controllers/studentController')
 // const getAllRequestedSupervisors = require('../controllers/supervisorController').getAllRequestedSupervisors
 // const getSupervisorRequest = require('../controllers/supervisorController').getSupervisorRequest
 // const requestCheck = require('../controllers/supervisorController').requestCheck
-const getAllRequestedSupervisors = require('../controllers/staffController').getAllRequestedSupervisors
-const getSupervisorRequest = require('../controllers/staffController').getSupervisorRequest
-const requestCheck = require('../controllers/staffController').requestCheck
+
+// const getAllRequestedSupervisors = require('../controllers/staffController').getAllRequestedSupervisors
+// const getSupervisorRequest = require('../controllers/staffController').getSupervisorRequest
+// const requestCheck = require('../controllers/staffController').requestCheck
+
+const getAllRequestedSupervisors = require('../controllers/requestSupervisorController').getAllRequestedSupervisors
+const getSupervisorRequest = require('../controllers/requestSupervisorController').getSupervisorRequest
+const requestCheck = require('../controllers/requestSupervisorController').requestCheck
 
 const addSupervisor = require('../controllers/supervisorController').addSupervisor
-const addQualifications = require('../controllers/supervisorController').addQualifications 
-const addResearchField = require('../controllers/supervisorController').addResearchField
+const addQualifications = require('../controllers/staffController').addQualifications 
+const addResearchField = require('../controllers/staffController').addResearchField
 
 //add a request
 router.post('/addRequest', makeSupervisorRequest)
 
 //get all the requests
-// router.get('/requests',getAllRequestedSupervisors)
 router.get('/requests',getAllRequestedSupervisors)
 
 //get requests according to the supervisor
@@ -27,13 +31,13 @@ router.get('/requestedSupervisor', getSupervisorRequest)
 router.put('/updateRequest/:id', requestCheck)
 
 
-// add a supervisor for sample check
-router.post('/addSupervisor',addSupervisor )
+// // add a supervisor for sample check
+// router.post('/addSupervisor',addSupervisor )
 
-// update qualifications
-router.put('/updateQual',addQualifications )
+// // update qualifications
+// router.put('/updateQual',addQualifications )
 
-// update research interest
-router.put('/updateResearch', addResearchField)
+// // update research interest
+// router.put('/updateResearch', addResearchField)
 
 module.exports = router;
