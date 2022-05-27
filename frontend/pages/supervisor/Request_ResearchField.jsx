@@ -8,8 +8,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import {changeRequestStates, getAllRequests, getSupRequests} from "../../apis/supervisor/SupervisorApi";
+import {changeRequestStates, getAllRequests, getSupRequests} from "../../apis/staff/RequestSupervisorApi";
 import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
+import { useSelector } from 'react-redux';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -47,8 +48,10 @@ const formatter = new Intl.DateTimeFormat("en-GB", {
 
 const Request_ResearchField = () => {
 
+    const {user} = useSelector((state) => state.auth) //used to get the user
+
     const [requestDetails, setRequestDetails] = useState([]);
-    const [supEmail, setSupEmail] = useState("Kushnaya@gmail.com");
+    const [supEmail, setSupEmail] = useState(user.email);
     const [supRequests, setSupRequests] = useState([]);
     const [open, setOpen] = useState(false);
     const [onViewClick, setOnViewClick] = useState({});
