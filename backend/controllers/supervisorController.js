@@ -1,21 +1,17 @@
-const asyncHandler = require('express-async-handler')
-// const Supervisor = require('../models/supervisorModel')
+const asyncHandler = require('express-async-handler');
+const Supervisor = require('../models/supervisorModel');
 const requestSupervisor = require('../models/requestSupervisorModel');
 
-
 //accept or reject student groups according to the research field
-// const getAllRequestedSupervisors = asyncHandler(async (req, res) => {
-//     const result = await requestSupervisor.find()
-//
-//     if(result){
-//         res.json({
-//             response: result
-//         })
-//     }else{
-//         res.status(400)
-//         throw new Error("Empty requests!")
-//     }
-// })
+const getAllSupervisors = asyncHandler(async (req, res) => {
+	Supervisor.find()
+		.then((supervisor) => {
+			res.json(supervisor);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+});
 //
 // //get requests according to the supervisor
 // const getSupervisorRequest  = asyncHandler(async (req, res) => {
@@ -55,9 +51,6 @@ const requestSupervisor = require('../models/requestSupervisorModel');
 // //     getSupervisorRequest
 // // }
 //
-// module.exports.getAllRequestedSupervisors = getAllRequestedSupervisors
+module.exports.getAllSupervisors = getAllSupervisors;
 // module.exports.getSupervisorRequest = getSupervisorRequest
 // module.exports.requestCheck = requestCheck
-
-
-
