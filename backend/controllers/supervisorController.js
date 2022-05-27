@@ -107,6 +107,7 @@ module.exports.getAllRequestedSupervisors = getAllRequestedSupervisors
 module.exports.getSupervisorRequest = getSupervisorRequest
 module.exports.requestCheck = requestCheck
 
+// below are done
 module.exports.addSupervisor = addSupervisor
 module.exports.addQualifications = addQualifications
 module.exports.addResearchField = addResearchField

@@ -7,13 +7,12 @@ const makeSupervisorRequest = asyncHandler(async (req, res) => {
     try{
         const result = await requestSupervisor.create({
             requestedGroupID: req.body.groudID,
-            requestedGroup: req.body.group,
             supervisorName: req.body.supervisorName ,
             supervisorEmail:  req.body.supervisorEmail,
             topic:  req.body.topic,
             details:  req.body.details,
             requestStates:  req.body.requestStates,
-            requestEvaluatedDate:  req.body.requestEvaluatedDate,
+    
         })
 
         res.status(200).json(result)
