@@ -13,18 +13,16 @@ export default function DocSubmission(props){
     const [template, setTemplate] = useState("");
 
 
-    const onMSChangeFile = e => {
+
+    const onChangeFileMS = e => {
         setMarkingScheme(e.target.files[0]);
+        console.log(e.target.files[0])
     }
 
-    const onTChangeFile = e => {
+    const onChangeFileT = e => {
         setTemplate(e.target.files[0]);
+        console.log(e.target.files[0])
     }
-
-    // const onChangeFile = e => {
-    //     const file = e.target.files[0]
-    //     this.setState(() => ({ file }));
-    // }
 
 
     const handleSubmit = (e) => {
@@ -94,30 +92,22 @@ export default function DocSubmission(props){
                         className="markingScheme"
                         id="markingScheme"
                         name="markingScheme"
-                        onChange={onMSChangeFile}
+                        onChange={onChangeFileMS}
+
                     />
                 </div>
                 <br/>
-                {/*<div className="form-group col-md-6">*/}
-                {/*    <label><b>Template</b> </label>*/}
-                {/*    <input type="text" id="template" className="form-control" placeholder="Upload file"*/}
-                {/*           value={template}*/}
-                {/*           onChange={(e) => (*/}
-                {/*               setTemplate(e.target.value)*/}
-                {/*           )}*/}
-                {/*    />*/}
-                {/*</div>*/}
                 <div className="form-group">
                     <label htmlFor="template" className="form-label">Upload Template</label>
                     <br />
                     <input
                         type="file"
                         required
-                        accept=".ppt, .pptx, .doc"
+                        accept=".ppt, .pptx, .pdf"
                         className="template"
                         id="template"
                         name="template"
-                        onChange={onTChangeFile}
+                        onChange={onChangeFileT}
 
                     />
                 </div>
