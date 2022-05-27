@@ -2,6 +2,7 @@ const Role = require('../models/roleModel')
 const User = require('../models/userModel')
 const SubmissionType = require('../models/submissionTypeModel')
 const Panel = require('../models/panelModel')
+const Group = require('../models/groupModel')
 const Multer = require("multer");
 const path = require('path');
 
@@ -157,11 +158,24 @@ const addPanel = async (req, res) => {
     if(newPanel) {
         res.status(200).json(newPanel)
     } else {
-        res.status(404).json({ msg: 'No submission type created'})
+        res.status(404).json({ msg: 'No panels created'})
     }
 }
 
+// @desc    Get groups
+// @route   GET /api/admin/groups
+// @access  Private
+const getGroups = async (req, res) => {
 
+    const groups = await Group.find()
+
+    if(groups) {
+        res.status(200).json(groups)
+    } else {
+        res.status(404).json({ msg: 'No groups to display'})
+    }
+
+}
 
 
 module.exports = {
@@ -170,5 +184,6 @@ module.exports = {
     getStaff,
     addAssignment,
     upload,
-    addPanel
+    addPanel,
+    getGroups
 }
