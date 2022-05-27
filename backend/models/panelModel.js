@@ -1,13 +1,22 @@
 const mongoose = require('mongoose')
 
 const panelSchema = mongoose.Schema({
+        name: {
+            type: String,
+            required: [true, 'Please add a name']
+        },
+        staff: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        ],
+        groups: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Group'
+            }
+        ]
+    })
 
-    user:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'User'
-    },
-
-
-})
-
-module.exports = mongoose.model('Panel', pannelSchema)
+module.exports = mongoose.model('Panel', panelSchema)
