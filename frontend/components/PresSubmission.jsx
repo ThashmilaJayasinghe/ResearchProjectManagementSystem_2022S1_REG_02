@@ -73,8 +73,8 @@ export default function DocSubmission(props){
                 </div>
                 <br/>
                 <div className="form-group col-md-6">
-                    <label><b>Due Date</b> </label>
-                    <input type="date" id="dueDate" className="form-control" placeholder="Select due date"
+                    <label><b>Viva Date</b> </label>
+                    <input type="date" id="dueDate" className="form-control" placeholder="Select viva date"
                            value={dueDate}
                            onChange={(e) => (
                                setDueDate(e.target.value)
@@ -98,12 +98,12 @@ export default function DocSubmission(props){
                 </div>
                 <br/>
                 <div className="form-group">
-                    <label htmlFor="template" className="form-label">Upload Template (.doc or .docx file)</label>
+                    <label htmlFor="template" className="form-label">Upload Template (.ppt or .pptx file)</label>
                     <br />
                     <input
                         type="file"
                         required
-                        accept=".doc, .docx"
+                        accept=".ppt, .pptx"
                         className="template"
                         id="template"
                         name="template"

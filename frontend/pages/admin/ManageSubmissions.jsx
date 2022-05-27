@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import DocSubmissions from '../../components/DocSubmission'
+import PresSubmissions from '../../components/PresSubmission'
 import Typography from "@mui/material/Typography";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -88,7 +89,7 @@ function ManageSubmissions() {
                         <DocSubmissions type={'document'} />
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        Item Two
+                        <PresSubmissions type={'presentation'} />
                     </TabPanel>
                 </Box>
             </div>
