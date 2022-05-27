@@ -1,6 +1,7 @@
 import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react'
-import {addQualification, addResearchField} from '../../apis/supervisor/SupervisorApi'
+import { useSelector } from 'react-redux';
+import {addQualification, addResearchField, getStaff} from '../../apis/staff/StaffApi'
 
 const qualificationsArr = [
   "Bsc IT", "MSC Cloud computing", "Bsc in BA"
@@ -12,13 +13,16 @@ const researchInterestsArr = [
 
 const Sup_profile = () => {
 
-  const [name, setName] = useState("supervisor one");
-  const [email, setEmail] = useState("kamala@gmail.com");
+  const {user} = useSelector((state) => state.auth) //used to get the user
+
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
   const [qualifications, setQualifications] = useState(qualificationsArr);
   const [researchInterests, setResearchInterests] = useState(researchInterestsArr);
   const [registeredDate, setRegisteredDate] = useState('2020/10/20')
   const [newQualification, setNewQualification] = useState("");
   const [newResearchField, setNewResearchField] = useState("");
+  const [staffDetails, setStaffDetails] = useState()
 
   const [isAddQualification, setIsAddQualification] = useState(false);
   const [isAddResearchField, setIsAddResearchField] = useState(false);
@@ -34,6 +38,15 @@ const Sup_profile = () => {
 
     addResearchField(email, newResearchField).then(() => console.log("new research field added"))
   }
+
+  useEffect(() => {
+
+    getStaff(email, setStaffDetails).then(() => console.log("staff data retrieved"))
+
+
+  }, [])
+
+  console.log(staffDetails)
 
   return (
     <div>
