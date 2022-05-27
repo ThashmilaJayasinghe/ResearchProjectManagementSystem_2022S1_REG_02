@@ -87,9 +87,10 @@ const Header = () => {
 		setAnchorElNav(null);
 	};
 
+	//#063970
 
 	return (
-		<AppBar position="static" style={{ background: '#063970' }}>
+		<AppBar position="static" style={{ background: 'primary' }}>
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
 					<AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />

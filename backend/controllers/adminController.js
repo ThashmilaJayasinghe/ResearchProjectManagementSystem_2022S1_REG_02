@@ -118,7 +118,7 @@ const addAssignment = async (req, res) => {
     if(subType) {
         res.status(200).json(subType)
     } else {
-        return res.status(404).json({ msg: 'No submission type created'})
+        res.status(404).json({ msg: 'No submission type created'})
     }
 }
 

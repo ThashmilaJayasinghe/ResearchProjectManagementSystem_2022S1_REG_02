@@ -1,6 +1,9 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
+import {ThemeProvider} from "@mui/material";
+import {theme} from "./styling/theme";
+
 import Header from "./components/Header";
 import Home from "./pages/Home"
 import Register from "./pages/Register"
