@@ -1,63 +1,71 @@
-const asyncHandler = require('express-async-handler')
-// const Supervisor = require('../models/supervisorModel')
-const requestSupervisor = require('../models/requestSupervisorModel');
+const Staff = require('../models/staffModel');
+const asyncHandler = require('express-async-handler');
 
+// add supervisor to the database
 
-//accept or reject student groups according to the research field
-const getAllRequestedSupervisors = asyncHandler(async (req, res) => {
-    const result = await requestSupervisor.find()
+module.exports.addStaff = asyncHandler(async (req, res) => {
+	const data = req.body;
+	const { user, name, email, qualifications, researchInterests } = data;
+	console.log(data);
+	try {
+		const result = await Staff.create({
+			user,
+			name,
+			email,
+			qualifications,
+			researchInterests,
+		});
+		res.status(200).json(result);
+	} catch (err) {
+		console.log(err);
+	}
+});
 
-    if(result){
-        res.json({
-            response: result
-        })
-    }else{
-        res.status(400)
-        throw new Error("Empty requests!")
-    }
-})
+//update the qualifications of supervisor 
+const addQualifications = asyncHandler(async(req, res) => {
 
-//get requests according to the supervisor
-const getSupervisorRequest  = asyncHandler(async (req, res) => {
-
-    // const supervisorEmail = req.body.supervisorEmail;
-
-    const supervisorEmail = req.query.supervisorEmail
-
-    try{
-        const result = await requestSupervisor.findOne({supervisorEmail})
-        res.status(200).json(result)
-
-    }catch (err){
-        console.error("supervisor request getting not success")
-        console.log("Error in supervisor requests")
-    }
-
-})
-
-//accept or reject request
-const requestCheck = asyncHandler(async (req, res) => {
-
-    const reqId = req.params.id;
-    const reqStates = req.body.requestStates;
+    const newQualification = req.body.qualifications;
+    const email = req.body.email;
 
     try{
-        const updatedResult = await requestSupervisor.findByIdAndUpdate(reqId, {requestStates:reqStates})
-        res.status(200).json(updatedResult);
-    }catch (err){
+        const updateResult = await Staff.findOneAndUpdate({email:email},{ $push : {qualifications: newQualification}})
+        res.status(200).json(updateResult)
+    }catch(err){
         console.log(err)
     }
+}) 
+
+//update the research field of supervisor 
+const addResearchField = asyncHandler(async(req, res) => {
+
+    const newResearchFeild = req.body.researchInterests;
+    const email = req.body.email;
+
+    try{
+        const updateResult = await Staff.findOneAndUpdate({email:email},{ $push : {researchInterests: newResearchFeild}})
+        res.status(200).json(updateResult)
+    }catch(err){
+        console.log(err)
+    }
+}) 
+
+// get staff details
+const getStaffDetails = asyncHandler(async(req, res) => {
+
+    // const email = req.body.email;
+    const email = req.query.email;
+
+    try{
+        const result = await Staff.find({email})
+        res.status(200).json(result)
+    }catch(err){
+        console.log(err)
+        res.json(err)
+    }
+    
 
 })
 
-// module.exports = {
-//     getAllRequestedSupervisors,
-//     getSupervisorRequest
-// }
-
-module.exports.getAllRequestedSupervisors = getAllRequestedSupervisors
-module.exports.getSupervisorRequest = getSupervisorRequest
-module.exports.requestCheck = requestCheck
-
-
-
+module.exports.addQualifications = addQualifications
+module.exports.addResearchField = addResearchField
+module.exports.getStaffDetails = getStaffDetails
