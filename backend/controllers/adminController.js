@@ -2,15 +2,17 @@ const Role = require('../models/roleModel')
 const User = require('../models/userModel')
 const SubmissionType = require('../models/submissionTypeModel')
 const Multer = require("multer");
-const Goal = require("../models/goalModel");
+const path = require('path');
 
 
-//define storage for the images using Multer
+// define storage for Multer
 const storage = Multer.diskStorage({
 
     destination: (req, file, callback) => {
 
-        callback(null, "../frontend/public/Requested_Ads/");
+        file.fieldname === 'markingScheme' ?
+            callback(null, 'frontend/public/Marking_Schemes')
+            : callback(null, 'frontend/public/Templates');
 
     },
 
@@ -22,24 +24,36 @@ const storage = Multer.diskStorage({
 });
 
 
-//upload parameters for Multer
+// upload parameters for Multer
 const upload = Multer({
 
     storage: storage,
 
-    fileFilter: (req, file, callback) => {
-        var path = require('path');
-        var ext = path.extname(file.originalname);
-        if(ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
-            return callback(new Error('Only images are allowed'))
-        }
-        callback(null, true)
+    limits: {
+        fileSize: 2000000
     },
 
-    limits: {
-        fieldSize: 1024 * 1024 * 3,
-    }
+
+    fileFilter: (req, file, callback) => {
+
+        const ext = path.extname(file.originalname);
+
+        if (file.fieldname === 'markingScheme') {
+            if (ext !== '.doc' && ext !== '.docx' && ext !== '.pdf') {
+                return callback(new Error('Please upload a document'))
+            }
+            callback(null, true);
+        } else {
+            if (ext !== '.ppt' && ext !== '.pptx' && ext !== '.pdf') {
+                return callback(new Error('Please upload a document'))
+            }
+            callback(null, true);
+        }
+
+    },
+
 });
+
 
 
 // @desc    Add role
@@ -98,8 +112,9 @@ const getStaff = async (req, res) => {
 // @access  Private
 const addAssignment = async (req, res) => {
 
-    const{title, type, instructions, dueDate, markingScheme, template} = req.body
-    // const image =  req.file.filename;
+    const{title, type, instructions, dueDate} = req.body
+    const markingScheme =  req.files.markingScheme[0].filename;
+    const template =  req.files.template[0].filename;
 
     if(!title || !type || !instructions || !dueDate || !markingScheme || !template) {
         return res.status(400).json({ msg: 'Please add all fields'})
@@ -112,7 +127,6 @@ const addAssignment = async (req, res) => {
         dueDate,
         markingScheme,
         template
-
     })
 
     if(subType) {
@@ -130,4 +144,5 @@ module.exports = {
     allocateRole,
     getStaff,
     addAssignment,
+    upload
 }

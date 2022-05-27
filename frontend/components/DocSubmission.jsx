@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import axios from "axios";
 import {Link} from "react-router-dom";
 
+
 export default function DocSubmission(props){
 
     const [title, setTitle] = useState("");
@@ -12,18 +13,36 @@ export default function DocSubmission(props){
     const [template, setTemplate] = useState("");
 
 
-    const handleSubmit = () => {
+    const onMSChangeFile = e => {
+        setMarkingScheme(e.target.files[0]);
+    }
 
-        const newItem = {
-            title,
-            type,
-            instructions,
-            dueDate,
-            markingScheme,
-            template
-        }
+    const onTChangeFile = e => {
+        setTemplate(e.target.files[0]);
+    }
 
-        axios.post('http://localhost:5000/api/admin/addAssignment', newItem).then(()=>{
+    // const onChangeFile = e => {
+    //     const file = e.target.files[0]
+    //     this.setState(() => ({ file }));
+    // }
+
+
+    const handleSubmit = (e) => {
+
+        e.preventDefault();
+
+        const formData = new FormData();
+
+
+        formData.append("title", title);
+        formData.append("type", type);
+        formData.append("instructions", instructions);
+        formData.append("dueDate", dueDate);
+        formData.append("markingScheme", markingScheme);
+        formData.append("template", template);
+
+
+        axios.post('http://localhost:5000/api/admin/addAssignment', formData).then(()=>{
             alert('Submission added')
             window.location.href = "/admin";
 
@@ -34,7 +53,7 @@ export default function DocSubmission(props){
 
     return(
         <div className='container'>
-            <form>
+            <form encType={"multipart/form-data"}>
 
                 <div className="form-group col-md-6">
                     <label><b>Title</b> </label>
@@ -65,29 +84,46 @@ export default function DocSubmission(props){
                     />
                 </div>
                 <br/>
-                <div className="form-group col-md-6">
-                    <label><b>Marking Scheme</b> </label>
-                    <input type="text" id="markingScheme" className="form-control" placeholder="Upload file" value={markingScheme}
-                           onChange={(e)=>(
-                               setMarkingScheme(e.target.value)
-                           )}
+                <div className="form-group">
+                    <label htmlFor="markingScheme" className="form-label">Upload Marking Scheme</label>
+                    <br />
+                    <input
+                        type="file"
+                        required
+                        accept=".doc, .docx, .pdf"
+                        className="markingScheme"
+                        id="markingScheme"
+                        name="markingScheme"
+                        onChange={onMSChangeFile}
                     />
                 </div>
                 <br/>
-                <div className="form-group col-md-6">
-                    <label><b>Template</b> </label>
-                    <input type="text" id="template" className="form-control" placeholder="Upload file"
-                           value={template}
-                           onChange={(e) => (
-                               setTemplate(e.target.value)
-                           )}
+                {/*<div className="form-group col-md-6">*/}
+                {/*    <label><b>Template</b> </label>*/}
+                {/*    <input type="text" id="template" className="form-control" placeholder="Upload file"*/}
+                {/*           value={template}*/}
+                {/*           onChange={(e) => (*/}
+                {/*               setTemplate(e.target.value)*/}
+                {/*           )}*/}
+                {/*    />*/}
+                {/*</div>*/}
+                <div className="form-group">
+                    <label htmlFor="template" className="form-label">Upload Template</label>
+                    <br />
+                    <input
+                        type="file"
+                        required
+                        accept=".ppt, .pptx, .doc"
+                        className="template"
+                        id="template"
+                        name="template"
+                        onChange={onTChangeFile}
+
                     />
                 </div>
                 <br/>
                 <br/>
-                <Link to={'/admin'}>
-                    <button type="submit" className="btn btn-success" onClick={handleSubmit}>Submit</button>
-                </Link>
+                <button type="submit" className="btn btn-success" onClick={handleSubmit}>Submit</button>
             </form>
         </div>
     )
