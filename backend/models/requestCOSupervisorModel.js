@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const requestSupervisorModel = new Schema(
+const requestCOSupervisorModel = new Schema(
 	{
 		// requestedGroupID: {
-		// 	type: String,
-		// 	required: true,
+		//     type: String,
+		//     required: true
 		// },
 		supervisorName: {
 			type: String,
@@ -36,4 +36,7 @@ const requestSupervisorModel = new Schema(
 	}
 );
 
-module.exports = mongoose.model('RequestSupervisor', requestSupervisorModel);
+module.exports = mongoose.model(
+	'RequestCOSupervisor',
+	requestCOSupervisorModel
+);

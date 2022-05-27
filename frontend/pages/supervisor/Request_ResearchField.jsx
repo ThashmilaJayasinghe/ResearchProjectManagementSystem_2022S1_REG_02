@@ -117,7 +117,6 @@ const Request_ResearchField = () => {
 
 
 
-
             <div>
                 {/*<Button variant="outlined" onClick={handleClickModalOpen}>*/}
                 {/*    Open alert dialog*/}
