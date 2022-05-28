@@ -5,13 +5,10 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 
-const HomePage = () => {
+const PanelHomePage = () => {
 
-    console.log("this is supervisor")
+    console.log("this is panel memeber")
 
-    const {user} = useSelector((state) => state.auth) //used to get the user
-
-    console.log(user)
 
     return (
         <div style={{paddingTop: "2rem"}}>
@@ -27,16 +24,12 @@ const HomePage = () => {
                 }}
             >
                 <ButtonGroup variant="text" aria-label="text button group">
-
-                    <Link  to = '/supervisor/requestedresearchField'>
-                        <Button>View Requests</Button>
+                    <Link to = '#'>
+                        <Button>Presenttaion evaluation</Button>
                     </Link>
-                    <Link to = '#' style={{}}>
-                        <Button>Document evalueation</Button>
-                    </Link>
-
-                    <Link to = '/' style={{}}>
-                        <Button>Chat</Button>
+                    
+                    <Link  to = '#'>
+                        <Button>Topic evaluation</Button>
                     </Link>
                     
                 </ButtonGroup>
@@ -46,4 +39,4 @@ const HomePage = () => {
         </div>
     )
 }
-export default HomePage;
+export default PanelHomePage;

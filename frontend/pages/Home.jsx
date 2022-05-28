@@ -14,9 +14,6 @@ const Home = () => {
                 click to navigate
             </Link>
 
-            <Link to = "/student/requests">
-                View request
-            </Link>
         </div>
     )
 }

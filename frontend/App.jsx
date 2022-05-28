@@ -14,6 +14,7 @@ import Sup_profile from './pages/supervisor/Sup_profile';
 import Sup_chat from './pages/supervisor/Sup_chat';
 import Stu_chat from './pages/student/Stu_chat';
 import StaffProfile from './pages/staff/StaffProfile';
+import PanelHomePage from './pages/panelMemeber/PanelHomePage';
 
 
 function App(){
@@ -36,6 +37,8 @@ function App(){
                     <Route exact path='/staff/profile' element = {<StaffProfile/>} />
                     <Route exact path = '/supervisor/chat' element = {<Sup_chat/>}/>
                     <Route exact path='/student/chat' element = {<Stu_chat/>} />
+
+                    <Route exact path = '/panelMember' element = {<PanelHomePage/>} />
                 </Routes>
             </Router>
         </div>
