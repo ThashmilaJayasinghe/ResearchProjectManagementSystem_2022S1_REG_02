@@ -21,12 +21,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/api/goals', require('./routes/goalRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
-// app.use('/api/reqSupervisor', require('./routes/requestSupervisorRoutes'))
+// app.use('/api/reqSupervisor', require('./routes/requestSupervisorRoutes'));
 app.use('/topic', require('./routes/topicStatuesRoutes'));
 app.use('/marks', require('./routes/marksRoutes'));
 app.use('/group', require('./routes/groupRoutes'));
 app.use('/request', require('./routes/requestSupervisorRoutes'));
 app.use('/student', require('./routes/studentRoutes'));
 app.use('/supervisor', require('./routes/supervisorRoutes'));
+app.use('/staff', require('./routes/staffRoutes'));
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
