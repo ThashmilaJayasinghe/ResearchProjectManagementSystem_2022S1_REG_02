@@ -1,10 +1,8 @@
 const asyncHandler = require('express-async-handler')
 const requestSupervisor = require('../models/requestSupervisorModel');
-const requestSupervisor = require('../models/requestSupervisorModel');
 const RequestCOSupervisor = require('../models/requestCOSupervisorModel');
 const Group = require('../models/groupModel');
 const Student = require('../models/studentModel');
-const asyncHandler = require('express-async-handler');
 
 
 //accept or reject student groups according to the research field
