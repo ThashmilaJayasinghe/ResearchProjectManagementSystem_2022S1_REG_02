@@ -17,7 +17,15 @@ import Student from "./pages/student/StudentHome"
 import RequestForm from "./pages/student/RequestForm"
 import RequestCoSupForm from './pages/student/RequestCoSupForm';
 
+import StaffProfile from './pages/staff/StaffProfile'
+import Sup_chat from './pages/supervisor/Sup_chat'
+import Stu_chat from './pages/student/Stu_chat'
+import PanelHomePage from './pages/panelMemeber/PanelHomePage'
+
 function App(){
+
+    console.log("app called")
+
     return(
         <div>
             <Router>
@@ -28,7 +36,7 @@ function App(){
                     <Route path="/login" element ={<Login/>}/>
                     <Route path="/supervisor" element={<HomePage/>}/>
                     <Route path="/admin" element={<Admin/>}/>
-                    <Route exact path = '/requestedresearchField' element = {<Request_ResearchField/>} />
+                    <Route exact path = '/supervisor/requestedresearchField' element = {<Request_ResearchField/>} />
                     <Route path = '/updateuser' element = {<UpdateUser/>} />
                     <Route path = '/managesubmissions' element = {<ManageSubmissions/>} />
                     <Route path="/group" element = {<Group/>}/>
@@ -37,7 +45,10 @@ function App(){
                     <Route path="/researchFields" element = {<ResearchFields/>}/>
                     <Route path="/request" element = {<RequestForm/>}/>
                     <Route path="/request/co" element = {<RequestCoSupForm/>}/>
-
+                    <Route exact path='/staff/profile' element = {<StaffProfile/>} />
+                    <Route exact path = '/supervisor/chat' element = {<Sup_chat/>}/>
+                    <Route exact path='/student/chat' element = {<Stu_chat/>} />
+                    <Route exact path = '/panelMember' element = {<PanelHomePage/>} />
                 </Routes>
             </Router>
         </div>

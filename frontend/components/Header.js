@@ -46,7 +46,23 @@ const Header = () => {
 	const staffItems = [
 		{
 			text: 'StaffDash',
+			onClick: () => navigate('/staff')
+		},
+		{
+			text: 'Supervisor',
 			onClick: () => navigate('/supervisor')
+		},
+		{
+			text: 'Co-supervisor',
+			onClick: () => navigate('/co-supervisor')
+		},
+		{
+			text: 'Panel member',
+			onClick: () => navigate('/panelMember')
+		},
+		{
+			text: 'Profile',
+			onClick: () => navigate('/staff/profile')
 		},
 		{
 			text: 'Logout',
