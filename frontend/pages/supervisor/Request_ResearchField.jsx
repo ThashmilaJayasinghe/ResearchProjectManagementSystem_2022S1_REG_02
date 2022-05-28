@@ -78,14 +78,14 @@ const Request_ResearchField = () => {
     }
 
     useEffect(() => {
-        console.log("useEffect called")
-        getSupRequests(supEmail, setSupRequests)
-            .then(res => console.log("success"))
-            .catch(err => console.log(err))
+        async function getData() {
+            await getSupRequests(supEmail, setSupRequests)
+                .then(res => console.log("success"))
+                .catch(err => console.log(err))
+        }
+        getData()
 
     }, [reqState])
-
-    console.log(supRequests)
 
     return (
         // <div style={{paddingTop:"20px", margin: "40px"}}>
