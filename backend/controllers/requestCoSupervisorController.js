@@ -21,9 +21,9 @@ const getAllRequestedCoSupervisors = asyncHandler(async (req, res) => {
 //get requests according to the supervisor
 const getCoSupervisorRequest  = asyncHandler(async (req, res) => {
 
-    const supervisorEmail = req.body.supervisorEmail;
+    // const supervisorEmail = req.body.supervisorEmail;
    
-    // const supervisorEmail = req.query.supervisorEmail
+    const supervisorEmail = req.query.supervisorEmail
 
     try{
         const result = await RequestCOSupervisor.find({supervisorEmail})
