@@ -1,4 +1,8 @@
 node_modules
 .env
 frontend/package-lock.json
+
+history
+.history
+./history
 frontend/package-lock.json
