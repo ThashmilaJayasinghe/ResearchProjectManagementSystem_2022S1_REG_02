@@ -5,7 +5,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useSelector } from 'react-redux';
 import { changeCoSupervisorRequestStates, getCoSupervisorRequests } from '../../apis/staff/RequestCoSupervisorApi';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Table, TableBody, TableContainer, TableHead } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, LinearProgress, Table, TableBody, TableContainer, TableHead } from '@mui/material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -212,8 +212,10 @@ const Request_ResearchField_coSupervisor = () => {
                 </div>
               : 
               (
-                <div>
-                  No request...
+                <div style={{paddingTop: "4rem"}}>
+                    <Box sx={{ width: '50%', margin: "auto"}}>
+                        <LinearProgress />
+                    </Box>
                 </div>
               )
             }

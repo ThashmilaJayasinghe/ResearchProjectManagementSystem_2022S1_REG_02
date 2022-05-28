@@ -9,8 +9,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import {changeRequestStates, getAllRequests, getSupRequests} from "../../apis/staff/RequestSupervisorApi";
-import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
+import {Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, LinearProgress} from "@mui/material";
 import { useSelector } from 'react-redux';
+import { AlignHorizontalCenter } from '@mui/icons-material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -224,8 +225,10 @@ const Request_ResearchField = () => {
                     </div>
 
             </div> : (
-                    <div>
-                    No request...
+                    <div style={{paddingTop: "4rem"}}>
+                        <Box sx={{ width: '50%', margin: "auto"}}>
+                            <LinearProgress />
+                        </Box>
                     </div> 
                 )
             }
