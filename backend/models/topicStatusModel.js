@@ -6,6 +6,9 @@ const topicStatusSchema = new Schema({
 		type: String,
 		// required : true
 	},
+	panalID: {
+		type: String,
+	},
 	title: {
 		type: String,
 		required: true,
@@ -13,14 +16,14 @@ const topicStatusSchema = new Schema({
 	message: {
 		type: String,
 	},
-	supervisorID: {
-		type: String,
-		// required : true
-	},
-	coSupervisorID: {
-		type: String,
-		// required : true
-	},
+	// supervisorID: {
+	// 	type: String,
+	// 	// required : true
+	// },
+	// coSupervisorID: {
+	// 	type: String,
+	// 	// required : true
+	// },
 	status: {
 		type: String,
 		// required : true
