@@ -1,10 +1,8 @@
 const asyncHandler = require('express-async-handler')
 const requestSupervisor = require('../models/requestSupervisorModel');
-const requestSupervisor = require('../models/requestSupervisorModel');
 const RequestCOSupervisor = require('../models/requestCOSupervisorModel');
 const Group = require('../models/groupModel');
 const Student = require('../models/studentModel');
-const asyncHandler = require('express-async-handler');
 
 
 //accept or reject student groups according to the research field
@@ -29,7 +27,7 @@ const getSupervisorRequest  = asyncHandler(async (req, res) => {
     const supervisorEmail = req.query.supervisorEmail
 
     try{
-        const result = await requestSupervisor.findOne({supervisorEmail})
+        const result = await requestSupervisor.find({supervisorEmail})
         res.status(200).json(result)
 
     }catch (err){
@@ -121,6 +119,7 @@ module.exports.post_Co_request = (req, res) => {
 			console.log(err);
 		});
 };
+
 // module.exports.get_requests = (req,res) => {
 //     requestSupervisor.find()
 //         .then((requests)=>{
@@ -152,52 +151,6 @@ module.exports.post_Co_request = (req, res) => {
 //             res.status(200).send({status:'error with updating request', error:err.message});
 //         })
 // }
-
-module.exports.get_Group_request = (res, req) => {};
-
-//accept or reject student groups according to the research field
-module.exports.getAllRequestedSupervisors = asyncHandler(async (req, res) => {
-	const result = await requestSupervisor.find();
-
-	if (result) {
-		res.json({
-			response: result,
-		});
-	} else {
-		res.status(400);
-		throw new Error('Empty requests!');
-	}
-});
-
-//get requests according to the supervisor
-module.exports.getSupervisorRequest = asyncHandler(async (req, res) => {
-	// const supervisorEmail = req.body.supervisorEmail;
-
-	const supervisorEmail = req.query.supervisorEmail;
-
-	try {
-		const result = await requestSupervisor.findOne({ supervisorEmail });
-		res.status(200).json(result);
-	} catch (err) {
-		console.error('supervisor request getting not success');
-		console.log('Error in supervisor requests');
-	}
-});
-
-//accept or reject request
-module.exports.requestCheck = asyncHandler(async (req, res) => {
-	const reqId = req.params.id;
-	const reqStates = req.body.requestStates;
-
-	try {
-		const updatedResult = await requestSupervisor.findByIdAndUpdate(reqId, {
-			requestStates: reqStates,
-		});
-		res.status(200).json(updatedResult);
-	} catch (err) {
-		console.log(err);
-	}
-});
 
 
 module.exports.getAllRequestedSupervisors = getAllRequestedSupervisors

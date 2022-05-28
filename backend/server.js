@@ -29,5 +29,6 @@ app.use('/request', require('./routes/requestSupervisorRoutes'));
 app.use('/student', require('./routes/studentRoutes'));
 app.use('/supervisor', require('./routes/supervisorRoutes'));
 app.use('/api/staff', require('./routes/staffRoutes'))
+app.use('/api/reqCoSupervisor', require('./routes/requestCoSupervisorRoutes'))
 
 app.listen(port, () => console.log(`Server started on port ${port}`));

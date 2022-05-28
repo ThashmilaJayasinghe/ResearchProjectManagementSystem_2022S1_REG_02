@@ -18,7 +18,12 @@ export const getAllRequests = async (setRequestDetails) => {
 export const getSupRequests = async (supEmail,setSupRequests) => {
     try {
         const response = await axios.get("http://localhost:5000/api/reqSupervisor/requestedSupervisor",{params:{supervisorEmail:supEmail}})
-            .then((res) => setSupRequests([res.data]))
+            .then((res) => 
+            {
+                setSupRequests(res.data)
+            })
+
+        
     }catch (err){
         console.log(err)
     }

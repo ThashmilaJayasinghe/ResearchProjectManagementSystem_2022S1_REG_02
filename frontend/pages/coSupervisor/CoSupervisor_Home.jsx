@@ -1,21 +1,11 @@
-import React from 'react';
-import TextField from '@mui/material/TextField';
-import { Box, Button, ButtonGroup } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Box, Button, ButtonGroup } from '@mui/material'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-
-const HomePage = () => {
-
-    console.log("this is supervisor")
-
-    const {user} = useSelector((state) => state.auth) //used to get the user
-
-    console.log(user)
-
-    return (
+const CoSupervisor_Home = () => {
+  return (        
         <div style={{paddingTop: "2rem"}}>
-
+            co supervisor
             <Box
                 sx={{
                     display: 'flex',
@@ -28,13 +18,14 @@ const HomePage = () => {
             >
                 <ButtonGroup variant="text" aria-label="text button group">
 
-                    <Link  to = '/supervisor/requestedresearchField'>
+                    <Link  to = '/co-supervisor/requestedresearchField'>
                         <Button>View Requests</Button>
                     </Link>
                     <Link to = '#' style={{}}>
                         <Button>Document evalueation</Button>
                     </Link>
 
+{/* chat route and component that will called are same */}
                     <Link to = '/' style={{}}>
                         <Button>Chat</Button>
                     </Link>
@@ -42,8 +33,10 @@ const HomePage = () => {
                 </ButtonGroup>
 
             </Box>
-            
         </div>
-    )
+
+
+  )
 }
-export default HomePage;
+
+export default CoSupervisor_Home
