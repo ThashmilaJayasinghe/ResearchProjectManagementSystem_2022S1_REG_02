@@ -14,9 +14,18 @@ const getSupervisorRequest =
 const requestCheck =
 	require('../controllers/requestSupervisorController').requestCheck;
 
+const get_Group_Sup_request =
+	require('../controllers/requestSupervisorController').get_Group_Sup_request;
+const get_Group_COSup_request =
+	require('../controllers/requestSupervisorController').get_Group_COSup_request;
+
 //add a request
-router.post('/supervisor', makeSupervisorRequest);
-router.post('/coSupervisor', makeCOSupervisorRequest);
+router.post('/supervisor/:id', makeSupervisorRequest);
+router.post('/coSupervisor/:id', makeCOSupervisorRequest);
+
+//Get a group details
+router.get('/grouprequest/:id', get_Group_Sup_request);
+router.get('/groupcorequest/:id', get_Group_COSup_request);
 
 //get all the requests
 router.get('/requests', getAllRequestedSupervisors);

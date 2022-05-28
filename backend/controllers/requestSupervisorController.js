@@ -5,16 +5,16 @@ const Student = require('../models/studentModel');
 const asyncHandler = require('express-async-handler');
 
 module.exports.post_request = async (req, res) => {
-	// let id = req.params.id;
-	// console.log(id);
-	// let student = await Student.findOne({ user: id });
-	// const regNum = student.regNumber;
-	// console.log(regNum);
-	// const group = await Group.findOne({ 'members.regNumber': regNum });
-	// const gid = group._id.toString();
-	// console.log(gid);
+	let id = req.params.id;
+	console.log(id);
+	let student = await Student.findOne({ user: id });
+	const regNum = student.regNumber;
+	console.log(regNum);
+	const group = await Group.findOne({ 'members.regNumber': regNum });
+	const gid = group._id.toString();
+	console.log(gid);
 
-	// const requestedGroupID = gid;
+	const requestedGroupID = gid;
 	const supervisorName = req.body.supervisorName;
 	const supervisorEmail = req.body.supervisorEmail;
 	const researchField = req.body.researchField;
@@ -23,7 +23,7 @@ module.exports.post_request = async (req, res) => {
 	const requestStates = req.body.requestStates;
 
 	const newRequest = new requestSupervisor({
-		// requestedGroupID,
+		requestedGroupID,
 		supervisorName,
 		supervisorEmail,
 		researchField,
@@ -42,8 +42,17 @@ module.exports.post_request = async (req, res) => {
 		});
 };
 
-module.exports.post_Co_request = (req, res) => {
-	// const requestedGroupID = req.body.title;
+module.exports.post_Co_request = async (req, res) => {
+	let id = req.params.id;
+	console.log(id);
+	let student = await Student.findOne({ user: id });
+	const regNum = student.regNumber;
+	console.log(regNum);
+	const group = await Group.findOne({ 'members.regNumber': regNum });
+	const gid = group._id.toString();
+	console.log(gid);
+
+	const requestedGroupID = gid;
 	const supervisorName = req.body.supervisorName;
 	const supervisorEmail = req.body.supervisorEmail;
 	const researchField = req.body.researchField;
@@ -52,7 +61,7 @@ module.exports.post_Co_request = (req, res) => {
 	const requestStates = req.body.requestStates;
 
 	const newRequest = new RequestCOSupervisor({
-		// requestedGroupID,
+		requestedGroupID,
 		supervisorName,
 		supervisorEmail,
 		researchField,
@@ -70,6 +79,7 @@ module.exports.post_Co_request = (req, res) => {
 			console.log(err);
 		});
 };
+
 // module.exports.get_requests = (req,res) => {
 //     requestSupervisor.find()
 //         .then((requests)=>{
@@ -102,7 +112,48 @@ module.exports.post_Co_request = (req, res) => {
 //         })
 // }
 
-module.exports.get_Group_request = (res, req) => {};
+module.exports.get_Group_Sup_request = async (req, res) => {
+	let id = req.params.id;
+	// let id = '62910bfdaaed76cedd411ae3';
+	console.log(id);
+	let student = await Student.findOne({ user: id });
+	const regNum = student.regNumber;
+	console.log(regNum);
+	const group = await Group.findOne({ 'members.regNumber': regNum });
+	const gid = group._id.toString();
+	console.log(gid);
+
+	requestSupervisor
+		.findOne({ requestedGroupID: gid })
+		.then((requestSupervisor) => {
+			console.log(requestSupervisor);
+			res.json(requestSupervisor);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+
+module.exports.get_Group_COSup_request = async (req, res) => {
+	let id = req.params.id;
+	// let id = '62910bfdaaed76cedd411ae3';
+	console.log(id);
+	let student = await Student.findOne({ user: id });
+	const regNum = student.regNumber;
+	console.log(regNum);
+	const group = await Group.findOne({ 'members.regNumber': regNum });
+	const gid = group._id.toString();
+	console.log(gid);
+
+	RequestCOSupervisor.findOne({ requestedGroupID: gid })
+		.then((RequestCOSupervisor) => {
+			console.log(RequestCOSupervisor);
+			res.json(RequestCOSupervisor);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
 
 //accept or reject student groups according to the research field
 module.exports.getAllRequestedSupervisors = asyncHandler(async (req, res) => {
