@@ -2,7 +2,6 @@ const asyncHandler = require('express-async-handler')
 const Supervisor = require('../models/supervisorModel')
 const requestSupervisor = require('../models/requestSupervisorModel');
 
-
 //accept or reject student groups according to the research field
 const getAllRequestedSupervisors = asyncHandler(async (req, res) => {
     const result = await requestSupervisor.find()

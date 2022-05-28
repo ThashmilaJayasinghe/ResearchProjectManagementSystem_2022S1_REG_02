@@ -2,17 +2,17 @@ import {useState, useEffect} from 'react'
 import Axios from 'axios';
 import {useNavigate, Link} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 function AdminDashboard() {
 
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     const {user} = useSelector((state) => state.auth) //used to get the user
 
-
-    const [currents, setCurrents] = useState([]);
+    const [staffs, setStaffs] = useState([]);
     const [search, setSearch] = useState("");
 
 
@@ -22,9 +22,9 @@ function AdminDashboard() {
             navigate('/')
         }
 
-        Axios.get("http://localhost:5000/api/users/staff")
+        Axios.get("http://localhost:5000/api/admin/staff/")
             .then((res) => {
-                setCurrents(res.data)
+                setStaffs(res.data)
                 console.log(res.data);
             })
 
@@ -39,134 +39,94 @@ function AdminDashboard() {
                 <h1>Welcome {user && user.name}</h1>
                 <p>Admin Dashboard</p>
                 <br/>
-                <h2>Current Advertisements</h2>
+                <h2>Staff Details</h2>
                 <br/>
             </div>
-            {/*<div className="topnav__search">*/}
-            {/*    <input type="text" placeholder='Search By Title...' onChange={(e) => {*/}
-            {/*        setSearch(e.target.value);*/}
-            {/*    }}/>*/}
-            {/*    <i className='bx bx-search'></i>*/}
-            {/*</div>*/}
-            {/*<div className="row">*/}
-            {/*    <div className="col-12">*/}
-            {/*        <div className="card">*/}
-            {/*            <div className="card__body">*/}
-            {/*                <table className="table">*/}
-            {/*                    <thead className="thead-dark">*/}
-            {/*                    <tr>*/}
-            {/*                        <th scope="col">Title</th>*/}
-            {/*                        <th scope="col">Description</th>*/}
-            {/*                        <th scope="col">Placement</th>*/}
-            {/*                        /!** <th scope="col">Duration</th> *!/*/}
-            {/*                        <th scope="col">StartDate</th>*/}
-            {/*                        <th scope="col">EndDate</th>*/}
-            {/*                        <th scope="col">Image</th>*/}
-            {/*                        <th scope="col">Actions</th>*/}
-            {/*                    </tr>*/}
-            {/*                    </thead>*/}
-            {/*                    <tbody>*/}
-            {/*                    {currents*/}
-            {/*                        .filter(current => {*/}
-            {/*                            if (search == "") {*/}
-            {/*                                return current*/}
-            {/*                            } else if (current.title.toLowerCase().includes(search.toLowerCase())) {*/}
-            {/*                                return current*/}
-            {/*                            }*/}
-            {/*                        })*/}
-            {/*                        .map((current) => {*/}
+            <div>
+                <input type="text" placeholder='Search By Name...' onChange={(e) => {
+                    setSearch(e.target.value);
+                }}/>
+                <i className='bx bx-search'></i>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {staffs
+                                    .filter(staff => {
+                                        if (search == "") {
+                                            return staff
+                                        } else if (staff.name.toLowerCase().includes(search.toLowerCase())) {
+                                            return staff
+                                        }
+                                    })
+                                    .map((staff) => {
 
-            {/*                            const setCurrent = (current) => {*/}
-            {/*                                let {*/}
-            {/*                                    _id,*/}
-            {/*                                    title,*/}
-            {/*                                    description,*/}
-            {/*                                    placement,*/}
-            {/*                                    startdate,*/}
-            {/*                                    enddate,*/}
-            {/*                                    image*/}
-            {/*                                } = current;*/}
-            {/*                                console.log(_id);*/}
-            {/*                                localStorage.setItem('ID', _id);*/}
-            {/*                                console.log(localStorage.getItem('ID'));*/}
-            {/*                                localStorage.setItem('Title', title);*/}
-            {/*                                localStorage.setItem('Description', description);*/}
-            {/*                                localStorage.setItem('Placement', placement);*/}
-            {/*                                localStorage.setItem('Startdate', startdate);*/}
-            {/*                                console.log(localStorage.getItem('Startdate'));*/}
-            {/*                                localStorage.setItem('Enddate', enddate);*/}
-            {/*                                console.log(localStorage.getItem('Enddate'));*/}
-            {/*                                localStorage.setItem('Image', image);*/}
-            {/*                            }*/}
+                                        const setStaff = (staff) => {
+                                            let {
+                                                _id,
+                                                name,
+                                                email
+                                            } = staff;
+                                            console.log(_id);
+                                            localStorage.setItem('ID', _id);
+                                            console.log(localStorage.getItem('id'));
+                                            localStorage.setItem('Name', name);
+                                            localStorage.setItem('Email', email);
+                                        }
 
-            {/*                            const getCurrent = () => {*/}
-            {/*                                Axios.get("http://localhost:5000/api/users/staff")*/}
-            {/*                                    .then((getCurrent) => {*/}
-            {/*                                        setCurrents(getCurrent.data);*/}
-            {/*                                    })*/}
-            {/*                            }*/}
+                                        const getStaff = () => {
+                                            Axios.get("http://localhost:5000/api/admin/staff/")
+                                                .then((getStaff) => {
+                                                    setStaffs(getStaff.data);
+                                                })
+                                                .catch((err) => {
+                                                    alert(err)
+                                                })
+                                        }
 
-            {/*                            const onDelete = (id) => {*/}
+                                        const onDelete = (id) => {
 
-            {/*                                if (window.confirm('Do you wish to delete this staff member?')) {*/}
-            {/*                                    Axios.get("http://localhost:5000/api/users/" + id)*/}
-            {/*                                        .then(() => {*/}
-            {/*                                            getCurrent();*/}
-            {/*                                            // alert("Ad Deleted");*/}
-            {/*                                        })*/}
-            {/*                                }*/}
-            {/*                            }*/}
+                                            if (window.confirm('Do you wish to delete this staff member?')) {
+                                                Axios.get("http://localhost:5000/api/users/" + id)
+                                                    .then(() => {
+                                                        getStaff();
+                                                        alert("Staff Member Deleted");
+                                                    })
+                                            }
+                                        }
 
-
-            {/*                            const location = () => {*/}
-            {/*                                if (current.placement == 'Horizontal Banner')*/}
-            {/*                                    return ('Horizontal_Banner')*/}
-            {/*                                else*/}
-            {/*                                    return ('Medium_Banner')*/}
-            {/*                            };*/}
-
-            {/*                            const loc = location();*/}
-
-            {/*                            return (*/}
-            {/*                                <tr>*/}
-            {/*                                    <td>{current.title}</td>*/}
-            {/*                                    <td>{current.description}</td>*/}
-            {/*                                    <td>{current.placement}</td>*/}
-            {/*                                    <td>{current.startdate.substring(0, 10)}</td>*/}
-            {/*                                    <td>{current.enddate.substring(0, 10)}</td>*/}
-            {/*                                    <td>*/}
-            {/*                                        <div>*/}
-            {/*                                            <button className='btnIcon btnshow'*/}
-            {/*                                                    onClick={() => onOpenModal(`/${loc}/${current.image}`)}>*/}
-            {/*                                                <i className='bx bx-show'></i></button>*/}
-            {/*                                            <Modal className="modal-mainR" isOpen={modalState.mState.open}>*/}
-            {/*                                                <h2 className="Mh2C">Current Advertisement</h2>*/}
-            {/*                                                <img className="modal-imgR"*/}
-            {/*                                                     src={modalState.mState.modalImage} alt="ad"/>*/}
-            {/*                                                <button className="btncloseC"*/}
-            {/*                                                        onClick={() => onCloseModal()}>Close*/}
-            {/*                                                </button>*/}
-            {/*                                            </Modal>*/}
-            {/*                                        </div>*/}
-            {/*                                    </td>*/}
-            {/*                                    <td>*/}
-            {/*                                        <Link to='/updatecurrent'>*/}
-            {/*                                            <button className='btnIcon' onClick={() => setCurrent(current)}>*/}
-            {/*                                                <i className='bx bx-edit'></i></button>*/}
-            {/*                                        </Link>*/}
-            {/*                                        <button className='btnIcon btnsecond'*/}
-            {/*                                                onClick={() => onDelete(current._id)}><i*/}
-            {/*                                            className='bx bx-trash'></i></button>*/}
-            {/*                                    </td>*/}
-            {/*                                </tr>*/}
-            {/*                            )*/}
-            {/*                        })}*/}
-            {/*                    </tbody>*/}
-            {/*                </table>*/}
-            {/*            </div>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
+                                        return (
+                                            <tr>
+                                                <td>{staff.name}</td>
+                                                <td>{staff.email}</td>
+                                                <td>
+                                                    <Link to='/updateuser'>
+                                                        <button className='btnIcon' onClick={() => setStaff(staff)}>
+                                                            <EditIcon/></button>
+                                                    </Link>
+                                                    <button className='btnIcon btnsecond'
+                                                            onClick={() => onDelete(staff._id)}><DeleteIcon/>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 

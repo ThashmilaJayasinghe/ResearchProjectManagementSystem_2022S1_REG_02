@@ -19,25 +19,16 @@ const addQualifications = require('../controllers/staffController').addQualifica
 const addResearchField = require('../controllers/staffController').addResearchField
 
 //add a request
-router.post('/addRequest', makeSupervisorRequest)
+router.post('/supervisor', makeSupervisorRequest);
+router.post('/coSupervisor', makeCOSupervisorRequest);
 
 //get all the requests
-router.get('/requests',getAllRequestedSupervisors)
-
-//get requests according to the supervisor
-router.get('/requestedSupervisor', getSupervisorRequest)
-
-//update request states
-router.put('/updateRequest/:id', requestCheck)
-
-
-// // add a supervisor for sample check
-// router.post('/addSupervisor',addSupervisor )
-
-// // update qualifications
-// router.put('/updateQual',addQualifications )
-
-// // update research interest
-// router.put('/updateResearch', addResearchField)
+router.get('/requests', getAllRequestedSupervisors);
+//
+// //get requests according to the supervisor
+router.get('/requestedSupervisor', getSupervisorRequest);
+//
+// //update request states
+router.put('/updateRequest/:id', requestCheck);
 
 module.exports = router;
