@@ -19,8 +19,8 @@ const addQualifications = require('../controllers/staffController').addQualifica
 const addResearchField = require('../controllers/staffController').addResearchField
 
 //add a request
-router.post('/supervisor', makeSupervisorRequest);
-router.post('/coSupervisor', makeCOSupervisorRequest);
+// router.post('/supervisor', makeSupervisorRequest);
+// router.post('/coSupervisor', makeCOSupervisorRequest);
 
 //get all the requests
 router.get('/requests', getAllRequestedSupervisors);
