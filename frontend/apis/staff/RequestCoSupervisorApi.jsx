@@ -17,8 +17,8 @@ export const getAllCoSupervisorRequests = async (setRequestDetails) => {
 //get data according to the co-supervisor
 export const getCoSupervisorRequests = async (staffEmail,setSupRequests) => {
     try {
-        const response = await axios.get("http://localhost:5000/api/",{params:{supervisorEmail:staffEmail}})
-            .then((res) => setSupRequests([res.data]))
+        const response = await axios.get("http://localhost:5000/api/reqCoSupervisor/requestedCoSupervisor",{params:{supervisorEmail:staffEmail}})
+            .then((res) => setSupRequests(res.data))
     }catch (err){
         console.log(err)
     }
@@ -28,7 +28,7 @@ export const getCoSupervisorRequests = async (staffEmail,setSupRequests) => {
 export const changeCoSupervisorRequestStates = async (id, state) => {
 
     try{
-        const response = await axios.put(`http://localhost:5000/api/reqSupervisor//${id}`, {requestStates: state})
+        const response = await axios.put(`http://localhost:5000/api/reqCoSupervisor/updateCoSupervisorRequest/${id}`, {requestStates: state})
             .then((res) => console.log(res.data))
     }catch (err) {
         console.log(err)
