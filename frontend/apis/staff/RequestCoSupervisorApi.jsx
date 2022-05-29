@@ -4,7 +4,7 @@ import axios from 'axios'
 export const getAllCoSupervisorRequests = async (setRequestDetails) => {
 
     try{
-        const response = await axios.get("http://localhost:5000/api/")
+        const response = await axios.get("http://localhost:5000/api/reqCoSupervisor/coSupervisorRequests")
             .then(res => setRequestDetails(res.data.response))
 
         return response;
@@ -25,11 +25,18 @@ export const getCoSupervisorRequests = async (staffEmail,setSupRequests) => {
 }
 
 //change the states of the request
-export const changeCoSupervisorRequestStates = async (id, state) => {
+export const changeCoSupervisorRequestStates = async (id, state, groupID, staffId) => {
 
     try{
         const response = await axios.put(`http://localhost:5000/api/reqCoSupervisor/updateCoSupervisorRequest/${id}`, {requestStates: state})
             .then((res) => console.log(res.data))
+
+        if(state == "accepted"){
+            const updateGroup = await axios.put('http://localhost:5000/group/updateCoSupervisor', {supervisorID: staffId, groupId: groupID})
+                .then((res) => console.log(res.data))
+        }
+
+       
     }catch (err) {
         console.log(err)
     }
