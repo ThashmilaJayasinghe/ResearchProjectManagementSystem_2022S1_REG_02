@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 
 const requestSupervisorModel = new Schema(
 	{
-		// requestedGroupID: {
-		// 	type: String,
-		// 	required: true,
-		// },
+		requestedGroupID: {
+			type: String,
+			// required: true,
+		},
 		supervisorName: {
 			type: String,
 			required: true,

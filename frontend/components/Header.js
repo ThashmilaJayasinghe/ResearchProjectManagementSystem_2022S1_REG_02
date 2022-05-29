@@ -9,39 +9,37 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import {Link, useNavigate} from 'react-router-dom'
-import {useDispatch, useSelector} from "react-redux";
-import {logout, reset} from "../features/authSlice";
-import Button from "@mui/material/Button";
-
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout, reset } from '../features/authSlice';
+import Button from '@mui/material/Button';
 
 const Header = () => {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
-	const navigate = useNavigate()
-	const dispatch = useDispatch()
-
-	const {user} = useSelector((state) => state.auth)
+	const { user } = useSelector((state) => state.auth);
 
 	const onLogout = () => {
-		dispatch(logout())
-		dispatch(reset())
-		navigate('/')
-	}
+		dispatch(logout());
+		dispatch(reset());
+		navigate('/');
+	};
 
 	const adminItems = [
 		{
 			text: 'AdminDash',
-			onClick: () => navigate('/admin')
+			onClick: () => navigate('/admin'),
 		},
 		{
 			text: 'Submissions',
-			onClick: () => navigate('/managesubmissions')
+			onClick: () => navigate('/managesubmissions'),
 		},
 		{
 			text: 'Logout',
-			onClick: () => onLogout()
+			onClick: () => onLogout(),
 		},
-	]
+	];
 
 	const staffItems = [
 		{
@@ -66,44 +64,47 @@ const Header = () => {
 		},
 		{
 			text: 'Logout',
-			onClick: () => onLogout()
+			onClick: () => onLogout(),
 		},
-	]
+	];
 
 	const studentItems = [
 		{
 			text: 'Student',
-			onClick: () =>  navigate('/student')
+			onClick: () => navigate('/student'),
 		},
 		{
 			text: 'Submissions',
-			onClick: () =>  navigate('/submissions')
+			onClick: () => navigate('/submissions'),
 		},
 		{
 			text: 'Group',
-			onClick: () =>  navigate('/group')
+			onClick: () => navigate('/group'),
 		},
 		{
 			text: 'Research Fields',
-			onClick: () =>  navigate('/researchFields')
+			onClick: () => navigate('/researchFields'),
+		},
+		{
+			text: 'Instructors',
+			onClick: () => navigate('/instructor'),
 		},
 		{
 			text: 'Logout',
-			onClick: () => onLogout()
+			onClick: () => onLogout(),
 		},
-	]
+	];
 
 	const Items = [
 		{
 			text: 'Login',
-			onClick: () => navigate('/login')
+			onClick: () => navigate('/login'),
 		},
 		{
 			text: 'Register',
-			onClick: () => navigate('/register')
-		}
-	]
-
+			onClick: () => navigate('/register'),
+		},
+	];
 
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 
@@ -114,7 +115,6 @@ const Header = () => {
 	const handleCloseNavMenu = () => {
 		setAnchorElNav(null);
 	};
-
 
 	return (
 		<AppBar position="static" style={{ background: '#063970' }}>
@@ -168,50 +168,41 @@ const Header = () => {
 								display: { xs: 'block', md: 'none' },
 							}}
 						>
-							{user && user.roles.includes('admin') ? (
-
-								adminItems.map((adminItem) => {
-									const {text, onClick} = adminItem;
-									return (
-										<MenuItem key={text} onClick={onClick}>
-											<Typography textAlign="center">{text}</Typography>
-										</MenuItem>
-									)
-								})
-
-							) : user && user.roles.includes('staff') ? (
-
-								staffItems.map((staffItem) => {
-									const {text, onClick} = staffItem;
-									return (
-										<MenuItem key={text} onClick={onClick}>
-											<Typography textAlign="center">{text}</Typography>
-										</MenuItem>
-									)
-								})
-
-							) : user && user.roles.includes('student') ? (
-
-								studentItems.map((studentItem) => {
-									const {text, onClick} = studentItem;
-									return (
-										<MenuItem key={text} onClick={onClick}>
-											<Typography textAlign="center">{text}</Typography>
-										</MenuItem>
-									)
-								})
-							) : (
-
-								Items.map((Item) => {
-									const {text, onClick} = Item;
-									return (
-										<MenuItem key={text} onClick={onClick}>
-											<Typography textAlign="center">{text}</Typography>
-										</MenuItem>
-									)
-								})
-
-							)}
+							{user && user.roles.includes('admin')
+								? adminItems.map((adminItem) => {
+										const { text, onClick } = adminItem;
+										return (
+											<MenuItem key={text} onClick={onClick}>
+												<Typography textAlign="center">{text}</Typography>
+											</MenuItem>
+										);
+								  })
+								: user && user.roles.includes('staff')
+								? staffItems.map((staffItem) => {
+										const { text, onClick } = staffItem;
+										return (
+											<MenuItem key={text} onClick={onClick}>
+												<Typography textAlign="center">{text}</Typography>
+											</MenuItem>
+										);
+								  })
+								: user && user.roles.includes('student')
+								? studentItems.map((studentItem) => {
+										const { text, onClick } = studentItem;
+										return (
+											<MenuItem key={text} onClick={onClick}>
+												<Typography textAlign="center">{text}</Typography>
+											</MenuItem>
+										);
+								  })
+								: Items.map((Item) => {
+										const { text, onClick } = Item;
+										return (
+											<MenuItem key={text} onClick={onClick}>
+												<Typography textAlign="center">{text}</Typography>
+											</MenuItem>
+										);
+								  })}
 						</Menu>
 					</Box>
 					<AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -234,66 +225,57 @@ const Header = () => {
 						LOGO
 					</Typography>
 					<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-						{user && user.roles.includes('admin') ? (
-
-							adminItems.map((adminItem) => {
-								const {text, onClick} = adminItem;
-								return (
-									<Button
-										key={text}
-										onClick={onClick}
-										sx={{ my: 2, color: 'white', display: 'block' }}
-									>
-										{text}
-									</Button>
-								)
-							})
-
-						) : user && user.roles.includes('staff') ? (
-
-							staffItems.map((staffItem) => {
-								const {text, onClick} = staffItem;
-								return (
-									<Button
-										key={text}
-										onClick={onClick}
-										sx={{ my: 2, color: 'white', display: 'block' }}
-									>
-										{text}
-									</Button>
-								)
-							})
-
-						) : user && user.roles.includes('student') ? (
-
-							studentItems.map((studentItem) => {
-								const {text, onClick} = studentItem;
-								return (
-									<Button
-										key={text}
-										onClick={onClick}
-										sx={{ my: 2, color: 'white', display: 'block' }}
-									>
-										{text}
-									</Button>
-								)
-							})
-						) : (
-
-							Items.map((Item) => {
-								const {text, onClick} = Item;
-								return (
-									<Button
-										key={text}
-										onClick={onClick}
-										sx={{ my: 2, color: 'white', display: 'block' }}
-									>
-										{text}
-									</Button>
-								)
-							})
-
-						)}
+						{user && user.roles.includes('admin')
+							? adminItems.map((adminItem) => {
+									const { text, onClick } = adminItem;
+									return (
+										<Button
+											key={text}
+											onClick={onClick}
+											sx={{ my: 2, color: 'white', display: 'block' }}
+										>
+											{text}
+										</Button>
+									);
+							  })
+							: user && user.roles.includes('staff')
+							? staffItems.map((staffItem) => {
+									const { text, onClick } = staffItem;
+									return (
+										<Button
+											key={text}
+											onClick={onClick}
+											sx={{ my: 2, color: 'white', display: 'block' }}
+										>
+											{text}
+										</Button>
+									);
+							  })
+							: user && user.roles.includes('student')
+							? studentItems.map((studentItem) => {
+									const { text, onClick } = studentItem;
+									return (
+										<Button
+											key={text}
+											onClick={onClick}
+											sx={{ my: 2, color: 'white', display: 'block' }}
+										>
+											{text}
+										</Button>
+									);
+							  })
+							: Items.map((Item) => {
+									const { text, onClick } = Item;
+									return (
+										<Button
+											key={text}
+											onClick={onClick}
+											sx={{ my: 2, color: 'white', display: 'block' }}
+										>
+											{text}
+										</Button>
+									);
+							  })}
 					</Box>
 				</Toolbar>
 			</Container>

@@ -5,7 +5,9 @@ const groupSchema = new Schema({
 	subMemberRegNumber: {
 		type: String,
 	},
-
+	groupName: {
+		type: String,
+	},
 	members: [
 		{
 			regNumber: {

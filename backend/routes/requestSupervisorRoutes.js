@@ -18,7 +18,20 @@ const addSupervisor = require('../controllers/supervisorController').addSupervis
 const addQualifications = require('../controllers/staffController').addQualifications 
 const addResearchField = require('../controllers/staffController').addResearchField
 
+const get_Group_Sup_request =
+	require('../controllers/requestSupervisorController').get_Group_Sup_request;
+const get_Group_COSup_request =
+	require('../controllers/requestSupervisorController').get_Group_COSup_request;
+
 //add a request
+
+router.post('/supervisor/:id', makeSupervisorRequest);
+router.post('/coSupervisor/:id', makeCOSupervisorRequest);
+
+//Get a group details
+router.get('/grouprequest/:id', get_Group_Sup_request);
+router.get('/groupcorequest/:id', get_Group_COSup_request);
+
 // router.post('/supervisor', makeSupervisorRequest);
 // router.post('/coSupervisor', makeCOSupervisorRequest);
 

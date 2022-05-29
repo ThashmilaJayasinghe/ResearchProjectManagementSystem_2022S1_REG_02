@@ -2,8 +2,11 @@ import axios from "axios";
 import TextField from "@mui/material/TextField";
 import React, { useEffect, useState } from "react";
 import {Button} from "@mui/material";
+import { useSelector } from 'react-redux';
 
 export default function RequestCoSupForm(){
+
+    const { user } = useSelector((state) => state.auth);
 
     useEffect(()=>{
         setSupervisorName(localStorage.getItem("name"))
@@ -26,7 +29,7 @@ export default function RequestCoSupForm(){
             requestStates:"Pending"
         }
 
-        axios.post('http://localhost:5000/request/coSupervisor',newRequest)
+        axios.post('http://localhost:5000/request/coSupervisor/'+user._id,newRequest)
         .then(()=>{
             alert('Request Sent')
             setResearchField("")
