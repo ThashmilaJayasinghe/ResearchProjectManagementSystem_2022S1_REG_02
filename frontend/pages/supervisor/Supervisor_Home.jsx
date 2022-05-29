@@ -7,11 +7,8 @@ import { useSelector } from 'react-redux';
 
 const HomePage = () => {
 
-    console.log("this is supervisor")
-
-    // const {user} = useSelector((state) => state.auth) //used to get the user
-
-    // console.log(user)
+    const {user} = useSelector((state) => state.auth) //used to get the user
+    localStorage.setItem("agent-uid", user.name)
 
     return (
         <div style={{paddingTop: "2rem"}}>
@@ -31,11 +28,11 @@ const HomePage = () => {
                     <Link  to = '/supervisor/requestedresearchField'>
                         <Button>View Requests</Button>
                     </Link>
-                    <Link to = '#' style={{}}>
+                    <Link to = '#'>
                         <Button>Document evalueation</Button>
                     </Link>
 
-                    <Link to = '/' style={{}}>
+                    <Link to = '/supervisor/chat'>
                         <Button>Chat</Button>
                     </Link>
                     
