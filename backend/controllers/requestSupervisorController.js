@@ -205,34 +205,6 @@ module.exports.get_Group_COSup_request = async (req, res) => {
 		});
 };
 
-//accept or reject student groups according to the research field
-module.exports.getAllRequestedSupervisors = asyncHandler(async (req, res) => {
-	const result = await requestSupervisor.find();
-
-	if (result) {
-		res.json({
-			response: result,
-		});
-	} else {
-		res.status(400);
-		throw new Error('Empty requests!');
-	}
-});
-
-//get requests according to the supervisor
-module.exports.getSupervisorRequest = asyncHandler(async (req, res) => {
-	// const supervisorEmail = req.body.supervisorEmail;
-
-	const supervisorEmail = req.query.supervisorEmail;
-
-	try {
-		const result = await requestSupervisor.findOne({ supervisorEmail });
-		res.status(200).json(result);
-	} catch (err) {
-		console.error('supervisor request getting not success');
-		console.log('Error in supervisor requests');
-	}
-});
 
 
 module.exports.getAllRequestedSupervisors = getAllRequestedSupervisors

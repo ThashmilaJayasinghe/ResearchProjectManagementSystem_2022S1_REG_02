@@ -9,8 +9,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import {changeRequestStates, getAllRequests, getSupRequests} from "../../apis/staff/RequestSupervisorApi";
-import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
+import {Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, LinearProgress} from "@mui/material";
 import { useSelector } from 'react-redux';
+import { AlignHorizontalCenter } from '@mui/icons-material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -65,16 +66,17 @@ const Request_ResearchField = () => {
         setOpen(false);
     };
 
-    const onAcceptClick = (groupId) => {
+    const onAcceptClick = (groupId, actualGroupId) => {
         const accept  = "accepted"
         setReqState(accept);
-        changeRequestStates(groupId, accept).then(res => console.log("successfully changed!"))
+        changeRequestStates(groupId, accept, actualGroupId, user._id).then(res => console.log("successfully changed!"))
     }
 
     const onRejectClick = (groupId) => {
         const reject  = "rejected"
         setReqState(reject);
-        changeRequestStates(groupId, reject).then(res => console.log("successfully changed!"))
+        const actualGroupId = ""
+        changeRequestStates(groupId, reject, actualGroupId, user._id).then(res => console.log("successfully changed!"))
     }
 
     useEffect(() => {
@@ -208,7 +210,7 @@ const Request_ResearchField = () => {
                                     variant="contained"
                                     color="success"
                                     style={{marginRight: "5px"}}
-                                    onClick = {() => (onAcceptClick(onViewClick._id), handleModalClose())}
+                                    onClick = {() => (onAcceptClick(onViewClick._id, onViewClick.requestedGroupID), handleModalClose())}
                                 >
                                     Accept
                                 </Button>
@@ -224,8 +226,10 @@ const Request_ResearchField = () => {
                     </div>
 
             </div> : (
-                    <div>
-                    No request...
+                    <div style={{paddingTop: "4rem"}}>
+                        <Box sx={{ width: '50%', margin: "auto"}}>
+                            <LinearProgress />
+                        </Box>
                     </div> 
                 )
             }

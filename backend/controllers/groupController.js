@@ -93,6 +93,37 @@ const set_group = async (req, res) => {
 	}
 };
 
-const update_group = (req, res) => {};
 
-module.exports = { set_group, create_group, get_Group };
+const update_group_supervisor = async(req, res) => {
+	// const staffId = req.params.staffId;
+	const staffId = req.body.supervisorID;
+	const groudId = req.body.groupId;
+
+	console.log(staffId)
+	console.log(groudId)
+
+	try{
+		const updatedResult = await Group.findByIdAndUpdate(groudId, {supervisorID: staffId})
+		res.status(200).json(updatedResult)
+	}
+	catch(err) {
+		console.log(err);
+	}
+};
+
+const update_group_coSupervisor = async(req, res) => {
+	// const staffId = req.params.staffId;
+	const staffId = req.body.coSupervisorID;
+	const groudId = req.body.groupId;
+
+	try{
+		const updatedResult = await Group.findByIdAndUpdate(groudId, {coSupervisorID: staffId})
+		res.status(200).json(updatedResult)
+	}
+	catch(err) {
+		console.log(err);
+	}
+}
+
+
+module.exports = { set_group, create_group, get_Group, update_group_supervisor, update_group_coSupervisor};

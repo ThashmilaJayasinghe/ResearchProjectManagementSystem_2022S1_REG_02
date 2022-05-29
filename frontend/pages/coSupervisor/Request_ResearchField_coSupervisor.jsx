@@ -5,7 +5,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useSelector } from 'react-redux';
 import { changeCoSupervisorRequestStates, getCoSupervisorRequests } from '../../apis/staff/RequestCoSupervisorApi';
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Table, TableBody, TableContainer, TableHead } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, LinearProgress, Table, TableBody, TableContainer, TableHead } from '@mui/material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -52,16 +52,17 @@ const Request_ResearchField_coSupervisor = () => {
     setOpen(false);
   };
 
-  const onAcceptClick = (groupId) => {
+  const onAcceptClick = (groupId, actualGroupId) => {
     const accept  = "accepted"
     setReqState(accept);
-    changeCoSupervisorRequestStates(groupId, accept).then(res => console.log("successfully changed!"))
+    changeCoSupervisorRequestStates(groupId, accept, actualGroupId, user._id).then(res => console.log("successfully changed!"))
   }
 
   const onRejectClick = (groupId) => {
     const reject  = "rejected"
     setReqState(reject);
-    changeCoSupervisorRequestStates(groupId, reject).then(res => console.log("successfully changed!"))
+    const actualGroupId = "";
+    changeCoSupervisorRequestStates(groupId, reject, actualGroupId, user._id).then(res => console.log("successfully changed!"))
   }
 
   useEffect(() => {
@@ -195,7 +196,7 @@ const Request_ResearchField_coSupervisor = () => {
                                   variant="contained"
                                   color="success"
                                   style={{marginRight: "5px"}}
-                                  onClick = {() => (onAcceptClick(onViewClick._id), handleModalClose())}
+                                  onClick = {() => (onAcceptClick(onViewClick._id, onViewClick.requestedGroupID), handleModalClose())}
                               >
                                   Accept
                               </Button>
@@ -212,8 +213,10 @@ const Request_ResearchField_coSupervisor = () => {
                 </div>
               : 
               (
-                <div>
-                  No request...
+                <div style={{paddingTop: "4rem"}}>
+                    <Box sx={{ width: '50%', margin: "auto"}}>
+                        <LinearProgress />
+                    </Box>
                 </div>
               )
             }
