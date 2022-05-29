@@ -20,15 +20,13 @@ import RequestCoSupForm from './pages/student/RequestCoSupForm';
 // import TopicRequestPanalForm from './pages/student/TopicRequestPanalForm';
 
 import StaffProfile from './pages/staff/StaffProfile'
-import Sup_chat from './pages/supervisor/Sup_chat'
+import SupervisorChat from './pages/supervisor/SupervisorChat'
 import Stu_chat from './pages/student/Stu_chat'
 import PanelHomePage from './pages/panelMemeber/PanelHomePage'
 import CoSupervisor_Home from './pages/coSupervisor/CoSupervisor_Home';
 import Request_ResearchField_coSupervisor from './pages/coSupervisor/Request_ResearchField_coSupervisor';
 
 function App(){
-
-    console.log("app called")
 
     return(
         <div>
@@ -41,11 +39,11 @@ function App(){
 
                     <Route path="/supervisor" element={<Supervisor_Home/>}/>
                     <Route exact path = '/supervisor/requestedresearchField' element = {<Request_ResearchField/>} />
-                    <Route exact path = '/supervisor/chat' element = {<Sup_chat/>}/>
+                    <Route exact path = '/supervisor/chat' element = {<SupervisorChat/>}/>
 
                     <Route path = '/co-supervisor' element = {< CoSupervisor_Home/>} />
                     <Route exact path = '/co-supervisor/requestedresearchField' element = {<Request_ResearchField_coSupervisor/>} />
-                    <Route exact path = '/supervisor/chat' element = {<Sup_chat/>}/>
+                    <Route exact path = '/supervisor/chat' element = {<SupervisorChat/>}/>
 
                     <Route path="/admin" element={<Admin/>}/>
 
