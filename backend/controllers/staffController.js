@@ -62,10 +62,51 @@ const getStaffDetails = asyncHandler(async(req, res) => {
         console.log(err)
         res.json(err)
     }
-    
+})
 
+// remove qualifications
+const removeQualifications = asyncHandler(async(req, res) => {
+    
+    const email = req.body.email;
+    // const indexValue = req.body.IndexVal;
+    const arrVal = req.body.value;
+
+    try{
+        const deleteVal = await Staff.findOneAndUpdate({email: email}, 
+            {
+                $pull: { qualifications: arrVal }
+            }
+        )
+        res.status(200).json(deleteVal)
+    }
+    catch(err){
+        console.log(err)
+        res.json(err)
+    }
+})
+
+const removeResearchInterests = asyncHandler(async(req, res) => {
+    
+    const email = req.body.email;
+    // const indexValue = req.body.IndexVal;
+    const arrVal = req.body.value;
+
+    try{
+        const deleteVal = await Staff.findOneAndUpdate({email: email}, 
+            {
+                $pull: { researchInterests: arrVal }
+            }
+        )
+        res.status(200).json(deleteVal)
+    }
+    catch(err){
+        console.log(err)
+        res.json(err)
+    }
 })
 
 module.exports.addQualifications = addQualifications
 module.exports.addResearchField = addResearchField
 module.exports.getStaffDetails = getStaffDetails
+module.exports.removeQualifications = removeQualifications
+module.exports.removeResearchInterests = removeResearchInterests
