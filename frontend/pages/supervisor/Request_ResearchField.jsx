@@ -66,16 +66,17 @@ const Request_ResearchField = () => {
         setOpen(false);
     };
 
-    const onAcceptClick = (groupId) => {
+    const onAcceptClick = (groupId, actualGroupId) => {
         const accept  = "accepted"
         setReqState(accept);
-        changeRequestStates(groupId, accept).then(res => console.log("successfully changed!"))
+        changeRequestStates(groupId, accept, actualGroupId, user._id).then(res => console.log("successfully changed!"))
     }
 
     const onRejectClick = (groupId) => {
         const reject  = "rejected"
         setReqState(reject);
-        changeRequestStates(groupId, reject).then(res => console.log("successfully changed!"))
+        const actualGroupId = ""
+        changeRequestStates(groupId, reject, actualGroupId, user._id).then(res => console.log("successfully changed!"))
     }
 
     useEffect(() => {
@@ -209,7 +210,7 @@ const Request_ResearchField = () => {
                                     variant="contained"
                                     color="success"
                                     style={{marginRight: "5px"}}
-                                    onClick = {() => (onAcceptClick(onViewClick._id), handleModalClose())}
+                                    onClick = {() => (onAcceptClick(onViewClick._id, onViewClick.requestedGroupID), handleModalClose())}
                                 >
                                     Accept
                                 </Button>

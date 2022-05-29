@@ -52,16 +52,17 @@ const Request_ResearchField_coSupervisor = () => {
     setOpen(false);
   };
 
-  const onAcceptClick = (groupId) => {
+  const onAcceptClick = (groupId, actualGroupId) => {
     const accept  = "accepted"
     setReqState(accept);
-    changeCoSupervisorRequestStates(groupId, accept).then(res => console.log("successfully changed!"))
+    changeCoSupervisorRequestStates(groupId, accept, actualGroupId, user._id).then(res => console.log("successfully changed!"))
   }
 
   const onRejectClick = (groupId) => {
     const reject  = "rejected"
     setReqState(reject);
-    changeCoSupervisorRequestStates(groupId, reject).then(res => console.log("successfully changed!"))
+    const actualGroupId = "";
+    changeCoSupervisorRequestStates(groupId, reject, actualGroupId, user._id).then(res => console.log("successfully changed!"))
   }
 
   useEffect(() => {
@@ -195,7 +196,7 @@ const Request_ResearchField_coSupervisor = () => {
                                   variant="contained"
                                   color="success"
                                   style={{marginRight: "5px"}}
-                                  onClick = {() => (onAcceptClick(onViewClick._id), handleModalClose())}
+                                  onClick = {() => (onAcceptClick(onViewClick._id, onViewClick.requestedGroupID), handleModalClose())}
                               >
                                   Accept
                               </Button>
