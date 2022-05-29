@@ -16,6 +16,8 @@ import Submission from "./pages/student/Submissions"
 import Student from "./pages/student/StudentHome"
 import RequestForm from "./pages/student/RequestForm"
 import RequestCoSupForm from './pages/student/RequestCoSupForm';
+import Instructor from './pages/student/Instructor';
+import TopicRequestPanalForm from './pages/student/TopicRequestPanalForm';
 
 import StaffProfile from './pages/staff/StaffProfile'
 import Sup_chat from './pages/supervisor/Sup_chat'
@@ -55,6 +57,8 @@ function App(){
                     <Route path="/researchFields" element = {<ResearchFields/>}/>
                     <Route path="/request" element = {<RequestForm/>}/>
                     <Route path="/request/co" element = {<RequestCoSupForm/>}/>
+                    <Route path="/instructor" element = {<Instructor/>} />
+                    <Route path='/topicRequest' element = {<TopicRequestPanalForm/>}/>
                     <Route exact path='/staff/profile' element = {<StaffProfile/>} />
                     <Route exact path='/student/chat' element = {<Stu_chat/>} />
                     <Route exact path = '/panelMember' element = {<PanelHomePage/>} />

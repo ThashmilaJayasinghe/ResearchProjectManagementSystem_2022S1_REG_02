@@ -1,10 +1,13 @@
 const Group = require('../models/groupModel');
+const Student = require('../models/studentModel');
 
 const create_group = (req, res) => {
 	const subMemberRegNumber = req.body.subMemberRegNumber;
+	const groupName = req.body.groupName;
 	console.log(subMemberRegNumber);
 	const newGroup = new Group({
 		subMemberRegNumber,
+		groupName,
 		members: [],
 	});
 	console.log(newGroup);
@@ -19,13 +22,21 @@ const create_group = (req, res) => {
 		});
 };
 
-// const get_id = async (req, res) => {
-// 	const subMemberRegNumber = req.body.subMemberRegNumber;
-// 	Group.findOne({ subMemberRegNumber: subMemberRegNumber }).then((Group) => {
-// 		console.log(Group);
-// 		res.send(Group);
-// 	});
-// };
+const get_Group = async (req, res) => {
+	let id = req.params.id;
+	console.log(id);
+	let student = await Student.findOne({ user: id });
+	const regNum = student.regNumber;
+	console.log(regNum);
+	const group = await Group.findOne({ 'members.regNumber': regNum });
+	const gid = group._id.toString();
+	console.log(gid);
+
+	Group.findById({ _id: gid }).then((Group) => {
+		console.log(Group);
+		res.send(Group);
+	});
+};
 
 const set_group = async (req, res) => {
 	const subMemberRegNumber = req.body.temp;
@@ -51,7 +62,7 @@ const set_group = async (req, res) => {
 			if (i < 4) {
 				group.members.push({ regNumber, leader, email });
 				group = await group.save();
-				return res.status(201).send(group);
+				return res.status(200).send('Member is Added');
 			} else {
 				console.log('Limitted ' + i);
 				res.status(500).send('Limit exceded');
@@ -84,4 +95,4 @@ const set_group = async (req, res) => {
 
 const update_group = (req, res) => {};
 
-module.exports = { set_group, create_group };
+module.exports = { set_group, create_group, get_Group };
