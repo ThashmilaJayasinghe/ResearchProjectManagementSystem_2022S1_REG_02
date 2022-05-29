@@ -1,24 +1,15 @@
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableRow, TextField } from '@mui/material'
+import { Button, CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableRow, TextField } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { addQualification, addResearchField, deleteQualification, deleteResearchInterest, getStaff } from '../../apis/staff/StaffApi'
 
-const qualificationsArr = [
-    "Bsc IT", "MSC Cloud computing", "Bsc in BA"
-  ]
-  
-  const researchInterestsArr = [
-    "Cloud computing", "AI", "Robotics"
-  ]
-
 const StaffProfile = () => {
-
     const {user} = useSelector((state) => state.auth) //used to get the user
 
     const [name, setName] = useState(user.name);
     const [email, setEmail] = useState(user.email);
-    const [qualifications, setQualifications] = useState(qualificationsArr);
-    const [researchInterests, setResearchInterests] = useState(researchInterestsArr);
+    const [qualifications, setQualifications] = useState("");
+    const [researchInterests, setResearchInterests] = useState("");
     const [registeredDate, setRegisteredDate] = useState('2020/10/20')
     const [newQualification, setNewQualification] = useState("");
     const [newResearchField, setNewResearchField] = useState("");
@@ -71,7 +62,6 @@ const StaffProfile = () => {
     }, [staffDetails])
 
     const onQualificationDelete = async(arrItem) => {
-   
       await deleteQualification(email, arrItem)
         .then(async() => 
           {
@@ -86,8 +76,6 @@ const StaffProfile = () => {
     }
 
     const onResearchInterestDelete = async(arrItem) => {
-
-
       await deleteResearchInterest(email, arrItem)
       .then(async() => 
         {
@@ -158,29 +146,35 @@ const StaffProfile = () => {
                               Qualifications
                             </TableCell>
                             <TableCell style={{ width: "70%"}} align="left">
+
                               {
-                              qualifications.map((item, idx) => {
-                                return (
-                                    // <div style={{paddingTop: "0.7rem"}}>
-                                    //   {item}
-                                    // </div>
-
-                                    <TableRow>
-                                      <TableCell>
-                                          {item}
-                                      </TableCell>
-                                      <TableCell>
-                                        <div style={{cursor: "pointer"}} onClick={() => onQualificationDelete(item)}>
-                                          <svg xmlns="http://www.w3.org/2000/svg" width='1.2rem' height="1.2rem" fill="none" viewBox="0 0 24 24" stroke="#ed2121" strokeWidth={2}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                          </svg>
-                                        </div>
-                                      </TableCell>
-                                    </TableRow>         
-                                )
-                              }) 
-                              }
-
+                                qualifications ?
+                                  <>
+                                    {
+                                      qualifications.map((item, idx) => {
+                                        return (
+                                            <TableRow>
+                                              <TableCell>
+                                                  {item}
+                                              </TableCell>
+                                              <TableCell>
+                                                <div style={{cursor: "pointer"}} onClick={() => onQualificationDelete(item)}>
+                                                  <svg xmlns="http://www.w3.org/2000/svg" width='1.2rem' height="1.2rem" fill="none" viewBox="0 0 24 24" stroke="#ed2121" strokeWidth={2}>
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                  </svg>
+                                                </div>
+                                              </TableCell>
+                                            </TableRow>         
+                                        )
+                                      }) 
+                                    }
+                                  </>
+                                  : (
+                                    <div style={{padding: "3rem" }}>
+                                      <CircularProgress color="inherit" />
+                                    </div>
+                                  )
+                                }
                                 {
                                   isAddQualification ? (
                                     <>                                
@@ -222,24 +216,33 @@ const StaffProfile = () => {
                             </TableCell>
                             <TableCell style={{ width: "70%"}} align="left">
                               {
-                              researchInterests.map((item, idx) => {
-                                return (
-                                    <TableRow>
-                                      <TableCell>
-                                          {item}
-                                      </TableCell>
-                                      <TableCell>
-                                        <div style={{cursor: "pointer"}} onClick={() => onResearchInterestDelete(item)}>
-                                          <svg xmlns="http://www.w3.org/2000/svg" width='1.2rem' height="1.2rem" fill="none" viewBox="0 0 24 24" stroke="#ed2121" strokeWidth={2}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                          </svg>
-                                        </div>
-                                      </TableCell>
-                                    </TableRow>
-                                )
-                              }) 
+                                researchInterests ? 
+                                  <>
+                                    {
+                                      researchInterests.map((item, idx) => {
+                                        return (
+                                            <TableRow>
+                                              <TableCell>
+                                                  {item}
+                                              </TableCell>
+                                              <TableCell>
+                                                <div style={{cursor: "pointer"}} onClick={() => onResearchInterestDelete(item)}>
+                                                  <svg xmlns="http://www.w3.org/2000/svg" width='1.2rem' height="1.2rem" fill="none" viewBox="0 0 24 24" stroke="#ed2121" strokeWidth={2}>
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                  </svg>
+                                                </div>
+                                              </TableCell>
+                                            </TableRow>
+                                        )
+                                      }) 
+                                    }
+                                  </>
+                                  : (
+                                    <div style={{padding: "3rem" }}>
+                                      <CircularProgress color="inherit" />
+                                    </div>
+                                  )
                               }
-
                               {
                                 isAddResearchField ? (
                                   <>
