@@ -1,5 +1,5 @@
 const express = require('express');
-const { addQualifications, addResearchField, getStaffDetails } = require('../controllers/staffController');
+const { addQualifications, addResearchField, getStaffDetails, removeQualifications, removeResearchInterests } = require('../controllers/staffController');
 const addStaff = require('../controllers/staffController').addStaff;
 
 const router = express.Router();
@@ -14,5 +14,10 @@ router.put('/updateQual',addQualifications )
 
 // update research interest
 router.put('/updateResearch', addResearchField)
+
+// delete qualification
+router.put('/deleteQual', removeQualifications)
+// delete research interest
+router.put('/deleteResearch', removeResearchInterests)
 
 module.exports = router;
