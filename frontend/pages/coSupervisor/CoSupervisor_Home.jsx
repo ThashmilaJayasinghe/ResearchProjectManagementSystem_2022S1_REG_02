@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const CoSupervisor_Home = () => {
   return (        
         <div style={{paddingTop: "2rem"}}>
-            co supervisor
+
             <Box
                 sx={{
                     display: 'flex',
