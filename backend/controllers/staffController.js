@@ -21,6 +21,17 @@ module.exports.addStaff = asyncHandler(async (req, res) => {
 	}
 });
 
+
+module.exports.getAllSupervisors = asyncHandler(async (req, res) => {
+	Staff.find()
+		.then((supervisor) => {
+			res.json(supervisor);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+});
+
 //update the qualifications of supervisor 
 const addQualifications = asyncHandler(async(req, res) => {
 

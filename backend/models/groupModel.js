@@ -31,17 +31,17 @@ const groupSchema = new Schema({
 	},
 	// supervisor: {
 	// 	type: mongoose.Schema.Types.ObjectId,
-	// 	ref: 'Staff',
+	// 	ref: 'Supervisor',
 	// },
-	supervisorID:{
-	    type:String
+	supervisorID: {
+		type: String,
 	},
-	coSupervisorID:{
-	    type:String
+	coSupervisorID: {
+		type: String,
 	},
 	// coSupervisor: {
 	// 	type: mongoose.Schema.Types.ObjectId,
-	// 	ref: 'Staff',
+	// 	ref: 'Supervisor',
 	// },
 });
 
