@@ -1,29 +1,20 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getStudentId } from './student/studentAPI'
+import StudentChat from './student/StudentChat'
 
 const Home = () => {
 
-    const {user} = useSelector((state) => state.auth) //used to get the user
-    const [studentDetails, setStudentDetails] = useState("")
-
-    useEffect(() => {
-        // get student id
-        console.log("Called")
-        // async function getStudent() {
-        //     await getStudentId(user._id, setStudentDetails)
-        //         .then(() => console.log("Student got"))
-        // }
-        // getStudent()
-    }, [])
-
-    console.log("called here")
+    console.log("vlue : " + localStorage.getItem("coSupChat"))
 
     return (
         <div>
             <div>
                 <h1>WELCOME TO RESEARCH PROJECT MANAGEMENTS </h1>
             </div>
+
+           
         </div>
     )
 }
