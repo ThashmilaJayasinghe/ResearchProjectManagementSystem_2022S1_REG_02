@@ -54,8 +54,28 @@ const HomePage = () => {
                     m: 1,
                     },
                 }}
+                style={{fontFamily: "Arial, Helvetica, sans-serif"}}
             >
-                <ButtonGroup variant="text" aria-label="text button group">
+                
+                <div 
+                    style={{
+                    borderRadius: "10px", 
+                    margin: "10px", 
+                    paddingTop: "", 
+                    boxShadow: "0 4px 10px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1)",
+                    height: "4rem",
+                    width: "30rem",
+                    alignItems:"center",
+                    display: 'flex',
+                    flexDirection: 'column',
+                    backgroundColor:"#f2f2f2"
+                }}
+                >
+                    <h2>Supervisor</h2>
+                </div>
+
+
+                <ButtonGroup variant="text" aria-label="text button group" >
                     <Link to = "/supervisor/requestedresearchField" style={{ textDecoration: 'none' }}>
                         <div 
                             style={{
