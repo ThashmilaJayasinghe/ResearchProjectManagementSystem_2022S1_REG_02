@@ -24,18 +24,56 @@ const HomePage = () => {
                 }}
             >
                 <ButtonGroup variant="text" aria-label="text button group">
-
-                    <Link  to = '/supervisor/requestedresearchField'>
-                        <Button>View Requests</Button>
-                    </Link>
-                    <Link to = '#'>
-                        <Button>Document evalueation</Button>
-                    </Link>
-
-                    <Link to = '/supervisor/chat'>
-                        <Button>Chat</Button>
-                    </Link>
+                    <div 
+                        style={{
+                        borderRadius: "10px", 
+                        margin: "10px", 
+                        padding: "", 
+                        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                        height: "14rem",
+                        width: "10rem",
+                        alignItems:"center",
+                        display: 'flex',
+                        flexDirection: 'column',
                     
+                    }}
+                    >
+                            <Link  to = '/supervisor/requestedresearchField'>
+                                <Button>View Requests</Button>
+                            </Link>
+                    </div>
+                    <div 
+                        style={{
+                        borderRadius: "10px", 
+                        margin: "10px", 
+                        padding: "", 
+                        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                        height: "14rem",
+                        width: "10rem",
+                        alignItems:"center",
+                        display: 'flex',
+                        flexDirection: 'column',
+                    }}>
+                            <Link to = '#'>
+                                <Button>Document evalueation</Button>
+                            </Link>
+                    </div>
+                    <div 
+                        style={{
+                        borderRadius: "10px", 
+                        margin: "10px", 
+                        padding: "", 
+                        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                        height: "14rem",
+                        width: "10rem",
+                        alignItems:"center",
+                        display: 'flex',
+                        flexDirection: 'column',
+                    }}>
+                            <Link to = '/supervisor/chat'>
+                                <Button>Chat</Button>
+                            </Link>
+                    </div>  
                 </ButtonGroup>
 
             </Box>
