@@ -130,8 +130,10 @@ const update_group_coSupervisor = async(req, res) => {
 // get group leader
 const getGroupDetails = async(req, res) => {
 	
-	const studentRegNumber = req.body.regNum;
-	
+	// const studentRegNumber = req.body.regNum;
+	const studentRegNumber = req.query.regNum
+
+
 	try{
 		const groupDetails = await Group.findOne({subMemberRegNumber:studentRegNumber})
 
