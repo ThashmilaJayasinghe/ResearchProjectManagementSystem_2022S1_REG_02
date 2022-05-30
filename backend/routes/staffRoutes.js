@@ -1,12 +1,28 @@
 const express = require('express');
+
 // const { getAllSupervisors } = require('../controllers/supervisorController');
-const addStaff = require('../controllers/staffController').addStaff;
+// const addStaff = require('../controllers/staffController').addStaff;
 const getAllSupervisors =
 	require('../controllers/staffController').getAllSupervisors;
+
+const { addQualifications, addResearchField, getStaffDetails } = require('../controllers/staffController');
+const addStaff = require('../controllers/staffController').addStaff;
+
 
 const router = express.Router();
 
 router.post('/', addStaff);
+
 router.get('/', getAllSupervisors);
+
+
+// get staff details
+router.get('/getStaff', getStaffDetails)
+
+// update qualifications
+router.put('/updateQual',addQualifications )
+
+// update research interest
+router.put('/updateResearch', addResearchField)
 
 module.exports = router;
