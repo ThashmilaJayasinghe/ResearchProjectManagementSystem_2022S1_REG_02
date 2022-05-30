@@ -1,10 +1,20 @@
 const express = require('express');
+
+// const { getAllSupervisors } = require('../controllers/supervisorController');
+// const addStaff = require('../controllers/staffController').addStaff;
+const getAllSupervisors =
+	require('../controllers/staffController').getAllSupervisors;
+
 const { addQualifications, addResearchField, getStaffDetails } = require('../controllers/staffController');
 const addStaff = require('../controllers/staffController').addStaff;
+
 
 const router = express.Router();
 
 router.post('/', addStaff);
+
+router.get('/', getAllSupervisors);
+
 
 // get staff details
 router.get('/getStaff', getStaffDetails)

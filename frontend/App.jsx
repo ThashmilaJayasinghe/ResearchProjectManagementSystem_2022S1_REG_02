@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Header from "./components/Header";
 import Home from "./pages/Home"
 import Register from "./pages/Register"
-import Supervisor_Home from "./pages/supervisor/Supervisor_Home";
+// import HomePage from "./pages/supervisor/HomePage";
 import Admin from "./pages/admin/AdminDash";
 import Login from "./pages/Login";
 import Request_ResearchField from "./pages/supervisor/Request_ResearchField";
@@ -16,20 +16,11 @@ import Submission from "./pages/student/Submissions"
 import Student from "./pages/student/StudentHome"
 import RequestForm from "./pages/student/RequestForm"
 import RequestCoSupForm from './pages/student/RequestCoSupForm';
-// import Instructor from './pages/student/Instructor';
-// import TopicRequestPanalForm from './pages/student/TopicRequestPanalForm';
-
-import StaffProfile from './pages/staff/StaffProfile'
-import Sup_chat from './pages/supervisor/Sup_chat'
-import Stu_chat from './pages/student/Stu_chat'
-import PanelHomePage from './pages/panelMemeber/PanelHomePage'
-import CoSupervisor_Home from './pages/coSupervisor/CoSupervisor_Home';
-import Request_ResearchField_coSupervisor from './pages/coSupervisor/Request_ResearchField_coSupervisor';
+import Instructor from './pages/student/Instructor';
+import TopicRequestPanalForm from './pages/student/TopicRequestPanalForm';
+import Submit from './pages/student/Submit';
 
 function App(){
-
-    console.log("app called")
-
     return(
         <div>
             <Router>
@@ -38,17 +29,9 @@ function App(){
                     <Route path="/" element={<Home/>}/>
                     <Route path="/register" element ={<Register/>}/>
                     <Route path="/login" element ={<Login/>}/>
-
-                    <Route path="/supervisor" element={<Supervisor_Home/>}/>
-                    <Route exact path = '/supervisor/requestedresearchField' element = {<Request_ResearchField/>} />
-                    <Route exact path = '/supervisor/chat' element = {<Sup_chat/>}/>
-
-                    <Route path = '/co-supervisor' element = {< CoSupervisor_Home/>} />
-                    <Route exact path = '/co-supervisor/requestedresearchField' element = {<Request_ResearchField_coSupervisor/>} />
-                    <Route exact path = '/supervisor/chat' element = {<Sup_chat/>}/>
-
+                    <Route path="/supervisor" element={<HomePage/>}/>
                     <Route path="/admin" element={<Admin/>}/>
-
+                    <Route exact path = '/requestedresearchField' element = {<Request_ResearchField/>} />
                     <Route path = '/updateuser' element = {<UpdateUser/>} />
                     <Route path = '/managesubmissions' element = {<ManageSubmissions/>} />
                     <Route path="/group" element = {<Group/>}/>
@@ -57,11 +40,9 @@ function App(){
                     <Route path="/researchFields" element = {<ResearchFields/>}/>
                     <Route path="/request" element = {<RequestForm/>}/>
                     <Route path="/request/co" element = {<RequestCoSupForm/>}/>
-                    {/* <Route path="/instructor" element = {<Instructor/>} /> */}
-                    {/* <Route path='/topicRequest' element = {<TopicRequestPanalForm/>}/> */}
-                    <Route exact path='/staff/profile' element = {<StaffProfile/>} />
-                    <Route exact path='/student/chat' element = {<Stu_chat/>} />
-                    <Route exact path = '/panelMember' element = {<PanelHomePage/>} />
+                    <Route path="/instructor" element = {<Instructor/>} />
+                    <Route path='/topicRequest' element = {<TopicRequestPanalForm/>}/>
+                    <Route path='/submit' element = {<Submit/>}/>
 
 
                 </Routes>

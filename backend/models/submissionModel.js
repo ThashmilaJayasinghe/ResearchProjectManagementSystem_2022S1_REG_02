@@ -5,23 +5,34 @@ const submissionSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Group',
 	},
-	submissions: [
-		{
-			submissionstitle: {
-				type: String,
-			},
-			document: {
-				type: String,
-			},
-			type: {
-				type: String,
-			},
-			subimit_Date: {
-				type: Date,
-				default: Date.now(),
-			},
-		},
-	],
+	submissionstitle: {
+		type: String,
+	},
+	document: {
+		type: String,
+	},
+	file_path: {
+		type: String,
+	},
+	file_mimetype: {
+		type: String,
+	},
+	type: {
+		type: String,
+	},
+	supervisorID: {
+		type: String,
+	},
+	coSupervisorID: {
+		type: String,
+	},
+	panelID: {
+		type: String,
+	},
+	subimit_Date: {
+		type: Date,
+		default: Date.now(),
+	},
 });
 
 module.exports = mongoose.model('Submissions', submissionSchema);
