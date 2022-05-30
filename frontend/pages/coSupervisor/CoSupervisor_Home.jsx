@@ -25,8 +25,7 @@ const CoSupervisor_Home = () => {
                         <Button>Document evalueation</Button>
                     </Link>
 
-{/* chat route and component that will called are same */}
-                    <Link to = '/' style={{}}>
+                    <Link to = '/supervisor/chat' >
                         <Button>Chat</Button>
                     </Link>
                     
