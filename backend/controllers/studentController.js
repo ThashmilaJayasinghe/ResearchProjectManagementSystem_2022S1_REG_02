@@ -48,4 +48,15 @@ module.exports.set_data = (req,res)=>{
     }
 }
 
+module.exports.isAStudent = async (req, res) => {
+	const id = req.params.id;
+	Student.findOne({ user: id })
+		.then((Student) => {
+			res.json(Student);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+
 
