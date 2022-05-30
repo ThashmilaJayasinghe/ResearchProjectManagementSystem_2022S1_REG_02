@@ -19,6 +19,7 @@ import Submission from "./pages/student/Submissions"
 import Student from "./pages/student/StudentHome"
 import RequestForm from "./pages/student/RequestForm"
 import RequestCoSupForm from './pages/student/RequestCoSupForm';
+import AddPanel from './pages/admin/AddPanel';
 
 function App(){
     return(
@@ -40,6 +41,7 @@ function App(){
                     <Route path="/researchFields" element = {<ResearchFields/>}/>
                     <Route path="/request" element = {<RequestForm/>}/>
                     <Route path="/request/co" element = {<RequestCoSupForm/>}/>
+                    <Route path="/addPanel" element = {<AddPanel/>}/>
 
                 </Routes>
             </Router>
