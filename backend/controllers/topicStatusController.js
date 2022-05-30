@@ -28,7 +28,8 @@ module.exports.post_topic_Status = async (req, res) => {
 	// panalID = panal._id.toString();
 
 	const grp_ID = gid;
-	const panalID = '629106cd2e08bfaa647de892';
+	// const panalID = '629106cd2e08bfaa647de892';
+	const panalID = req.body.panalID;
 	const title = req.body.title;
 	const message = req.body.message;
 	const supervisorID = req.body.supervisorID;
