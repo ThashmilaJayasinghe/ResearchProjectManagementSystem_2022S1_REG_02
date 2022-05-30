@@ -18,6 +18,7 @@ import RequestForm from "./pages/student/RequestForm"
 import RequestCoSupForm from './pages/student/RequestCoSupForm';
 import Instructor from './pages/student/Instructor';
 import TopicRequestPanalForm from './pages/student/TopicRequestPanalForm';
+import Submit from './pages/student/Submit';
 
 function App(){
     return(
@@ -41,6 +42,8 @@ function App(){
                     <Route path="/request/co" element = {<RequestCoSupForm/>}/>
                     <Route path="/instructor" element = {<Instructor/>} />
                     <Route path='/topicRequest' element = {<TopicRequestPanalForm/>}/>
+                    <Route path='/submit' element = {<Submit/>}/>
+
 
                 </Routes>
             </Router>
