@@ -36,6 +36,10 @@ const Header = () => {
 			onClick: () => navigate('/managesubmissions'),
 		},
 		{
+			text: 'Panels',
+			onClick: () => navigate('/addPanel')
+		},
+		{
 			text: 'Logout',
 			onClick: () => onLogout(),
 		},
@@ -117,7 +121,7 @@ const Header = () => {
 	};
 
 	return (
-		<AppBar position="static" style={{ background: '#063970' }}>
+		<AppBar position="static" style={{ background: 'primary' }}>
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
 					<AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
