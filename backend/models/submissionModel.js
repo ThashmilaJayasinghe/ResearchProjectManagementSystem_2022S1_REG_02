@@ -33,6 +33,9 @@ const submissionSchema = mongoose.Schema({
 		type: Date,
 		default: Date.now(),
 	},
+	status: {
+		type: String,
+	},
 });
 
 module.exports = mongoose.model('Submissions', submissionSchema);
