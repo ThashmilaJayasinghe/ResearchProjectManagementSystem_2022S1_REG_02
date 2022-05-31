@@ -26,7 +26,7 @@ const Header = () => {
 		dispatch(logout())
 		dispatch(reset())
 		navigate('/')
-	}
+	};
 
 	const adminItems = [
 		{
@@ -102,8 +102,6 @@ const Header = () => {
 	const handleCloseNavMenu = () => {
 		setAnchorElNav(null);
 	};
-
-	//#063970
 
 	return (
 		<AppBar position="static" style={{ background: 'primary' }}>
