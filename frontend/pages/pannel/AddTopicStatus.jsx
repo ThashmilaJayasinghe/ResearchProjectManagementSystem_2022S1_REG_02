@@ -2,9 +2,16 @@ import React, {useEffect} from "react";
 import {useState} from "react";
 import axios from "axios";
 import {useParams, Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {Select, TextField} from "@mui/material";
+import Button from "@mui/material/Button";
+
+
 
 
 export default function AddTopicStatus(){
+
+    const {user} = useSelector((state) => state.auth)
 
     const {id} = useParams();
 
@@ -13,11 +20,13 @@ export default function AddTopicStatus(){
     const [status, setStatus] = useState("")
     const [feedback, setFeedback] = useState("")
     const [supervisorName, setSuprvName] = useState('');
+    const [message, setMassage] = useState('');
 
     useEffect(()=>{
         setTitle(localStorage.getItem('title'))
         setGrpID(localStorage.getItem('grp_ID'))
         setStatus(localStorage.getItem('status'))
+        setMassage(localStorage.getItem('message'))
     },[])
 
     const handleSubmit = ((event)=>{
@@ -39,37 +48,44 @@ export default function AddTopicStatus(){
      })
 
     return(
-        <div>
-            <h1>Evaluate Topic</h1>
+        <div style={{paddingTop:"20px"}}>
+            <div style={{width: "60%", margin: "auto", }}>
+            <center><h1>Evaluate Topic</h1></center>
 
             <form>
-                <label>Group ID</label>
+                <h4>Group ID</h4>
 
-                <input type="text" id="grp_ID" value={grp_ID}
+                <TextField fullWidth type="text" id="grp_ID" value={grp_ID}
                 onChange={(e)=>{
                     setGrpID(e.target.value)
                 }}
                 />
-                <br/><br/>
 
-                <label>Supervisor Name</label>
-                <input type="text" id="supervisorName" value={supervisorName}
+
+                <h4>Supervisor Name</h4>
+                <TextField fullWidth type="text" id="supervisorName" value={user.name}
                        onChange={(e)=>{
                            setSuprvName(e.target.value)
                        }}
                 />
-                <br/><br/>
 
-                <label>Title</label>
-                <input type="text" id="title" value={title}
+                <h4>Title</h4>
+                <TextField fullWidth type="text" id="title" value={title}
                        onChange={(e)=>{
                            setTitle(e.target.value)
                        }}
                 />
+
+                <h4>Message</h4>
+                <TextField fullWidth type="text" id="message" value={message}
+                       onChange={(e)=>{
+                           setMassage(e.target.value)
+                       }}
+               readOnly/>
                 <br/><br/>
 
-                <label>Status</label>
-                <select type="text" id="status" value={status}
+                <h4>Status</h4>
+                <select fullWidth type="text" id="status" value={status}
                        onChange={(e)=>{
                            setStatus(e.target.value)
                        }}>
@@ -79,20 +95,25 @@ export default function AddTopicStatus(){
                 </select>
 
 
-                <br/><br/>
-
-                <label>Feedback</label>
-                <input type="text" id="feedback" value={feedback}
+                <h4>Feedback</h4>
+                <TextField fullWidth type="text" id="feedback" value={feedback}
                        onChange={(e)=>{
                            setFeedback(e.target.value)
                        }}
                 />
+
                 <br/><br/>
 
-                <Link to='/view'>
-                    <button onClick={handleSubmit}>Submit</button>
+                <Link to='/panelTopics'>
+                    <Button variant="contained" color="info" style={{marginRight: "5px"}} onClick={handleSubmit}>Submit</Button>
                 </Link>
             </form>
+
+            <br/><br/>
+            <Link to='/panelTopics'>
+                <Button variant="contained" color="info" style={{marginRight: "5px"}}>Back</Button>
+            </Link>
+        </div>
         </div>
     )
 }

@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 const HomePage = () => {
 
-    console.log("this is supervisor")
+    console.log("this is co-supervisor")
 
     const {user} = useSelector((state) => state.auth) //used to get the user
 
@@ -28,17 +28,10 @@ const HomePage = () => {
             >
                 <ButtonGroup variant="text" aria-label="text button group">
 
-                    <Link  to = '/supervisor/requestedresearchField'>
-                        <Button>View Requests</Button>
-                    </Link>
-                    <Link to = '/documentsEvaluationSupervisor' style={{}}>
-                        <Button>Documents evaluation</Button>
+                    <Link to = '/documentsEvaluationCoSupervisor' style={{}}>
+                        <Button>Documents evaluation/ co-supervisor</Button>
                     </Link>
 
-                    <Link to = '/' style={{}}>
-                        <Button>Chat</Button>
-                    </Link>
-                    
                 </ButtonGroup>
 
             </Box>

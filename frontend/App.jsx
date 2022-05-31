@@ -21,6 +21,17 @@ import StaffProfile from './pages/staff/StaffProfile'
 import Sup_chat from './pages/supervisor/Sup_chat'
 import Stu_chat from './pages/student/Stu_chat'
 import PanelHomePage from './pages/panelMemeber/PanelHomePage'
+import ViewTopics from "./pages/pannel/ViewTopics";
+import AddTopicStatus from "./pages/pannel/AddTopicStatus";
+import AcceptedTopics from "./pages/pannel/AcceptedTopics";
+import RejectedTopics from "./pages/pannel/RejectedTopics";
+import EvaluatePresentation from "./pages/pannel/EvaluatePresentation";
+import DocumentEvaluate from "./pages/supervisor/DocumentEvaluate";
+import DocumentEvalCoSupervisor from "./pages/CoSupervisor/DocumentEvalCoSupervisor";
+import CoSuperHomePage from "./pages/CoSupervisor/HomePage";
+import AddMarksCoSup from "./pages/CoSupervisor/AddMarksCoSup";
+import AddmarksSuper from "./pages/supervisor/AddmarksSuper";
+import AddMarkPanel from "./pages/pannel/AddMarkPanel";
 
 function App(){
 
@@ -49,10 +60,21 @@ function App(){
                     <Route exact path = '/supervisor/chat' element = {<Sup_chat/>}/>
                     <Route exact path='/student/chat' element = {<Stu_chat/>} />
                     <Route exact path = '/panelMember' element = {<PanelHomePage/>} />
+                    <Route exact path = '/panelTopics' element = {<ViewTopics/>} />
+                    <Route exact path = '/addTopicStatus/:id' element = {<AddTopicStatus/>}/>
+                    <Route exact path = '/panelTopicsAccepted' element = {<AcceptedTopics/>}/>
+                    <Route exact path = '/panelTopicsRejected' element = {<RejectedTopics/>}/>
+                    <Route exact path = '/evaluatePresentations' element = {<EvaluatePresentation/>}/>
+                    <Route exact path= '/documentsEvaluationSupervisor' element = {<DocumentEvaluate/>}/>
+                    <Route exact path= '/co-supervisor' element = {<CoSuperHomePage/>}/>
+                    <Route exact path= '/documentsEvaluationCoSupervisor' element = {<DocumentEvalCoSupervisor/>}/>
+                    <Route exact path= '/addmark/:id' element = {<AddMarksCoSup/>}/>
+                    <Route exact path= '/addmarksSuper/:id' element = {<AddmarksSuper/>}/>
+                    <Route exact path= '/AddMarkPanel/:id' element = {<AddMarkPanel/>}/>
                 </Routes>
             </Router>
         </div>
     )
 }
 
-export default App;
+export default App;``

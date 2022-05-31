@@ -7,6 +7,11 @@ const grp_Marks_Schema = new Schema({
         required : true
     },
     submissions : [{
+        submissionID:{
+            type: String,
+            required: [true, 'Please add submissionID'],
+        },
+
         submission : {
             type: String,
             required: [true, 'Please add assignment name'],
@@ -14,6 +19,9 @@ const grp_Marks_Schema = new Schema({
         submissionType: {
             type: String,
             required: [true, 'Please add assignment type'],
+        },
+        document:{
+            type: String
         },
         mark : {
             type : Number,

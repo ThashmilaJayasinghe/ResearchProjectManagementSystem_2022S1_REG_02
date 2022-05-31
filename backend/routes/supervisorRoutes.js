@@ -1,5 +1,5 @@
 const express = require('express')
-const getAllSupervisors = require('../controllers/supervisorController').getAllSupervisors
+const getAllSupervisors = require('../controllers/supervisorController').getAllRequestedSupervisors
 
 
 const router = express.Router();
