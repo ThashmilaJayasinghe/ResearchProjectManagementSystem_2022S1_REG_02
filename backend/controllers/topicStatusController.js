@@ -24,7 +24,12 @@ module.exports.post_topic_Status = async (req, res) => {
 	const gid = group._id.toString();
 	console.log(gid);
 
+	// const panal = await Panal.findOne({group:gid})
+	// panalID = panal._id.toString();
+
 	const grp_ID = gid;
+	// const panalID = '629106cd2e08bfaa647de892';
+	const panalID = req.body.panalID;
 	const title = req.body.title;
 	const message = req.body.message;
 	const supervisorID = req.body.supervisorID;
@@ -35,6 +40,7 @@ module.exports.post_topic_Status = async (req, res) => {
 
 	const newTopicS = new topic({
 		grp_ID,
+		panalID,
 		title,
 		message,
 		supervisorID,

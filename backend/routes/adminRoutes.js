@@ -11,4 +11,4 @@ router.post('/addAssignment', upload.fields([{name: 'markingScheme', maxCount: 1
 router.post('/addPanel', addPanel)
 router.get('/groups', getGroups)
 
-module.exports = router
+module.exports = router;

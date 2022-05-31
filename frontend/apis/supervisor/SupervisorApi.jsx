@@ -39,3 +39,24 @@ export const changeRequestStates = async (id, state) => {
         console.log(err)
     }
 }
+
+// ####################### with sample backend ############# this route should change
+export const addQualification = async (supEmail, newQualification) => {
+    console.log(supEmail)
+    try {
+        const response = await axios.put("http://localhost:5000/api/reqSupervisor/updateQual",{email:supEmail, qualifications: newQualification})
+            .then((res) => console.log("success: " + res))
+    }catch (err){
+        console.log(err)
+    }
+}
+
+export const addResearchField = async (supEmail, newResearchField) => {
+    console.log(supEmail)
+    try {
+        const response = await axios.put("http://localhost:5000/api/reqSupervisor/updateResearch",{email:supEmail, researchInterests: newResearchField})
+            .then((res) => console.log("success: " + res))
+    }catch (err){
+        console.log(err)
+    }
+}

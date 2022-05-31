@@ -5,7 +5,9 @@ const groupSchema = new Schema({
 	subMemberRegNumber: {
 		type: String,
 	},
-
+	groupName: {
+		type: String,
+	},
 	members: [
 		{
 			regNumber: {
@@ -27,20 +29,20 @@ const groupSchema = new Schema({
 		type: Date,
 		default: Date.now(),
 	},
-	supervisor: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Supervisor',
-	},
-	// supervisorName:{
-	//     type:String
+	// supervisor: {
+	// 	type: mongoose.Schema.Types.ObjectId,
+	// 	ref: 'Supervisor',
 	// },
-	// coSupervisorName:{
-	//     type:String
-	// },
-	coSupervisor: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Supervisor',
+	supervisorID: {
+		type: String,
 	},
+	coSupervisorID: {
+		type: String,
+	},
+	// coSupervisor: {
+	// 	type: mongoose.Schema.Types.ObjectId,
+	// 	ref: 'Supervisor',
+	// },
 });
 
 const Group = mongoose.model('Group', groupSchema);
