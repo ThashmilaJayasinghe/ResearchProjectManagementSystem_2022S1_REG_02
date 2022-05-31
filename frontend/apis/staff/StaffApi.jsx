@@ -32,3 +32,21 @@ export const addResearchField = async (staffEmail, newResearchField) => {
         console.log(err)
     }
 }
+
+export const deleteQualification = async(staffEmail, arrayValue) => {
+    try{
+        const response = await axios.put("http://localhost:5000/api/staff/deleteQual", {email: staffEmail, value: arrayValue})
+            .then((res) => console.log("Qualification suceesfully deleted"))
+    }catch(err) {
+        console.log(err)
+    }
+}
+
+export const deleteResearchInterest = async(staffEmail, arrayValue) => {
+    try{
+        const response = await axios.put("http://localhost:5000/api/staff/deleteResearch", {email: staffEmail, value: arrayValue})
+            .then((res) => console.log("Research interest suceesfully deleted"))
+    }catch(err) {
+        console.log(err)
+    }
+}

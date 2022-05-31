@@ -5,16 +5,16 @@ const region = process.env.REACT_APP_REGION;
 const AUTH_KEY = process.env.REACT_APP_AUTH_KEY;
 const wid = process.env.REACT_APP_W1;
 
-const Stu_chat = () => {
+const StudentChat = () => {
 
-    localStorage.setItem("cc-uid", "IT20123456")
-    localStorage.setItem("agent-uid", "nuwankodagoda")
+    // localStorage.setItem("cc-uid", "IT20123456")
+    // localStorage.setItem("agent-uid", "nuwankodagoda")
 
   console.log("user : " + localStorage.getItem("cc-uid"))
   console.log("agent : " + localStorage.getItem("agent-uid"))
 
   const [load, setLoad] = useState(true);
-    const [studentName, setStudentName] = useState("IT20253462Name");
+    const [studentName, setStudentName] = useState(localStorage.getItem("cc-uid"));
     const [studentEmail, setStudentEmail] = useState("")
 
   useEffect(() => {
@@ -116,4 +116,4 @@ const Stu_chat = () => {
 
 }
 
-export default Stu_chat
+export default StudentChat
