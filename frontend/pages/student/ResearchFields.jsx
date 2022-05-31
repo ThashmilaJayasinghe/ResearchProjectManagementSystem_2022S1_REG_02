@@ -38,7 +38,7 @@ export default function ResearchFields(){
     console.log(staffDetails)
     useEffect(()=>{
         const getStaffDetails=()=>{
-            axios.get('http://localhost:5000/supervisor')
+            axios.get('http://localhost:5000/staff/')
                 .then((res)=>{
                     const data = res.data;
 

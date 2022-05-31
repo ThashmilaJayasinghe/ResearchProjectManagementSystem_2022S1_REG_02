@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const Student = require('../models/studentModel')
 const mongoose = require("mongoose");
+const SubmissionType = require("../models/submissionTypeModel");
 // const requestSupervisor = require('../models/requestSupervisorModel');
 
 // const makeSupervisorRequest = asyncHandler(async (req, res) => {
@@ -47,5 +48,26 @@ module.exports.set_data = (req,res)=>{
         res.status(500).send("User is not there")
     }
 }
+
+module.exports.isAStudent = async (req, res) => {
+	const id = req.params.id;
+	Student.findOne({ user: id })
+		.then((Student) => {
+			res.json(Student);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+}
+
+module.exports.getAllFiles = async (req, res) => {
+    SubmissionType.find()
+        .then((SubmissionType) => {
+            res.json(SubmissionType);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
 
 

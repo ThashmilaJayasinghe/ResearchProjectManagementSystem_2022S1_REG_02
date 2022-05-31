@@ -73,6 +73,7 @@ const addRole = async (req, res) => {
     res.status(200).json(role)
 }
 
+
 // @desc    Allocate role
 // @route   PUT /api/admin/allocateRole/:staffid
 // @access  Private
@@ -92,10 +93,12 @@ const allocateRole = async (req, res) => {
     res.status(200).json(allocatedUser)
 }
 
+
 // @desc    Get all staff data
 // @route   GET /api/admin/staff
 // @access  Private
 const getStaff = async (req, res) => {
+
     const staff = await User.find({roles:'staff'})
 
     if(staff) {
@@ -103,7 +106,8 @@ const getStaff = async (req, res) => {
     } else {
         return res.status(404).json({ msg: 'No staff to display'})
     }
-};
+}
+
 
 // @desc    Add assignment
 // @route   POST /api/admin/addAssignment
