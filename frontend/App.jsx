@@ -19,6 +19,7 @@ import RequestCoSupForm from './pages/student/RequestCoSupForm';
 import Instructor from './pages/student/Instructor';
 import TopicRequestPanalForm from './pages/student/TopicRequestPanalForm';
 import Submit from './pages/student/Submit';
+import RegisterNumber from './pages/student/RegisterNumber';
 
 function App(){
     return(
@@ -29,7 +30,7 @@ function App(){
                     <Route path="/" element={<Home/>}/>
                     <Route path="/register" element ={<Register/>}/>
                     <Route path="/login" element ={<Login/>}/>
-                    <Route path="/supervisor" element={<HomePage/>}/>
+                    {/* <Route path="/supervisor" element={<HomePage/>}/> */}
                     <Route path="/admin" element={<Admin/>}/>
                     <Route exact path = '/requestedresearchField' element = {<Request_ResearchField/>} />
                     <Route path = '/updateuser' element = {<UpdateUser/>} />
@@ -43,7 +44,7 @@ function App(){
                     <Route path="/instructor" element = {<Instructor/>} />
                     <Route path='/topicRequest' element = {<TopicRequestPanalForm/>}/>
                     <Route path='/submit' element = {<Submit/>}/>
-
+                    <Route path='/registerNo' element= {<RegisterNumber/>}/>
 
                 </Routes>
             </Router>
