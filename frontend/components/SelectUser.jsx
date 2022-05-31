@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -8,7 +8,7 @@ import {useState, useEffect, useRef} from "react";
 import Axios from "axios";
 
 
-export default function BasicSelect(props) {
+export default function SelectUser(props) {
 
     const [member, setMember] = useState('');
     const [staffs, setStaffs] = useState([]);
@@ -26,7 +26,6 @@ export default function BasicSelect(props) {
         Axios.get("http://localhost:5000/api/admin/staff/")
             .then((res) => {
                 setStaffs(res.data)
-                console.log(res.data);
             })
 
         if (notInitialRender.current) {

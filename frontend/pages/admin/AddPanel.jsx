@@ -3,15 +3,16 @@ import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import SelectUser from '../../components/SelectUser'
+import SelectGroup from '../../components/SelectGroup'
 
 
 export default function AddPanel(){
 
     const [name, setName] = useState("");
     const [staff1, setStaff1] = useState("");
-    const [staff2, setStaff2] = useState("6291079f2e08bfaa647de898");
-    const [staff3, setStaff3] = useState("6291078b2e08bfaa647de895");
-    const [group, setGroup] = useState("628ffd844d56899c00a91485");
+    const [staff2, setStaff2] = useState("");
+    const [staff3, setStaff3] = useState("");
+    const [group, setGroup] = useState("");
 
     const {user} = useSelector((state) => state.auth) //used to get the user
 
@@ -28,24 +29,28 @@ export default function AddPanel(){
 
     const handleSubmit = () => {
 
-        const formData = {
-            name,
-            staff1,
-            staff2,
-            staff3,
-            group
+        if(staff1 === staff2 || staff1 === staff3 || staff2 ===staff3) {
+            alert('Please select 3 different staff members')
+        } else {
+            const formData = {
+                name,
+                staff1,
+                staff2,
+                staff3,
+                group
+            }
+
+            console.log(formData)
+
+            axios.post('http://localhost:5000/api/admin/addPanel', formData).then(()=>{
+                alert('Panel allocated')
+                window.location.href = "/admin";
+
+            }).catch((err)=>{
+                alert(err)
+            })
         }
 
-        console.log(formData)
-        alert("staff1")
-
-        axios.post('http://localhost:5000/api/admin/addPanel', formData).then(()=>{
-            alert('Panel allocated')
-            window.location.href = "/admin";
-
-        }).catch((err)=>{
-            alert(err)
-        })
     }
 
     const handleMember1 = (member) => {
@@ -59,6 +64,10 @@ export default function AddPanel(){
 
     const handleMember3 = (member) => {
         setStaff3(member)
+    }
+
+    const handleGroup = (chosen) => {
+        setGroup(chosen)
     }
 
     return(
@@ -90,7 +99,8 @@ export default function AddPanel(){
                 </div>
                 <br/>
                 <div className="form-group">
-
+                    <label><b>Group</b></label>
+                    <SelectGroup handleSelected={handleGroup} />
                 </div>
                 <br/>
                 <br/>
