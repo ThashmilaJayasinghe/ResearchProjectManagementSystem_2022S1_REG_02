@@ -33,7 +33,7 @@ const get_Group_Pannel = async (req, res) => {
 	const gid = group._id.toString();
 	console.log(gid);
 
-	Panel.findOne({ groups: gid })
+	Panel.find({ groups: gid })
 		.then((Panel) => {
 			res.json(Panel);
 		})
