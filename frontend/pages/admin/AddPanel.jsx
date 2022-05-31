@@ -76,7 +76,7 @@ export default function AddPanel(){
 
                 <div className="form-group col-md-6">
                     <label><b>Name</b> </label>
-                    <input type="text" id="name" className="form-control" placeholder="Enter panel name" value={name}
+                    <input type="text" id="name" className="form-control" placeholder="Enter panel name" value={name} required="required"
                            onChange={(e) =>(
                                setName(e.target.value)
                            )}

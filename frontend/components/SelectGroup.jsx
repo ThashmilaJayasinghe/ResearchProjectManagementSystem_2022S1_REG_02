@@ -49,12 +49,11 @@ export default function SelectGroup(props) {
                     label="Group"
                     onChange={handleChange}
                 >
-
                     {groups
                         .map((group) => {
                             return (
                                 <MenuItem key={group._id} value={group._id}>
-                                    {group.subMemberRegNumber}
+                                    {group.groupName}
                                 </MenuItem>
                             )
                         })}
