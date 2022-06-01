@@ -8,7 +8,7 @@ const router = express.Router();
 //     require('../controllers/submissionController').get_Group_Submissions;
 // const download = require('../controllers/submissionController').download;
 
-//Panel routes
+//require Panel submission routes
 const get_PanelPresentations = require('../controllers/SubmissionController').get_Panel_Presentations;
 const get_SupervisorDocuments = require('../controllers/submissionController').get_Supervisor_documents;
 const get_co_SupervisorDocuments = require('../controllers/submissionController').get_co_Supervisor_Documents;
@@ -19,7 +19,7 @@ const update_SubmissionStatus = require('../controllers/submissionController').u
 // router.get('/:id', get_Group_Submissions);
 // router.get('/download/:id', download);
 
-//panel routes
+//panel submission routes
 router.get('/panelPresentations', get_PanelPresentations)
 router.get('/SupervisorDocuments', get_SupervisorDocuments);
 router.get('/co-supervisorDocuments', get_co_SupervisorDocuments);

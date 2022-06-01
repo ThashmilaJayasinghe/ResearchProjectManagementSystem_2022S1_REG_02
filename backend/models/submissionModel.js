@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+//submission model
 const submissionSchema = mongoose.Schema({
     groupId: {
         type: mongoose.Schema.Types.ObjectId,

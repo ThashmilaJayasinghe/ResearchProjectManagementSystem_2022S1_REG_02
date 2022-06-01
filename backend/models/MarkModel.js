@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//Mark model
 const grp_Marks_Schema = new Schema({
     grp_ID : {
         type : String,

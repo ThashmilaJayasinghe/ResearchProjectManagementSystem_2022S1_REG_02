@@ -16,12 +16,12 @@ const get_topic_Status_panelRejected  = require('../controllers/topicStatusContr
 
 const router = express.Router();
 
-
+//student topic evaluate routes
 router.post('/:id', post_topicStatus);
 router.get('/', get_topicStatus);
  router.put('/updateTopic', update_topic_status);
 
- ///Pannel
+ //Panel topic evaluate routes
 router.put('/update/:id', updatetopicStatusPannel);
 router.get('/panelTopics', get_topic_StatusPanel)
 router.get('/panelTopicsAccepted', get_topic_Status_panelAccepted)

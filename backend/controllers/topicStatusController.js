@@ -4,7 +4,7 @@ const Student = require('../models/studentModel');
 const { json } = require('express');
 const Panel = require('../models/panel_model')
 
-
+//get all evaluate topics
 module.exports.get_topic_Status = (req, res) =>{
 	topic
 		.find()
@@ -16,7 +16,7 @@ module.exports.get_topic_Status = (req, res) =>{
 		});
 }
 
-
+//add evaluate topic
 module.exports.post_topic_Status = async (req, res) => {
 	let id = req.params.id;
 	console.log(id);
@@ -57,6 +57,7 @@ module.exports.post_topic_Status = async (req, res) => {
 		});
 };
 
+//update evaluate topic
 module.exports.update_topic_status = (req, res) => {
 	let {
 		grp_ID,
@@ -92,7 +93,7 @@ module.exports.update_topic_status = (req, res) => {
 		});
 };
 
-/////////////Pannel
+//update evaluate topic by panel
 module.exports.update_topic_Status_Pannel = (req,res) => {
 	let topicID = req.params.id;
 	const status = req.body.status;
@@ -122,8 +123,7 @@ module.exports.update_topic_Status_Pannel = (req,res) => {
 		})
 }
 
-
-
+//get evaluate topic by panel
 module.exports.get_topic_Status_panel = async (req, res) => {
 
 	let userID = req.query.id;
@@ -148,6 +148,7 @@ module.exports.get_topic_Status_panel = async (req, res) => {
 	}
 };
 
+//get accepted evaluated topic by panel
 module.exports.get_topic_Status_panel_Accepted = async (req, res) => {
 
 	let userID = req.query.id;
@@ -172,6 +173,7 @@ module.exports.get_topic_Status_panel_Accepted = async (req, res) => {
 	}
 };
 
+//get rejected evaluated topic by panel
 module.exports.get_topic_Status_panel_Rejected = async (req, res) => {
 
 	let userID = req.query.id;

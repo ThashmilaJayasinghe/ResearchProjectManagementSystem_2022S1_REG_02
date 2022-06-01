@@ -158,6 +158,7 @@ module.exports.get_Panel_Presentations = async (req, res) => {
     }
 }
 
+//get Supervisor documents
 module.exports.get_Supervisor_documents = async (req, res) =>{
 
     let userID = req.query.id;
@@ -180,6 +181,7 @@ module.exports.get_Supervisor_documents = async (req, res) =>{
     }
 }
 
+//get Co-Supervisor documents
 module.exports.get_co_Supervisor_Documents = async (req, res) =>{
 
     let userID = req.query.id;

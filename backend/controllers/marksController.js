@@ -1,6 +1,6 @@
 const grp_mark = require('../models/MarkModel')
 
-
+//get marks
 const get_Marks =async (req, res) =>{
     grp_mark.find()
         .then((marks) =>{
@@ -11,6 +11,7 @@ const get_Marks =async (req, res) =>{
         })
 }
 
+//add marks
 const add_Mark = async (req, res) =>{
 
     const grp_ID = req.body.grp_ID;

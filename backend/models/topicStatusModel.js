@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//topic status model
 const topicStatusSchema = new Schema({
 	grp_ID: {
 		type: String,

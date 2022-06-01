@@ -4,6 +4,7 @@ import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
+import { saveAs } from "file-saver";
 
 export default function AddMarksCoSup(){
 
@@ -28,6 +29,14 @@ export default function AddMarksCoSup(){
         setDocument(localStorage.getItem('document'))
         setStatus(localStorage.getItem('status'))
     },[])
+
+
+        const saveFile = () => {
+            saveAs(
+                "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+                "example.pdf"
+            );
+        };
 
 
     const addMark = ((event)=>{
@@ -98,6 +107,8 @@ export default function AddMarksCoSup(){
                            setDocument(e.target.value)
                        }}
                 />
+
+                <button onClick={saveFile}>download</button>
 
 
                 <h4>Marks   </h4>
