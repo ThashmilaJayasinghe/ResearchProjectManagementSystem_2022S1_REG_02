@@ -99,7 +99,7 @@ const Request_ResearchField_coSupervisor = () => {
     }, 5000);
 
     return () => clearTimeout(timer)
-}, [])
+}, [coSupRequests])
 
 
 
