@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
-import Axios from 'axios'
+import axios from 'axios'
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
 export default function UpdateUser(){
@@ -34,20 +35,20 @@ export default function UpdateUser(){
             email
         }
 
-        Axios.put("http://localhost:5000/api/users/" + id, formData)
-            .then((res) => {
-                alert(res.data)
-            }).then(() => {
-                navigate('/admin')
-            }).catch((err) => {
-                alert(err)
-            })
+
+        axios.put('http://localhost:5000/api/users/' + id, formData).then(()=>{
+            alert('User Updated')
+            window.location.href = "/admin";
+
+        }).catch((err)=>{
+            alert(err)
+        })
     }
 
     return(
 
         <div>
-            <form id="updateform" onSubmit={updateUser}>
+            <form id="updateform">
                 <div className="input-group">
                     <label htmlFor="name" className="form-label">Name</label>
                     <input type="text" className="form-control" id="name" placeholder="Enter Name" required="required" value={name} onChange={(e)=>{
@@ -65,7 +66,9 @@ export default function UpdateUser(){
 
                     }}/>
                 </div>
-                <button type="submit" className="btn btn-primary">Update</button>
+                <Link to={'/admin'}>
+                    <button type="submit" className="btn btn-primary" onClick={updateUser}>Update</button>
+                </Link>
             </form>
         </div>
     )

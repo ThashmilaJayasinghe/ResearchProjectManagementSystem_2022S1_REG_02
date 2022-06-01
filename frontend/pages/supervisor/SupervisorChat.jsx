@@ -6,17 +6,17 @@ const region = process.env.REACT_APP_REGION;
 const AUTH_KEY = process.env.REACT_APP_AUTH_KEY;
 const wid = process.env.REACT_APP_W2;
 
-const Sup_chat = () => {
+const SupervisorChat = () => {
 
 
-    localStorage.setItem("agent-uid", "NuwanKodagoda")
+    // localStorage.setItem("agent-uid", "NuwanKodagoda")
 
     console.log("user : " + localStorage.getItem("cc-uid"))
     console.log("agent : " + localStorage.getItem("agent-uid"))
 
     const [loading, setLoading] = useState(true);
     const [supervisorEmail, setSupervisorEmail] = useState("NuwanK@gmail.com");
-    const [supervisorName, setSupervisorName] = useState("Nuwan Kodagoda");
+    const [supervisorName, setSupervisorName] = useState(localStorage.getItem("agent-uid"));
     
     useEffect(() => {
       window.CometChatWidget.init({
@@ -32,7 +32,7 @@ const Sup_chat = () => {
               // create new user
               const uid = "agent" + new Date().getSeconds().toString();
               const user = new window.CometChatWidget.CometChat.User(uid);
-              user.setName(uid);
+              user.setName(supervisorName);
               window.CometChatWidget.createOrUpdateUser(user).then((user) => {
                 // Proceed with user login
       
@@ -125,4 +125,4 @@ const Sup_chat = () => {
     return <div id="cometchat" style={{ margin: "0 auto", width: "60%", paddingTop: "40px" }} />;
 }
 
-export default Sup_chat
+export default SupervisorChat

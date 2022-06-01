@@ -3,6 +3,10 @@ import {Button} from "@mui/material"
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { getStudentId } from './studentAPI';
+import { getGroupDetails } from '../../apis/group/GroupApi';
+import StudentChat from './StudentChat';
+
 
 export default function Instructor() {
 
@@ -11,6 +15,9 @@ export default function Instructor() {
   const [supervisor,setSupervisor] = useState([]);
   const [coSupervisor,setCoSupervisor] = useState([]);
   const [panel,setPannel] = useState([]);
+  const [studentDetails, setStudentDetails] = useState("")
+  const [groupDetails, setGroupDetails] = useState("")
+  const [isCoSupervisorChat, setIsCoSupervisorChat] = useState(false)
 
   useEffect(()=>{
     const getSupervisor=()=>{
@@ -50,6 +57,55 @@ export default function Instructor() {
   const handleClick = ()=>{
       localStorage.setItem('_id',panel._id)
   }
+
+  useEffect(() => {
+  // get student id
+  console.log("Called")
+  async function getStudent() {
+      await getStudentId(user._id, setStudentDetails)
+          .then(async(res) => {
+            console.log("Student got ")
+          })
+  }
+  getStudent()
+  }, [])
+
+  // console.log(studentDetails)
+  console.log(isCoSupervisorChat)
+
+  useEffect(() => {
+      if(studentDetails){
+      localStorage.setItem("cc-uid", studentDetails.regNumber)
+      async function getGroup() {
+        await getGroupDetails(studentDetails.regNumber, setGroupDetails)
+          .then(() => console.log("Group details successfully loaded"))
+      }
+      getGroup();
+    }
+
+  }, [studentDetails])
+
+  const onSupervisorChat = (supervisor) => {
+    console.log("Supervisor chat called")
+
+    if(supervisor){
+      const tempVal = supervisor.supervisorName;
+      console.log(tempVal)
+      localStorage.setItem("agent-uid", tempVal)
+      localStorage.setItem("supChat", true)
+    }
+  }
+
+  const onCoSupervisorChat = (coSupervisor) => {
+    if(coSupervisor){
+      const tempVal = coSupervisor.supervisorName;
+      console.log(tempVal)
+      localStorage.setItem("agent-uid", tempVal)
+      setIsCoSupervisorChat(true)
+      localStorage.setItem("coSupChat", true)
+    }
+  }
+
   return (
     <div style={{paddingTop:"20px"}}>
       <div style={{marginTop: "50px", width: "50%", margin: "auto"}}>
@@ -89,15 +145,24 @@ export default function Instructor() {
                 <td style={{paddingTop: "10px", color: "red"}}>: Rejected</td>
             }
             {
-                supervisor.requestStates == "accepted" &&
-                <td style={{paddingTop: "10px", color: "green"}}>: Acceppted</td>
+                supervisor.requestStates == "accepted" && 
+                <>
+                  <td style={{paddingTop: "10px", color: "green"}}>: Accepted</td>
+                  <td>
+                    <div onClick={() => onSupervisorChat(supervisor)} style = {{cursor: "pointer"}}>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#3db2d9" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                      </svg>
+                    </div>
+                  </td>
+                </>
             }
             {
                 supervisor.requestStates == "Pending" &&
                 <td style={{paddingTop: "10px"}}>: Pending</td>
             }
-
         </tr>
+
             </div>
             </table>
                 )
@@ -139,7 +204,16 @@ export default function Instructor() {
             }
             {
                 coSupervisor.requestStates == "accepted" &&
-                <td style={{paddingTop: "10px", color: "green"}}>: Acceppted</td>
+                <>
+                  <td style={{paddingTop: "10px", color: "green"}}>: Accepted</td>
+                  <td>
+                    <div onClick={() => onCoSupervisorChat(coSupervisor)} style = {{cursor: "pointer"}}>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#3db2d9" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                      </svg>
+                    </div>
+                  </td>
+                </>
             }
             {
                 coSupervisor.requestStates == "Pending" &&
@@ -176,6 +250,13 @@ export default function Instructor() {
             <Link to="/topicRequest">
       <Button variant="contained" color="info" onClick={handleClick}>Panel Members</Button>
       </Link>
+
+      {/* {
+        localStorage.getItem("coSupChat") && 
+          
+            <StudentChat />
+          
+      } */}
     
 
 </div>

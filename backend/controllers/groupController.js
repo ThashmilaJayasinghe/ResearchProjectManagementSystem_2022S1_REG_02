@@ -1,5 +1,7 @@
 const Group = require('../models/groupModel');
+const Staff = require('../models/staffModel');
 const Student = require('../models/studentModel');
+const Supervisor = require('../models/supervisorModel');
 
 const create_group = (req, res) => {
 	const subMemberRegNumber = req.body.subMemberRegNumber;
@@ -125,5 +127,49 @@ const update_group_coSupervisor = async(req, res) => {
 	}
 }
 
+// get group leader
+const getGroupDetails = async(req, res) => {
+	
+	// const studentRegNumber = req.body.regNum;
+	const studentRegNumber = req.query.regNum
 
-module.exports = { set_group, create_group, get_Group, update_group_supervisor, update_group_coSupervisor};
+
+	try{
+		const groupDetails = await Group.findOne({subMemberRegNumber:studentRegNumber})
+
+		if(groupDetails){
+			const tempSupervisor = groupDetails.supervisorID;
+			const tempCoSupervisor = groupDetails.coSupervisorID;
+			const supervisor = await Staff.findOne({user:tempSupervisor})
+			const coSupervisor = await Staff.findOne({user:tempCoSupervisor})
+
+			if(supervisor && coSupervisor){
+				const supervisorDetails = supervisor;
+				const coSupervisorDetails = coSupervisor;
+				res.status(200).json({groupDetails, supervisorDetails, coSupervisorDetails})
+			}
+			else if(supervisor || coSupervisor){
+				if(supervisor){
+					const supervisorDetails = supervisor;
+					res.status(200).json({groupDetails, supervisorDetails})
+				}
+				if(coSupervisor){
+					const coSupervisorDetails = coSupervisor;
+					res.status(200).json({groupDetails, coSupervisorDetails})
+				}
+			}
+			else{
+				res.status(200).json(groupDetails)
+			}
+		}
+		else{
+			res.status(204).json(groupDetails)
+		}
+	}catch(err){
+		console.log(err)
+		res.status(501).json(err)
+	}
+}
+
+
+module.exports = { set_group, create_group, get_Group, update_group_supervisor, update_group_coSupervisor, getGroupDetails};

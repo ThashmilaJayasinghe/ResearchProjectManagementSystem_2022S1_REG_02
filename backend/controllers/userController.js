@@ -123,15 +123,11 @@ const deleteUser = async (req, res) => {
 // @access  Private
 const updateUser = async (req, res) => {
 
-    console.log(req.body)
-    console.log(req.params.id)
-
     const {name, email} = req.body;
 
     const updatedUser = {name, email}
 
     await User.findByIdAndUpdate(req.params.id, updatedUser).then(() => {
-        console.log(User)
         res.status(200).json("User updated");
     }).catch((err) => {
         console.log(err);
