@@ -115,9 +115,9 @@ export default function Instructor() {
 <div style={{border: "1px solid black", borderRadius: "10px", margin: "10px", padding: "10px"}}>
       <center><h3>Supervisor</h3></center>
     
-      {/* {
-        supervisor.map((data)=>{
-          return( */}
+      {
+        supervisor.map((supervisor)=>{
+          return(
             <table width={'100%'}>
             <div>
                 <tr>
@@ -165,12 +165,17 @@ export default function Instructor() {
 
             </div>
             </table>
+                )
+              })
+            } 
             </div>
-          {/* )
-        })
-      } */}
+       
       <div style={{border: "1px solid black", borderRadius: "10px", margin: "10px", padding: "10px"}}>
       <center><h3>Co-Supervisor</h3></center>
+      {
+        coSupervisor.map((coSupervisor)=>{
+
+          return(
       <table width={'100%'}>
             <div>
                 <tr>
@@ -218,10 +223,16 @@ export default function Instructor() {
         </tr>
             </div>
             </table>
+          )
+        })}
             </div>
 
             <div style={{border: "1px solid black", borderRadius: "10px", margin: "10px", padding: "10px"}}>
       <center><h3>Panal</h3></center>
+      {
+        panel.map((panel)=>{
+
+          return(
     
             <table width={'100%'}>
               
@@ -233,6 +244,8 @@ export default function Instructor() {
               </tr>
               </div>
             </table>
+          )
+        })}
             </div>
             <Link to="/topicRequest">
       <Button variant="contained" color="info" onClick={handleClick}>Panel Members</Button>

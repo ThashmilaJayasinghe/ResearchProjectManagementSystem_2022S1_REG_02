@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import {login, reset} from '../features/authSlice'
 import Spinner from '../components/Spinner'
+import axios from 'axios'
 
 
 
@@ -20,6 +21,23 @@ function Login() {
 
     const {user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth)
 
+    const isAvailable=()=>{
+        const res =  axios.get('http://localhost:5000/student/isAvailabale/'+user._id)
+        return res;
+    }
+    //     .then((res)=>{
+    //         console.log(res)
+    //         const regNO = res.data.regNumber
+    //       console.log(regNO)
+    //         if(regNO != null){
+    //             return true;
+    //         }else{
+    //             return false;
+    //         }
+    //      })
+        
+    // }
+
     useEffect(() => {
 
         if(isError) {
@@ -30,7 +48,10 @@ function Login() {
         if(isSuccess || user){
             user.roles.includes('admin') ? navigate('/admin')
                 : user.roles.includes('staff') ? navigate('/supervisor')
-                    : navigate('/')
+                        // : (res !=null) ? navigate('/')
+                        //     :navigate('/registerNo')
+                    : isAvailable() ? navigate('/')
+                        : navigate('/registerNo')
         }
 
         dispatch(reset())
