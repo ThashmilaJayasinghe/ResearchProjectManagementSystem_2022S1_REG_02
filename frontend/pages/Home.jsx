@@ -86,9 +86,15 @@ const Home = () => {
                                     <div style={{height: "100%", backgroundColor: "#c1dbf5", padding: "1rem", borderRadius: "0rem 1rem"}}>
                                         <h2 style={{ fontSize:"34px"}}>Hi&nbsp;
                                             {
-                                                user && (
+                                                user ? (
                                                     <>
                                                         {user.name} !
+                                                    </>
+                                                )
+                                                :
+                                                (
+                                                    <>
+                                                        user!
                                                     </>
                                                 )
                                             }
