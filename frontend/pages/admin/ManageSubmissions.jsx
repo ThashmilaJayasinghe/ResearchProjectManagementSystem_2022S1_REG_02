@@ -1,18 +1,56 @@
+import React from 'react';
 import {useState, useEffect} from 'react'
-import Axios from 'axios';
-import {useNavigate, Link} from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
+import {useSelector} from 'react-redux'
+import DocSubmissions from '../../components/DocSubmission'
+import PresSubmissions from '../../components/PresSubmission'
+import Typography from "@mui/material/Typography";
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+
+
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box sx={{ p: 3 }}>
+                    <Typography component={'span'} variant={'body2'}>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
+}
+
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
 
 
 function ManageSubmissions() {
 
+
     const navigate = useNavigate()
 
     const {user} = useSelector((state) => state.auth) //used to get the user
-
-    const [staffs, setStaffs] = useState([]);
-    const [search, setSearch] = useState("");
-
 
     useEffect(() => {
 
@@ -20,20 +58,43 @@ function ManageSubmissions() {
             navigate('/')
         }
 
-        // Axios.get("http://localhost:5000/api/admin/staff/")
-        //     .then((res) => {
-        //         setStaffs(res.data)
-        //         console.log(res.data);
-        //     })
-
-
     }, [user, navigate]);
 
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     return (
         <div>
-            <h1>Submission Management</h1>
+            <div>
+                <Typography variant="h4">
+                    Submission Management
+                </Typography>
+            </div>
+            <br />
+            <div>
+                <Typography variant={"h6"}>
+                    Add a New Submission
+                </Typography>
+                <Box sx={{ width: '100%' }}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                            <Tab label="Document Submission" {...a11yProps(0)} />
+                            <Tab label="Presentation Submission" {...a11yProps(1)} />
+                        </Tabs>
+                    </Box>
+                    <TabPanel value={value} index={0}>
+                        <DocSubmissions type={'document'} />
+                    </TabPanel>
+                    <TabPanel value={value} index={1}>
+                        <PresSubmissions type={'presentation'} />
+                    </TabPanel>
+                </Box>
+            </div>
         </div>
+
     )
 
 }

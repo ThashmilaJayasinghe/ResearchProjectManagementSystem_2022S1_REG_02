@@ -21,6 +21,7 @@ export default function Submit() {
         formData.append('document',document)
         formData.append('submissionstitle',submissionstitle)
         formData.append('type',type)
+        formData.append('status','Pending')
 
         axios.post('http://localhost:5000/submit/'+user._id,formData)
         .then(()=>{

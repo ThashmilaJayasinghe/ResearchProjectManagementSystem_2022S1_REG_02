@@ -4,6 +4,7 @@ const Submissions = require('../models/submissionModel');
 const Panel = require('../models/panelModel');
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 
 const upload = multer({
 	storage: multer.diskStorage({
@@ -12,7 +13,7 @@ const upload = multer({
 		},
 
 		filename(req, file, callback) {
-			callback(null, Date.now() + file.originalname);
+			callback(null, file.originalname);
 		},
 	}),
 	limits: {
@@ -49,12 +50,13 @@ const addSubmission = async (req, res) => {
 	const sID = group.supervisorID;
 	const coSID = group.coSupervisorID;
 
-	// const panel = await Panel.findOne({ groups: gid });
-	// const pID = panel._id.toString();
+	const panel = await Panel.findOne({ groups: gid });
+	const pID = panel._id.toString();
 
 	const type = req.body.type;
 	if (type == 'document') {
 		const submissionstitle = req.body.submissionstitle;
+		const status = req.body.status;
 		const document = req.file.originalname;
 		console.log(document);
 		const path = req.file.path;
@@ -68,6 +70,7 @@ const addSubmission = async (req, res) => {
 			file_mimetype: mimetype,
 			supervisorID: sID,
 			coSupervisorID: coSID,
+			status,
 		});
 
 		submission
@@ -80,6 +83,7 @@ const addSubmission = async (req, res) => {
 			});
 	} else {
 		const submissionstitle = req.body.submissionstitle;
+		const status = req.body.status;
 		const document = req.file.filename;
 		const path = req.file.path;
 		const mimetype = req.file.mimetype;
@@ -91,6 +95,7 @@ const addSubmission = async (req, res) => {
 			file_path: path,
 			file_mimetype: mimetype,
 			panelID: pID,
+			status,
 		});
 		submission
 			.save()
@@ -121,17 +126,84 @@ const get_Group_Submissions = async (req, res) => {
 		});
 };
 
-const download = async (res, req) => {
-	// const id = req.params.id;
-	// console.log(id);
-	Submissions.find({ _id: '62933ba3d096dabf2bbfffde' }),
-		(err, data) => {
-			if (err) {
-				console.log(err);
-			} else {
-				var x = data.file_path;
-				res.download(x);
-			}
-		};
+const delete_submission = async (req, res) => {
+	let id = req.params.id;
+	Submissions.findByIdAndDelete({ _id: id })
+		.then(() => {
+			res.json('Submition deleted');
+		})
+		.catch((err) => {
+			console.log(err);
+		});
 };
-module.exports = { upload, addSubmission, get_Group_Submissions, download };
+
+const download = async (req, res) => {
+	console.log('calling');
+	// try {
+	// 	const document = req.params.document;
+	// 	const sPath = path.join(
+	// 		__dirname,
+	// 		'..',
+	// 		'..',
+	// 		'frontend/submissions',
+	// 		document
+	// 	);
+	// 	var file = fs.createReadStream(sPath);
+	// 	console.log(file);
+	// 	file.pipe(res);
+	// } catch (error) {
+	// 	return res.status(400).json({
+	// 		success: false,
+	// 		error: error,
+	// 	});
+	// }
+
+	// Submissions.findById({ _id: req.params.id }),
+	// 	(err, data) => {
+	// 		console.log(req.params.id);
+	// 		if (err) {
+	// 			console.log(err);
+	// 		} else {
+	// 			var x =
+	// 				__dirname + '..' + '..' + 'frontend/submissions' + data[0].document;
+	// 			res.download(x);
+	// 		}
+	// 	};
+
+	try {
+		const file = await Submissions.findById(req.params.id);
+		res.set({
+			'Content-Type': file.file_mimetype,
+		});
+		console.log(file);
+		res.sendFile(path.join(__dirname, '..', '..', file.file_path));
+	} catch (error) {
+		res.json('Error while downloading file. Try again later.');
+	}
+};
+module.exports = {
+	upload,
+	addSubmission,
+	get_Group_Submissions,
+	download,
+	delete_submission,
+};
+
+// try {
+// 	const file = await Submissions.findById(req.params.id);
+// 	res.set({
+// 		'Content-Type': file.file_mimetype,
+// 	});
+// 	res.sendFile(path.join(__dirname, '..', file.file_path));
+// } catch (error) {
+// 	res.json('Error while downloading file. Try again later.');
+// }
+// Submissions.findById({ _id: req.params.id }),
+// 	(err, data) => {
+// 		if (err) {
+// 			console.log(err);
+// 		} else {
+// 			var x = __dirname + '/submissions/' + data[0].document;
+// 			res.download(x);
+// 		}
+// 	};

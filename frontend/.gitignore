@@ -1,6 +1,8 @@
 node_modules
 .parcel-cache
 dist
-
+package-lock.json
+public
 .env.local
 package-lock.json
+
