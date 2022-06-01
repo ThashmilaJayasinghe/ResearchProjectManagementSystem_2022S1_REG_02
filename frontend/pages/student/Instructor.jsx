@@ -77,10 +77,12 @@ export default function Instructor() {
       if(studentDetails){
       localStorage.setItem("cc-uid", studentDetails.regNumber)
       async function getGroup() {
+
         await getGroupDetails(studentDetails.regNumber, setGroupDetails)
           .then(() => console.log("Group details successfully loaded"))
       }
       getGroup();
+
     }
 
   }, [studentDetails])
@@ -93,6 +95,8 @@ export default function Instructor() {
       console.log(tempVal)
       localStorage.setItem("agent-uid", tempVal)
       localStorage.setItem("supChat", true)
+
+      window.location.reload()
     }
   }
 
@@ -103,6 +107,8 @@ export default function Instructor() {
       localStorage.setItem("agent-uid", tempVal)
       setIsCoSupervisorChat(true)
       localStorage.setItem("coSupChat", true)
+
+      window.location.reload()
     }
   }
 
