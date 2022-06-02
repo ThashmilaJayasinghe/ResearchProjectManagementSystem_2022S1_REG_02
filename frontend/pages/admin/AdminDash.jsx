@@ -4,6 +4,15 @@ import {useNavigate, Link} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Typography from "@mui/material/Typography";
+import {TextField} from "@mui/material";
 
 
 function AdminDashboard() {
@@ -34,33 +43,50 @@ function AdminDashboard() {
 
     return (
         <div>
-            <div>
-                {/* code below: if user (i.e. logged in), show name */}
-                <h1>Welcome {user && user.name}</h1>
-                <p>Admin Dashboard</p>
-                <br/>
-                <h2>Staff Details</h2>
-                <br/>
+            <div style={{paddingTop:"20px"}}>
+                <Typography variant="h3">
+                    Welcome {user && user.name}!
+                </Typography>
+                <Typography variant="h6">
+                    Admin Dashboard
+                </Typography>
+                <center>
+                    <Typography variant="h4">
+                        Staff Details
+                    </Typography>
+                </center>
             </div>
-            <div>
-                <input type="text" placeholder='Search By Name...' onChange={(e) => {
+            <div style={{width: "60%", margin: "auto", paddingTop:"30px"}}>
+                <TextField
+                    type="text"
+                    placeholder='Search By Name...'
+                    size= "small"
+                    fullWidth
+                    onChange={(e) => {
                     setSearch(e.target.value);
                 }}/>
                 <i className='bx bx-search'></i>
             </div>
-            <div>
-                <div>
+            <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
+                <div
+                    style={{
+                        borderRadius: "10px",
+                        padding: "",
+                        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+
+                    }}
+                >
                     <div>
-                        <div>
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                        <TableContainer component={Paper}>
+                            <Table sx={{ minWidth: 400 }} aria-label="simple table">
+                                <TableHead>
+                                <TableRow>
+                                    <TableCell>Name</TableCell>
+                                    <TableCell>Email</TableCell>
+                                    <TableCell>Actions</TableCell>
+                                </TableRow>
+                                </TableHead>
+                                <TableBody>
                                 {staffs
                                     .filter(staff => {
                                         if (search == "") {
@@ -106,10 +132,13 @@ function AdminDashboard() {
                                         }
 
                                         return (
-                                            <tr>
-                                                <td>{staff.name}</td>
-                                                <td>{staff.email}</td>
-                                                <td>
+                                            <TableRow
+                                                key={staff.name}
+                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            >
+                                                <TableCell>{staff.name}</TableCell>
+                                                <TableCell>{staff.email}</TableCell>
+                                                <TableCell>
                                                     <Link to='/updateuser'>
                                                         <button className='btnIcon' onClick={() => setStaff(staff)}>
                                                             <EditIcon/></button>
@@ -117,13 +146,18 @@ function AdminDashboard() {
                                                     <button className='btnIcon btnsecond'
                                                             onClick={() => onDelete(staff._id)}><DeleteIcon/>
                                                     </button>
-                                                </td>
-                                            </tr>
+                                                    <div style={{cursor: "pointer"}} onClick={() => onDelete(staff._id)}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width='1.2rem' height="1.2rem" fill="none" viewBox="0 0 24 24" stroke="#ed2121" strokeWidth={2}>
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                        </svg>
+                                                    </div>
+                                                </TableCell>
+                                            </TableRow>
                                         )
                                     })}
-                                </tbody>
-                            </table>
-                        </div>
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
                     </div>
                 </div>
             </div>
