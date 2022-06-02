@@ -3,10 +3,11 @@ import {useSelector, useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import {register, reset} from '../features/authSlice'
 import Spinner from '../components/Spinner'
-import { Button, Select, Paper, Table, TableBody, TableCell, TableContainer, TableRow, TextField } from '@mui/material'
+import { Button, Select, TextField } from '@mui/material'
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import Typography from "@mui/material/Typography";
 
 
 function Register() {
@@ -74,10 +75,9 @@ function Register() {
     return (
         <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
             <center>
-                <h1>
+                <Typography variant="h4">
                     Register
-                </h1>
-                <p>Please create an account</p>
+                </Typography>
             </center>
 
             <div

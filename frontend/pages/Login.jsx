@@ -4,7 +4,8 @@ import {useNavigate} from 'react-router-dom'
 import {login, reset} from '../features/authSlice'
 import Spinner from '../components/Spinner'
 import axios from 'axios'
-import { Button, CircularProgress, Paper, Table, TableBody, TableCell, TableContainer, TableRow, TextField } from '@mui/material'
+import { Button, TextField } from '@mui/material'
+import Typography from "@mui/material/Typography";
 
 
 function Login() {
@@ -82,11 +83,13 @@ function Login() {
 
     return (
         <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
-            <center>
-                <h1>
-                    Login
-                </h1>
-            </center>
+            <div>
+                <center>
+                    <Typography variant="h4">
+                        Login
+                    </Typography>
+                </center>
+            </div>
             <div
                 style={{
                     borderRadius: "10px",

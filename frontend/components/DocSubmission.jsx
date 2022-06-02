@@ -142,7 +142,6 @@ export default function DocSubmission(props){
                         name="template"
                         style = {{marginTop: "0.5rem"}}
                         onChange={onChangeFileT}
-
                     />
                 </div>
                 <div style={{padding: "3rem" }}>

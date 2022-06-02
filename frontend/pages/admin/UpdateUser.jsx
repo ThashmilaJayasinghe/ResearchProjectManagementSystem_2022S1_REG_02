@@ -3,18 +3,8 @@ import axios from 'axios'
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {Link} from "react-router-dom";
-import {
-    Button,
-    CircularProgress,
-    InputLabel,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableRow,
-    TextField
-} from '@mui/material'
+import {Button, InputLabel, TextField} from '@mui/material'
+import Typography from "@mui/material/Typography";
 
 export default function UpdateUser(){
 
@@ -60,9 +50,9 @@ export default function UpdateUser(){
 
         <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
             <center>
-                <h1>
+                <Typography variant="h4">
                     Update Staff
-                </h1>
+                </Typography>
             </center>
             <div
                 style={{

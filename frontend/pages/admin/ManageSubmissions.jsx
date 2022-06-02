@@ -68,7 +68,7 @@ function ManageSubmissions() {
 
     return (
         <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
-            <div>
+            <div style={{paddingBottom:"40px"}}>
                 <center>
                     <Typography variant="h4">
                         Add Submission
