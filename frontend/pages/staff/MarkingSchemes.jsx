@@ -1,12 +1,17 @@
 import React from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Typography from "@mui/material/Typography";
+import {TextField} from "@mui/material";
 import {useState, useEffect, useRef} from "react";
 import Axios from "axios";
 import fileDownload from 'js-file-download'
+import Button from "@mui/material/Button";
 
 
 export default function SelectUser(props) {
@@ -41,17 +46,50 @@ export default function SelectUser(props) {
 
 
     return (
-        <div>
-            {subTypes
-                .map((subType) => {
-                    return (
-                        <div>
-                            <p>{subType.title}</p>
-                            <button onClick={() => {handleClick(subType.markingScheme)}}>
-                                Download Here</button>
-                        </div>
-                    )
-                })}
+        <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
+            <center>
+                <Typography variant="h4">
+                    Marking Schemes
+                </Typography>
+            </center>
+            <div
+                style={{
+                    borderRadius: "10px",
+                    margin: "10px",
+                    padding: "",
+                    boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+
+                }}
+            >
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 400 }} aria-label="simple table">
+                        <TableBody>
+                            {subTypes
+                                .map((subType) => {
+                                    return (
+                                        <TableRow
+                                            key={subType.title}
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                            <TableCell sx={{ width: "50%" }}>
+                                                {subType.title}
+                                            </TableCell>
+                                            <TableCell sx={{ width: "50%" }} align="center">
+                                                <Button
+                                                    variant="contained"
+                                                    style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#646FD4", marginTop: "0.5rem" }}
+                                                    onClick={() => {handleClick(subType.markingScheme)}}
+                                                >
+                                                    Download Marking Scheme
+                                                </Button>
+                                            </TableCell>
+                                        </TableRow>
+                                    )
+                                })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
         </div>
     );
 }
