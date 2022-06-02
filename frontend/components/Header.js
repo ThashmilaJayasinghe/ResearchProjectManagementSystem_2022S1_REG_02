@@ -40,6 +40,10 @@ const Header = () => {
 			onClick: () => navigate('/addPanel')
 		},
 		{
+			text: 'MarkingSchemes',
+			onClick: () => navigate('/markingSchemes')
+		},
+		{
 			text: 'Logout',
 			onClick: () => onLogout(),
 		},
