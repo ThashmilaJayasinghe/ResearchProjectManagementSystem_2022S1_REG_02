@@ -24,6 +24,9 @@ const topicStatusSchema = new Schema({
 	// 	type: String,
 	// 	// required : true
 	// },
+	topicDocument: {
+		type: String,
+	},
 	status: {
 		type: String,
 		// required : true
