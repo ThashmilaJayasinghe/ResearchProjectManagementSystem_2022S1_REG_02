@@ -19,41 +19,28 @@ function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+
     const {user, isLoading, isError, isSuccess, message} = useSelector((state) => state.auth)
 
-    const isAvailable=()=>{
-        const res =  axios.get('http://localhost:5000/student/isAvailabale/'+user._id)
-        return res;
-    }
-    //     .then((res)=>{
-    //         console.log(res)
-    //         const regNO = res.data.regNumber
-    //       console.log(regNO)
-    //         if(regNO != null){
-    //             return true;
-    //         }else{
-    //             return false;
-    //         }
-    //      })
-        
-    // }
+    const [registered,setRegistered] = useState()
 
     useEffect(() => {
-
+        console.log('3')
         if(isError) {
             alert('Incorrect Credentials')
         }
-
+        console.log("tttt",registered)
         //*********************************************
         if(isSuccess || user){
+            console.log(localStorage.getItem('res'))
             user.roles.includes('admin') ? navigate('/admin')
                 : user.roles.includes('staff') ? navigate('/supervisor')
-                        // : (res !=null) ? navigate('/')
-                        //     :navigate('/registerNo')
-                    : isAvailable() ? navigate('/')
-                        : navigate('/registerNo')
-        }
+                            : (registered) ? navigate('/')
+                                :navigate('/registerNo')
 
+                                console.log("in",registered)
+        }
+        console.log('4')
         dispatch(reset())
 
     }, [user, isError, isSuccess, message, navigate, dispatch])
@@ -65,13 +52,24 @@ function Login() {
         }))
     }
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
 
+        console.log('1')
         const userData = {
             email,
             password
         }
+        console.log(userData)
+        await axios.get('http://localhost:5000/student/isAvailabale/'+email)
+        .then((res)=>{
+            setRegistered(res.data)
+            localStorage.setItem('res',res.data)
+            console.log('data',res.data)
+        }).catch((err)=>{
+            alert(err)
+        })
+        console.log('2')
 
         dispatch(login(userData))
     }
