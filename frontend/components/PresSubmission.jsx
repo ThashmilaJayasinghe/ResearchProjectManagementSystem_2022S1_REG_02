@@ -12,7 +12,12 @@ export default function DocSubmission(props){
     const [markingScheme, setMarkingScheme] = useState("");
     const [template, setTemplate] = useState("");
 
-
+    // Calculating min date for date picker
+    const date = new Date();
+    // adding a day
+    date.setDate(date.getDate() + 1);
+    const isoDate = date.toISOString()
+    const today = isoDate.substring(0, 10)
 
     const onChangeFileMS = e => {
         setMarkingScheme(e.target.files[0]);

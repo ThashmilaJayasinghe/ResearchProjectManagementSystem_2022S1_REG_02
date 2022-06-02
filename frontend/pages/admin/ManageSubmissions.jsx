@@ -67,17 +67,15 @@ function ManageSubmissions() {
     };
 
     return (
-        <div>
+        <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
             <div>
-                <Typography variant="h4">
-                    Submission Management
-                </Typography>
+                <center>
+                    <Typography variant="h4">
+                        Add Submission
+                    </Typography>
+                </center>
             </div>
-            <br />
             <div>
-                <Typography variant={"h6"}>
-                    Add a New Submission
-                </Typography>
                 <Box sx={{ width: '100%' }}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
