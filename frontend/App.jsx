@@ -30,6 +30,7 @@ import PanelHomePage from './pages/panelMemeber/PanelHomePage'
 import CoSupervisor_Home from './pages/coSupervisor/CoSupervisor_Home';
 import Request_ResearchField_coSupervisor from './pages/coSupervisor/Request_ResearchField_coSupervisor';
 import Supervisor_Home from './pages/supervisor/Supervisor_Home'
+import MarkingSchemes from './pages/staff/MarkingSchemes'
 
 
 function App(){
@@ -42,7 +43,6 @@ function App(){
                     <Route path="/register" element ={<Register/>}/>
                     <Route path="/login" element ={<Login/>}/>
                     <Route path="/admin" element={<Admin/>}/>
-
                     <Route path = '/updateuser' element = {<UpdateUser/>} />
                     <Route path = '/managesubmissions' element = {<ManageSubmissions/>} />
                     <Route path="/group" element = {<Group/>}/>
@@ -55,7 +55,6 @@ function App(){
                     <Route path="/instructor" element = {<Instructor/>} />
                     <Route path='/topicRequest' element = {<TopicRequestPanalForm/>}/>
                     <Route path='/submit' element = {<Submit/>}/>
-
                     <Route path = '/staff/profile' element = {<StaffProfile />} />
                     <Route path="/supervisor" element={<Supervisor_Home/>}/>
                     <Route exact path = '/supervisor/requestedresearchField' element = {<Request_ResearchField/>} />
@@ -63,6 +62,7 @@ function App(){
                     <Route path = '/co-supervisor' element = {< CoSupervisor_Home/>} />
                     <Route exact path = '/co-supervisor/requestedresearchField' element = {<Request_ResearchField_coSupervisor/>} />
                     <Route exact path = '/supervisor/chat' element = {<SupervisorChat/>}/>
+                    <Route path = '/markingSchemes' element = {<MarkingSchemes/>}/>
                     {/* <Route exact path = '/student/chat' element = {<StudentChat/>}/> */}
 
                 </Routes>
