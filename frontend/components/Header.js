@@ -21,16 +21,9 @@ const Header = () => {
 	const { user } = useSelector((state) => state.auth);
 
 	const onLogout = () => {
-
-		localStorage.removeItem("agent-uid")
-		localStorage.removeItem("supChat")
-		localStorage.removeItem("coSupChat")
-		localStorage.removeItem("cc-uid")
-		
 		dispatch(logout());
 		dispatch(reset());
 		navigate('/');
-		window.location.reload('/')
 	};
 
 	const adminItems = [
@@ -47,12 +40,20 @@ const Header = () => {
 			onClick: () => navigate('/addPanel')
 		},
 		{
+			text: 'MarkingSchemes',
+			onClick: () => navigate('/markingSchemes')
+		},
+		{
 			text: 'Logout',
 			onClick: () => onLogout(),
 		},
 	];
 
 	const staffItems = [
+		{
+			text: 'StaffDash',
+			onClick: () => navigate('/staff')
+		},
 		{
 			text: 'Supervisor',
 			onClick: () => navigate('/supervisor')
