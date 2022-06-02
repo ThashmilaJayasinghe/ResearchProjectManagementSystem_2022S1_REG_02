@@ -1,7 +1,7 @@
-const asyncHandler = require('express-async-handler')
-const Student = require('../models/studentModel')
-const mongoose = require("mongoose");
-const SubmissionType = require("../models/submissionTypeModel");
+const asyncHandler = require('express-async-handler');
+const Student = require('../models/studentModel');
+const mongoose = require('mongoose');
+const SubmissionType = require('../models/submissionTypeModel');
 // const requestSupervisor = require('../models/requestSupervisorModel');
 
 // const makeSupervisorRequest = asyncHandler(async (req, res) => {
@@ -26,28 +26,28 @@ const SubmissionType = require("../models/submissionTypeModel");
 //     }
 // })
 
-module.exports.set_data = (req,res)=>{
-    const user = req.params.id;
-    const regNumber = req.body.regNumber;
+module.exports.set_data = (req, res) => {
+	const user = req.params.id;
+	const regNumber = req.body.regNumber;
 
-    if(user){
-        const student = new Student({
-            user,
-            regNumber
-        })
+	if (user) {
+		const student = new Student({
+			user,
+			regNumber,
+		});
 
-        student.save()
-            .then(()=>{
-                res.json('student is added')
-            })
-            .catch((err)=>{
-                console.log(err)
-            })
-    }
-    else {
-        res.status(500).send("User is not there")
-    }
-}
+		student
+			.save()
+			.then(() => {
+				res.json('student is added');
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	} else {
+		res.status(500).send('User is not there');
+	}
+};
 
 module.exports.isAStudent = async (req, res) => {
 	const id = req.params.id;
@@ -61,13 +61,22 @@ module.exports.isAStudent = async (req, res) => {
 }
 
 module.exports.getAllFiles = async (req, res) => {
-    SubmissionType.find()
-        .then((SubmissionType) => {
-            res.json(SubmissionType);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+	SubmissionType.find()
+		.then((SubmissionType) => {
+			res.json(SubmissionType);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
 };
 
-
+module.exports.isAStudent = async (req, res) => {
+	const id = req.params.id;
+	Student.findOne({ user: id })
+		.then((Student) => {
+			res.json(Student);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
