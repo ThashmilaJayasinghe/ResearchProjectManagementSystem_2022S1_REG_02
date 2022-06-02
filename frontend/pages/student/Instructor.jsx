@@ -48,15 +48,14 @@ export default function Instructor() {
     .then((res)=>{
       const panel = res.data;
       setPannel(panel);
-      // localStorage.setItem(panel._id);
     }).catch(()=>{
       alert('Error in retrieving data')
     })
   },[])
 
-  const handleClick = ()=>{
-      localStorage.setItem('_id',panel._id)
-  }
+  // const handleClick = ()=>{
+  //     localStorage.setItem('pid',panel._id)
+  // }
 
   useEffect(() => {
   // get student id
@@ -232,6 +231,10 @@ export default function Instructor() {
       {
         panel.map((panel)=>{
 
+          
+            localStorage.setItem('pid',panel._id)
+        
+
           return(
     
             <table width={'100%'}>
@@ -248,7 +251,7 @@ export default function Instructor() {
         })}
             </div>
             <Link to="/topicRequest">
-      <Button variant="contained" color="info" onClick={handleClick}>Panel Members</Button>
+      <Button variant="contained" color="info">Panel Members</Button>
       </Link>
 
       {/* {
