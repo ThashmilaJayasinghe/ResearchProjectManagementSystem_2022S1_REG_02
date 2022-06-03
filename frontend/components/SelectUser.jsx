@@ -47,6 +47,7 @@ export default function SelectUser(props) {
                     id="demo-simple-select"
                     value={member}
                     label="Member"
+                    required="required"
                     onChange={handleChange}
                 >
 

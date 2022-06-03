@@ -108,6 +108,20 @@ const getStaff = async (req, res) => {
     }
 }
 
+// @desc    Get all student data
+// @route   GET /api/admin/students
+// @access  Private
+const getStudents = async (req, res) => {
+
+    const students = await User.find({roles:'student'})
+
+    if(students) {
+        res.status(200).json(students)
+    } else {
+        return res.status(404).json({ msg: 'No students to display'})
+    }
+}
+
 
 // @desc    Add assignment
 // @route   POST /api/admin/addAssignment
@@ -178,12 +192,33 @@ const getGroups = async (req, res) => {
 }
 
 
+// @desc    Get all panel data
+// @route   GET /api/admin/allPanels
+// @access  Private
+const getAllPanels = async (req, res) => {
+
+    const panels = await Panel.find()
+    const panelDetails = [];
+
+    if(panels) {
+
+
+
+        res.status(200).json(panels)
+    } else {
+        return res.status(404).json({ msg: 'No panels to display'})
+    }
+}
+
+
 module.exports = {
     addRole,
     allocateRole,
     getStaff,
+    getStudents,
     addAssignment,
     upload,
     addPanel,
-    getGroups
+    getGroups,
+    getAllPanels
 }

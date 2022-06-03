@@ -16,30 +16,13 @@ import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 
 
-export default function SelectUser(props) {
+export default function SelectUser() {
 
-    const [subTypes, setSubTypes] = useState([]);
-
+    const [panels, setPanels] = useState([]);
 
     const navigate = useNavigate()
 
     const {user} = useSelector((state) => state.auth) //used to get the user
-
-
-    const handleClick = (file) => {
-
-        let filePath = "../../public/Marking_Schemes/" + file;
-
-        Axios.get(`${filePath}`, {
-            responseType: 'blob',
-        }).then((res) => {
-            let filename = filePath.replace(/^.*[\\\/]/, '')
-            let fileExtension;
-            fileExtension= filePath.split('.');
-            fileExtension =fileExtension[fileExtension.length -1];
-            fileDownload(res.data, `${filename}.${fileExtension}`);
-        });
-    }
 
     useEffect(() => {
 
@@ -47,9 +30,9 @@ export default function SelectUser(props) {
             navigate('/')
         }
 
-        Axios.get("http://localhost:5000/student/allSubmitTypes")
+        Axios.get("http://localhost:5000/api/admin/allPanels")
             .then((res) => {
-                setSubTypes(res.data)
+                setPanels(res.data)
             })
 
     }, [user, navigate]);
@@ -59,7 +42,7 @@ export default function SelectUser(props) {
         <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
             <center>
                 <Typography variant="h4">
-                    Marking Schemes
+                    Panel Details
                 </Typography>
             </center>
             <div
@@ -73,26 +56,26 @@ export default function SelectUser(props) {
             >
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 400 }} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Name</TableCell>
+                                <TableCell>Staff Members</TableCell>
+                                <TableCell>Students</TableCell>
+                                {/*<TableCell>Actions</TableCell>*/}
+                            </TableRow>
+                        </TableHead>
                         <TableBody>
-                            {subTypes
-                                .map((subType) => {
+                            {panels
+                                .map((panel) => {
                                     return (
                                         <TableRow
-                                            key={subType.title}
+                                            key={panel.name}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
-                                            <TableCell sx={{ width: "50%" }}>
-                                                {subType.title}
+                                            <TableCell sx={{ width: "30%" }}>
+                                                {panel.name}
                                             </TableCell>
-                                            <TableCell sx={{ width: "50%" }} align="center">
-                                                <Button
-                                                    variant="contained"
-                                                    style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#646FD4", marginTop: "0.5rem" }}
-                                                    onClick={() => {handleClick(subType.markingScheme)}}
-                                                >
-                                                    Download Marking Scheme
-                                                </Button>
-                                            </TableCell>
+                                            {panel.staff.map()}
                                         </TableRow>
                                     )
                                 })}

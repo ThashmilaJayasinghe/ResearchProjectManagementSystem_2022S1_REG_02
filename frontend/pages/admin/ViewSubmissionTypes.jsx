@@ -16,7 +16,7 @@ import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 
 
-export default function SelectUser(props) {
+export default function ViewSubmissionTypes() {
 
     const [subTypes, setSubTypes] = useState([]);
 
@@ -24,7 +24,6 @@ export default function SelectUser(props) {
     const navigate = useNavigate()
 
     const {user} = useSelector((state) => state.auth) //used to get the user
-
 
     const handleClick = (file) => {
 
@@ -81,16 +80,25 @@ export default function SelectUser(props) {
                                             key={subType.title}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
-                                            <TableCell sx={{ width: "50%" }}>
+                                            <TableCell sx={{ width: "30%" }}>
                                                 {subType.title}
                                             </TableCell>
-                                            <TableCell sx={{ width: "50%" }} align="center">
+                                            <TableCell sx={{ width: "35%" }} align="center">
                                                 <Button
                                                     variant="contained"
                                                     style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#646FD4", marginTop: "0.5rem" }}
                                                     onClick={() => {handleClick(subType.markingScheme)}}
                                                 >
                                                     Download Marking Scheme
+                                                </Button>
+                                            </TableCell>
+                                            <TableCell sx={{ width: "35%" }} align="center">
+                                                <Button
+                                                    variant="contained"
+                                                    style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#646FD4", marginTop: "0.5rem" }}
+                                                    onClick={() => {handleClick(subType.template)}}
+                                                >
+                                                    Download Template
                                                 </Button>
                                             </TableCell>
                                         </TableRow>
