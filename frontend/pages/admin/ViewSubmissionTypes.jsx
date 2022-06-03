@@ -12,7 +12,7 @@ import {useState, useEffect, useRef} from "react";
 import Axios from "axios";
 import fileDownload from 'js-file-download'
 import Button from "@mui/material/Button";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 
 
@@ -58,7 +58,7 @@ export default function ViewSubmissionTypes() {
         <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
             <center>
                 <Typography variant="h4">
-                    Marking Schemes
+                    Submission Types
                 </Typography>
             </center>
             <div
@@ -74,10 +74,10 @@ export default function ViewSubmissionTypes() {
                     <Table sx={{ minWidth: 400 }} aria-label="simple table">
                         <TableBody>
                             {subTypes
-                                .map((subType) => {
+                                .map((subType, index) => {
                                     return (
                                         <TableRow
-                                            key={subType.title}
+                                            key={index}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
                                             <TableCell sx={{ width: "30%" }}>
@@ -86,7 +86,7 @@ export default function ViewSubmissionTypes() {
                                             <TableCell sx={{ width: "35%" }} align="center">
                                                 <Button
                                                     variant="contained"
-                                                    style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#646FD4", marginTop: "0.5rem" }}
+                                                    style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }}
                                                     onClick={() => {handleClick(subType.markingScheme)}}
                                                 >
                                                     Download Marking Scheme
@@ -95,11 +95,20 @@ export default function ViewSubmissionTypes() {
                                             <TableCell sx={{ width: "35%" }} align="center">
                                                 <Button
                                                     variant="contained"
-                                                    style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#646FD4", marginTop: "0.5rem" }}
+                                                    style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }}
                                                     onClick={() => {handleClick(subType.template)}}
                                                 >
                                                     Download Template
                                                 </Button>
+                                            </TableCell>
+                                            <TableCell>
+                                                <div style={{ display: "flex", gap: "1rem" }}>
+                                                    <div style={{cursor: "pointer"}} onClick={() => onDelete(subType._id)}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width='1.2rem' height="1.2rem" fill="none" viewBox="0 0 24 24" stroke="#ed2121" strokeWidth={2}>
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
                                             </TableCell>
                                         </TableRow>
                                     )
