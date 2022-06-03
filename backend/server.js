@@ -17,11 +17,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.resolve(__dirname, 'submissions')));
 
-app.get('/', (req, res) => {
-    res.send("called here")
-})
-
-const API = process.env.NODE_ENV === 'production' && 'https://testing-project-suboda.herokuapp.com/'
 
 app.use('/api/goals', require('./routes/goalRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
