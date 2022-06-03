@@ -100,7 +100,7 @@ const Sup_profile = () => {
                                 />
 
                                 <Button variant="contained"
-                                  style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#577BC1", marginTop: "10px"}}
+                                  style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "10px"}}
                                   onClick={() => (setIsAddQualification(false), onAddQualification())}
                                 >Save</Button>
                               
@@ -108,7 +108,7 @@ const Sup_profile = () => {
                           ): (
                             <>
                               <Button variant="contained"
-                                style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#646FD4"}}
+                                style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "##053769"}}
                                 onClick={() => setIsAddQualification(true)}
                               >+ Add new qualification</Button>
                             </>
@@ -138,14 +138,14 @@ const Sup_profile = () => {
                                     fullWidth
                                   />
                                  <Button variant="contained"
-                                  style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#577BC1", marginTop: "10px"}}
+                                  style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "10px"}}
                                   onClick={() => (setIsAddResearchField(false), onAddResearchField())}
                                   >Save</Button>
                               </>
                             ) : (
                               <>
                                 <Button variant="contained"
-                                style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#646FD4"}}
+                                style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769"}}
                                 onClick={() => setIsAddResearchField(true)}
                                 >+ Add new research field</Button>
                               </>

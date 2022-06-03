@@ -165,7 +165,7 @@ function Register() {
                             <Button
                                 type='submit'
                                 variant="contained"
-                                style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#646FD4", marginTop: "0.5rem" }}
+                                style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }}
                             >
                                 Register
                             </Button>
