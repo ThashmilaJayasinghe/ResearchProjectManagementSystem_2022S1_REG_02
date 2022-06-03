@@ -5,6 +5,8 @@ const requestSupervisor = require('../models/requestSupervisorModel');
 // get all supervisors
 const getAllSupervisors = asyncHandler(async(req, res) => {
 
+    console.log("I am called")
+
     try{
         const result = await Supervisor.find();
         res.status(200).json(result)
