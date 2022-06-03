@@ -3,11 +3,13 @@ import {useSelector, useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import {register, reset} from '../features/authSlice'
 import Spinner from '../components/Spinner'
-import { Button, Select, TextField } from '@mui/material'
+import Button from '@mui/material/Button'
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Typography from "@mui/material/Typography";
+import Select from '@mui/material/Select'
+import TextField from '@mui/material/TextField'
 
 
 function Register() {

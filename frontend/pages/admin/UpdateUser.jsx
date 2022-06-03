@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import {useDispatch, useSelector} from "react-redux";
+import useSelector from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {Link} from "react-router-dom";
-import {Button, InputLabel, TextField} from '@mui/material'
+import Button from '@mui/material/Button'
+import InputLabel from '@mui/material/InputLabel'
+import TextField from '@mui/material/TextField'
 import Typography from "@mui/material/Typography";
 
 export default function UpdateUser(){

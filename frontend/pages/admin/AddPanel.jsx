@@ -5,7 +5,8 @@ import {useSelector} from "react-redux";
 import SelectUser from '../../components/SelectUser'
 import SelectGroup from '../../components/SelectGroup'
 import Typography from "@mui/material/Typography";
-import {InputLabel, TextField} from "@mui/material";
+import InputLabel from "@mui/material/InputLabel";
+import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 
