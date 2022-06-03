@@ -9,7 +9,7 @@ const fs = require('fs');
 const upload = multer({
 	storage: multer.diskStorage({
 		destination(req, file, callback) {
-			callback(null, 'frontend/submissions');
+			callback(null, 'frontend/public/submissions');
 		},
 
 		filename(req, file, callback) {

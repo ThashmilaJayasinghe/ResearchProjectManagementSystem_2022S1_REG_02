@@ -1,7 +1,40 @@
 const topic = require('../models/topicStatusModel');
 const Group = require('../models/groupModel');
 const Student = require('../models/studentModel');
+const Panal = require('../models/panelModel');
 const { json } = require('express');
+const multer = require('multer');
+
+module.exports.upload = multer({
+	storage: multer.diskStorage({
+		destination(req, file, callback) {
+			callback(null, 'frontend/public/topicdoc');
+		},
+
+		filename(req, file, callback) {
+			callback(null, file.originalname);
+		},
+	}),
+	limits: {
+		fileSize: 2000000,
+	},
+	fileFilter(req, file, callback) {
+		const ext = path.extname(file.originalname);
+
+		if (
+			ext !== '.ppt' &&
+			ext !== '.pptx' &&
+			ext !== '.doc' &&
+			ext !== '.docx' &&
+			ext !== '.pdf'
+		) {
+			return callback(
+				new Error('Please upload a .ppt, .pptx, .doc or .docx file')
+			);
+		}
+		callback(null, true);
+	},
+});
 
 module.exports.get_topic_Status = (req, res) => {
 	topic
@@ -24,27 +57,25 @@ module.exports.post_topic_Status = async (req, res) => {
 	const gid = group._id.toString();
 	console.log(gid);
 
-	// const panal = await Panal.findOne({group:gid})
-	// panalID = panal._id.toString();
-
 	const grp_ID = gid;
 	// const panalID = '629106cd2e08bfaa647de892';
 	const panalID = req.body.panalID;
+	const topicDocument = req.file.originalname;
 	const title = req.body.title;
 	const message = req.body.message;
-	const supervisorID = req.body.supervisorID;
-	const coSupervisorID = req.body.coSupervisorID;
 	const status = req.body.status;
 	const feedback = req.body.feedback;
 	const evaluated_Date = req.body.evaluated_Date;
 
+	// const panal = await Panal.findOne({ group: gid });
+	// panalID = panal._id.toString();
+
 	const newTopicS = new topic({
 		grp_ID,
 		panalID,
+		topicDocument,
 		title,
 		message,
-		supervisorID,
-		coSupervisorID,
 		status,
 		feedback,
 		evaluated_Date,

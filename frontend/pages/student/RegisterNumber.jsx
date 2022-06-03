@@ -10,6 +10,18 @@ export default function RegisterNumber() {
     const { user } = useSelector((state) => state.auth);
 
     const [regNumber,setRegNumber] = useState("");
+    // const [registered, setRegistered] = useState("");
+    //
+    // const isAvailable=()=>{
+    //     axios.get('http://localhost:5000/student/isAvailabale/'+user._id)
+    //         .then((res)=>{
+    //             setRegistered(res.data);
+    //             console.log(res.data)
+    //         }).catch((err)=>{
+    //         console.log(err);
+    //     })
+    //
+    // }
 
     const handleSubmit = ()=>{
         axios.post('http://localhost:5000/student/'+user._id, {regNumber})

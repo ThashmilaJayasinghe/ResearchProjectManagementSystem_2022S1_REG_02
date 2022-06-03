@@ -62,13 +62,13 @@ export default function Group(){
             setLeader(false)
             setEmail('')
         }).catch((err)=>{
-            alert(err)
+            alert("You cannot add more than 4 members")
         })
     }
 
     
         useEffect(()=>{
-            axios.get('http://localhost:5000/group/'+user._id)
+            axios.get('http://localhost:5000/group/getGroup/'+user._id)
             .then((res)=>{
                 const group = res.data.members;
                 setGroupDetails(group);

@@ -10,22 +10,25 @@ export default function TopicRequestPanalForm() {
 
     const [title,setTopic] = useState("");
     const [massege,setMassege] = useState("");
+    const [topicDocument, setTopicDocument] = useState("")
     const [panalID,setPanelID] = useState("");
 
     useEffect(()=>{
-    setPanelID(localStorage.getItem("_id"))
+    setPanelID(localStorage.getItem('pid'))
     })
     const handleSubmit = () =>{
-        const newRequest = {
-            panalID,
-            title,
-            massege
-        }
-        axios.post('http://localhost:5000/topic/' + user._id ,newRequest)
+        const formData = new FormData();
+        formData.append('panalID',panalID)
+        formData.append('topicDocument',topicDocument)
+        formData.append('title',title)
+        formData.append('massege',massege)
+        formData.append('status','Pending')
+
+        axios.post('http://localhost:5000/topic/' + user._id ,formData)
         .then(()=>{
             alert('Topic request added');
         }).catch(()=>{
-            alert(err)
+            alert("Please upload a .ppt, .pptx, .doc or .docx file")
         })
     }
 
@@ -35,7 +38,7 @@ export default function TopicRequestPanalForm() {
                 
             <center><h1>Request Topic</h1></center>
                     <h4>Research Topic</h4>
-                    <TextField fullWidth type="text" id="topic" label="topic....." onChange={(e)=>(setTopic(e.target.value))}/>
+                    <TextField  required fullWidth type="text" id="topic" label="topic....." onChange={(e)=>(setTopic(e.target.value))}/>
                 
                 
                     {/* <h4>Research Document</h4>
@@ -43,7 +46,10 @@ export default function TopicRequestPanalForm() {
                  */}
                 
                     <h4>Massege</h4>
-                    <TextField fullWidth type="text" id="massege" label="Massege....." onChange={(e)=>(setMassege(e.target.value))}/>
+                    <TextField  required fullWidth type="text" id="massege" label="Massege....." onChange={(e)=>(setMassege(e.target.value))}/>
+
+                    <h4>Submit</h4>
+                    <TextField   required type="file" onChange={(e)=>{setTopicDocument(e.target.files[0])}}/>
                 
                     <div style={{paddingTop: "20px"}}>
                         <Button type="submit"  variant="contained" color="info" style={{marginRight: "5px"}} onClick={handleSubmit}>Set Request</Button>

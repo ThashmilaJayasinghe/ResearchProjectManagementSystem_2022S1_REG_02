@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Student = require('../models/studentModel');
+const User = require('../models/userModel');
 const mongoose = require('mongoose');
 const SubmissionType = require('../models/submissionTypeModel');
 // const requestSupervisor = require('../models/requestSupervisorModel');
@@ -50,15 +51,20 @@ module.exports.set_data = (req, res) => {
 };
 
 module.exports.isAStudent = async (req, res) => {
-	const id = req.params.id;
-	Student.findOne({ user: id })
+	const email = req.params.email;
+	console.log(email);
+	const user = await User.findOne({ email: email });
+	console.log(user);
+	const id = user._id;
+	await Student.findOne({ user: id })
 		.then((Student) => {
 			res.json(Student);
+			console.log(Student);
 		})
 		.catch((err) => {
 			console.log(err);
 		});
-}
+};
 
 module.exports.getAllFiles = async (req, res) => {
 	SubmissionType.find()
@@ -70,13 +76,13 @@ module.exports.getAllFiles = async (req, res) => {
 		});
 };
 
-module.exports.isAStudent = async (req, res) => {
-	const id = req.params.id;
-	Student.findOne({ user: id })
-		.then((Student) => {
-			res.json(Student);
-		})
-		.catch((err) => {
-			console.log(err);
-		});
-};
+// module.exports.isAStudent = async (req, res) => {
+// 	const id = req.params.id;
+// 	Student.findOne({ user: id })
+// 		.then((Student) => {
+// 			res.json(Student);
+// 		})
+// 		.catch((err) => {
+// 			console.log(err);
+// 		});
+// };
