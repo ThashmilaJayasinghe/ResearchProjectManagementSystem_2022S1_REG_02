@@ -198,8 +198,12 @@ const getGroups = async (req, res) => {
 const getAllPanels = async (req, res) => {
 
     const panels = await Panel.find()
+    const panelDetails = [];
 
     if(panels) {
+
+
+
         res.status(200).json(panels)
     } else {
         return res.status(404).json({ msg: 'No panels to display'})

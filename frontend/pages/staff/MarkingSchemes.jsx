@@ -12,12 +12,18 @@ import {useState, useEffect, useRef} from "react";
 import Axios from "axios";
 import fileDownload from 'js-file-download'
 import Button from "@mui/material/Button";
+import {useNavigate} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 
 export default function SelectUser(props) {
 
-    const [member, setMember] = useState('');
     const [subTypes, setSubTypes] = useState([]);
+
+
+    const navigate = useNavigate()
+
+    const {user} = useSelector((state) => state.auth) //used to get the user
 
 
     const handleClick = (file) => {
@@ -37,12 +43,16 @@ export default function SelectUser(props) {
 
     useEffect(() => {
 
+        if(!user) {
+            navigate('/')
+        }
+
         Axios.get("http://localhost:5000/student/allSubmitTypes")
             .then((res) => {
                 setSubTypes(res.data)
             })
 
-    }, [member]);
+    }, [user, navigate]);
 
 
     return (

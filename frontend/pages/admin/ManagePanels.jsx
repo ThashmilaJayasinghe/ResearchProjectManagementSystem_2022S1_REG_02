@@ -4,7 +4,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 
 
-function ManageSubmissions() {
+function ManagePanels() {
 
 
     const navigate = useNavigate()
@@ -63,4 +63,4 @@ function ManageSubmissions() {
 
 }
 
-export default ManageSubmissions
+export default ManagePanels
