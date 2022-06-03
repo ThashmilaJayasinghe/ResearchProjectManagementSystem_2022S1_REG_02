@@ -5,7 +5,6 @@ const dotenv = require('dotenv').config();
 const connectDB = require('./config/db');
 const port = process.env.PORT || 5000;
 const path = require('path');
-const Supervisor = require('./models/supervisorModel');
 
 connectDB();
 
@@ -17,16 +16,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.resolve(__dirname, 'submissions')));
-
-app.get('/supervisors', (req, res) => {
-    Supervisor.find({}, (err, result) => {
-        if(err){
-            res.send(err)
-        }else{
-            res.send(result)
-        }
-    })
-})
 
 
 app.use('/api/goals', require('./routes/goalRoutes'));

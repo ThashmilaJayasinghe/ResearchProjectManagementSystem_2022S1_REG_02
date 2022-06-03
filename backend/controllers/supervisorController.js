@@ -9,7 +9,8 @@ const getAllSupervisors = asyncHandler(async(req, res) => {
 
     try{
         const result = await Supervisor.find();
-        res.status(200).json(result)
+        // res.status(200).json(result)
+        res.send("called")
     }
     catch(err) {
         console.log("Error occured")
