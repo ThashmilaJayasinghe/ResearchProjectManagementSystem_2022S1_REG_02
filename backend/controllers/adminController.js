@@ -108,6 +108,20 @@ const getStaff = async (req, res) => {
     }
 }
 
+// @desc    Get all student data
+// @route   GET /api/admin/students
+// @access  Private
+const getStudents = async (req, res) => {
+
+    const students = await User.find({roles:'student'})
+
+    if(students) {
+        res.status(200).json(students)
+    } else {
+        return res.status(404).json({ msg: 'No students to display'})
+    }
+}
+
 
 // @desc    Add assignment
 // @route   POST /api/admin/addAssignment
@@ -182,6 +196,7 @@ module.exports = {
     addRole,
     allocateRole,
     getStaff,
+    getStudents,
     addAssignment,
     upload,
     addPanel,

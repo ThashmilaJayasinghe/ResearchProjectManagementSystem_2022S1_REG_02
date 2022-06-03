@@ -163,6 +163,13 @@ function AdminDashboard() {
                     </div>
                 </div>
             </div>
+            <div style={{paddingTop:"30px"}}>
+                <center>
+                    <Typography variant="h4">
+                        Student Details
+                    </Typography>
+                </center>
+            </div>
         </div>
     )
 
