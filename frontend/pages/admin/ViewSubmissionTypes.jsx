@@ -58,7 +58,7 @@ export default function ViewSubmissionTypes() {
         <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
             <center>
                 <Typography variant="h4">
-                    Marking Schemes
+                    Submission Types
                 </Typography>
             </center>
             <div
@@ -74,10 +74,10 @@ export default function ViewSubmissionTypes() {
                     <Table sx={{ minWidth: 400 }} aria-label="simple table">
                         <TableBody>
                             {subTypes
-                                .map((subType) => {
+                                .map((subType, index) => {
                                     return (
                                         <TableRow
-                                            key={subType.title}
+                                            key={index}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
                                             <TableCell sx={{ width: "30%" }}>
