@@ -51,7 +51,7 @@ export default function UpdateUser(){
         <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
             <center>
                 <Typography variant="h4">
-                    Update Staff
+                    Update User
                 </Typography>
             </center>
             <div

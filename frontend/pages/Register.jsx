@@ -95,6 +95,7 @@ function Register() {
                                name="name"
                                id="name"
                                value={name}
+                               required="required"
                                placeholder='Enter your name'
                                size= "small"
                                fullWidth
@@ -107,6 +108,7 @@ function Register() {
                                name="email"
                                id="email"
                                value={email}
+                               required="required"
                                placeholder='Enter your email'
                                    size= "small"
                                    fullWidth
@@ -114,18 +116,6 @@ function Register() {
                                onChange={onChange} />
                     </div>
                     <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
-                        {/*<select*/}
-                        {/*    aria-label="Default select example"*/}
-                        {/*    id="role"*/}
-                        {/*    name="role"*/}
-                        {/*    required="required"*/}
-                        {/*    onChange={onChange}*/}
-                        {/*>*/}
-                        {/*    <option disabled selected value>Please select user role</option>*/}
-                        {/*    <option value="admin">Admin</option>*/}
-                        {/*    <option value="staff">Staff</option>*/}
-                        {/*    <option value="student">Student</option>*/}
-                        {/*</select>*/}
                         <FormControl fullWidth>
                             <InputLabel id="role-label">Please select user role</InputLabel>
                             <Select
@@ -147,6 +137,7 @@ function Register() {
                                className='form-control'
                                name="password"
                                id="password"
+                               required="required"
                                value={password}
                                placeholder='Enter password'
                                size= "small"
@@ -160,6 +151,7 @@ function Register() {
                                name="password2"
                                id="password2"
                                value={password2}
+                               required="required"
                                placeholder='Confirm password'
                                size= "small"
                                fullWidth

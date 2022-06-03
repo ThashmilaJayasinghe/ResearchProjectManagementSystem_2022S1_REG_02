@@ -37,7 +37,7 @@ const Header = () => {
 		},
 		{
 			text: 'Panels',
-			onClick: () => navigate('/addPanel')
+			onClick: () => navigate('/managePanels')
 		},
 		{
 			text: 'MarkingSchemes',
