@@ -71,6 +71,7 @@ export default function DocSubmission(props){
                     <TextField
                         labelId="title-label"
                         type="text"
+                        required="required"
                         id="title"
                         placeholder="Enter assignment title"
                         value={title}
@@ -88,6 +89,7 @@ export default function DocSubmission(props){
                         labelId="instructions-label"
                         type="text"
                         id="instructions"
+                        required="required"
                         placeholder="Enter instructions"
                         value={instructions}
                         size= "small"
@@ -105,6 +107,7 @@ export default function DocSubmission(props){
                         type="date"
                         InputProps={{inputProps: { min: today} }}
                         id="dueDate"
+                        required="required"
                         placeholder="Select due date"
                         size= "small"
                         fullWidth
@@ -120,7 +123,7 @@ export default function DocSubmission(props){
                     <input
                         labelId="markingScheme-label"
                         type="file"
-                        required
+                        required="required"
                         accept=".doc, .docx, .pdf"
                         className="markingScheme"
                         id="markingScheme"
@@ -135,7 +138,7 @@ export default function DocSubmission(props){
                     <input
                         labelId="template-label"
                         type="file"
-                        required
+                        required="required"
                         accept=".doc, .docx"
                         className="template"
                         id="template"

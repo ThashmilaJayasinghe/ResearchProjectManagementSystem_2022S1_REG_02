@@ -73,6 +73,7 @@ export default function DocSubmission(props){
                         labelId="title-label"
                         type="text"
                         id="title"
+                        required="required"
                         placeholder="Enter assignment title"
                         size= "small"
                         fullWidth
@@ -89,6 +90,7 @@ export default function DocSubmission(props){
                         labelId="instructions-label"
                         type="text" id="instructions"
                         placeholder="Enter instructions"
+                        required="required"
                         size= "small"
                         fullWidth
                         style = {{marginTop: "0.5rem"}}
@@ -105,6 +107,7 @@ export default function DocSubmission(props){
                         type="date"
                         InputProps={{inputProps: { min: today} }}
                         id="dueDate"
+                        required="required"
                         placeholder="Select viva date"
                         size= "small"
                         fullWidth
@@ -120,7 +123,7 @@ export default function DocSubmission(props){
                     <input
                         labelId="markingScheme-label"
                         type="file"
-                        required
+                        required="required"
                         accept=".doc, .docx, .pdf"
                         className="markingScheme"
                         id="markingScheme"
@@ -135,7 +138,7 @@ export default function DocSubmission(props){
                     <input
                         labelId="template-label"
                         type="file"
-                        required
+                        required="required"
                         accept=".ppt, .pptx"
                         className="template"
                         id="template"
