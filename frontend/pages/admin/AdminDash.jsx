@@ -130,7 +130,7 @@ function AdminDashboard() {
                                         const onDelete = (id) => {
 
                                             if (window.confirm('Do you wish to delete this staff member?')) {
-                                                Axios.get("http://localhost:5000/api/users/" + id)
+                                                Axios.delete("http://localhost:5000/api/users/" + id)
                                                     .then(() => {
                                                         getStaff();
                                                         alert("Staff Member Deleted");
@@ -243,7 +243,7 @@ function AdminDashboard() {
                                             const onStudDelete = (id) => {
 
                                                 if (window.confirm('Do you wish to delete this student member?')) {
-                                                    Axios.get("http://localhost:5000/api/users/" + id)
+                                                    Axios.delete("http://localhost:5000/api/users/" + id)
                                                         .then(() => {
                                                             getStudent();
                                                             alert("Student Deleted");

@@ -210,6 +210,19 @@ const getAllPanels = async (req, res) => {
     }
 }
 
+// @desc    Delete submission type
+// @route   DELETE /api/admin/deleteAssignment/:id
+// @access  Private
+const deleteSubmissionType = async (req, res) => {
+
+    await SubmissionType.findByIdAndDelete(req.params.id).then(() => {
+        res.status(200).json("Submission type deleted");
+    }).catch((err) => {
+        console.log(err);
+    })
+
+}
+
 
 module.exports = {
     addRole,
@@ -220,5 +233,6 @@ module.exports = {
     upload,
     addPanel,
     getGroups,
-    getAllPanels
+    getAllPanels,
+    deleteSubmissionType
 }

@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { addRole, allocateRole, getStaff, getStudents, addAssignment, upload, addPanel, getGroups, getAllPanels } = require('../controllers/adminController')
+const { addRole, allocateRole, getStaff, getStudents, addAssignment, upload, addPanel, getGroups, getAllPanels, deleteSubmissionType } = require('../controllers/adminController')
 const { protect, authRole } = require('../middleware/authMiddleware')
 // actual route is /api/admin/
 
@@ -12,5 +12,6 @@ router.post('/addAssignment', upload.fields([{name: 'markingScheme', maxCount: 1
 router.post('/addPanel', addPanel)
 router.get('/groups', getGroups)
 router.get('/allPanels', getAllPanels)
+router.delete('/deleteAssignment/:id', deleteSubmissionType)
 
 module.exports = router;
