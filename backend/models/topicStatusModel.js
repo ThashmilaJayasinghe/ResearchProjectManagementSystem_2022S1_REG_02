@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//topic status model
 const topicStatusSchema = new Schema({
 	grp_ID: {
 		type: String,
@@ -16,17 +17,6 @@ const topicStatusSchema = new Schema({
 	message: {
 		type: String,
 	},
-	// supervisorID: {
-	// 	type: String,
-	// 	// required : true
-	// },
-	// coSupervisorID: {
-	// 	type: String,
-	// 	// required : true
-	// },
-	topicDocument: {
-		type: String,
-	},
 	status: {
 		type: String,
 		// required : true
@@ -39,6 +29,5 @@ const topicStatusSchema = new Schema({
 		default: Date.now,
 	},
 });
-
 const topicStatus = mongoose.model('topicStatus', topicStatusSchema);
 module.exports = topicStatus;
