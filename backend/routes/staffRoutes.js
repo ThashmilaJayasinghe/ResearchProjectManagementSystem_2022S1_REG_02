@@ -13,7 +13,6 @@ router.post('/', addStaff);
 
 router.get('/', getAllSupervisors);
 
-
 // get staff details
 router.get('/getStaff', getStaffDetails)
 
@@ -25,6 +24,7 @@ router.put('/updateResearch', addResearchField)
 
 // delete qualification
 router.put('/deleteQual', removeQualifications)
+
 // delete research interest
 router.put('/deleteResearch', removeResearchInterests)
 

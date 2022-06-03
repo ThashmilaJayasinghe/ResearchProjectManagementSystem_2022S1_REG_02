@@ -127,12 +127,11 @@ const update_group_coSupervisor = async(req, res) => {
 	}
 }
 
-// get group leader
+// get group leader, their supervisor and co-supervisor
 const getGroupDetails = async(req, res) => {
 	
 	// const studentRegNumber = req.body.regNum;
 	const studentRegNumber = req.query.regNum
-
 
 	try{
 		const groupDetails = await Group.findOne({subMemberRegNumber:studentRegNumber})
@@ -170,6 +169,5 @@ const getGroupDetails = async(req, res) => {
 		res.status(501).json(err)
 	}
 }
-
 
 module.exports = { set_group, create_group, get_Group, update_group_supervisor, update_group_coSupervisor, getGroupDetails};

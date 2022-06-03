@@ -11,9 +11,6 @@ connectDB();
 const app = express();
 app.use(cors());
 
-// app.get('/api/goals', (req, res) => {
-//     res.status(200).json({message: 'Get goals'})
-// })
 
 app.use(cors());
 app.use(express.json());
@@ -23,7 +20,6 @@ app.use(express.static(path.resolve(__dirname, 'submissions')));
 app.use('/api/goals', require('./routes/goalRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
-// app.use('/api/reqSupervisor', require('./routes/requestSupervisorRoutes'));
 app.use('/topic', require('./routes/topicStatuesRoutes'));
 app.use('/marks', require('./routes/marksRoutes'));
 app.use('/group', require('./routes/groupRoutes'));
