@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {InputLabel, TextField} from "@mui/material";
+import Button from "@mui/material/Button";
 
 
 export default function DocSubmission(props){
@@ -12,7 +14,12 @@ export default function DocSubmission(props){
     const [markingScheme, setMarkingScheme] = useState("");
     const [template, setTemplate] = useState("");
 
-
+    // Calculating min date for date picker
+    const date = new Date();
+    // adding a day
+    date.setDate(date.getDate() + 1);
+    const isoDate = date.toISOString()
+    const today = isoDate.substring(0, 10)
 
     const onChangeFileMS = e => {
         setMarkingScheme(e.target.files[0]);
@@ -50,70 +57,110 @@ export default function DocSubmission(props){
     }
 
     return(
-        <div className='container'>
-            <form encType={"multipart/form-data"}>
+        <div
+            style={{
+                borderRadius: "10px",
+                margin: "10px",
+                padding: "",
+                boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
 
-                <div className="form-group col-md-6">
-                    <label><b>Title</b> </label>
-                    <input type="text" id="title" className="form-control" placeholder="Enter assignment title" value={title}
-                           onChange={(e) =>(
-                               setTitle(e.target.value)
-                           )}
+            }}
+        >
+            <form encType={"multipart/form-data"}>
+                <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
+                    <InputLabel id="title-label">Title</InputLabel>
+                    <TextField
+                        labelId="title-label"
+                        type="text"
+                        id="title"
+                        required="required"
+                        placeholder="Enter assignment title"
+                        size= "small"
+                        fullWidth
+                        style = {{marginTop: "0.5rem"}}
+                        value={title}
+                        onChange={(e) =>(
+                            setTitle(e.target.value)
+                        )}
                     />
                 </div>
-                <br/>
-                <div className="form-group col-md-6">
-                    <label><b>Instructions</b> </label>
-                    <input type="text" id="title" className="form-control" placeholder="Enter instructions"
-                           value={instructions}
-                           onChange={(e) => (
-                               setInstructions(e.target.value)
-                           )}
+                <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
+                    <InputLabel id="instructions-label">Instructions</InputLabel>
+                    <TextField
+                        labelId="instructions-label"
+                        type="text" id="instructions"
+                        placeholder="Enter instructions"
+                        required="required"
+                        size= "small"
+                        fullWidth
+                        style = {{marginTop: "0.5rem"}}
+                        value={instructions}
+                        onChange={(e) => (
+                            setInstructions(e.target.value)
+                        )}
                     />
                 </div>
-                <br/>
-                <div className="form-group col-md-6">
-                    <label><b>Viva Date</b> </label>
-                    <input type="date" id="dueDate" className="form-control" placeholder="Select viva date"
-                           value={dueDate}
-                           onChange={(e) => (
-                               setDueDate(e.target.value)
-                           )}
+                <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
+                    <InputLabel id="date-label">Viva Date</InputLabel>
+                    <TextField
+                        labelId="date-label"
+                        type="date"
+                        InputProps={{inputProps: { min: today} }}
+                        id="dueDate"
+                        required="required"
+                        placeholder="Select viva date"
+                        size= "small"
+                        fullWidth
+                        style = {{marginTop: "0.5rem"}}
+                        value={dueDate}
+                        onChange={(e) => (
+                            setDueDate(e.target.value)
+                        )}
                     />
                 </div>
-                <br/>
-                <div className="form-group">
-                    <label htmlFor="markingScheme" className="form-label">Upload Marking Scheme</label>
-                    <br />
+                <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
+                    <InputLabel id="markingScheme-label" className="form-label">Upload Marking Scheme</InputLabel>
                     <input
+                        labelId="markingScheme-label"
                         type="file"
-                        required
+                        required="required"
                         accept=".doc, .docx, .pdf"
                         className="markingScheme"
                         id="markingScheme"
                         name="markingScheme"
+                        style = {{marginTop: "0.5rem"}}
                         onChange={onChangeFileMS}
 
                     />
                 </div>
-                <br/>
-                <div className="form-group">
-                    <label htmlFor="template" className="form-label">Upload Template (.ppt or .pptx file)</label>
-                    <br />
+                <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
+                    <InputLabel id="template-label">Upload Template (.ppt or .pptx file)</InputLabel>
                     <input
+                        labelId="template-label"
                         type="file"
-                        required
+                        required="required"
                         accept=".ppt, .pptx"
                         className="template"
                         id="template"
                         name="template"
+                        style = {{marginTop: "0.5rem"}}
                         onChange={onChangeFileT}
-
                     />
                 </div>
-                <br/>
-                <br/>
-                <button type="submit" className="btn btn-success" onClick={handleSubmit}>Submit</button>
+                <div style={{padding: "3rem" }}>
+                    <center>
+                        <Link to={'/admin'} style={{ textDecoration: 'none' }}>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#646FD4", marginTop: "0.5rem" }}
+                                onClick={handleSubmit}
+                            >
+                                Submit
+                            </Button>
+                        </Link>
+                    </center>
+                </div>
             </form>
         </div>
     )

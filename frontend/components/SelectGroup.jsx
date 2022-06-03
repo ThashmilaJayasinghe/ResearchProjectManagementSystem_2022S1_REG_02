@@ -47,6 +47,7 @@ export default function SelectGroup(props) {
                     id="demo-simple-select"
                     value={chosen}
                     label="Group"
+                    required="required"
                     onChange={handleChange}
                 >
                     {groups
