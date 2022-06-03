@@ -139,17 +139,19 @@ function AdminDashboard() {
                                                 <TableCell>{staff.name}</TableCell>
                                                 <TableCell>{staff.email}</TableCell>
                                                 <TableCell>
-                                                    <Link to='/updateuser'>
-                                                        <button className='btnIcon' onClick={() => setStaff(staff)}>
-                                                            <EditIcon/></button>
-                                                    </Link>
-                                                    <button className='btnIcon btnsecond'
-                                                            onClick={() => onDelete(staff._id)}><DeleteIcon/>
-                                                    </button>
-                                                    <div style={{cursor: "pointer"}} onClick={() => onDelete(staff._id)}>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width='1.2rem' height="1.2rem" fill="none" viewBox="0 0 24 24" stroke="#ed2121" strokeWidth={2}>
-                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                        </svg>
+                                                    <div style={{ display: "flex", gap: "1rem" }}>
+                                                        <Link to='/updateuser'>
+                                                            <div style={{cursor: "pointer"}} onClick={() => setStaff(staff)}>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width='1.2rem' height="1.2rem" fill="none" viewBox="0 0 24 24" stroke="#ed2121" strokeWidth={2}>
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                                </svg>
+                                                            </div>
+                                                        </Link>
+                                                        <div style={{cursor: "pointer"}} onClick={() => onDelete(staff._id)}>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width='1.2rem' height="1.2rem" fill="none" viewBox="0 0 24 24" stroke="#ed2121" strokeWidth={2}>
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                            </svg>
+                                                        </div>
                                                     </div>
                                                 </TableCell>
                                             </TableRow>
