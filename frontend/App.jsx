@@ -31,7 +31,8 @@ import CoSupervisor_Home from './pages/coSupervisor/CoSupervisor_Home';
 import Request_ResearchField_coSupervisor from './pages/coSupervisor/Request_ResearchField_coSupervisor';
 import Supervisor_Home from './pages/supervisor/Supervisor_Home'
 import MarkingSchemes from './pages/staff/MarkingSchemes'
-
+import AddSubmissions from "./pages/admin/AddSubmissionTypes";
+import ViewSubmissions from "./pages/admin/ViewSubmissionTypes";
 
 function App(){
     return(
@@ -66,6 +67,8 @@ function App(){
                     <Route exact path = '/co-supervisor/requestedresearchField' element = {<Request_ResearchField_coSupervisor/>} />
                     <Route exact path = '/supervisor/chat' element = {<SupervisorChat/>}/>
                     {/* <Route exact path = '/student/chat' element = {<StudentChat/>}/> */}
+                    <Route path = '/addSubmissions' element = {<AddSubmissions/>} />
+                    <Route path = '/viewSubmissions' element = {<ViewSubmissions/>} />
 
                 </Routes>
             </Router>
