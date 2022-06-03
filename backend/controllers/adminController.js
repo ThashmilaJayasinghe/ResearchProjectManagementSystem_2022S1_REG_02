@@ -192,6 +192,21 @@ const getGroups = async (req, res) => {
 }
 
 
+// @desc    Get all panel data
+// @route   GET /api/admin/allPanels
+// @access  Private
+const getAllPanels = async (req, res) => {
+
+    const panels = await Panel.find()
+
+    if(panels) {
+        res.status(200).json(panels)
+    } else {
+        return res.status(404).json({ msg: 'No panels to display'})
+    }
+}
+
+
 module.exports = {
     addRole,
     allocateRole,
@@ -200,5 +215,6 @@ module.exports = {
     addAssignment,
     upload,
     addPanel,
-    getGroups
+    getGroups,
+    getAllPanels
 }
