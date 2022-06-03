@@ -75,6 +75,28 @@ export default function ViewSubmissionTypes() {
                         <TableBody>
                             {subTypes
                                 .map((subType, index) => {
+
+                                    const getSubTypes = () => {
+                                        Axios.get("http://localhost:5000/student/allSubmitTypes")
+                                            .then((getSubTypes) => {
+                                                setSubTypes(getSubTypes.data);
+                                            })
+                                            .catch((err) => {
+                                                alert(err)
+                                            })
+                                    }
+
+                                    const onDelete = (id) => {
+
+                                        if (window.confirm('Do you wish to delete this submission type?')) {
+                                            Axios.delete("http://localhost:5000/api/admin/deleteAssignment/" + id)
+                                                .then(() => {
+                                                    getSubTypes();
+                                                    alert("Submission Type Deleted");
+                                                })
+                                        }
+                                    }
+
                                     return (
                                         <TableRow
                                             key={index}
@@ -83,7 +105,7 @@ export default function ViewSubmissionTypes() {
                                             <TableCell sx={{ width: "30%" }}>
                                                 {subType.title}
                                             </TableCell>
-                                            <TableCell sx={{ width: "35%" }} align="center">
+                                            <TableCell sx={{ width: "30%" }} align="center">
                                                 <Button
                                                     variant="contained"
                                                     style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }}
@@ -92,7 +114,7 @@ export default function ViewSubmissionTypes() {
                                                     Download Marking Scheme
                                                 </Button>
                                             </TableCell>
-                                            <TableCell sx={{ width: "35%" }} align="center">
+                                            <TableCell sx={{ width: "30%" }} align="center">
                                                 <Button
                                                     variant="contained"
                                                     style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }}
@@ -101,7 +123,7 @@ export default function ViewSubmissionTypes() {
                                                     Download Template
                                                 </Button>
                                             </TableCell>
-                                            <TableCell>
+                                            <TableCell sx={{ width: "10%" }} align="center">
                                                 <div style={{ display: "flex", gap: "1rem" }}>
                                                     <div style={{cursor: "pointer"}} onClick={() => onDelete(subType._id)}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width='1.2rem' height="1.2rem" fill="none" viewBox="0 0 24 24" stroke="#ed2121" strokeWidth={2}>

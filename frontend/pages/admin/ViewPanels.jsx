@@ -60,22 +60,43 @@ export default function SelectUser() {
                             <TableRow>
                                 <TableCell>Name</TableCell>
                                 <TableCell>Staff Members</TableCell>
-                                <TableCell>Students</TableCell>
+                                <TableCell>Group</TableCell>
                                 {/*<TableCell>Actions</TableCell>*/}
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {panels
-                                .map((panel) => {
+                                .map((panel, index) => {
                                     return (
                                         <TableRow
-                                            key={panel.name}
+                                            key={index}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
                                             <TableCell sx={{ width: "30%" }}>
                                                 {panel.name}
                                             </TableCell>
-                                            {panel.staff.map()}
+                                            <TableCell sx={{ width: "30%" }}>
+                                                {panel.staff.map((pmember) => {
+
+                                                    Axios.get("http://localhost:5000/api/admin/allPanels")
+                                                        .then((res) => {
+                                                            setPanels(res.data)
+                                                        })
+
+                                                    return (
+                                                        <li>{pmember}</li>
+
+                                                    )
+                                            })}
+                                            </TableCell>
+                                            <TableCell sx={{ width: "30%" }}>
+                                                {panel.groups.map((group) => {
+                                                    return (
+                                                        <li>{group}</li>
+
+                                                    )
+                                                })}
+                                            </TableCell>
                                         </TableRow>
                                     )
                                 })}
