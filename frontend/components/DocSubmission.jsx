@@ -92,14 +92,14 @@ export default function DocSubmission(props){
                         )}
                     />
                 </div>
-                <div>
-                    <ReactQuill
-                        theme='snow'
-                        value={convertedText}
-                        onChange={setConvertedText}
-                        style={{minHeight: '300px'}}
-                    />
-                </div>
+                {/*<div>*/}
+                {/*    <ReactQuill*/}
+                {/*        theme='snow'*/}
+                {/*        value={convertedText}*/}
+                {/*        onChange={setConvertedText}*/}
+                {/*        style={{minHeight: '300px'}}*/}
+                {/*    />*/}
+                {/*</div>*/}
                 <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
                     <InputLabel id="instructions-label">Instructions</InputLabel>
                     <TextField
