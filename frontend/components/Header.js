@@ -48,10 +48,6 @@ const Header = () => {
 
 	const staffItems = [
 		{
-			text: 'StaffDash',
-			onClick: () => navigate('/staff')
-		},
-		{
 			text: 'Supervisor',
 			onClick: () => navigate('/supervisor')
 		},
