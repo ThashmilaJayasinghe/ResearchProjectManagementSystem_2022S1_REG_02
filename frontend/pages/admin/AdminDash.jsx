@@ -29,7 +29,10 @@ function AdminDashboard() {
 
     useEffect(() => {
 
-        if(!user) {
+        if(!user ) {
+            navigate('/')
+        } else if(!(user.roles.includes('admin'))) {
+            alert("Unauthorized access!")
             navigate('/')
         }
 

@@ -19,6 +19,7 @@ import {useSelector} from "react-redux";
 export default function SelectUser() {
 
     const [panels, setPanels] = useState([]);
+    const [member, setMember] = useState("");
 
     const navigate = useNavigate()
 
@@ -34,6 +35,14 @@ export default function SelectUser() {
             .then((res) => {
                 setPanels(res.data)
             })
+            // }).then(() => {
+            //     panels.map((panel) => {
+            //         Axios.get("http://localhost:5000/api/users/" + panel)
+            //             .then((res) => {
+            //                 setMember(res.data.name)
+            //     })
+            // })
+
 
     }, [user, navigate]);
 
@@ -78,14 +87,8 @@ export default function SelectUser() {
                                             <TableCell sx={{ width: "30%" }}>
                                                 {panel.staff.map((pmember) => {
 
-                                                    Axios.get("http://localhost:5000/api/admin/allPanels")
-                                                        .then((res) => {
-                                                            setPanels(res.data)
-                                                        })
-
                                                     return (
                                                         <li>{pmember}</li>
-
                                                     )
                                             })}
                                             </TableCell>

@@ -202,7 +202,7 @@ const getAllPanels = async (req, res) => {
 
     if(panels) {
 
-
+        // const staff = await User.find({roles:'student'})
 
         res.status(200).json(panels)
     } else {
