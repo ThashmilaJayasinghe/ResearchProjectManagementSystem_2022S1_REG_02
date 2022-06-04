@@ -6,9 +6,12 @@ import Paper from '@mui/material/Paper';
 import { useSelector } from 'react-redux';
 import { changeCoSupervisorRequestStates, getCoSupervisorRequests } from '../../apis/staff/RequestCoSupervisorApi';
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, LinearProgress, Table, TableBody, TableContainer, TableHead } from '@mui/material';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Lottie from 'react-lottie'
 import notFountAnimation from '../../components/looties/notFoundError.json'
+// import noDataAvailableAnimation from '../../components/looties/noData.json'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -45,6 +48,15 @@ const unableToResolve = {
     }
 };
 
+// const noDataAvailable = {
+//     loop: true,
+//     autoplay: true,
+//     animationData: noDataAvailableAnimation,
+//     rendererSettings: {
+//         preserveAspectRatio: "xMidYMid slice"
+//     }
+// }
+
 const Request_ResearchField_coSupervisor = () => {
 
   const {user} = useSelector((state) => state.auth) //used to get the user
@@ -66,12 +78,34 @@ const Request_ResearchField_coSupervisor = () => {
   };
 
   const onAcceptClick = (groupId, actualGroupId) => {
+
+    toast.success('Request accepted!', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
     const accept  = "accepted"
     setReqState(accept);
     changeCoSupervisorRequestStates(groupId, accept, actualGroupId, user._id).then(res => console.log("successfully changed!"))
   }
 
   const onRejectClick = (groupId) => {
+
+    toast.info('Request Rejected!', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
     const reject  = "rejected"
     setReqState(reject);
     const actualGroupId = "";
@@ -107,6 +141,19 @@ const Request_ResearchField_coSupervisor = () => {
 
   return (
     <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
+        <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            />
+            {/* Same as */}
+        <ToastContainer />
         {
             !isTimeOut ?
             <>
@@ -152,18 +199,27 @@ const Request_ResearchField_coSupervisor = () => {
                                                             </>
                                                             : (
                                                                 <>
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none"
-                                                                        viewBox="-14 0 60 24" stroke="#49de73" stroke-width="1">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                                                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                                                                    </svg>
+                                                                {
+                                                                    data.requestStates == "accepted" ? (
+                                                                        <>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none"
+                                                                                viewBox="-14 0 60 24" stroke="#49de73" stroke-width="1">
+                                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                                        d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                                                                            </svg>
+                                                                        </> 
+                                                                    ):
+                                                                    <>
+                                                                        <div style={{color: "#f5c425"}}>Not marked</div>
+                                                                    </>
+                                                                }
                                                                 </>
                                                             )
                                                     }
                                                     </>
                                                 ) : (
                                                     <>
-                                                        <div style={{color: "yellow"}}>Not marked</div>
+                                                        <div style={{color: "#f5c425"}}>Not marked</div>
                                                     </>
                                                     )
                                             }
@@ -204,12 +260,13 @@ const Request_ResearchField_coSupervisor = () => {
                                         </tr>
                                         <tr style={{height: "40px"}}>
                                             <td>Added date</td>
+                                            {/* <td>: {formatter.format(Date.parse(onViewClick.createdAt))}</td> */}
                                             <td>: {onViewClick.createdAt}</td>
                                         </tr>
-                                        <tr style={{height: "40px"}} >
+                                        {/* <tr style={{height: "40px"}} >
                                             <td >Details</td>
                                             <td>: {onViewClick.details}</td>
-                                        </tr>
+                                        </tr> */}
                                         <tr style={{height: "40px"}}>
                                             <td>Current status</td>
                                             <td>: {onViewClick.requestStates}</td>
