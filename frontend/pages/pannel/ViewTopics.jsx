@@ -63,7 +63,9 @@ export default function ViewTopics(){
     },[])
 
     return(
+
         <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
+
             <center><h1>Topic Evaluation</h1></center>
 
             <TableContainer component={Paper}>
