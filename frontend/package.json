@@ -33,7 +33,8 @@
     "react-lottie": "^1.2.3",
     "react-md-spinner": "^1.0.0",
     "react-redux": "^8.0.2",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "react-toastify": "^9.0.3"
   },
   "devDependencies": {
     "crypto-browserify": "^3.12.0",
