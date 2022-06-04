@@ -35,7 +35,6 @@ const upload = Multer({
         fileSize: 2000000
     },
 
-
     fileFilter: (req, file, callback) => {
 
         const ext = path.extname(file.originalname);
@@ -51,9 +50,7 @@ const upload = Multer({
             }
             callback(null, true);
         }
-
     },
-
 });
 
 
@@ -176,17 +173,17 @@ const addPanel = async (req, res) => {
     }
 }
 
-// @desc    Get groups
-// @route   GET /api/admin/groups
+// @desc    Get group
+// @route   GET /api/admin/group
 // @access  Private
-const getGroups = async (req, res) => {
+const getGroup = async (req, res) => {
 
-    const groups = await Group.find()
+    const group = await Group.findById(req.params.id)
 
-    if(groups) {
-        res.status(200).json(groups)
+    if(group) {
+        res.status(200).json(group)
     } else {
-        res.status(404).json({ msg: 'No groups to display'})
+        res.status(404).json({ msg: 'No group to display'})
     }
 
 }
@@ -198,12 +195,8 @@ const getGroups = async (req, res) => {
 const getAllPanels = async (req, res) => {
 
     const panels = await Panel.find()
-    const panelDetails = [];
 
     if(panels) {
-
-
-
         res.status(200).json(panels)
     } else {
         return res.status(404).json({ msg: 'No panels to display'})
@@ -232,7 +225,7 @@ module.exports = {
     addAssignment,
     upload,
     addPanel,
-    getGroups,
+    getGroup,
     getAllPanels,
     deleteSubmissionType
 }

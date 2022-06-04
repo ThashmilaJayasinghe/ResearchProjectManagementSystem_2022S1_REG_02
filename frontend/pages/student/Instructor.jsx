@@ -91,8 +91,9 @@ export default function Instructor() {
 
     if(supervisor){
       const tempVal = supervisor.supervisorName;
-      console.log(tempVal)
-      localStorage.setItem("agent-uid", tempVal)
+      const tempName = tempVal.replace(/ /g, '')
+
+      localStorage.setItem("agent-uid", tempName)
       localStorage.setItem("supChat", true)
 
       window.location.reload()
@@ -102,8 +103,9 @@ export default function Instructor() {
   const onCoSupervisorChat = (coSupervisor) => {
     if(coSupervisor){
       const tempVal = coSupervisor.supervisorName;
-      console.log(tempVal)
-      localStorage.setItem("agent-uid", tempVal)
+      const tempName = tempVal.replace(/ /g, '')
+
+      localStorage.setItem("agent-uid", tempName)
       setIsCoSupervisorChat(true)
       localStorage.setItem("coSupChat", true)
 
@@ -117,7 +119,13 @@ export default function Instructor() {
 
 <center><h1>Instructors</h1></center>
 
-<div style={{border: "1px solid black", borderRadius: "10px", margin: "10px", padding: "10px"}}>
+       <div  style={{
+           borderRadius: "10px",
+           margin: "10px",
+           padding: "5px",
+           boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+
+       }}>
       <center><h3>Supervisor</h3></center>
     
       {
@@ -166,16 +174,26 @@ export default function Instructor() {
                 supervisor.requestStates == "Pending" &&
                 <td style={{paddingTop: "10px"}}>: Pending</td>
             }
+
         </tr>
 
             </div>
+                <hr/>
             </table>
+
                 )
               })
             } 
-            </div>
-       
-      <div style={{border: "1px solid black", borderRadius: "10px", margin: "10px", padding: "10px"}}>
+
+       </div>
+
+          <div  style={{
+              borderRadius: "10px",
+              margin: "10px",
+              padding: "5px",
+              boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+
+          }}>
       <center><h3>Co-Supervisor</h3></center>
       {
         coSupervisor.map((coSupervisor)=>{
@@ -227,12 +245,19 @@ export default function Instructor() {
 
         </tr>
             </div>
+          <hr/>
             </table>
           )
         })}
             </div>
 
-            <div style={{border: "1px solid black", borderRadius: "10px", margin: "10px", padding: "10px"}}>
+          <div  style={{
+              borderRadius: "10px",
+              margin: "10px",
+              padding: "5px",
+              boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+
+          }}>
       <center><h3>Panal</h3></center>
       {
         panel.map((panel)=>{
@@ -257,7 +282,7 @@ export default function Instructor() {
         })}
             </div>
             <Link to="/topicRequest">
-      <Button variant="contained" color="info">Panel Members</Button>
+      <Button style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }} variant="contained" color="info">Panel Members</Button>
       </Link>
 
       {/* {

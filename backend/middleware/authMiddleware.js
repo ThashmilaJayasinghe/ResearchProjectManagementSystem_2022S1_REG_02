@@ -5,11 +5,10 @@ const Role = require('../models/roleModel')
 const protect = async (req, res, next) => {
     let token
 
-    // HTTP header has an authorization object.
-    // That is being checked below.
-    // And we're checking for the word 'Bearer'
-    // which is always followed by the token.
-    // eg Bearer drgtergfge
+    // HTTP header has an authorization object. That is being checked below.
+    // And we're checking for the word 'Bearer' which is always
+    // followed by the token. eg Bearer drgtergfge
+
     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         try{
             // Get token from header
@@ -22,13 +21,11 @@ const protect = async (req, res, next) => {
             req.user = await User.findById(decoded.id).select('-password')
 
             next()
-
         } catch (error) {
             console.log(error)
             res.status(401).json({ msg:'Not authorized'});
         }
     }
-
     if(!token) {
         return res.status(401).json({ msg: 'Not authorized, no token'});
     }
@@ -37,30 +34,14 @@ const protect = async (req, res, next) => {
 const authRole = (role) => {
     return async (req, res, next) => {
 
-        // const userRoles = await Role.findById(req.user.roles)
-        // if (userRoles.name !== role) {
-        //     return res.status(401).json({ msg: 'Not authorized'});
-        // }
 
         if(!(req.user.roles.includes(role))) {
-            return res.status(401).json({ msg: 'Not authorized'});
+            return res.status(401).json({ msg: 'User Not Authorized'});
         }
 
         next()
     }
 }
-
-// const aRole = (role) => {
-//     return (req, res, next) => {
-//         if(req.user.role !== role) {
-//             res.status(401)
-//             return res.send('Not authorized')
-//         }
-//
-//         next()
-//     }
-// }
-
 
 module.exports = {
     protect,

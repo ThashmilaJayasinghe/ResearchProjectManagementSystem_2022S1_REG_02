@@ -46,7 +46,7 @@ export default function Submit() {
                     <h4>Submit</h4>
                     <TextField type="file" onChange={(e)=>{setDocument(e.target.files[0])}}/>
                     <div style={{paddingTop: "20px"}}>
-                        <Button type="submit"  variant="contained" color="info" style={{marginRight: "5px"}} onClick={handleSubmit}>Sumbit</Button>
+                        <Button type="submit"  variant="contained" style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }} onClick={handleSubmit}>Sumbit</Button>
                 </div>
                 </div> 
         </div>

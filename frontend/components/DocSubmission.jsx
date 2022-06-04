@@ -2,9 +2,18 @@ import React, {useState} from 'react'
 import axios from "axios";
 import {Link} from "react-router-dom";
 import {Button, InputLabel, TextField} from "@mui/material";
-
+import ReactQuill from "react-quill"
+import 'react-quill/dist/quill.snow.css'
+import {useSelector} from "react-redux";
 
 export default function DocSubmission(props){
+
+    const {user} = useSelector((state) => state.auth) //used to get the user
+    const config = {
+        headers: {
+            Authorization: `Bearer ${user.token}`,
+        },
+    }
 
     const [title, setTitle] = useState("");
     const [type, setType] = useState(props.type);
@@ -12,6 +21,7 @@ export default function DocSubmission(props){
     const [dueDate, setDueDate] = useState("");
     const [markingScheme, setMarkingScheme] = useState("");
     const [template, setTemplate] = useState("");
+    const [convertedText, setConvertedText] = useState("Some default content");
 
     // Calculating min date for date picker
     const date = new Date();
@@ -45,10 +55,9 @@ export default function DocSubmission(props){
         formData.append("markingScheme", markingScheme);
         formData.append("template", template);
 
-
-        axios.post('http://localhost:5000/api/admin/addAssignment', formData).then(()=>{
+        axios.post('http://localhost:5000/api/admin/addAssignment', formData, config).then(()=>{
             alert('Submission added')
-            // window.location.href = "/admin";
+            window.location.href = "/managesubmissions";
 
         }).catch((err)=>{
             alert(err)
@@ -85,20 +94,33 @@ export default function DocSubmission(props){
                 </div>
                 <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
                     <InputLabel id="instructions-label">Instructions</InputLabel>
-                    <TextField
-                        labelId="instructions-label"
-                        type="text"
-                        id="instructions"
-                        required="required"
-                        placeholder="Enter instructions"
-                        value={instructions}
-                        size= "small"
-                        fullWidth
-                        style = {{marginTop: "0.5rem"}}
-                        onChange={(e) => (
-                            setInstructions(e.target.value)
-                        )}
-                    />
+                    {/*<TextField*/}
+                    {/*    labelId="instructions-label"*/}
+                    {/*    type="text"*/}
+                    {/*    id="instructions"*/}
+                    {/*    required="required"*/}
+                    {/*    placeholder="Enter instructions"*/}
+                    {/*    value={instructions}*/}
+                    {/*    size= "small"*/}
+                    {/*    fullWidth*/}
+                    {/*    style = {{marginTop: "0.5rem"}}*/}
+                    {/*    onChange={(e) => (*/}
+                    {/*        setInstructions(e.target.value)*/}
+                    {/*    )}*/}
+                    {/*/>*/}
+                    <div>
+                        <ReactQuill
+                            theme='snow'
+                            value={instructions}
+                            style={{minHeight: '100px', marginTop: "0.5rem"}}
+                            id="instructions"
+                            required="required"
+                            placeholder="Enter instructions"
+                            size= "small"
+                            fullWidth
+                            onChange={setInstructions}
+                        />
+                    </div>
                 </div>
                 <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
                     <InputLabel id="date-label">Due Date</InputLabel>
@@ -149,7 +171,7 @@ export default function DocSubmission(props){
                 </div>
                 <div style={{padding: "3rem" }}>
                     <center>
-                        <Link to={'/admin'} style={{ textDecoration: 'none' }}>
+                        <Link to={'/managesubmissions'} style={{ textDecoration: 'none' }}>
                             <Button
                                 type="submit"
                                 variant="contained"

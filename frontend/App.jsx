@@ -46,6 +46,7 @@ import AcceptedTopics from "./pages/pannel/AcceptedTopics";
 import RejectedTopics from "./pages/pannel/RejectedTopics";
 import EvaluatePresentation from "./pages/pannel/EvaluatePresentation";
 import ViewTopicEvaluated from "./pages/pannel/ViewTopicEvaluated";
+import RegisterNumber from './pages/student/RegisterNumber';
 
 function App(){
     return(
@@ -84,6 +85,7 @@ function App(){
                     <Route path = '/viewSubmissions' element = {<ViewSubmissions/>} />
                     <Route path = '/viewPanels' element = {<ViewPanels/>} />
                     <Route path = '/managePanels' element = {<ManagePanels/>} />
+                    <Route path = '/registerNo' element = {<RegisterNumber/>}/>
 
                     <Route exact path= '/addmarksSuper/:id' element = {<AddmarksSuper/>}/>
                     <Route exact path= '/documentsEvaluationSupervisor' element = {<DocumentEvaluate/>}/>
@@ -111,6 +113,14 @@ function App(){
                 localStorage.getItem("supChat") &&
                     <StudentChat />
             }
+            
+                {/* localStorage.getItem("coSupChat") && 
+                  <StudentChat />
+
+                localStorage.getItem("supChat") && 
+                    <StudentChat />
+             */}
+
         </div>
     )
 }

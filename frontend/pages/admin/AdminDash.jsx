@@ -20,6 +20,11 @@ function AdminDashboard() {
     const navigate = useNavigate()
 
     const {user} = useSelector((state) => state.auth) //used to get the user
+    const config = {
+        headers: {
+            Authorization: `Bearer ${user.token}`,
+        },
+    }
 
     const [staffs, setStaffs] = useState([]);
     const [students, setStudents] = useState([]);
@@ -29,17 +34,21 @@ function AdminDashboard() {
 
     useEffect(() => {
 
-        if(!user) {
+        if(!user ) {
+            navigate('/')
+        } else if(!(user.roles.includes('admin'))) {
+            alert("Unauthorized access!")
             navigate('/')
         }
 
-        Axios.get("http://localhost:5000/api/admin/staff/")
+
+        Axios.get("http://localhost:5000/api/admin/staff/", config)
             .then((res) => {
                 setStaffs(res.data)
                 console.log(res.data);
             })
 
-        Axios.get("http://localhost:5000/api/admin/students/")
+        Axios.get("http://localhost:5000/api/admin/students/", config)
             .then((res) => {
                 setStudents(res.data)
                 console.log(res.data);
@@ -118,7 +127,8 @@ function AdminDashboard() {
                                         }
 
                                         const getStaff = () => {
-                                            Axios.get("http://localhost:5000/api/admin/staff/")
+
+                                            Axios.get("http://localhost:5000/api/admin/staff/", config)
                                                 .then((getStaff) => {
                                                     setStaffs(getStaff.data);
                                                 })
@@ -130,7 +140,8 @@ function AdminDashboard() {
                                         const onDelete = (id) => {
 
                                             if (window.confirm('Do you wish to delete this staff member?')) {
-                                                Axios.delete("http://localhost:5000/api/users/" + id)
+
+                                                Axios.delete("http://localhost:5000/api/users/" + id, config)
                                                     .then(() => {
                                                         getStaff();
                                                         alert("Staff Member Deleted");
@@ -231,7 +242,7 @@ function AdminDashboard() {
                                             }
 
                                             const getStudent = () => {
-                                                Axios.get("http://localhost:5000/api/admin/students/")
+                                                Axios.get("http://localhost:5000/api/admin/students/", config)
                                                     .then((getStudent) => {
                                                         setStudents(getStudent.data);
                                                     })
@@ -243,7 +254,7 @@ function AdminDashboard() {
                                             const onStudDelete = (id) => {
 
                                                 if (window.confirm('Do you wish to delete this student member?')) {
-                                                    Axios.delete("http://localhost:5000/api/users/" + id)
+                                                    Axios.delete("http://localhost:5000/api/users/" + id, config)
                                                         .then(() => {
                                                             getStudent();
                                                             alert("Student Deleted");

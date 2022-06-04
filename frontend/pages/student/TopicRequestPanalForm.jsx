@@ -27,8 +27,10 @@ export default function TopicRequestPanalForm() {
         axios.post('http://localhost:5000/topic/' + user._id ,formData)
         .then(()=>{
             alert('Topic request added');
-        }).catch(()=>{
-            alert("Please upload a .ppt, .pptx, .doc or .docx file")
+
+        }).catch((err)=>{
+            alert(err)
+            // alert("Please upload a .ppt, .pptx, .doc or .docx file")
         })
     }
 
@@ -52,7 +54,7 @@ export default function TopicRequestPanalForm() {
                     <TextField   required type="file" onChange={(e)=>{setTopicDocument(e.target.files[0])}}/>
                 
                     <div style={{paddingTop: "20px"}}>
-                        <Button type="submit"  variant="contained" color="info" style={{marginRight: "5px"}} onClick={handleSubmit}>Set Request</Button>
+                        <Button type="submit"  variant="contained" color="info" style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }} onClick={handleSubmit}>Set Request</Button>
                 </div>
                 </div> 
         </div>
