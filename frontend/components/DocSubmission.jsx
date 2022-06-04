@@ -2,9 +2,18 @@ import React, {useState} from 'react'
 import axios from "axios";
 import {Link} from "react-router-dom";
 import {Button, InputLabel, TextField} from "@mui/material";
-
+import ReactQuill from "react-quill"
+import 'react-quill/dist/quill.snow.css'
+import {useSelector} from "react-redux";
 
 export default function DocSubmission(props){
+
+    const {user} = useSelector((state) => state.auth) //used to get the user
+    const config = {
+        headers: {
+            Authorization: `Bearer ${user.token}`,
+        },
+    }
 
     const [title, setTitle] = useState("");
     const [type, setType] = useState(props.type);
@@ -12,6 +21,7 @@ export default function DocSubmission(props){
     const [dueDate, setDueDate] = useState("");
     const [markingScheme, setMarkingScheme] = useState("");
     const [template, setTemplate] = useState("");
+    const [convertedText, setConvertedText] = useState("Some default content");
 
     // Calculating min date for date picker
     const date = new Date();
@@ -45,8 +55,7 @@ export default function DocSubmission(props){
         formData.append("markingScheme", markingScheme);
         formData.append("template", template);
 
-
-        axios.post('http://localhost:5000/api/admin/addAssignment', formData).then(()=>{
+        axios.post('http://localhost:5000/api/admin/addAssignment', formData, config).then(()=>{
             alert('Submission added')
             // window.location.href = "/admin";
 
@@ -81,6 +90,14 @@ export default function DocSubmission(props){
                         onChange={(e) =>(
                             setTitle(e.target.value)
                         )}
+                    />
+                </div>
+                <div>
+                    <ReactQuill
+                        theme='snow'
+                        value={convertedText}
+                        onChange={setConvertedText}
+                        style={{minHeight: '300px'}}
                     />
                 </div>
                 <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>

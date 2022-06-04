@@ -58,7 +58,7 @@ export default function RequestForm(){
                     <TextField fullWidth type="text" id="massege" label="Massege....." onChange={(e)=>(setMassege(e.target.value))}/>
                 
                     <div style={{paddingTop: "20px"}}>
-                        <Button type="submit"  variant="contained" color="info" style={{marginRight: "5px"}} onClick={handleSubmit}>Set Request</Button>
+                        <Button type="submit"  variant="contained" color="info" style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }} onClick={handleSubmit}>Set Request</Button>
                 </div>
                 </div> 
         </div>

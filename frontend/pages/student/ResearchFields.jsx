@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: "#093e94",
+        backgroundColor: "#064382",
         color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
@@ -54,6 +54,13 @@ export default function ResearchFields(){
 
     return(
         <div style={{paddingTop:"20px", margin: "40px"}}>
+            <div  style={{
+                borderRadius: "10px",
+                margin: "10px",
+                padding: "15px",
+                boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+
+            }}>
             <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
@@ -94,12 +101,12 @@ export default function ResearchFields(){
                                     </StyledTableCell>
                                     <StyledTableCell>
                                         <Link to={'/request'}>
-                                        <Button variant="contained" onClick={()=>setSupervisor(data)}>Select</Button>
+                                        <Button style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }} variant="contained" onClick={()=>setSupervisor(data)}>Select</Button>
                                         </Link>
                                     </StyledTableCell>
                                     <StyledTableCell>
                                         <Link to={'/request/co'}>
-                                        <Button variant="contained" onClick={()=>setSupervisor(data)}>Select</Button>
+                                        <Button style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }} variant="contained" onClick={()=>setSupervisor(data)}>Select</Button>
                                         </Link>
                                     </StyledTableCell>
                                 </StyledTableRow>
@@ -109,6 +116,7 @@ export default function ResearchFields(){
                 </TableBody>
                 </Table>
             </TableContainer>
+            </div>
         </div>
     )
 }

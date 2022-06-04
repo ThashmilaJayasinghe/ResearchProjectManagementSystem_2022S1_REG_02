@@ -15,7 +15,7 @@ import fileDownload from 'js-file-download'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: '#064382',
         color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
@@ -67,6 +67,13 @@ const StudentHome = () =>{
         <div style={{paddingTop:"10px", margin: "20px"}}>
 
             <h1>Here your Assingments</h1>
+            <div  style={{
+                borderRadius: "10px",
+                margin: "10px",
+                padding: "15px",
+                boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+
+            }}>
             <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
@@ -95,11 +102,11 @@ const StudentHome = () =>{
                                     <StyledTableCell>{data.type}</StyledTableCell>
                                     <StyledTableCell>{data.instructions}</StyledTableCell>
                                     <StyledTableCell>{data.dueDate}</StyledTableCell>
-                                    <StyledTableCell><Button variant="contained" onClick={()=>{handleClick(data.template)}}>Download </Button></StyledTableCell>
+                                    <StyledTableCell><Button variant="contained" style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }} onClick={()=>{handleClick(data.template)}}>Download </Button></StyledTableCell>
     
                                     <StyledTableCell>
                                         <Link to={'/submit'}>
-                                        <Button variant="contained" onClick={()=>setTypes(data)}>Submit</Button>
+                                        <Button variant="contained" style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }} onClick={()=>setTypes(data)}>Submit</Button>
                                         </Link>
                                     </StyledTableCell>
                                 </StyledTableRow>
@@ -109,6 +116,7 @@ const StudentHome = () =>{
                 </TableBody>
                 </Table>
             </TableContainer>
+                </div>
         </div>
     )
 }

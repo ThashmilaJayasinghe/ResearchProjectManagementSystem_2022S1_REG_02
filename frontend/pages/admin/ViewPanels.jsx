@@ -19,10 +19,16 @@ import {useSelector} from "react-redux";
 export default function SelectUser() {
 
     const [panels, setPanels] = useState([]);
+    const [member, setMember] = useState("");
 
     const navigate = useNavigate()
 
     const {user} = useSelector((state) => state.auth) //used to get the user
+    const config = {
+        headers: {
+            Authorization: `Bearer ${user.token}`,
+        },
+    }
 
     useEffect(() => {
 
@@ -30,10 +36,18 @@ export default function SelectUser() {
             navigate('/')
         }
 
-        Axios.get("http://localhost:5000/api/admin/allPanels")
+        Axios.get("http://localhost:5000/api/admin/allPanels", config)
             .then((res) => {
                 setPanels(res.data)
             })
+            // }).then(() => {
+            //     panels.map((panel) => {
+            //         Axios.get("http://localhost:5000/api/users/" + panel, config)
+            //             .then((res) => {
+            //                 setMember(res.data.name)
+            //     })
+            // })
+
 
     }, [user, navigate]);
 
@@ -60,22 +74,37 @@ export default function SelectUser() {
                             <TableRow>
                                 <TableCell>Name</TableCell>
                                 <TableCell>Staff Members</TableCell>
-                                <TableCell>Students</TableCell>
+                                <TableCell>Group</TableCell>
                                 {/*<TableCell>Actions</TableCell>*/}
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {panels
-                                .map((panel) => {
+                                .map((panel, index) => {
                                     return (
                                         <TableRow
-                                            key={panel.name}
+                                            key={index}
                                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         >
                                             <TableCell sx={{ width: "30%" }}>
                                                 {panel.name}
                                             </TableCell>
-                                            {panel.staff.map()}
+                                            <TableCell sx={{ width: "30%" }}>
+                                                {panel.staff.map((pmember) => {
+
+                                                    return (
+                                                        <li>{pmember}</li>
+                                                    )
+                                            })}
+                                            </TableCell>
+                                            <TableCell sx={{ width: "30%" }}>
+                                                {panel.groups.map((group) => {
+                                                    return (
+                                                        <li>{group}</li>
+
+                                                    )
+                                                })}
+                                            </TableCell>
                                         </TableRow>
                                     )
                                 })}

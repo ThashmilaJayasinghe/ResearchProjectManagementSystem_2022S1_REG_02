@@ -19,6 +19,11 @@ export default function AddPanel(){
     const [group, setGroup] = useState("");
 
     const {user} = useSelector((state) => state.auth) //used to get the user
+    const config = {
+        headers: {
+            Authorization: `Bearer ${user.token}`,
+        },
+    }
 
     const navigate = useNavigate()
 
@@ -46,7 +51,7 @@ export default function AddPanel(){
 
             console.log(formData)
 
-            axios.post('http://localhost:5000/api/admin/addPanel', formData).then(()=>{
+            axios.post('http://localhost:5000/api/admin/addPanel', formData, config).then(()=>{
                 alert('Panel allocated')
                 window.location.href = "/admin";
 

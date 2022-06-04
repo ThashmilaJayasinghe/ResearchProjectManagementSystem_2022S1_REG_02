@@ -111,6 +111,17 @@ const getMe = async (req, res) => {
     })
 }
 
+// @desc    Get user data
+// @route   GET /api/users/:id
+// @access  Private
+const getUser = async (req, res) => {
+    const {_id, name, email} = await User.findById(req.params.id)
+
+    res.status(200).json({
+        name
+    })
+}
+
 // @desc    Get all user data
 // @route   GET /api/users/all
 // @access  Private
@@ -173,4 +184,5 @@ module.exports = {
     getAll,
     deleteUser,
     updateUser,
+    getUser
 }
