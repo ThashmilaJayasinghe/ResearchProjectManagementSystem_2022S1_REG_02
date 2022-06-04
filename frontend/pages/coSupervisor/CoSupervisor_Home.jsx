@@ -103,7 +103,7 @@ const CoSupervisor_Home = () => {
                         <Button>View Requests</Button>
                     </Link> */}
 
-                    <Link to = '#' style={{ textDecoration: 'none' }}>
+                    <Link to = '/documentsEvaluationCoSupervisor' style={{ textDecoration: 'none' }}>
                         <div 
                             style={{
                             borderRadius: "10px", 

@@ -12,6 +12,7 @@ import Paper from '@mui/material/Paper';
 import { Link } from "react-router-dom";
 
 import fileDownload from 'js-file-download'
+import ReactQuill from "react-quill";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -100,7 +101,15 @@ const StudentHome = () =>{
                                 <StyledTableRow>
                                     <StyledTableCell>{data.title}</StyledTableCell>
                                     <StyledTableCell>{data.type}</StyledTableCell>
-                                    <StyledTableCell>{data.instructions}</StyledTableCell>
+                                    {/*<StyledTableCell>{data.instructions}</StyledTableCell>*/}
+                                    <StyledTableCell>
+                                        <ReactQuill
+                                            value={data.instructions}
+                                            readOnly={true}
+                                            style={{minHeight: '30px', marginTop: "0.5rem"}}
+                                            theme={"bubble"}
+                                        />
+                                    </StyledTableCell>
                                     <StyledTableCell>{data.dueDate}</StyledTableCell>
                                     <StyledTableCell><Button variant="contained" style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }} onClick={()=>{handleClick(data.template)}}>Download </Button></StyledTableCell>
     

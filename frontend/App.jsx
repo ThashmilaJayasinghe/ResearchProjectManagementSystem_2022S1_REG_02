@@ -35,6 +35,17 @@ import AddSubmissions from "./pages/admin/AddSubmissionTypes";
 import ViewSubmissions from "./pages/admin/ViewSubmissionTypes";
 import ManagePanels from './pages/admin/ManagePanels';
 import ViewPanels from './pages/admin/ViewPanels';
+import AddmarksSuper from "./pages/supervisor/AddmarksSuper";
+import DocumentEvaluate from "./pages/supervisor/DocumentEvaluate";
+import AddMarksCoSup from "./pages/coSupervisor/AddMarksCoSup";
+import DocumentEvalCoSupervisor from "./pages/coSupervisor/DocumentEvalCoSupervisor";
+import AddMarkPanel from "./pages/pannel/AddMarkPanel";
+import ViewTopics from "./pages/pannel/ViewTopics";
+import AddTopicStatus from "./pages/pannel/AddTopicStatus";
+import AcceptedTopics from "./pages/pannel/AcceptedTopics";
+import RejectedTopics from "./pages/pannel/RejectedTopics";
+import EvaluatePresentation from "./pages/pannel/EvaluatePresentation";
+import ViewTopicEvaluated from "./pages/pannel/ViewTopicEvaluated";
 import RegisterNumber from './pages/student/RegisterNumber';
 
 function App(){
@@ -75,6 +86,21 @@ function App(){
                     <Route path = '/viewPanels' element = {<ViewPanels/>} />
                     <Route path = '/managePanels' element = {<ManagePanels/>} />
                     <Route path = '/registerNo' element = {<RegisterNumber/>}/>
+
+                    <Route exact path= '/addmarksSuper/:id' element = {<AddmarksSuper/>}/>
+                    <Route exact path= '/documentsEvaluationSupervisor' element = {<DocumentEvaluate/>}/>
+
+                    <Route exact path= '/documentsEvaluationCoSupervisor' element = {<DocumentEvalCoSupervisor/>}/>
+                    <Route exact path= '/addmark/:id' element = {<AddMarksCoSup/>}/>
+
+                    <Route exact path= '/panelMember' element = {<PanelHomePage/>}/>
+                    <Route exact path= '/AddMarkPanel/:id' element = {<AddMarkPanel/>}/>
+                    <Route exact path = '/panelTopics' element = {<ViewTopics/>} />
+                    <Route exact path = '/addTopicStatus/:id' element = {<AddTopicStatus/>}/>
+                    <Route exact path = '/panelTopicsAccepted' element = {<AcceptedTopics/>}/>
+                    <Route exact path = '/panelTopicsRejected' element = {<RejectedTopics/>}/>
+                    <Route exact path = '/evaluatePresentations' element = {<EvaluatePresentation/>}/>
+                    <Route exact path = '/viewTopicEvaluated' element = {<ViewTopicEvaluated/>}/>
 
                 </Routes>
             </Router>

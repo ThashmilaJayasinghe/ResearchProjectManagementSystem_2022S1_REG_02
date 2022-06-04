@@ -15,6 +15,11 @@ export default function UpdateUser(){
     const [email, setEmail] = useState("");
 
     const {user} = useSelector((state) => state.auth) //used to get the user
+    const config = {
+        headers: {
+            Authorization: `Bearer ${user.token}`,
+        },
+    }
 
     const navigate = useNavigate()
 
@@ -39,7 +44,7 @@ export default function UpdateUser(){
         }
 
 
-        axios.put('http://localhost:5000/api/users/' + id, formData).then(()=>{
+        axios.put('http://localhost:5000/api/users/' + id, formData, config).then(()=>{
             alert('User Updated')
             // window.location.href = "/admin";
 

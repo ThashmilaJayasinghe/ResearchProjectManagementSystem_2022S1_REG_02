@@ -6,9 +6,17 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {useState, useEffect, useRef} from "react";
 import Axios from "axios";
+import {useSelector} from "react-redux";
 
 
 export default function SelectUser(props) {
+
+    const {user} = useSelector((state) => state.auth) //used to get the user
+    const config = {
+        headers: {
+            Authorization: `Bearer ${user.token}`,
+        },
+    }
 
     const [member, setMember] = useState('');
     const [staffs, setStaffs] = useState([]);
@@ -23,7 +31,7 @@ export default function SelectUser(props) {
 
     useEffect(() => {
 
-        Axios.get("http://localhost:5000/api/admin/staff/")
+        Axios.get("http://localhost:5000/api/admin/staff/", config)
             .then((res) => {
                 setStaffs(res.data)
             })

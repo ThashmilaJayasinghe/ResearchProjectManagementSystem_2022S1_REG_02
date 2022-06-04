@@ -13,7 +13,11 @@ import supervisorChat from '../../components/looties/chat.json'
 const HomePage = () => {
 
     const {user} = useSelector((state) => state.auth) //used to get the user
-    localStorage.setItem("agent-uid", user.name)
+
+    //remove whitespaces
+    const tempName = user.name.replace(/ /g, '')
+
+    localStorage.setItem("agent-uid", tempName)
 
     const documentEvaluation = {
         loop: true,
@@ -108,7 +112,7 @@ const HomePage = () => {
                         </div>
                     </Link>
 
-                    <Link to = '#' style={{ textDecoration: 'none' }}>
+                    <Link to = '/documentsEvaluationSupervisor' style={{ textDecoration: 'none' }}>
                         <div 
                             style={{
                             borderRadius: "10px", 

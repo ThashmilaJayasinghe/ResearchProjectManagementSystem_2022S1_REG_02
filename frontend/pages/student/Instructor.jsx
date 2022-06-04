@@ -103,8 +103,9 @@ export default function Instructor() {
 
     if(supervisor){
       const tempVal = supervisor.supervisorName;
-      console.log(tempVal)
-      localStorage.setItem("agent-uid", tempVal)
+      const tempName = tempVal.replace(/ /g, '')
+
+      localStorage.setItem("agent-uid", tempName)
       localStorage.setItem("supChat", true)
 
       window.location.reload()
@@ -114,8 +115,9 @@ export default function Instructor() {
   const onCoSupervisorChat = (coSupervisor) => {
     if(coSupervisor){
       const tempVal = coSupervisor.supervisorName;
-      console.log(tempVal)
-      localStorage.setItem("agent-uid", tempVal)
+      const tempName = tempVal.replace(/ /g, '')
+
+      localStorage.setItem("agent-uid", tempName)
       setIsCoSupervisorChat(true)
       localStorage.setItem("coSupChat", true)
 
