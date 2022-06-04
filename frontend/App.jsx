@@ -87,6 +87,14 @@ function App(){
                 localStorage.getItem("supChat") &&
                     <StudentChat />
             }
+            
+                {/* localStorage.getItem("coSupChat") && 
+                  <StudentChat />
+
+                localStorage.getItem("supChat") && 
+                    <StudentChat />
+             */}
+
         </div>
     )
 }
