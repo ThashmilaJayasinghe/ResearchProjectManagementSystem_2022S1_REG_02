@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import {InputLabel, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import {useSelector} from "react-redux";
+import ReactQuill from "react-quill"
+import 'react-quill/dist/quill.snow.css'
 
 
 export default function DocSubmission(props){
@@ -58,7 +60,7 @@ export default function DocSubmission(props){
 
         axios.post('http://localhost:5000/api/admin/addAssignment', formData, config).then(()=>{
             alert('Submission added')
-            window.location.href = "/admin";
+            window.location.href = "/managesubmissions";
 
         }).catch((err)=>{
             alert(err)
@@ -95,19 +97,32 @@ export default function DocSubmission(props){
                 </div>
                 <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
                     <InputLabel id="instructions-label">Instructions</InputLabel>
-                    <TextField
-                        labelId="instructions-label"
-                        type="text" id="instructions"
-                        placeholder="Enter instructions"
-                        required="required"
-                        size= "small"
-                        fullWidth
-                        style = {{marginTop: "0.5rem"}}
-                        value={instructions}
-                        onChange={(e) => (
-                            setInstructions(e.target.value)
-                        )}
-                    />
+                    {/*<TextField*/}
+                    {/*    labelId="instructions-label"*/}
+                    {/*    type="text" id="instructions"*/}
+                    {/*    placeholder="Enter instructions"*/}
+                    {/*    required="required"*/}
+                    {/*    size= "small"*/}
+                    {/*    fullWidth*/}
+                    {/*    style = {{marginTop: "0.5rem"}}*/}
+                    {/*    value={instructions}*/}
+                    {/*    onChange={(e) => (*/}
+                    {/*        setInstructions(e.target.value)*/}
+                    {/*    )}*/}
+                    {/*/>*/}
+                    <div>
+                        <ReactQuill
+                            theme='snow'
+                            value={instructions}
+                            style={{minHeight: '100px', marginTop: "0.5rem"}}
+                            id="instructions"
+                            required="required"
+                            placeholder="Enter instructions"
+                            size= "small"
+                            fullWidth
+                            onChange={setInstructions}
+                        />
+                    </div>
                 </div>
                 <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
                     <InputLabel id="date-label">Viva Date</InputLabel>
@@ -158,7 +173,7 @@ export default function DocSubmission(props){
                 </div>
                 <div style={{padding: "3rem" }}>
                     <center>
-                        <Link to={'/admin'} style={{ textDecoration: 'none' }}>
+                        <Link to={'/managesubmissions'} style={{ textDecoration: 'none' }}>
                             <Button
                                 type="submit"
                                 variant="contained"

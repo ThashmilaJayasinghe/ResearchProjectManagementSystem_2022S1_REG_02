@@ -65,7 +65,7 @@ function Login() {
         await axios.get('http://localhost:5000/student/isAvailabale/'+email)
         .then((res)=>{
             setRegistered(res.data)
-            localStorage.setItem('res',res.data.regNumber)
+            // localStorage.setItem('res',res.data.regNumber)
             console.log('data',res.data)
         }).catch((err)=>{
             alert(err)

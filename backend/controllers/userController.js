@@ -38,7 +38,6 @@ const registerUser = async (req, res) => {
         roles: [role]
     })
 
-
     if(user) {
 
         if(role == "staff"){
@@ -56,7 +55,6 @@ const registerUser = async (req, res) => {
             }
         }
 
-
         res.status(201).json({
             _id: user.id,
             name: user.name,
@@ -64,9 +62,6 @@ const registerUser = async (req, res) => {
             roles: user.roles,
             token: generateToken(user._id)
         })
-
-
-       
 
     } else {
         return res.status(400).json({ msg: 'Invalid user data'})
