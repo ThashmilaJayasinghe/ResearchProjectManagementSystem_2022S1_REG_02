@@ -45,6 +45,7 @@ import AddTopicStatus from "./pages/pannel/AddTopicStatus";
 import AcceptedTopics from "./pages/pannel/AcceptedTopics";
 import RejectedTopics from "./pages/pannel/RejectedTopics";
 import EvaluatePresentation from "./pages/pannel/EvaluatePresentation";
+import ViewTopicEvaluated from "./pages/pannel/ViewTopicEvaluated";
 
 function App(){
     return(
@@ -97,6 +98,7 @@ function App(){
                     <Route exact path = '/panelTopicsAccepted' element = {<AcceptedTopics/>}/>
                     <Route exact path = '/panelTopicsRejected' element = {<RejectedTopics/>}/>
                     <Route exact path = '/evaluatePresentations' element = {<EvaluatePresentation/>}/>
+                    <Route exact path = '/viewTopicEvaluated' element = {<ViewTopicEvaluated/>}/>
 
                 </Routes>
             </Router>

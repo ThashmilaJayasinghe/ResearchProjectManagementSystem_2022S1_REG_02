@@ -12,6 +12,7 @@ import Table from "@mui/material/Table";
 import Button from "@mui/material/Button";
 import TableBody from "@mui/material/TableBody";
 
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: "#093e94",
@@ -72,7 +73,7 @@ export default function ViewTopics(){
                     <StyledTableCell align="center"> index </StyledTableCell>
                     <StyledTableCell align="center"> Group ID</StyledTableCell>
                     <StyledTableCell align="center">Title</StyledTableCell>
-                    <StyledTableCell align="center">Message</StyledTableCell>
+                    <StyledTableCell align="center">Submitted Date</StyledTableCell>
                     <StyledTableCell align="center">Status</StyledTableCell>
                     <StyledTableCell align="center">Action</StyledTableCell>
                 </TableRow>
@@ -95,7 +96,7 @@ export default function ViewTopics(){
                             <StyledTableCell component="th" scope="row" align="center" key={index}>{index+1}</StyledTableCell>
                             <StyledTableCell align="center">{topic.grp_ID}</StyledTableCell>
                             <StyledTableCell align="center">{topic.title}</StyledTableCell>
-                            <StyledTableCell align="center">{topic.message}</StyledTableCell>
+                            <StyledTableCell align="center">{topic.evaluated_Date.substring(0,10)}</StyledTableCell>
                             <StyledTableCell align="center">{topic.status}</StyledTableCell>
 
                             <StyledTableCell align="center">

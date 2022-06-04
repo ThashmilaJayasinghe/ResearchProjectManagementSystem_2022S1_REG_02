@@ -52,47 +52,68 @@ export default function AddTopicStatus(){
             <div style={{width: "60%", margin: "auto", }}>
             <center><h1>Evaluate Topic</h1></center>
 
+                <div
+                    style={{
+                        borderRadius: "10px",
+                        margin: "10px",
+                        padding: "",
+                        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+
+                    }}
+                >
+
             <form>
+
+                <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
+
                 <h4>Group ID</h4>
 
                 <TextField fullWidth type="text" id="grp_ID" value={grp_ID}
                 onChange={(e)=>{
                     setGrpID(e.target.value)
                 }}
-                />
+                           inputProps={{readOnly:true}}/>
 
 
-                <h4>Supervisor Name</h4>
+                <h4>Evaluator Name</h4>
                 <TextField fullWidth type="text" id="supervisorName" value={user.name}
                        onChange={(e)=>{
                            setSuprvName(e.target.value)
                        }}
-                />
+                           inputProps={{readOnly:true}}/>
 
                 <h4>Title</h4>
                 <TextField fullWidth type="text" id="title" value={title}
                        onChange={(e)=>{
                            setTitle(e.target.value)
                        }}
-                />
+                           inputProps={{readOnly:true}}/>
 
                 <h4>Message</h4>
                 <TextField fullWidth type="text" id="message" value={message}
                        onChange={(e)=>{
                            setMassage(e.target.value)
                        }}
-               readOnly/>
+                           inputProps={{readOnly:true}}/>
                 <br/><br/>
 
+                    <Button
+                        variant="contained"
+                        style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }}
+                        //onClick={() => {handleClick(topicDocument)}}
+                    >
+                        Download Document
+                    </Button>
+
                 <h4>Status</h4>
-                <select fullWidth type="text" id="status" value={status}
+                <Select native fullWidth type="text" id="status" value={status}
                        onChange={(e)=>{
                            setStatus(e.target.value)
                        }}>
                     <option value="#">Select Status</option>
                     <option value="Accepted">Accepted</option>
                     <option value="Rejected">Rejected</option>
-                </select>
+                </Select>
 
 
                 <h4>Feedback</h4>
@@ -107,12 +128,14 @@ export default function AddTopicStatus(){
                 <Link to='/panelTopics'>
                     <Button variant="contained" color="info" style={{marginRight: "5px"}} onClick={handleSubmit}>Submit</Button>
                 </Link>
-            </form>
 
-            <br/><br/>
-            <Link to='/panelTopics'>
-                <Button variant="contained" color="info" style={{marginRight: "5px"}}>Back</Button>
-            </Link>
+                    <br/>
+                    <br/><br/>
+                </div>
+            </form>
+                </div>
+
+
         </div>
         </div>
     )

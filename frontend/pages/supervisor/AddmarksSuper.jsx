@@ -69,9 +69,20 @@ export default function AddmarksSuper(){
         <div style={{paddingTop:"20px"}}>
             <div style={{width: "60%", margin: "auto", }}>
 
-                <center><h1>Add document mark - Supervisor</h1></center>
+                <center><h1>Add Document Mark - Supervisor</h1></center>
+
+                <div
+                    style={{
+                        borderRadius: "10px",
+                        margin: "10px",
+                        padding: "",
+                        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+
+                    }}
+                >
 
                 <form>
+                    <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
                     <h4>Group ID  </h4>
                     <TextField fullWidth type='text' id='grp_ID' value={grp_ID}
                                onChange={(e)=>{
@@ -84,7 +95,7 @@ export default function AddmarksSuper(){
                                onChange={(e)=>{
                                    setGrpID(e.target.value)
                                }}
-                    />
+                               readOnly/>
 
                     <h4>Submission Type   </h4>
                     <TextField fullWidth type='text' id='submissionType' value={submissionType}
@@ -110,10 +121,12 @@ export default function AddmarksSuper(){
 
                     <br/><br/>
                     <Link to={'/documentsEvaluationCoSupervisor'} >
-                        <Button variant="contained" color="info" style={{marginRight: "5px"}} onClick={addMark}>Add Mark</Button>
+                        <Button variant="contained" color="info" style={{marginRight: "55px"}} onClick={addMark}>Add Mark</Button>
+                        <br/><br/>
                     </Link>
-
+                    </div>
                 </form>
+                </div>
             </div>
         </div>
     )

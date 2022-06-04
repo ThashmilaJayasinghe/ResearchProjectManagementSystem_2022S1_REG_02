@@ -77,9 +77,21 @@ export default function AddMarksCoSup(){
         <div style={{paddingTop:"20px"}}>
             <div style={{width: "60%", margin: "auto", }}>
 
-                <center><h1>Add document mark - coSupervisor</h1></center>
+                <center><h1>Add Document Mark - Co-Supervisor</h1></center>
+
+                <div
+                    style={{
+                        borderRadius: "10px",
+                        margin: "10px",
+                        padding: "",
+                        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+
+                    }}
+                >
 
             <form>
+                <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
+
                 <h4>Group ID  </h4>
                 <TextField fullWidth type='text' id='grp_ID' value={grp_ID}
                 onChange={(e)=>{
@@ -122,8 +134,10 @@ export default function AddMarksCoSup(){
                 <Link to={'/documentsEvaluationCoSupervisor'} >
                     <Button variant="contained" color="info" style={{marginRight: "5px"}} onClick={addMark}>Add Mark</Button>
                 </Link>
-
+                    <br/><br/>
+                </div>
             </form>
+                </div>
         </div>
         </div>
     )
