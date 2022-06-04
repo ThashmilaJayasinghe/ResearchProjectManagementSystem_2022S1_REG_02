@@ -108,7 +108,7 @@ const HomePage = () => {
                         </div>
                     </Link>
 
-                    <Link to = '#' style={{ textDecoration: 'none' }}>
+                    <Link to = '/documentsEvaluationSupervisor' style={{ textDecoration: 'none' }}>
                         <div 
                             style={{
                             borderRadius: "10px", 

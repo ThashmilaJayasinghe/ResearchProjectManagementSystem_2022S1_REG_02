@@ -19,23 +19,31 @@ const PanelHomePage = () => {
                     flexDirection: 'column',
                     alignItems: 'center',
                     '& > *': {
-                    m: 1,
+                        m: 1,
                     },
                 }}
             >
                 <ButtonGroup variant="text" aria-label="text button group">
-                    <Link to = '#'>
-                        <Button>Presenttaion evaluation</Button>
+                    <Link to = '/evaluatePresentations'>
+                        <Button>Presentation evaluation</Button>
                     </Link>
-                    
-                    <Link  to = '#'>
+
+                    <Link  to = '/panelTopics'>
                         <Button>Topic evaluation</Button>
                     </Link>
-                    
+
+                    <Link  to = '/panelTopicsAccepted'>
+                        <Button>Accepted Topic Evaluations</Button>
+                    </Link>
+
+                    <Link  to = '/panelTopicsRejected'>
+                        <Button>Rejected Topic Evaluations</Button>
+                    </Link>
+
                 </ButtonGroup>
 
             </Box>
-            
+
         </div>
     )
 }
