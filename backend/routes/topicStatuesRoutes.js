@@ -1,5 +1,5 @@
 const express = require('express');
-const { upload } = require('../controllers/topicStatusController');
+const upload = require('../controllers/topicStatusController').upload;
 
 const post_topicStatus =
 	require('../controllers/topicStatusController').post_topic_Status;
