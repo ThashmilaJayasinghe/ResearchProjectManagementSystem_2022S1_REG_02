@@ -12,7 +12,7 @@ const updatetopicStatusPannel = require('../controllers/topicStatusController').
 const get_topic_StatusPanel  = require('../controllers/topicStatusController').get_topic_Status_panel
 const get_topic_Status_panelAccepted  = require('../controllers/topicStatusController').get_topic_Status_panel_Accepted
 const get_topic_Status_panelRejected  = require('../controllers/topicStatusController').get_topic_Status_panel_Rejected
-
+const get_Group_topic_Status = require('../controllers/topicStatusController').get_Group_topic_Status
 
 const router = express.Router();
 
@@ -20,6 +20,7 @@ const router = express.Router();
 router.post('/:id', upload.single('topicDocument'), post_topicStatus);
 router.get('/', get_topicStatus);
 router.put('/updateTopic', update_topic_status);
+router.get('/get_GrouptopicStatus/:id',get_Group_topic_Status)
 
 //Panel topic evaluate routes
 router.put('/update/:id', updatetopicStatusPannel);

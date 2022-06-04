@@ -15,6 +15,7 @@ export default function Instructor() {
   const [supervisor,setSupervisor] = useState([]);
   const [coSupervisor,setCoSupervisor] = useState([]);
   const [panel,setPannel] = useState([]);
+  const [topicStatus,setTopicStatus] = useState([]);
   const [studentDetails, setStudentDetails] = useState("")
   const [groupDetails, setGroupDetails] = useState("")
   const [isCoSupervisorChat, setIsCoSupervisorChat] = useState(false)
@@ -52,6 +53,17 @@ export default function Instructor() {
       alert('Error in retrieving data')
     })
   },[])
+
+    useEffect(()=>{
+        axios.get('http://localhost:5000/topic/get_GrouptopicStatus/'+user._id)
+            .then((res)=>{
+                const topicStatus = res.data;
+                console.log(topicStatus)
+                setTopicStatus(topicStatus)
+            }).catch((err)=>{
+                alert(err)
+        })
+    },[])
 
   // const handleClick = ()=>{
   //     localStorage.setItem('pid',panel._id)
@@ -265,20 +277,69 @@ export default function Instructor() {
         
 
           return(
-    
+
             <table width={'100%'}>
               
           <div>
                 <tr>
             <td style={{paddingTop: "10px"}}><b>Panal Name</b></td>
             <td style={{paddingTop: "10px"}}>: {panel.name}</td>
+                </tr>
+          </div>
+
             <td> &nbsp;  &nbsp;  &nbsp;  &nbsp;</td>
-              </tr>
-              </div>
+
             </table>
           )
         })}
             </div>
+          <div  style={{
+              borderRadius: "10px",
+              margin: "10px",
+              padding: "5px",
+              boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+
+          }}>
+          {
+              topicStatus.map((topic)=>{
+                  return(
+                      <table width={'100%'}>
+                      <div>
+                          <tr>
+                              <td style={{paddingTop: "10px"}}><b>Topic</b></td>
+                              <td style={{paddingTop: "10px"}}>: {topic.title}</td>
+                          </tr>
+                          <tr>
+                              <td style={{paddingTop: "10px"}}><b>Status</b></td>
+                              {
+                                  topic.status == "Rejected" &&
+                                  <td style={{paddingTop: "10px", color: "red"}}>: Rejected</td>
+                              }
+                              {
+                                  topic.status == "Accepted" &&
+
+                                  <td style={{paddingTop: "10px", color: "green"}}>: Accepted</td>
+
+                              }
+                              {
+                                  topic.status == "Pending" &&
+                                  <td style={{paddingTop: "10px"}}>: Pending</td>
+                              }
+
+                          </tr>
+                          <tr>
+                              <td style={{paddingTop: "10px"}}><b>FeedBack for Topic</b></td>
+                              <td style={{paddingTop: "10px"}}>: {topic.feedback}</td>
+                          </tr>
+                      </div>
+                          <hr/>
+                      </table>
+                  )
+              })
+          }
+          </div>
+
+
             <Link to="/topicRequest">
       <Button style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }} variant="contained" color="info">Panel Members</Button>
       </Link>
@@ -296,13 +357,3 @@ export default function Instructor() {
     </div>
   )
 }
-
-
-  
-
-
-      
-
-
-
-

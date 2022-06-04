@@ -5,6 +5,7 @@ const Panal = require('../models/panelModel');
 const { json } = require('express');
 const multer = require('multer');
 const path = require('path');
+const requestSupervisor = require("../models/requestSupervisorModel");
 
 module.exports.upload = multer({
 	storage: multer.diskStorage({
@@ -265,4 +266,24 @@ module.exports.get_topic_Status_panel_Rejected = async (req, res) => {
 		console.log(err)
 		res.status(500).send("Something get wrong when getting rejected topics")
 	}
+};
+
+module.exports.get_Group_topic_Status = async (req, res) => {
+	let id = req.params.id;
+	// let id = '62910bfdaaed76cedd411ae3';
+	console.log(id);
+	let student = await Student.findOne({ user: id });
+	const regNum = student.regNumber;
+	console.log(regNum);
+	const group = await Group.findOne({ 'members.regNumber': regNum });
+	const gid = group._id.toString();
+	console.log(gid);
+	topic
+		.find({grp_ID: gid})
+		.then((topics) => {
+			res.send( topics );
+		})
+		.catch((err) => {
+			console.log(err);
+		});
 };
