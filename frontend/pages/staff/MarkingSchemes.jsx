@@ -87,7 +87,7 @@ export default function SelectUser(props) {
                                             <TableCell sx={{ width: "50%" }} align="center">
                                                 <Button
                                                     variant="contained"
-                                                    style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#646FD4", marginTop: "0.5rem" }}
+                                                    style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }}
                                                     onClick={() => {handleClick(subType.markingScheme)}}
                                                 >
                                                     Download Marking Scheme

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import useSelector from "react-redux";
+import {useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {Link} from "react-router-dom";
 import Button from '@mui/material/Button'
@@ -101,7 +101,7 @@ export default function UpdateUser(){
                                 <Button
                                     type="submit"
                                     variant="contained"
-                                    style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#646FD4", marginTop: "0.5rem" }}
+                                    style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }}
                                     onClick={updateUser}
                                 >
                                     Update

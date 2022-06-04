@@ -79,13 +79,14 @@ function App(){
                 </Routes>
             </Router>
 
-            
-                {/* localStorage.getItem("coSupChat") && 
-                  <StudentChat />
-
-                localStorage.getItem("supChat") && 
+            {
+                localStorage.getItem("coSupChat") &&
                     <StudentChat />
-             */}
+            }
+            {
+                localStorage.getItem("supChat") &&
+                    <StudentChat />
+            }
         </div>
     )
 }
