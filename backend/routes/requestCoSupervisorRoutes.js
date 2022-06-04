@@ -5,11 +5,11 @@ const router = express.Router()
 
 //get all the requests
 router.get('/coSupervisorRequests', getAllRequestedCoSupervisors);
-//
-// //get requests according to the supervisor
+
+//get requests according to the supervisor
 router.get('/requestedCoSupervisor', getCoSupervisorRequest);
-//
-// //update request states
+
+//update request states
 router.put('/updateCoSupervisorRequest/:id', coSupervisorRequestCheck);
 
 module.exports = router;
