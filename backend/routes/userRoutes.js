@@ -4,13 +4,13 @@ const { registerUser, loginUser, getMe, getAll, deleteUser, updateUser, getUser 
 const { protect, authRole } = require('../middleware/authMiddleware')
 // actual route is /api/users/
 
-router.post('/', protect, authRole('admin'), registerUser)
+router.post('/', registerUser)
 router.post('/login', loginUser)
 // Private functions are called after the middleware function "protect"
 router.get('/me', protect, getMe)
-router.get('/all', getAll)
-router.delete('/:id', protect, authRole('admin'), deleteUser)
-router.put('/:id', protect, authRole('admin'), updateUser)
-router.get('/:id', protect, authRole('admin'), getUser)
+router.get('/all', protect, getAll)
+router.delete('/:id', protect, deleteUser)
+router.put('/:id', protect, updateUser)
+router.get('/:id', protect, getUser)
 
 module.exports = router
