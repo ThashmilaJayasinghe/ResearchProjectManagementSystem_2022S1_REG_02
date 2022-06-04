@@ -40,7 +40,7 @@ export default function RegisterNumber() {
                 
                     <div style={{paddingTop: "20px"}}>
                         <Link to='/'>
-                        <Button type="submit"  variant="contained" color="info" style={{marginRight: "5px"}} onClick={handleSubmit}>Register</Button>
+                        <Button type="submit"  variant="contained" color="info" style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }} onClick={handleSubmit}>Register</Button>
                         </Link>
                 </div>
                 </div> 

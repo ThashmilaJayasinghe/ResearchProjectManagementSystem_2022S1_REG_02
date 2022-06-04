@@ -16,7 +16,7 @@ import fileDownload from 'js-file-download'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: "#093e94",
+        backgroundColor: "#064382",
         color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
@@ -83,6 +83,13 @@ const Submissions = () =>{
         <div>
             <div>
             <h1>Our Submissions</h1>
+                <div  style={{
+                    borderRadius: "10px",
+                    margin: "10px",
+                    padding: "15px",
+                    boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+
+                }}>
             <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
@@ -139,8 +146,8 @@ const Submissions = () =>{
                                     <StyledTableCell>{data.submissionstitle}</StyledTableCell>
                                     <StyledTableCell>{data.type}</StyledTableCell>
                                     <StyledTableCell>{data.document}</StyledTableCell>
-                                    <StyledTableCell><Button variant="contained" onClick={()=>{handleClick(data.document)}}>Download </Button></StyledTableCell>
-                                    <StyledTableCell><Button variant="contained" onClick={()=>onDelete(data._id)}>Remove</Button></StyledTableCell>
+                                    <StyledTableCell><Button variant="contained" style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }} onClick={()=>{handleClick(data.document)}}>Download </Button></StyledTableCell>
+                                    <StyledTableCell><Button variant="contained" style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }} onClick={()=>onDelete(data._id)}>Remove</Button></StyledTableCell>
                                                                       
                                 </StyledTableRow>
                             )
@@ -148,10 +155,18 @@ const Submissions = () =>{
                     }
                 </TableBody>
                 </Table>
-                </TableContainer>     
+                </TableContainer>
+                </div>
                 </div> 
                 <div>
                 <h1>Our Submission Marks</h1>
+                    <div  style={{
+                        borderRadius: "10px",
+                        margin: "10px",
+                        padding: "15px",
+                        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+
+                    }}>
             <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
@@ -181,7 +196,8 @@ const Submissions = () =>{
                     }
                 </TableBody>
                 </Table>
-                </TableContainer>  
+                </TableContainer>
+                    </div>
                     </div>          
         </div>
 
