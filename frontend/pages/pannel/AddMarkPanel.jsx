@@ -52,7 +52,7 @@ export default function AddMarkPanel(){
 
         axios.post('http://localhost:5000/marks', grouppmark)
             .then(()=>{
-                axios.put('http://localhost:5000/api/submissions/updateSubmissionStatus', updateStatus)
+                axios.put('http://localhost:5000/submit/updateSubmissionStatus', updateStatus)
                     .then(()=>{
 
                     })
@@ -146,7 +146,7 @@ export default function AddMarkPanel(){
                     />
 
                     <br/><br/>
-                    <Link to={'/documentsEvaluationCoSupervisor'} >
+                    <Link to={'/panelMember'} >
                         <Button variant="contained" color="info" style={{marginRight: "5px"}} onClick={addMark}>Add Mark</Button>
                     </Link>
                         <br/><br/><br/>

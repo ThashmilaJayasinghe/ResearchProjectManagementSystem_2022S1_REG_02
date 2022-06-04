@@ -152,7 +152,7 @@ export default function AddTopicStatus(){
 
                 <br/><br/>
 
-                <Link to='/panelTopics'>
+                <Link to='/panelMember'>
                     <Button variant="contained" color="info" style={{marginRight: "5px"}} onClick={handleSubmit}>Submit</Button>
                 </Link>
 

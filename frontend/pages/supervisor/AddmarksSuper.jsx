@@ -53,7 +53,7 @@ export default function AddmarksSuper(){
 
         axios.post('http://localhost:5000/marks', grouppmark)
             .then(()=>{
-                axios.put('http://localhost:5000/api/submissions/updateSubmissionStatus', updateStatus)
+                axios.put('http://localhost:5000/submit/updateSubmissionStatus', updateStatus)
                     .then(()=>{
 
                     })
@@ -146,7 +146,7 @@ export default function AddmarksSuper(){
                     />
 
                     <br/><br/>
-                    <Link to={'/documentsEvaluationCoSupervisor'} >
+                    <Link to={'/supervisor'} >
                         <Button variant="contained" color="info" style={{marginRight: "55px"}} onClick={addMark}>Add Mark</Button>
                         <br/><br/>
                     </Link>
