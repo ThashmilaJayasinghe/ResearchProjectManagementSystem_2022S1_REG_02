@@ -252,19 +252,6 @@ const StaffProfile = () => {
 
                             </TableCell>
                         </TableRow>
-                          {/* <ToastContainer
-                            position="top-right"
-                            autoClose={5000}
-                            hideProgressBar={false}
-                            newestOnTop={false}
-                            closeOnClick
-                            rtl={false}
-                            pauseOnFocusLoss
-                            draggable
-                            pauseOnHover
-                            /> */}
-                            {/* Same as */}
-                          {/* <ToastContainer /> */}
                         <TableRow>
                             <TableCell component="th" scope="row" style={{paddingLeft: "2rem"}}>
                               Research interest
@@ -321,7 +308,7 @@ const StaffProfile = () => {
                                 ) : (
                                   <>
                                     <Button variant="contained"
-                                    style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#646FD4", marginTop:"0.5rem"}}
+                                    style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop:"0.5rem"}}
                                     onClick={() => setIsAddResearchField(true)}
                                     >+ Add new research field</Button>
                                   </>
