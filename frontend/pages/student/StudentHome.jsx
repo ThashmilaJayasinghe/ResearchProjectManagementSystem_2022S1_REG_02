@@ -11,6 +11,8 @@ import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import { Link } from "react-router-dom";
 
+import fileDownload from 'js-file-download'
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         backgroundColor: theme.palette.common.black,
@@ -30,6 +32,22 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
         border: 0,
     },
 }));
+
+const handleClick = (file) => {
+
+    let filePath = "../../public/submissions/" + file;
+
+    axios.get(`${filePath}`, {
+        responseType: 'blob',
+    }).then((res) => {
+        let filename = filePath.replace(/^.*[\\\/]/, '')
+        let fileExtension;
+        fileExtension= filePath.split('.');
+        fileExtension =fileExtension[fileExtension.length -1];
+        fileDownload(res.data, `${filename}.${fileExtension}`);
+    });
+}
+
 const StudentHome = () =>{
 
     const [submissionTypes,setSubmissionTypes] = useState([]);
@@ -77,7 +95,7 @@ const StudentHome = () =>{
                                     <StyledTableCell>{data.type}</StyledTableCell>
                                     <StyledTableCell>{data.instructions}</StyledTableCell>
                                     <StyledTableCell>{data.dueDate}</StyledTableCell>
-                                    <StyledTableCell><a href='' download>{data.template}</a></StyledTableCell>
+                                    <StyledTableCell><Button variant="contained" onClick={()=>{handleClick(data.template)}}>Download </Button></StyledTableCell>
     
                                     <StyledTableCell>
                                         <Link to={'/submit'}>

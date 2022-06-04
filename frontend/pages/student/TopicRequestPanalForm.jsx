@@ -27,8 +27,9 @@ export default function TopicRequestPanalForm() {
         axios.post('http://localhost:5000/topic/' + user._id ,formData)
         .then(()=>{
             alert('Topic request added');
-        }).catch(()=>{
-            alert("Please upload a .ppt, .pptx, .doc or .docx file")
+        }).catch((err)=>{
+            alert(err)
+            // alert("Please upload a .ppt, .pptx, .doc or .docx file")
         })
     }
 
