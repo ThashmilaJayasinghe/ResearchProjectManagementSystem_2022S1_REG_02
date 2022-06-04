@@ -2,6 +2,9 @@ import { Button, CircularProgress, Paper, Table, TableBody, TableCell, TableCont
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { addQualification, addResearchField, deleteQualification, deleteResearchInterest, getStaff } from '../../apis/staff/StaffApi'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const StaffProfile = () => {
     const {user} = useSelector((state) => state.auth) //used to get the user
@@ -23,6 +26,16 @@ const StaffProfile = () => {
       await addQualification(email, newQualification)
       .then(async() => {
           console.log("new qualification added")
+
+          toast.success('New qualification added!', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
          
           await getStaff(email, setStaffDetails)
             .then((res) => {
@@ -35,6 +48,16 @@ const StaffProfile = () => {
       await addResearchField(email, newResearchField)
       .then(async() => { 
         console.log("new research field added")
+
+        toast.success('New research field added!', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
 
         await getStaff(email, setStaffDetails)
             .then((res) => {
@@ -66,6 +89,18 @@ const StaffProfile = () => {
         .then(async() => 
           {
             console.log("Delete success")
+
+            toast.info('Qualification removed!', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+
+
             
             await getStaff(email, setStaffDetails)
             .then((res) => {
@@ -80,6 +115,15 @@ const StaffProfile = () => {
       .then(async() => 
         {
           console.log("Delete success")
+          toast.info('Research interest removed!', {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
           
           await getStaff(email, setStaffDetails)
           .then((res) => {
@@ -91,9 +135,23 @@ const StaffProfile = () => {
 
     return (
       <div> 
+        <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            />
+            {/* Same as */}
+          <ToastContainer />
+
          <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
               <center><h1>My profile</h1></center>
-  
+              
               <div 
                 style={{
                   borderRadius: "10px", 
@@ -112,7 +170,7 @@ const StaffProfile = () => {
                               Name
                             </TableCell>
                             <TableCell style={{ width: "70%"}} align="left">
-                              {name}
+                              <div style={{ cursor: "not-allowed"}}> {name} </div>
                             </TableCell>
                         </TableRow>
                         
@@ -121,23 +179,7 @@ const StaffProfile = () => {
                             Email address
                           </TableCell>
                           <TableCell style={{ width: "70%"}} align="left">
-                            {email}
-                          </TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell component="th" scope="row" style={{paddingLeft: "2rem"}}>
-                            Password
-                          </TableCell>
-                          <TableCell style={{ width: "70%"}} align="left">
-                            password here...
-                          </TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell component="th" scope="row" style={{paddingLeft: "2rem"}}>
-                            Registered date
-                          </TableCell>
-                          <TableCell style={{ width: "70%"}} align="left">
-                            date...
+                            <div style={{ cursor: "not-allowed"}}> {email} </div>
                           </TableCell>
                         </TableRow>
 
@@ -210,6 +252,19 @@ const StaffProfile = () => {
 
                             </TableCell>
                         </TableRow>
+                          {/* <ToastContainer
+                            position="top-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            /> */}
+                            {/* Same as */}
+                          {/* <ToastContainer /> */}
                         <TableRow>
                             <TableCell component="th" scope="row" style={{paddingLeft: "2rem"}}>
                               Research interest
