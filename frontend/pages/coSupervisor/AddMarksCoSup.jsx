@@ -61,7 +61,7 @@ export default function AddMarksCoSup(){
 
         axios.post('http://localhost:5000/marks', grouppmark)
             .then(()=>{
-                axios.put('http://localhost:5000/api/submissions/updateSubmissionStatus', updateStatus)
+                axios.put('http://localhost:5000/submit/updateSubmissionStatus', updateStatus)
                     .then(()=>{
 
                     })
@@ -156,7 +156,7 @@ export default function AddMarksCoSup(){
                 />
 
                 <br/><br/>
-                <Link to={'/documentsEvaluationCoSupervisor'} >
+                <Link to={'/co-supervisor'} >
                     <Button variant="contained" color="info" style={{marginRight: "5px"}} onClick={addMark}>Add Mark</Button>
                 </Link>
                     <br/><br/>
