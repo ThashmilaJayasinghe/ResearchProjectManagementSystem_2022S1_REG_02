@@ -177,7 +177,6 @@ const Request_ResearchField = () => {
                                     <TableHead>
                                         <TableRow>
                                             <StyledTableCell align="center">Group Id</StyledTableCell>
-                                            <StyledTableCell align="center">Group Name</StyledTableCell>
                                             <StyledTableCell align="center">Topic&nbsp;</StyledTableCell>
                                             <StyledTableCell align="center">Added date&nbsp;</StyledTableCell>
                                             <StyledTableCell align="center">Checked&nbsp;</StyledTableCell>
@@ -191,7 +190,6 @@ const Request_ResearchField = () => {
                                                 <StyledTableCell component="th" scope="row" align="center">
                                                     {data.requestedGroupID}
                                                 </StyledTableCell>
-                                                <StyledTableCell align="center">{data.requestedGroup}</StyledTableCell>
                                                 <StyledTableCell align="center">{data.topic}</StyledTableCell>
                                                 <StyledTableCell align="center">{formatter.format(Date.parse(data.createdAt))}</StyledTableCell>
                                                 <StyledTableCell align="center">
