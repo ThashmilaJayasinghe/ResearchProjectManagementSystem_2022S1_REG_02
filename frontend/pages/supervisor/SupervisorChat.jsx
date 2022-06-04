@@ -9,7 +9,7 @@ const wid = process.env.REACT_APP_W2;
 const SupervisorChat = () => {
 
 
-    // localStorage.setItem("agent-uid", "NuwanKodagoda")
+  // localStorage.setItem("agent-uid", "NuwanKodagoda")
 
     console.log("user : " + localStorage.getItem("cc-uid"))
     console.log("agent : " + localStorage.getItem("agent-uid"))
