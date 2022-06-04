@@ -20,7 +20,6 @@ export default function ViewSubmissionTypes() {
 
     const [subTypes, setSubTypes] = useState([]);
 
-
     const navigate = useNavigate()
 
     const {user} = useSelector((state) => state.auth) //used to get the user

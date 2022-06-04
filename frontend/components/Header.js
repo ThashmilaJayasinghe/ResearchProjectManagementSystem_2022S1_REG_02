@@ -41,6 +41,10 @@ const Header = () => {
 			onClick: () => navigate('/managePanels')
 		},
 		{
+			text: 'Register User',
+			onClick: () => navigate('/register'),
+		},
+		{
 			text: 'Logout',
 			onClick: () => onLogout(),
 		},
@@ -104,10 +108,6 @@ const Header = () => {
 		{
 			text: 'Login',
 			onClick: () => navigate('/login'),
-		},
-		{
-			text: 'Register',
-			onClick: () => navigate('/register'),
 		},
 	];
 
