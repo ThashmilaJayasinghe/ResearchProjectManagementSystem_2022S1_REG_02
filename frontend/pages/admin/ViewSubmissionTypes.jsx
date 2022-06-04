@@ -24,6 +24,12 @@ export default function ViewSubmissionTypes() {
     const navigate = useNavigate()
 
     const {user} = useSelector((state) => state.auth) //used to get the user
+    const config = {
+        headers: {
+            Authorization: `Bearer ${user.token}`,
+        },
+    }
+
 
     const handleClick = (file) => {
 
@@ -46,7 +52,7 @@ export default function ViewSubmissionTypes() {
             navigate('/')
         }
 
-        Axios.get("http://localhost:5000/student/allSubmitTypes")
+        Axios.get("http://localhost:5000/student/allSubmitTypes", config)
             .then((res) => {
                 setSubTypes(res.data)
             })
@@ -77,7 +83,7 @@ export default function ViewSubmissionTypes() {
                                 .map((subType, index) => {
 
                                     const getSubTypes = () => {
-                                        Axios.get("http://localhost:5000/student/allSubmitTypes")
+                                        Axios.get("http://localhost:5000/student/allSubmitTypes", config)
                                             .then((getSubTypes) => {
                                                 setSubTypes(getSubTypes.data);
                                             })
@@ -89,7 +95,7 @@ export default function ViewSubmissionTypes() {
                                     const onDelete = (id) => {
 
                                         if (window.confirm('Do you wish to delete this submission type?')) {
-                                            Axios.delete("http://localhost:5000/api/admin/deleteAssignment/" + id)
+                                            Axios.delete("http://localhost:5000/api/admin/deleteAssignment/" + id, config)
                                                 .then(() => {
                                                     getSubTypes();
                                                     alert("Submission Type Deleted");

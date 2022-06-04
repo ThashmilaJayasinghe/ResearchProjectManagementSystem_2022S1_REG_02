@@ -24,6 +24,11 @@ export default function SelectUser() {
     const navigate = useNavigate()
 
     const {user} = useSelector((state) => state.auth) //used to get the user
+    const config = {
+        headers: {
+            Authorization: `Bearer ${user.token}`,
+        },
+    }
 
     useEffect(() => {
 
@@ -31,13 +36,13 @@ export default function SelectUser() {
             navigate('/')
         }
 
-        Axios.get("http://localhost:5000/api/admin/allPanels")
+        Axios.get("http://localhost:5000/api/admin/allPanels", config)
             .then((res) => {
                 setPanels(res.data)
             })
             // }).then(() => {
             //     panels.map((panel) => {
-            //         Axios.get("http://localhost:5000/api/users/" + panel)
+            //         Axios.get("http://localhost:5000/api/users/" + panel, config)
             //             .then((res) => {
             //                 setMember(res.data.name)
             //     })

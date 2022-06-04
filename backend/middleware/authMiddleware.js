@@ -21,6 +21,7 @@ const protect = async (req, res, next) => {
             // Get user using id in the token payload
             req.user = await User.findById(decoded.id).select('-password')
 
+
             next()
 
         } catch (error) {
@@ -36,6 +37,7 @@ const protect = async (req, res, next) => {
 
 const authRole = (role) => {
     return async (req, res, next) => {
+
 
         if(!(req.user.roles.includes(role))) {
             return res.status(401).json({ msg: 'User Not Authorized'});

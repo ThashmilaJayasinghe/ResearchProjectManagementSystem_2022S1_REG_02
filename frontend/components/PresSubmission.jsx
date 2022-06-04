@@ -3,9 +3,18 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 import {InputLabel, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
+import {useSelector} from "react-redux";
 
 
 export default function DocSubmission(props){
+
+    const {user} = useSelector((state) => state.auth) //used to get the user
+    const config = {
+        headers: {
+            Authorization: `Bearer ${user.token}`,
+        },
+    }
+
 
     const [title, setTitle] = useState("");
     const [type, setType] = useState(props.type);
@@ -47,7 +56,7 @@ export default function DocSubmission(props){
         formData.append("template", template);
 
 
-        axios.post('http://localhost:5000/api/admin/addAssignment', formData).then(()=>{
+        axios.post('http://localhost:5000/api/admin/addAssignment', formData, config).then(()=>{
             alert('Submission added')
             window.location.href = "/admin";
 
