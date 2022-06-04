@@ -81,7 +81,7 @@ export default function AcceptedTopics(){
                         {topics.map((topic, index)=>{
 
                             const passTopic = (topic)=>{
-                                let {_id, grp_ID, title, status, message, feedback} = topic;
+                                let {_id, grp_ID, title, status, message, feedback, topicDocument} = topic;
 
                                 localStorage.setItem('_id', _id)
                                 localStorage.setItem('grp_ID', grp_ID)
@@ -89,6 +89,7 @@ export default function AcceptedTopics(){
                                 localStorage.setItem('status',status)
                                 localStorage.setItem('message', message)
                                 localStorage.setItem('feedback', feedback)
+                                localStorage.setItem('topicDocument', topicDocument)
                             }
 
                             return(

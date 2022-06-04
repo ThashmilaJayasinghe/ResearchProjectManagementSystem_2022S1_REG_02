@@ -94,7 +94,7 @@ const PanelHomePage = () => {
                                 paddingTop: "",
                                 boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
                                 height: "14rem",
-                                width: "10rem",
+                                width: "12rem",
                                 alignItems:"center",
                                 display: 'flex',
                                 flexDirection: 'column',
@@ -126,7 +126,7 @@ const PanelHomePage = () => {
                                 padding: "",
                                 boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
                                 height: "14rem",
-                                width: "10rem",
+                                width: "12rem",
                                 alignItems:"center",
                                 display: 'flex',
                                 flexDirection: 'column',
@@ -154,7 +154,7 @@ const PanelHomePage = () => {
                                 padding: "",
                                 boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
                                 height: "14rem",
-                                width: "10rem",
+                                width: "12rem",
                                 alignItems:"center",
                                 display: 'flex',
                                 flexDirection: 'column',
@@ -168,7 +168,7 @@ const PanelHomePage = () => {
                                 />
                             </div>
                             <div style={{paddingTop: "1rem"}}>
-                                <p style={{color: "#012904"}}>Accepted Topic Evaluations</p>
+                                <p style={{color: "#012904"}}>Accepted Topics</p>
                             </div>
                         </div>
                     </Link>
@@ -182,7 +182,7 @@ const PanelHomePage = () => {
                                 padding: "",
                                 boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
                                 height: "14rem",
-                                width: "10rem",
+                                width: "12rem",
                                 alignItems:"center",
                                 display: 'flex',
                                 flexDirection: 'column',
@@ -196,7 +196,7 @@ const PanelHomePage = () => {
                                 />
                             </div>
                             <div style={{paddingTop: "1rem"}}>
-                                <p style={{color: "#012904"}}>Rejected Topic Evaluations</p>
+                                <p style={{color: "#012904"}}>Rejected Topics</p>
                             </div>
                         </div>
                     </Link>

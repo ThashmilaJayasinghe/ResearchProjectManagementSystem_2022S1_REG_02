@@ -69,7 +69,7 @@ export default function DocumentEvalCoSupervisor(){
                     <StyledTableCell align="center">Index</StyledTableCell>
                     <StyledTableCell align="center">Group ID</StyledTableCell>
                     <StyledTableCell align="center">Title</StyledTableCell>
-                    <StyledTableCell align="center">Document</StyledTableCell>
+                    <StyledTableCell align="center">Date</StyledTableCell>
                     <StyledTableCell align="center">Status</StyledTableCell>
                     <StyledTableCell align="center">Actions</StyledTableCell>
                 </TableRow>
@@ -94,7 +94,7 @@ export default function DocumentEvalCoSupervisor(){
                          <StyledTableCell component="th" scope="row" align="center" key={index}>{index+1}</StyledTableCell>
                          <StyledTableCell align="center">{documentt.groupId}</StyledTableCell>
                          <StyledTableCell align="center">{documentt.submissionstitle}</StyledTableCell>
-                         <StyledTableCell align="center">{documentt.document}</StyledTableCell>
+                         <StyledTableCell align="center">{documentt.subimit_Date.substring(0,10)}</StyledTableCell>
                          <StyledTableCell align="center">{documentt.status}</StyledTableCell>
                             <StyledTableCell align="center">
                              <Link to={'/addmark/'+documentt._id}>

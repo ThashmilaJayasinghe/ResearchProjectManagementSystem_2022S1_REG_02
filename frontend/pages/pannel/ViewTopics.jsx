@@ -84,13 +84,14 @@ export default function ViewTopics(){
                 {topics.map((topic, index)=>{
 
                      const passTopic = (topic)=>{
-                     let {_id, grp_ID, title, status, message} = topic;
+                     let {_id, grp_ID, title, status, message, topicDocument} = topic;
 
                      localStorage.setItem('_id', _id)
                      localStorage.setItem('grp_ID', grp_ID)
                      localStorage.setItem('title', title)
                      localStorage.setItem('status',status)
                      localStorage.setItem('message', message)
+                         localStorage.setItem('topicDocument', topicDocument)
                      }
 
                     return(

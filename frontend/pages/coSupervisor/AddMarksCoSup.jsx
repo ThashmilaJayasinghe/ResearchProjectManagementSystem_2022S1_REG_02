@@ -4,6 +4,8 @@ import {Link, useParams} from "react-router-dom";
 import axios from "axios";
 import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
+import Axios from "axios";
+import fileDownload from "js-file-download";
 // import { saveAs } from "file-saver";
 
 export default function AddMarksCoSup(){
@@ -73,6 +75,22 @@ export default function AddMarksCoSup(){
             })
     })
 
+    const handleClick = (file) => {
+
+        let filePath = "../../public/Documents/" + file;
+
+        Axios.get(`${filePath}`, {
+            responseType: 'blob',
+        }).then((res) => {
+            let filename = filePath.replace(/^.*[\\\/]/, '')
+            let fileExtension;
+            fileExtension= filePath.split('.');
+            fileExtension =fileExtension[fileExtension.length -1];
+            fileDownload(res.data, `${filename}.${fileExtension}`);
+        });
+    }
+
+
     return(
         <div style={{paddingTop:"20px"}}>
             <div style={{width: "60%", margin: "auto", }}>
@@ -97,30 +115,37 @@ export default function AddMarksCoSup(){
                 onChange={(e)=>{
                     setGrpID(e.target.value)
                 }}
-                readOnly/>
+                           inputProps={{readOnly:true}}/>
 
                 <h4>Submission   </h4>
                 <TextField fullWidth type='text' id='submission' value={submission}
                        onChange={(e)=>{
                            setGrpID(e.target.value)
                        }}
-                />
+                           inputProps={{readOnly:true}}/>
 
                 <h4>Submission Type   </h4>
                 <TextField fullWidth type='text' id='submissionType' value={submissionType}
                        onChange={(e)=>{
                            setGrpID(e.target.value)
                        }}
-                />
+                           inputProps={{readOnly:true}} />
 
-                <h4>Document </h4>
-                <TextField fullWidth type='text' id='document' value={document}
-                       onChange={(e)=>{
-                           setDocument(e.target.value)
-                       }}
-                />
+                    <h4>Document</h4>
+                    <TextField fullWidth type="text" id="message" value={document}
+                               onChange={(e)=>{
+                                   setDocument(e.target.value)
+                               }}
+                               inputProps={{readOnly:true}}/>
+                    <br/><br/>
 
-                {/*<button onClick={saveFile}>download</button>*/}
+                    <Button
+                        variant="contained"
+                        style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }}
+                        onClick={() => {handleClick(document)}}
+                    >
+                        Download Document
+                    </Button>
 
 
                 <h4>Marks   </h4>

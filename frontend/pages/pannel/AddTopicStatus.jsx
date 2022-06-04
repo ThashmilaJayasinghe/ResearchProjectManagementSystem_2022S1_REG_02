@@ -5,6 +5,8 @@ import {useParams, Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {Select, TextField} from "@mui/material";
 import Button from "@mui/material/Button";
+import Axios from "axios";
+import fileDownload from "js-file-download";
 
 
 
@@ -21,12 +23,14 @@ export default function AddTopicStatus(){
     const [feedback, setFeedback] = useState("")
     const [supervisorName, setSuprvName] = useState('');
     const [message, setMassage] = useState('');
+    const [topicDocument, setDocument] = useState('');
 
     useEffect(()=>{
         setTitle(localStorage.getItem('title'))
         setGrpID(localStorage.getItem('grp_ID'))
         setStatus(localStorage.getItem('status'))
         setMassage(localStorage.getItem('message'))
+        setDocument(localStorage.getItem('topicDocument'))
     },[])
 
     const handleSubmit = ((event)=>{
@@ -46,6 +50,21 @@ export default function AddTopicStatus(){
                 alert(err)
             })
      })
+
+    const handleClick = (file) => {
+
+        let filePath = "../../public/TopicEvaluation/" + file;
+
+        Axios.get(`${filePath}`, {
+            responseType: 'blob',
+        }).then((res) => {
+            let filename = filePath.replace(/^.*[\\\/]/, '')
+            let fileExtension;
+            fileExtension= filePath.split('.');
+            fileExtension =fileExtension[fileExtension.length -1];
+            fileDownload(res.data, `${filename}.${fileExtension}`);
+        });
+    }
 
     return(
         <div style={{paddingTop:"20px"}}>
@@ -97,10 +116,18 @@ export default function AddTopicStatus(){
                            inputProps={{readOnly:true}}/>
                 <br/><br/>
 
+                    <h4>Document</h4>
+                    <TextField fullWidth type="text" id="message" value={topicDocument}
+                               onChange={(e)=>{
+                                   setDocument(e.target.value)
+                               }}
+                               inputProps={{readOnly:true}}/>
+                    <br/><br/>
+
                     <Button
                         variant="contained"
                         style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }}
-                        //onClick={() => {handleClick(topicDocument)}}
+                        onClick={() => {handleClick(topicDocument)}}
                     >
                         Download Document
                     </Button>
