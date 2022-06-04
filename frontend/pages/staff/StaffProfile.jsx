@@ -188,7 +188,7 @@ const StaffProfile = () => {
                                         />
         
                                         <Button variant="contained"
-                                          style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#577BC1", marginTop: "10px"}}
+                                          style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "10px"}}
                                           onClick={() => (setIsAddQualification(false), onAddQualification())}
                                         >Save</Button>
                                         <Button variant="outlined"
@@ -200,7 +200,7 @@ const StaffProfile = () => {
                                   ): (
                                     <>
                                       <Button variant="contained"
-                                        style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#646FD4", marginTop: "0.5rem" }}
+                                        style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }}
                                         onClick={() => setIsAddQualification(true)}
                                       >+ Add new qualification</Button>
                                     </>
