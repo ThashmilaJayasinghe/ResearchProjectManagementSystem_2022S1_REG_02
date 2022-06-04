@@ -14,6 +14,8 @@ export default function Group(){
 
     const {user} = useSelector((state) => state.auth)
 
+    // setMyRegNumber(localStorage.getItem("res"));
+    // const [myRegNumber,setMyRegNumber] = useState("")
     const [subMemberRegNumber,setSubMemberRegNumber] = useState("")
     const [groupName,setGroupName] = useState("")
     const [regNumber, setRegNumber] = useState("")
@@ -80,7 +82,7 @@ export default function Group(){
    
     return(
         <div style={{paddingTop:"20px"}}>
-
+           
             <div>
                 <Button variant="contained" onClick={handleClickOpen}>My Group</Button>
                 <Dialog open={open} onClose={()=>(handleClose)}>

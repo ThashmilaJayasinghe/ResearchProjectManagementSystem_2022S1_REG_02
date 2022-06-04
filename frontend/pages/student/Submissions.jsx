@@ -12,7 +12,7 @@ import Paper from '@mui/material/Paper';
 import { useSelector } from 'react-redux';
 import download from 'downloadjs';
 
-
+import fileDownload from 'js-file-download'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -33,6 +33,21 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
         border: 0,
     },
 }));
+
+const handleClick = (file) => {
+
+    let filePath = "../../public/submissions/" + file;
+
+    axios.get(`${filePath}`, {
+        responseType: 'blob',
+    }).then((res) => {
+        let filename = filePath.replace(/^.*[\\\/]/, '')
+        let fileExtension;
+        fileExtension= filePath.split('.');
+        fileExtension =fileExtension[fileExtension.length -1];
+        fileDownload(res.data, `${filename}.${fileExtension}`);
+    });
+}
 const Submissions = () =>{
 
     const { user } = useSelector((state) => state.auth);
@@ -123,9 +138,9 @@ const Submissions = () =>{
                                 <StyledTableRow>
                                     <StyledTableCell>{data.submissionstitle}</StyledTableCell>
                                     <StyledTableCell>{data.type}</StyledTableCell>
-                                    <StyledTableCell><button onClick={()=>onClickDown(data._id,data.file_path, data.file_mimetype)}>{data.document}</button></StyledTableCell>
-                                    <StyledTableCell><a href={data.file_path} download></a>d</StyledTableCell>
-                                    <StyledTableCell><Button onClick={()=>onDelete(data._id)}>Remove</Button></StyledTableCell>
+                                    <StyledTableCell>{data.document}</StyledTableCell>
+                                    <StyledTableCell><Button variant="contained" onClick={()=>{handleClick(data.document)}}>Download </Button></StyledTableCell>
+                                    <StyledTableCell><Button variant="contained" onClick={()=>onDelete(data._id)}>Remove</Button></StyledTableCell>
                                                                       
                                 </StyledTableRow>
                             )
