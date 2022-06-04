@@ -35,6 +35,7 @@ import AddSubmissions from "./pages/admin/AddSubmissionTypes";
 import ViewSubmissions from "./pages/admin/ViewSubmissionTypes";
 import ManagePanels from './pages/admin/ManagePanels';
 import ViewPanels from './pages/admin/ViewPanels';
+import RegisterNumber from './pages/student/RegisterNumber';
 
 function App(){
     return(
@@ -73,18 +74,18 @@ function App(){
                     <Route path = '/viewSubmissions' element = {<ViewSubmissions/>} />
                     <Route path = '/viewPanels' element = {<ViewPanels/>} />
                     <Route path = '/managePanels' element = {<ManagePanels/>} />
+                    <Route path = '/registerNo' element = {<RegisterNumber/>}/>
 
                 </Routes>
             </Router>
 
-            {/*{*/}
-            {/*    localStorage.getItem("coSupChat") && */}
-            {/*        <StudentChat />*/}
-            {/*}*/}
-            {/*{*/}
-            {/*    localStorage.getItem("supChat") && */}
-            {/*        <StudentChat />*/}
-            {/*}*/}
+            
+                {/* localStorage.getItem("coSupChat") && 
+                  <StudentChat />
+
+                localStorage.getItem("supChat") && 
+                    <StudentChat />
+             */}
         </div>
     )
 }
