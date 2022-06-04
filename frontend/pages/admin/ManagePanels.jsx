@@ -4,7 +4,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 
 
-function ManageSubmissions() {
+function ManagePanels() {
 
 
     const navigate = useNavigate()
@@ -48,19 +48,19 @@ function ManageSubmissions() {
         // </div>
 
 
-   <div>
-       <Link to='/addSubmissions'>
-           Add Submissions
-       </Link>
+        <div>
+            <Link to='/addPanel'>
+                Allocate Panel
+            </Link>
 
-       <Link to='/viewSubmissions'>
-           View Submissions
-       </Link>
-   </div>
+            <Link to='/viewPanels'>
+                View Panels
+            </Link>
+        </div>
 
 
-)
+    )
 
 }
 
-export default ManageSubmissions
+export default ManagePanels

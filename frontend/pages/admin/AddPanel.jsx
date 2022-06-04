@@ -4,6 +4,10 @@ import {Link, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import SelectUser from '../../components/SelectUser'
 import SelectGroup from '../../components/SelectGroup'
+import Typography from "@mui/material/Typography";
+import InputLabel from "@mui/material/InputLabel";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 
 export default function AddPanel(){
@@ -71,41 +75,73 @@ export default function AddPanel(){
     }
 
     return(
-        <div className='container'>
-            <form>
+        <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
+            <div style={{paddingBottom:"40px"}}>
+                <center>
+                    <Typography variant="h4">
+                        Allocate Panel
+                    </Typography>
+                </center>
+            </div>
+            <div
+                style={{
+                    borderRadius: "10px",
+                    margin: "10px",
+                    padding: "",
+                    boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
 
-                <div className="form-group col-md-6">
-                    <label><b>Name</b> </label>
-                    <input type="text" id="name" className="form-control" placeholder="Enter panel name" value={name} required="required"
-                           onChange={(e) =>(
-                               setName(e.target.value)
-                           )}
-                    />
-                </div>
-                <br/>
-                <div className="form-group col-md-6">
-                    <label><b>Panel member 1</b> </label>
-                    < SelectUser handleMember={handleMember1} />
-                </div>
-                <br/>
-                <div className="form-group col-md-6">
-                    <label><b>Panel member 2</b> </label>
-                    < SelectUser handleMember={handleMember2} />
-                </div>
-                <br/>
-                <div className="form-group">
-                    <label><b>Panel member 3</b> </label>
-                    < SelectUser handleMember={handleMember3} />
-                </div>
-                <br/>
-                <div className="form-group">
-                    <label><b>Group</b></label>
-                    <SelectGroup handleSelected={handleGroup} />
-                </div>
-                <br/>
-                <br/>
-                <button type="submit" className="btn btn-success" onClick={handleSubmit}>Submit</button>
-            </form>
+                }}
+            >
+                <form>
+                    <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
+                        <InputLabel id="name-label">Enter Panel name</InputLabel>
+                        <TextField
+                            labelId="name-label"
+                            type="text"
+                            id="name"
+                            placeholder="Panel name"
+                            value={name}
+                            size= "small"
+                            fullWidth
+                            style = {{marginTop: "0.5rem"}}
+                            required="required"
+                            onChange={(e) =>(
+                                setName(e.target.value)
+                            )}
+                        />
+                    </div>
+                    <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
+                        <InputLabel>Select Panel member 1</InputLabel>
+                        < SelectUser handleMember={handleMember1} />
+                    </div>
+                    <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
+                        <InputLabel>Select Panel member 2</InputLabel>
+                        < SelectUser handleMember={handleMember2} />
+                    </div>
+                    <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
+                        <InputLabel>Select Panel member 3</InputLabel>
+                        < SelectUser handleMember={handleMember3} />
+                    </div>
+                    <div style={{paddingInline: "3rem", paddingTop: "3rem"}}>
+                        <InputLabel>Select Group</InputLabel>
+                        <SelectGroup handleSelected={handleGroup} />
+                    </div>
+                    <div style={{padding: "3rem" }}>
+                        <center>
+                            <Link to={'/admin'} style={{ textDecoration: 'none' }}>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    style={{maxHeight: "30px", fontSize: "12px", backgroundColor: "#053769", marginTop: "0.5rem" }}
+                                    onClick={handleSubmit}
+                                >
+                                    Submit
+                                </Button>
+                            </Link>
+                        </center>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

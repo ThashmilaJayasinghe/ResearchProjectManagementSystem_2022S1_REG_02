@@ -1,9 +1,11 @@
-function Spinner() {
-    return (
-        <div className="spinner-border" role="status">
-            <span className="visually-hidden">Loading...</span>
-        </div>
-    )
-}
+import * as React from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
-export default Spinner
+export default function CircularIndeterminate() {
+    return (
+        <Box sx={{ display: 'flex' }}>
+            <CircularProgress />
+        </Box>
+    );
+}

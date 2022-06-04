@@ -4,5 +4,3 @@ dist
 package-lock.json
 public
 .env.local
-package-lock.json
-

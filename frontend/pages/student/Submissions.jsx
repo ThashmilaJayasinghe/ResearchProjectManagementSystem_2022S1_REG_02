@@ -12,11 +12,11 @@ import Paper from '@mui/material/Paper';
 import { useSelector } from 'react-redux';
 import download from 'downloadjs';
 
-
+import fileDownload from 'js-file-download'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: "#093e94",
         color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
@@ -33,6 +33,21 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
         border: 0,
     },
 }));
+
+const handleClick = (file) => {
+
+    let filePath = "../../public/submissions/" + file;
+
+    axios.get(`${filePath}`, {
+        responseType: 'blob',
+    }).then((res) => {
+        let filename = filePath.replace(/^.*[\\\/]/, '')
+        let fileExtension;
+        fileExtension= filePath.split('.');
+        fileExtension =fileExtension[fileExtension.length -1];
+        fileDownload(res.data, `${filename}.${fileExtension}`);
+    });
+}
 const Submissions = () =>{
 
     const { user } = useSelector((state) => state.auth);
@@ -75,6 +90,7 @@ const Submissions = () =>{
                         <StyledTableCell>Title</StyledTableCell>
                         <StyledTableCell>Type</StyledTableCell>
                         <StyledTableCell>Assingment</StyledTableCell>
+                        <StyledTableCell>Assingment</StyledTableCell>
                         <StyledTableCell>Remove</StyledTableCell>
                     </TableRow>
                 </TableHead>
@@ -91,11 +107,9 @@ const Submissions = () =>{
                                 // return download(file, fileName, "image/png");
                                 const split = path.split('/');
                                 const filename = split[split.length - 1];
-                                setErrorMsg('');
                                 return download(res.data, filename, mimetype);
                               } catch (error) {
                                 if (error.response && error.response.status === 400) {
-                                  setErrorMsg('Error while downloading file. Try again later');
                                 }
                             }
                             }
@@ -124,8 +138,9 @@ const Submissions = () =>{
                                 <StyledTableRow>
                                     <StyledTableCell>{data.submissionstitle}</StyledTableCell>
                                     <StyledTableCell>{data.type}</StyledTableCell>
-                                    <StyledTableCell><button onClick={()=>onClickDown(data._id,data.file_path, data.file_mimetype)}>{data.document}</button></StyledTableCell>
-                                    <StyledTableCell><Button onClick={()=>onDelete(data._id)}>Remove</Button></StyledTableCell>
+                                    <StyledTableCell>{data.document}</StyledTableCell>
+                                    <StyledTableCell><Button variant="contained" onClick={()=>{handleClick(data.document)}}>Download </Button></StyledTableCell>
+                                    <StyledTableCell><Button variant="contained" onClick={()=>onDelete(data._id)}>Remove</Button></StyledTableCell>
                                                                       
                                 </StyledTableRow>
                             )

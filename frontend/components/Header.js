@@ -13,6 +13,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, reset } from '../features/authSlice';
 import Button from '@mui/material/Button';
+import logo from './SLIIT_Logo_Crest.png';
 
 const Header = () => {
 	const navigate = useNavigate();
@@ -21,16 +22,9 @@ const Header = () => {
 	const { user } = useSelector((state) => state.auth);
 
 	const onLogout = () => {
-
-		localStorage.removeItem("agent-uid")
-		localStorage.removeItem("supChat")
-		localStorage.removeItem("coSupChat")
-		localStorage.removeItem("cc-uid")
-		
 		dispatch(logout());
 		dispatch(reset());
 		navigate('/');
-		window.location.reload('/')
 	};
 
 	const adminItems = [
@@ -44,7 +38,7 @@ const Header = () => {
 		},
 		{
 			text: 'Panels',
-			onClick: () => navigate('/addPanel')
+			onClick: () => navigate('/managePanels')
 		},
 		{
 			text: 'Logout',
@@ -53,6 +47,10 @@ const Header = () => {
 	];
 
 	const staffItems = [
+		{
+			text: 'StaffDash',
+			onClick: () => navigate('/staff')
+		},
 		{
 			text: 'Supervisor',
 			onClick: () => navigate('/supervisor')
@@ -64,6 +62,10 @@ const Header = () => {
 		{
 			text: 'Panel member',
 			onClick: () => navigate('/panelMember')
+		},
+		{
+			text: 'Marking-Schemes',
+			onClick: () => navigate('/markingSchemes')
 		},
 		{
 			text: 'Profile',
@@ -124,10 +126,11 @@ const Header = () => {
 	};
 
 	return (
-		<AppBar position="static" style={{ background: 'primary' }}>
+		<AppBar position="static" style={{ background: '#053769' }}>
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					<AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+					{/*<AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />*/}
+					<img src={logo} alt="logo" sx={{ display: { xs: 'none', md: 'flex' }, mr: 1,  }} style={{ width:"2.5%", paddingRight:"10px"}} />
 					<Typography
 						variant="h6"
 						noWrap
@@ -143,7 +146,7 @@ const Header = () => {
 							textDecoration: 'none',
 						}}
 					>
-						LOGO
+						SLIIT
 					</Typography>
 
 					<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

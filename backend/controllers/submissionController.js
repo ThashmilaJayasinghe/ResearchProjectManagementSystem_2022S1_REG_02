@@ -9,7 +9,7 @@ const fs = require('fs');
 const upload = multer({
 	storage: multer.diskStorage({
 		destination(req, file, callback) {
-			callback(null, 'frontend/submissions');
+			callback(null, 'frontend/public/submissions');
 		},
 
 		filename(req, file, callback) {
@@ -181,12 +181,104 @@ const download = async (req, res) => {
 		res.json('Error while downloading file. Try again later.');
 	}
 };
+
+
+// Get panel presentation evaluation
+const get_Panel_Presentations = async (req, res) => {
+
+	let userID = req.query.id;
+	console.log(`Pannel member ID : ${userID}`)
+	let getpanel = await Panel.findOne({'staff': userID})
+	const panelID =  getpanel._id.toString();
+	console.log(`panel ID ${panelID}`)
+
+	const getPresentations = await Submissions.find({'panelID':panelID, type: "presentation", status: 'Pending'})
+
+	try{
+		if(getPresentations){
+			return res.json(getPresentations)
+		}
+		else{
+			console.log("Still, not presentations to evaluate")
+		}
+	}
+	catch (err){
+		console.log(err);
+		res.status(500).send("Something get wrong when getting presentations")
+	}
+}
+
+//get Supervisor documents
+const get_Supervisor_documents = async (req, res) =>{
+
+	let userID = req.query.id;
+	console.log(`Supervisor ID : ${userID}`)
+
+
+	const getDocuments = await Submissions.find({supervisorID:userID,status:"Pending"})
+
+	try{
+		if(getDocuments){
+			return res.json(getDocuments)
+		}
+		else{
+			console.log("Still, not submitted supervisor document")
+		}
+	}
+	catch (err){
+		console.log(err)
+		res.status(500).send("Something get wrong when getting supervisor documents")
+	}
+}
+
+//get Co-Supervisor documents
+const get_co_Supervisor_Documents = async (req, res) =>{
+
+	let userID = req.query.id;
+
+	console.log(`co-supervisor ID : ${userID}`)
+
+	const getCoDocuments = await Submissions.find({coSupervisorID:userID, status: "Pending"})
+
+	try{
+		if(getCoDocuments){
+			return res.json(getCoDocuments)
+		}
+		else{
+			console.log("Still, not submitted co-supervisor document")
+		}
+	}
+	catch (err){
+		console.log(err)
+		res.status(500).send("Something get wrong when getting co-supervisor documents")
+	}
+
+}
+
+
+//updateSubmission Status
+const update_Submission_Status = async (req, res)=>{
+
+	let submissionID = req.body.submissionID;
+	const status = req.body.status;
+
+	const updatedValue = await Submissions.findByIdAndUpdate(submissionID,{status:status})
+	return res.status(201).json(updatedValue);
+
+}
+
+
+
 module.exports = {
 	upload,
 	addSubmission,
 	get_Group_Submissions,
 	download,
 	delete_submission,
+	update_Submission_Status,
+	get_co_Supervisor_Documents,
+	get_Supervisor_documents,
+	get_Panel_Presentations
 };
 
 // try {

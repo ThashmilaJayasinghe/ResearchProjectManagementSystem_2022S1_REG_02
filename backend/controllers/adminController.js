@@ -57,58 +57,77 @@ const upload = Multer({
 });
 
 
+
 // @desc    Add role
 // @route   POST /api/admin/addRole
 // @access  Private
 const addRole = async (req, res) => {
-	if (!req.body.name) {
-		return res.status(400).json({ msg: 'Please add role' });
-	}
+    if(!req.body.name) {
+        return res.status(400).json({ msg: 'Please add role'})
+    }
 
-	const role = await Role.create({
-		name: req.body.name,
-	});
+    const role = await Role.create({
+        name: req.body.name,
+    })
 
-	res.status(200).json(role);
-};
+    res.status(200).json(role)
+}
+
 
 // @desc    Allocate role
 // @route   PUT /api/admin/allocateRole/:staffid
 // @access  Private
 const allocateRole = async (req, res) => {
-	const user = await User.findById(req.params.staffid);
+    const user = await User.findById(req.params.staffid)
 
-	// check for user
-	if (!user) {
-		return res.status(401).json({ msg: 'User not found' });
-	}
+    // check for user
+    if(!user) {
+        return res.status(401).json({ msg: 'User not found'})
+    }
 
-	user.roles.push(req.body.roles);
-	user.save();
+    user.roles.push(req.body.roles);
+    user.save();
 
-	const allocatedUser = await User.findByIdAndUpdate(req.params.staffid, user);
+    const allocatedUser = await User.findByIdAndUpdate(req.params.staffid, user)
 
-	res.status(200).json(allocatedUser);
-};
+    res.status(200).json(allocatedUser)
+}
+
 
 // @desc    Get all staff data
 // @route   GET /api/admin/staff
 // @access  Private
 const getStaff = async (req, res) => {
-	const staff = await User.find({ roles: 'staff' });
 
-	if (staff) {
-		res.status(200).json(staff);
-	} else {
-		return res.status(404).json({ msg: 'No staff to display' });
-	}
-};
+    const staff = await User.find({roles:'staff'})
+
+    if(staff) {
+        res.status(200).json(staff)
+    } else {
+        return res.status(404).json({ msg: 'No staff to display'})
+    }
+}
+
+// @desc    Get all student data
+// @route   GET /api/admin/students
+// @access  Private
+const getStudents = async (req, res) => {
+
+    const students = await User.find({roles:'student'})
+
+    if(students) {
+        res.status(200).json(students)
+    } else {
+        return res.status(404).json({ msg: 'No students to display'})
+    }
+}
+
 
 // @desc    Add assignment
 // @route   POST /api/admin/addAssignment
 // @access  Private
 const addAssignment = async (req, res) => {
-	
+
     const{title, type, instructions, dueDate} = req.body
     const markingScheme =  req.files.markingScheme[0].filename;
     const template =  req.files.template[0].filename;
@@ -173,12 +192,47 @@ const getGroups = async (req, res) => {
 }
 
 
+// @desc    Get all panel data
+// @route   GET /api/admin/allPanels
+// @access  Private
+const getAllPanels = async (req, res) => {
+
+    const panels = await Panel.find()
+    const panelDetails = [];
+
+    if(panels) {
+
+
+
+        res.status(200).json(panels)
+    } else {
+        return res.status(404).json({ msg: 'No panels to display'})
+    }
+}
+
+// @desc    Delete submission type
+// @route   DELETE /api/admin/deleteAssignment/:id
+// @access  Private
+const deleteSubmissionType = async (req, res) => {
+
+    await SubmissionType.findByIdAndDelete(req.params.id).then(() => {
+        res.status(200).json("Submission type deleted");
+    }).catch((err) => {
+        console.log(err);
+    })
+
+}
+
+
 module.exports = {
     addRole,
     allocateRole,
     getStaff,
+    getStudents,
     addAssignment,
     upload,
     addPanel,
-    getGroups
+    getGroups,
+    getAllPanels,
+    deleteSubmissionType
 }

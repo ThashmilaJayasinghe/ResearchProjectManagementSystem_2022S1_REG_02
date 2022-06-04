@@ -23,9 +23,6 @@ import AddPanel from './pages/admin/AddPanel';
 import Instructor from './pages/student/Instructor';
 import TopicRequestPanalForm from './pages/student/TopicRequestPanalForm';
 import Submit from './pages/student/Submit';
-
-import RegisterNumber from './pages/student/RegisterNumber';
-
 import StaffProfile from './pages/staff/StaffProfile'
 import SupervisorChat from './pages/supervisor/SupervisorChat'
 import StudentChat from './pages/student/StudentChat'
@@ -33,7 +30,12 @@ import PanelHomePage from './pages/panelMemeber/PanelHomePage'
 import CoSupervisor_Home from './pages/coSupervisor/CoSupervisor_Home';
 import Request_ResearchField_coSupervisor from './pages/coSupervisor/Request_ResearchField_coSupervisor';
 import Supervisor_Home from './pages/supervisor/Supervisor_Home'
-
+import MarkingSchemes from './pages/staff/MarkingSchemes'
+import AddSubmissions from "./pages/admin/AddSubmissionTypes";
+import ViewSubmissions from "./pages/admin/ViewSubmissionTypes";
+import ManagePanels from './pages/admin/ManagePanels';
+import ViewPanels from './pages/admin/ViewPanels';
+import RegisterNumber from './pages/student/RegisterNumber';
 
 function App(){
     return(
@@ -44,9 +46,6 @@ function App(){
                     <Route path="/" element={<Home/>}/>
                     <Route path="/register" element ={<Register/>}/>
                     <Route path="/login" element ={<Login/>}/>
-
-                    {/* <Route path="/supervisor" element={<HomePage/>}/> */}
-
                     <Route path="/admin" element={<Admin/>}/>
 
                     <Route path = '/updateuser' element = {<UpdateUser/>} />
@@ -61,9 +60,7 @@ function App(){
                     <Route path="/instructor" element = {<Instructor/>} />
                     <Route path='/topicRequest' element = {<TopicRequestPanalForm/>}/>
                     <Route path='/submit' element = {<Submit/>}/>
-
-                    <Route path='/registerNo' element= {<RegisterNumber/>}/>
-
+                    <Route path='/markingSchemes' element = {<MarkingSchemes/>}/>
 
                     <Route path = '/staff/profile' element = {<StaffProfile />} />
                     <Route path="/supervisor" element={<Supervisor_Home/>}/>
@@ -73,17 +70,21 @@ function App(){
                     <Route exact path = '/co-supervisor/requestedresearchField' element = {<Request_ResearchField_coSupervisor/>} />
                     <Route exact path = '/supervisor/chat' element = {<SupervisorChat/>}/>
                     {/* <Route exact path = '/student/chat' element = {<StudentChat/>}/> */}
-
+                    <Route path = '/addSubmissions' element = {<AddSubmissions/>} />
+                    <Route path = '/viewSubmissions' element = {<ViewSubmissions/>} />
+                    <Route path = '/viewPanels' element = {<ViewPanels/>} />
+                    <Route path = '/managePanels' element = {<ManagePanels/>} />
+                    <Route path = '/registerNo' element = {<RegisterNumber/>}/>
 
                 </Routes>
             </Router>
 
             {
-                localStorage.getItem("coSupChat") && 
+                localStorage.getItem("coSupChat") &&
                     <StudentChat />
             }
             {
-                localStorage.getItem("supChat") && 
+                localStorage.getItem("supChat") &&
                     <StudentChat />
             }
         </div>

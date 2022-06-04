@@ -95,79 +95,87 @@ const set_group = async (req, res) => {
 	}
 };
 
-
-const update_group_supervisor = async(req, res) => {
+const update_group_supervisor = async (req, res) => {
 	// const staffId = req.params.staffId;
 	const staffId = req.body.supervisorID;
 	const groudId = req.body.groupId;
 
-	console.log(staffId)
-	console.log(groudId)
+	console.log(staffId);
+	console.log(groudId);
 
-	try{
-		const updatedResult = await Group.findByIdAndUpdate(groudId, {supervisorID: staffId})
-		res.status(200).json(updatedResult)
-	}
-	catch(err) {
+	try {
+		const updatedResult = await Group.findByIdAndUpdate(groudId, {
+			supervisorID: staffId,
+		});
+		res.status(200).json(updatedResult);
+	} catch (err) {
 		console.log(err);
 	}
 };
 
-const update_group_coSupervisor = async(req, res) => {
+const update_group_coSupervisor = async (req, res) => {
 	// const staffId = req.params.staffId;
 	const staffId = req.body.coSupervisorID;
 	const groudId = req.body.groupId;
 
-	try{
-		const updatedResult = await Group.findByIdAndUpdate(groudId, {coSupervisorID: staffId})
-		res.status(200).json(updatedResult)
-	}
-	catch(err) {
+	try {
+		const updatedResult = await Group.findByIdAndUpdate(groudId, {
+			coSupervisorID: staffId,
+		});
+		res.status(200).json(updatedResult);
+	} catch (err) {
 		console.log(err);
 	}
-}
+};
 
-// get group leader, their supervisor and co-supervisor
-const getGroupDetails = async(req, res) => {
-	
+// get group leader
+const getGroupDetails = async (req, res) => {
 	// const studentRegNumber = req.body.regNum;
-	const studentRegNumber = req.query.regNum
+	const studentRegNumber = req.query.regNum;
 
-	try{
-		const groupDetails = await Group.findOne({subMemberRegNumber:studentRegNumber})
+	try {
+		const groupDetails = await Group.findOne({
+			subMemberRegNumber: studentRegNumber,
+		});
 
-		if(groupDetails){
+		if (groupDetails) {
 			const tempSupervisor = groupDetails.supervisorID;
 			const tempCoSupervisor = groupDetails.coSupervisorID;
-			const supervisor = await Staff.findOne({user:tempSupervisor})
-			const coSupervisor = await Staff.findOne({user:tempCoSupervisor})
+			const supervisor = await Staff.findOne({ user: tempSupervisor });
+			const coSupervisor = await Staff.findOne({ user: tempCoSupervisor });
 
-			if(supervisor && coSupervisor){
+			if (supervisor && coSupervisor) {
 				const supervisorDetails = supervisor;
 				const coSupervisorDetails = coSupervisor;
-				res.status(200).json({groupDetails, supervisorDetails, coSupervisorDetails})
-			}
-			else if(supervisor || coSupervisor){
-				if(supervisor){
+				res
+					.status(200)
+					.json({ groupDetails, supervisorDetails, coSupervisorDetails });
+			} else if (supervisor || coSupervisor) {
+				if (supervisor) {
 					const supervisorDetails = supervisor;
-					res.status(200).json({groupDetails, supervisorDetails})
+					res.status(200).json({ groupDetails, supervisorDetails });
 				}
-				if(coSupervisor){
+				if (coSupervisor) {
 					const coSupervisorDetails = coSupervisor;
-					res.status(200).json({groupDetails, coSupervisorDetails})
+					res.status(200).json({ groupDetails, coSupervisorDetails });
 				}
+			} else {
+				res.status(200).json(groupDetails);
 			}
-			else{
-				res.status(200).json(groupDetails)
-			}
+		} else {
+			res.status(204).json(groupDetails);
 		}
-		else{
-			res.status(204).json(groupDetails)
-		}
-	}catch(err){
-		console.log(err)
-		res.status(501).json(err)
+	} catch (err) {
+		console.log(err);
+		res.status(501).json(err);
 	}
-}
+};
 
-module.exports = { set_group, create_group, get_Group, update_group_supervisor, update_group_coSupervisor, getGroupDetails};
+module.exports = {
+	set_group,
+	create_group,
+	get_Group,
+	update_group_supervisor,
+	update_group_coSupervisor,
+	getGroupDetails,
+};

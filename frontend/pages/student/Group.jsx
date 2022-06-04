@@ -14,6 +14,8 @@ export default function Group(){
 
     const {user} = useSelector((state) => state.auth)
 
+    // setMyRegNumber(localStorage.getItem("res"));
+    // const [myRegNumber,setMyRegNumber] = useState("")
     const [subMemberRegNumber,setSubMemberRegNumber] = useState("")
     const [groupName,setGroupName] = useState("")
     const [regNumber, setRegNumber] = useState("")
@@ -62,13 +64,13 @@ export default function Group(){
             setLeader(false)
             setEmail('')
         }).catch((err)=>{
-            alert(err)
+            alert("You cannot add more than 4 members")
         })
     }
 
     
         useEffect(()=>{
-            axios.get('http://localhost:5000/group/'+user._id)
+            axios.get('http://localhost:5000/group/getGroup/'+user._id)
             .then((res)=>{
                 const group = res.data.members;
                 setGroupDetails(group);
@@ -80,7 +82,7 @@ export default function Group(){
    
     return(
         <div style={{paddingTop:"20px"}}>
-
+           
             <div>
                 <Button variant="contained" onClick={handleClickOpen}>My Group</Button>
                 <Dialog open={open} onClose={()=>(handleClose)}>
