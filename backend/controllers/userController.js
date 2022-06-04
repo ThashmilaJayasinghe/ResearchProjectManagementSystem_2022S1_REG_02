@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs')
 const User = require('../models/userModel')
 const asyncHandler = require("express-async-handler");
 const Goal = require("../models/goalModel");
+const Staff = require('../models/staffModel');
 
 // @desc    Register new user
 // @route   POST /api/users
@@ -37,8 +38,23 @@ const registerUser = async (req, res) => {
         roles: [role]
     })
 
-
     if(user) {
+
+        if(role == "staff"){
+            try {
+                const result = await Staff.create({
+                    user: user.id,
+                    name: user.name,
+                    email: user.email,
+                    qualifications: [],
+                    researchInterests: [],
+                });
+                // res.status(200).json(result);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
         res.status(201).json({
             _id: user.id,
             name: user.name,
@@ -46,6 +62,7 @@ const registerUser = async (req, res) => {
             roles: user.roles,
             token: generateToken(user._id)
         })
+
     } else {
         return res.status(400).json({ msg: 'Invalid user data'})
     }
@@ -86,6 +103,17 @@ const getMe = async (req, res) => {
         name,
         email,
         roles
+    })
+}
+
+// @desc    Get user data
+// @route   GET /api/users/:id
+// @access  Private
+const getUser = async (req, res) => {
+    const {_id, name, email} = await User.findById(req.params.id)
+
+    res.status(200).json({
+        name
     })
 }
 
@@ -151,4 +179,5 @@ module.exports = {
     getAll,
     deleteUser,
     updateUser,
+    getUser
 }

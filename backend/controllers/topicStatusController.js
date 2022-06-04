@@ -5,6 +5,7 @@ const Panal = require('../models/panelModel');
 const Panel = require('../models/panelModel');
 const { json } = require('express');
 const multer = require('multer');
+const path = require('path');
 
 module.exports.upload = multer({
 	storage: multer.diskStorage({
@@ -21,6 +22,7 @@ module.exports.upload = multer({
 	},
 	fileFilter(req, file, callback) {
 		const ext = path.extname(file.originalname);
+		console.log(ext);
 
 		if (
 			ext !== '.ppt' &&

@@ -2,6 +2,31 @@ import React from 'react';
 import {useState, useEffect} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import {useSelector} from 'react-redux'
+import Typography from "@mui/material/Typography";
+
+import Lottie from 'react-lottie'
+import documentEvaluationAnimation from "../../components/looties/documentEvaluation.json";
+import viewRequestAnimation from "../../components/looties/viewRequest.json";
+import {ButtonGroup} from "@mui/material";
+
+
+const documentEvaluation = {
+    loop: true,
+    autoplay: true,
+    animationData: documentEvaluationAnimation,
+    rendererSettings: {
+        preserveAspectRatio: "xMidYMid slice"
+    }
+};
+
+const viewRequest = {
+    loop: true,
+    autoplay: true,
+    animationData: viewRequestAnimation,
+    rendererSettings: {
+        preserveAspectRatio: "xMidYMid slice"
+    }
+};
 
 
 function ManageSubmissions() {
@@ -21,44 +46,65 @@ function ManageSubmissions() {
 
 
     return (
-        // <div style={{width: "60%", margin: "auto", paddingTop:"40px"}}>
-        //     <div style={{paddingBottom:"40px"}}>
-        //         <center>
-        //             <Typography variant="h4">
-        //                 Add Submission
-        //             </Typography>
-        //         </center>
-        //     </div>
-        //     <div>
-        //         <Box sx={{ width: '100%' }}>
-        //             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        //                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-        //                     <Tab label="Document Submission" {...a11yProps(0)} />
-        //                     <Tab label="Presentation Submission" {...a11yProps(1)} />
-        //                 </Tabs>
-        //             </Box>
-        //             <TabPanel value={value} index={0}>
-        //                 <DocSubmissions type={'document'} />
-        //             </TabPanel>
-        //             <TabPanel value={value} index={1}>
-        //                 <PresSubmissions type={'presentation'} />
-        //             </TabPanel>
-        //         </Box>
-        //     </div>
-        // </div>
-
-
    <div>
-       <Link to='/addSubmissions'>
-           Add Submissions
-       </Link>
-
-       <Link to='/viewSubmissions'>
-           View Submissions
-       </Link>
+       <center>
+           <ButtonGroup variant="text" aria-label="text button group" style={{ paddingTop:"120px" }}>
+               <Link to='/addSubmissions' style={{ textDecoration: 'none' }}>
+                   <div
+                       style={{
+                           borderRadius: "10px",
+                           margin: "10px",
+                           padding: "",
+                           boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                           height: "14rem",
+                           width: "14rem",
+                           alignItems:"center",
+                           display: 'flex',
+                           flexDirection: 'column',
+                           backgroundColor: "#daf7dc"
+                       }}>
+                       <div style={{paddingTop: "0.5rem"}}>
+                           <Lottie
+                               options={documentEvaluation}
+                               height={150}
+                               width={150}
+                           />
+                       </div>
+                       <div style={{paddingTop: "1rem"}}>
+                           <Typography variant="h6" style={{color: "#2e7d32"}}>Add Submission Type</Typography>
+                       </div>
+                   </div>
+               </Link>
+               <Link to='/viewSubmissions' style={{ textDecoration: 'none' }}>
+                   <div
+                       style={{
+                           borderRadius: "10px",
+                           margin: "10px",
+                           paddingTop: "",
+                           boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                           height: "14rem",
+                           width: "14rem",
+                           alignItems:"center",
+                           display: 'flex',
+                           flexDirection: 'column',
+                           backgroundColor:"#f7e9df"
+                       }}
+                   >
+                       <div style={{paddingTop: "0.5rem"}}>
+                           <Lottie
+                               options={viewRequest}
+                               height={150}
+                               width={150}
+                           />
+                       </div>
+                       <div style={{paddingTop: "1rem"}}>
+                           <Typography variant="h6" style={{color: "#e65100"}}>View Submission Types</Typography>
+                       </div>
+                   </div>
+               </Link>
+           </ButtonGroup>
+       </center>
    </div>
-
-
 )
 
 }
