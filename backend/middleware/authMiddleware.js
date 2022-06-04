@@ -37,30 +37,13 @@ const protect = async (req, res, next) => {
 const authRole = (role) => {
     return async (req, res, next) => {
 
-        // const userRoles = await Role.findById(req.user.roles)
-        // if (userRoles.name !== role) {
-        //     return res.status(401).json({ msg: 'Not authorized'});
-        // }
-
         if(!(req.user.roles.includes(role))) {
-            return res.status(401).json({ msg: 'Not authorized'});
+            return res.status(401).json({ msg: 'User Not Authorized'});
         }
 
         next()
     }
 }
-
-// const aRole = (role) => {
-//     return (req, res, next) => {
-//         if(req.user.role !== role) {
-//             res.status(401)
-//             return res.send('Not authorized')
-//         }
-//
-//         next()
-//     }
-// }
-
 
 module.exports = {
     protect,
