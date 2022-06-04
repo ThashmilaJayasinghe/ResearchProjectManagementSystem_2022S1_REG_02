@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {useState, useEffect, useRef} from "react";
 import Axios from "axios";
+import {useSelector} from "react-redux";
 
 
 export default function SelectGroup(props) {
@@ -13,6 +14,13 @@ export default function SelectGroup(props) {
     const [chosen, setChosen] = useState('');
     const [groups, setGroups] = useState([]);
     const notInitialRender = useRef(false)
+
+    const {user} = useSelector((state) => state.auth) //used to get the user
+    const config = {
+        headers: {
+            Authorization: `Bearer ${user.token}`,
+        },
+    }
 
 
     const handleChange = (event) => {
@@ -23,7 +31,7 @@ export default function SelectGroup(props) {
 
     useEffect(() => {
 
-        Axios.get("http://localhost:5000/api/admin/groups/")
+        Axios.get("http://localhost:5000/api/admin/groups/", config)
             .then((res) => {
                 setGroups(res.data)
             })

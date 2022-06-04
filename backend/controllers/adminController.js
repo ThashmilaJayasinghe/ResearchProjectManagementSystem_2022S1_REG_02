@@ -174,16 +174,31 @@ const addPanel = async (req, res) => {
 }
 
 // @desc    Get group
-// @route   GET /api/admin/group
+// @route   GET /api/admin/group/:id
 // @access  Private
 const getGroup = async (req, res) => {
 
     const group = await Group.findById(req.params.id)
 
     if(group) {
-        res.status(200).json(group)
+        res.status(200).json(group.groupName)
     } else {
         res.status(404).json({ msg: 'No group to display'})
+    }
+
+}
+
+// @desc    Get groups
+// @route   GET /api/admin/groups
+// @access  Private
+const getGroups = async (req, res) => {
+
+    const groups = await Group.find()
+
+    if(groups) {
+        res.status(200).json(groups)
+    } else {
+        res.status(404).json({ msg: 'No groups to display'})
     }
 
 }
@@ -216,6 +231,18 @@ const deleteSubmissionType = async (req, res) => {
 
 }
 
+// @desc    Delete panel
+// @route   DELETE /api/admin/deletePanel/:id
+// @access  Private
+const deletePanel = async (req, res) => {
+
+    await Panel.findByIdAndDelete(req.params.id).then(() => {
+        res.status(200).json("Panel deleted");
+    }).catch((err) => {
+        console.log(err);
+    })
+
+}
 
 module.exports = {
     addRole,
@@ -226,6 +253,8 @@ module.exports = {
     upload,
     addPanel,
     getGroup,
+    getGroups,
     getAllPanels,
-    deleteSubmissionType
+    deleteSubmissionType,
+    deletePanel
 }

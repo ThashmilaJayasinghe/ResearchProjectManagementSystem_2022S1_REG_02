@@ -53,7 +53,7 @@ export default function AddPanel(){
 
             axios.post('http://localhost:5000/api/admin/addPanel', formData, config).then(()=>{
                 alert('Panel allocated')
-                window.location.href = "/managePanels";
+                window.location.href = "/viewPanels";
 
             }).catch((err)=>{
                 alert(err)
@@ -133,7 +133,7 @@ export default function AddPanel(){
                     </div>
                     <div style={{padding: "3rem" }}>
                         <center>
-                            <Link to={'/managePanels'} style={{ textDecoration: 'none' }}>
+                            <Link to="#" style={{ textDecoration: 'none' }}>
                                 <Button
                                     type="submit"
                                     variant="contained"
