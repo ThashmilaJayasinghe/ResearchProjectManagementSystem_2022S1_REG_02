@@ -58,7 +58,7 @@ export default function DocSubmission(props){
 
         axios.post('http://localhost:5000/api/admin/addAssignment', formData, config).then(()=>{
             alert('Submission added')
-            window.location.href = "/admin";
+            window.location.href = "/managesubmissions";
 
         }).catch((err)=>{
             alert(err)
@@ -158,7 +158,7 @@ export default function DocSubmission(props){
                 </div>
                 <div style={{padding: "3rem" }}>
                     <center>
-                        <Link to={'/admin'} style={{ textDecoration: 'none' }}>
+                        <Link to={'/managesubmissions'} style={{ textDecoration: 'none' }}>
                             <Button
                                 type="submit"
                                 variant="contained"

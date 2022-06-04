@@ -35,7 +35,6 @@ const upload = Multer({
         fileSize: 2000000
     },
 
-
     fileFilter: (req, file, callback) => {
 
         const ext = path.extname(file.originalname);
@@ -51,9 +50,7 @@ const upload = Multer({
             }
             callback(null, true);
         }
-
     },
-
 });
 
 
