@@ -65,7 +65,7 @@ export default function DocumentEvaluate(){
                 <TableRow>
                     <StyledTableCell align="center">Index</StyledTableCell>
                     <StyledTableCell align="center">Group ID</StyledTableCell>
-                    <StyledTableCell align="center">Title</StyledTableCell>
+                    <StyledTableCell align="center">Submission Title</StyledTableCell>
                     <StyledTableCell align="center">Date</StyledTableCell>
                     <StyledTableCell align="center">Status</StyledTableCell>
                     <StyledTableCell align="center">Actions</StyledTableCell>
